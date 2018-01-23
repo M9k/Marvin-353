@@ -1,5 +1,5 @@
 {
-  "extends": ["airbnb-base"],
+  "extends": ["airbnb"],
   "parserOptions": {
     "ecmaVersion": 2017,
     "sourceType": "module",
@@ -14,5 +14,8 @@
   "env": {
     "browser": true,
     "node": true
-   }
+  },
+  "plugins": [
+    "react"
+  ]
 }
