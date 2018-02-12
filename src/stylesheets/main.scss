@@ -1,0 +1,23 @@
+body {
+  background-color: aliceblue;
+}
+#footer {
+  background-color: aquamarine;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  width: 100%;
+}
+#header {
+  overflow: hidden;
+  min-height: 4em;
+  padding: 1%;
+}
+#headerWelcome {
+  float: left;
+  color: crimson;
+  font-weight: bold;
+}
+#headerLinks {
+  float: right;
+}
