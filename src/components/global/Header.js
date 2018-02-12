@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import WelcomeLabel from '../label/WelcomeLabel';
 
 const Header = props => (
   <div id="header">
-    <div id="headerWelcome">{props.welcome}</div>
+    <WelcomeLabel id="headerWelcome" text={props.welcome} />
     <div id="headerLinks">{props.children}</div>
   </div>
 );
@@ -14,7 +15,7 @@ Header.propTypes = {
 };
 
 Header.defaultProps = {
-  welcome: 'Welcome',
+  welcome: 'Welcome to Marvin',
   children: '',
 };
 
