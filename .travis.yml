@@ -4,6 +4,7 @@ node_js:
 
 notifications:
   email: false
+  slack: 353swe:TBr27Dyzfxr9mmz1qYaWjJiv
 
 cache:
   directories:
