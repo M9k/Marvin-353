@@ -26,7 +26,13 @@ const getWeb3 = new Promise(((resolve, reject) => {
 
       console.log('Injected web3 detected.');
 
-      resolve(store.dispatch(web3Initialized(results)));
+      // TODO: aggiustare questa chiamata, genera TypeError: _store2.default is undefined
+      // resolve(store.dispatch(web3Initialized(results)));
+
+      // TODO: l'oggetto esiste
+      console.log(web3Initialized(results));
+      // TODO: genera lo stesso errore anche senza il resolve, il problema è in babel
+      console.log(store.dispatch(web3Initialized(results)));
       console.log('We3 store dispatched.');
     } else {
       // Fallback to localhost if no web3 injection. We've configured this to
