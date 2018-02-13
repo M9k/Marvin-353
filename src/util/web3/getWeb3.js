@@ -27,6 +27,7 @@ const getWeb3 = new Promise(((resolve, reject) => {
       console.log('Injected web3 detected.');
 
       resolve(store.dispatch(web3Initialized(results)));
+      console.log('We3 store dispatched.');
     } else {
       // Fallback to localhost if no web3 injection. We've configured this to
       // use the development console's port by default.
