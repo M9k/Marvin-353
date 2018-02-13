@@ -9,6 +9,7 @@ const Price = () => (
       <ButtonHelp />
     </Header>
     <h1>Price</h1>
+    <p>Block number: TODO</p>
     <p>TODO</p>
     <ButtonBackToHome />
   </div>
