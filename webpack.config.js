@@ -10,7 +10,6 @@ module.exports = {
     // http://gaearon.github.io/react-hot-loader/getstarted/
     'webpack-dev-server/client?http://localhost:8080',
     'webpack/hot/only-dev-server',
-    'babel-polyfill',
     path.join(__dirname, appRoot, 'index.js'),
   ],
   output: {
