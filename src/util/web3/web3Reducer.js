@@ -1,9 +1,11 @@
+import { WEB3_INITIALIZED } from './getWeb3';
+
 const initialState = {
   web3Instance: null,
 };
 
 const web3Reducer = (state = initialState, action) => {
-  if (action.type === 'WEB3_INITIALIZED') {
+  if (action.type === WEB3_INITIALIZED) {
     // TODO: questa parte funziona correttamente
     console.log('Reducer is started');
     const newState = Object.assign({}, state, { web3Instance: action.web3ActionInstance });
