@@ -40,6 +40,7 @@ module.exports = {
       },
     ],
   },
+  debug: true,
   devServer: {
     contentBase: path.join(__dirname, 'public'),
   },
