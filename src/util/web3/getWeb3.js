@@ -1,11 +1,11 @@
 import Web3 from 'web3';
-import store from '../../store';
+import { store } from '../../store';
 
 export const WEB3_INITIALIZED = 'WEB3_INITIALIZED';
 function web3Initialized(results) {
   return {
     type: WEB3_INITIALIZED,
-    payload: results,
+    web3Instance: results.web3Instance,
   };
 }
 
@@ -25,15 +25,10 @@ const getWeb3 = new Promise(((resolve, reject) => {
       };
 
       console.log('Injected web3 detected.');
-
-      // TODO: aggiustare questa chiamata, genera TypeError: _store2.default is undefined
-      // resolve(store.dispatch(web3Initialized(results)));
-
-      // TODO: l'oggetto esiste
+      // TODO: aggiustare questa chiamata, genera can't prevent extensions on this proxy object
       console.log(web3Initialized(results));
-      // TODO: genera lo stesso errore anche senza il resolve, il problema è in babel
-      console.log(store.dispatch(web3Initialized(results)));
-      console.log('We3 store dispatched.');
+      resolve(store.dispatch(web3Initialized(results)));
+      console.log('Store updated');
     } else {
       // Fallback to localhost if no web3 injection. We've configured this to
       // use the development console's port by default.

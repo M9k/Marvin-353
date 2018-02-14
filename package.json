@@ -51,7 +51,7 @@
     "redux-form": "^6.4.3",
     "redux-freeze": "^0.1.5",
     "redux-saga": "^0.14.3",
-    "web3": "^1.0.0-beta.29",
+    "web3": "^1.0.0-beta.30",
     "webpack": "^1.14.0"
   },
   "devDependencies": {

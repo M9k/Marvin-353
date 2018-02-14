@@ -4,11 +4,12 @@ const initialState = {
 
 const web3Reducer = (state = initialState, action) => {
   if (action.type === 'WEB3_INITIALIZED') {
+    // TODO: errore qui
+    console.log(action.web3Instance);
     return Object.assign({}, state, {
-      web3Instance: action.payload.web3Instance,
+      web3Instance: action.web3Instance,
     });
   }
-
   return state;
 };
 
