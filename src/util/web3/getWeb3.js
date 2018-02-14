@@ -5,7 +5,7 @@ export const WEB3_INITIALIZED = 'WEB3_INITIALIZED';
 function web3Initialized(results) {
   return {
     type: WEB3_INITIALIZED,
-    web3Instance: results.web3Instance,
+    web3ActionInstance: results.web3Instance,
   };
 }
 
@@ -19,31 +19,25 @@ const getWeb3 = new Promise(((resolve, reject) => {
     if (typeof web3 !== 'undefined') {
       // Use Mist/MetaMask's provider.
       web3 = new Web3(web3.currentProvider);
-
       results = {
         web3Instance: web3,
       };
-
-      console.log('Injected web3 detected.');
-      // TODO: aggiustare questa chiamata, genera can't prevent extensions on this proxy object
-      console.log(web3Initialized(results));
-      resolve(store.dispatch(web3Initialized(results)));
-      console.log('Store updated');
     } else {
       // Fallback to localhost if no web3 injection. We've configured this to
       // use the development console's port by default.
       const provider = new Web3.providers.HttpProvider('http://127.0.0.1:9545');
-
       web3 = new Web3(provider);
-
       results = {
         web3Instance: web3,
       };
-
-      console.log('No web3 instance injected, using Local web3.');
-
-      resolve(store.dispatch(web3Initialized(results)));
     }
+
+    console.log('Injected web3 detected.');
+    // TODO: succede solo nel caso l'if sopra sia soddisfatto (cioè c'è Metamask)
+    // TODO: aggiustare questa chiamata, genera can't prevent extensions on this proxy object
+    console.log(web3Initialized(results));
+    resolve(store.dispatch(web3Initialized(results)));
+    console.log('Store updated');
   });
 }));
 
