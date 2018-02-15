@@ -1,7 +1,6 @@
 # PoC-Marvin-353
-Il nome è sufficientemente carino per Elena
 
-#Installare queste estensioni!!
-https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd
+    Il nome è sufficientemente carino per Elena
 
-https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi
+**Guida provvisoria:**
+https://drive.google.com/open?id=1C3vwr6G-Lojrr2gYeqbnYxphCkj7RTkwq-SoT3zbEz4
