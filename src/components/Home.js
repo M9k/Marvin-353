@@ -14,6 +14,7 @@ const Home = () => (
     </Header>
     <Button link="/login">Login</Button><br />
     <Button link="/register">Register</Button><br />
+    <h2>Versione di Web3: {web3.version.api}</h2><br />
   </div>
 );
 

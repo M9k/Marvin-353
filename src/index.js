@@ -8,7 +8,10 @@ import Footer from './components/global/Footer';
 import './stylesheets/main.scss';
 import getWeb3 from './util/web3/getWeb3';
 
-getWeb3.then(results => { console.log('Web3 initialized!'); })
+let web3;
+getWeb3.then((results) => {
+  web3 = results;
+})
   .catch(() => { console.log('Error in web3 initialization.'); });
 
 // render the main component

@@ -16,3 +16,5 @@ src/stylesheets/main\.css
 src/stylesheets/imageLabel\.css
 
 *.map
+
+package-lock\.json
