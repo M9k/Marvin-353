@@ -17,4 +17,34 @@ src/stylesheets/imageLabel\.css
 
 *.map
 
-package-lock\.json
+JSON
+
+JSON\.map
+
+*.scssc
+
+src/stylesheets/main\.css\.map
+
+src/stylesheets/main\.css
+
+src/stylesheets/imageLabel\.css
+
+*.map
+
+public/bundle.js
+
+JSON
+
+JSON\.map
+
+*.scssc
+
+src/stylesheets/main\.css\.map
+
+src/stylesheets/main\.css
+
+src/stylesheets/imageLabel\.css
+
+*.map
+
+package-lock\.json
