@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from './Button';
 
-const ButtonBackToHome = props => (
+const ButtonBackToHome = () => (
   <Button link="/">
     Go back to home
   </Button>

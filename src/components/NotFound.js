@@ -5,7 +5,7 @@ import ButtonBackToHome from './buttons/ButtonBackToHome';
 const NotFound = () => (
   <div className="page-not-found">
     <h4>Page not found!</h4>
-    <ButtonBackToHome user="NONE" />
+    <ButtonBackToHome />
   </div>
 );
 

@@ -3,7 +3,7 @@ import React from 'react';
 const Footer = () => (
   <div id="footer">
     <p>
-      &copy; 2018 Marvin - Made with ❤ by 353
+      &copy; 2018 Marvin - <a href="/License">MIT License</a> - Made with ❤ by 353
     </p>
   </div>
 );

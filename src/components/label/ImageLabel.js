@@ -19,6 +19,6 @@ ImageLabel.propTypes = {
 
 ImageLabel.defaultProps = {
   alt: '',
-}
+};
 
 export default ImageLabel;
