@@ -15,7 +15,7 @@ const Home = () => (
     <div className="page-content">
       <Button link="/login">Login</Button><br />
       <Button link="/register">Register</Button><br />
-      <h2>Versione di Web3: {web3.version.api}</h2><br />
+      <h2>TEST ONLY! - Versione di Web3: {web3.version.api}</h2><br />
     </div>
   </div>
 );
