@@ -1,11 +1,13 @@
 .imageLabel {
   .image {
     float: left;
+    height: 4rem;
   }
   .text {
-    float: left;
     color: crimson;
+    float: left;
     font-size: 1.2em;
     font-weight: bold;
+    visibility: hidden;
   }
 }

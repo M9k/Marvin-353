@@ -1,18 +1,69 @@
+/* variables */
+$red: #7c1d22;
+$red-marvin: #dc686e;
+$gray-marvin: #595968;
+
+/* components */
 body {
-  background-color: aliceblue;
+  background-color: white;
+
+  .page-content {
+    margin: 6rem auto;
+    text-align: center;
+    top: 50%;
+    width: 24rem;
+
+    a {
+      background-color: initial;
+      margin: 1rem 0;
+      border-radius: 0;
+      border: 0.25rem solid $gray-marvin;
+    }
+
+    a:hover {
+      background-color: $red;
+      border-color: white;
+    }
+  }
 }
+
+.page-content a, #headerLinks a {
+  background: none;
+  border: none;
+  box-shadow: none;
+  color: $gray-marvin;
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+
 #footer {
-  background-color: aquamarine;
-  position: absolute;
+  background-color: $red;
   bottom: 0;
+  color: white;
+  position: absolute;
   text-align: center;
   width: 100%;
+
+  p {
+    margin: 0.5rem 0;
+  }
 }
+
 #header {
   overflow: hidden;
-  min-height: 4em;
+  min-height: 4rem;
   padding: 1%;
 }
+
 #headerLinks {
   float: right;
+
+  a {
+    margin: 0.25rem 0.5rem;
+  }
+
+  a:hover {
+    text-decoration-line: underline;
+    text-decoration-color: $red-marvin;
+  }
 }

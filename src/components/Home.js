@@ -12,8 +12,10 @@ const Home = () => (
       <ButtonPrice />
       <ButtonHelp />
     </Header>
-    <Button link="/login">Login</Button><br />
-    <Button link="/register">Register</Button><br />
+    <div className="page-content">
+      <Button link="/login">Login</Button><br />
+      <Button link="/register">Register</Button><br />
+    </div>
   </div>
 );
 
