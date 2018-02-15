@@ -48,3 +48,4 @@ src/stylesheets/imageLabel\.css
 *.map
 
 package-lock\.json
+\.nyc_output/
