@@ -19,12 +19,17 @@
     "start": "webpack-dev-server --inline --hot --history-api-fallback --host localhost --port 8080 --devtool source-map",
     "build-dev": "webpack --config webpack.dev.config.js",
     "build-prod": "webpack -p --config webpack.prod.config.js",
-    "test": "nyc mocha --recursive --compilers js:babel-register --require babel-polyfill --require ignore-styles",
+    "test": "nyc mocha test/[^_]*/* --recursive --compilers js:babel-register --require babel-polyfill --require ignore-styles",
     "test-watch": "npm test -- --watch",
     "install-eslint": "npm install -g eslint eslint-plugin-react eslint-plugin-jsx-a11y eslint-plugin-import",
-    "truffle-test": "./node_modules/.bin/truffle test test/contracts/*",
-    "truffle-coverage": "./node_modules/.bin/solidity-coverage",
+    "truffle-test": "./node_modules/.bin/truffle test test/_contracts/*",
+    "solidity-coverage": "./node_modules/.bin/solidity-coverage",
     "testrpc": "./node_modules/.bin/testrpc-sc > /dev/null &"
+  },
+  "nyc": {
+    "exclude": [
+      "**test/**"
+    ]
   },
   "babel": {
     "presets": [

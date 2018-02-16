@@ -23,6 +23,6 @@ script:
   - npm run build-dev
   - npm run build-prod
 after_script:
-  - npm run truffle-coverage #Appena decidiamo che servizio usare lo pushamo sopra (coverall richiede il repo pubblico)
+  - npm run solidity-coverage #Appena decidiamo che servizio usare lo pushamo sopra (coverall richiede il repo pubblico)
   - python sol-coverage.py -p #Push sul db metabase
 
