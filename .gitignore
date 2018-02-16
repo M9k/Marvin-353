@@ -47,5 +47,10 @@ src/stylesheets/imageLabel\.css
 
 *.map
 
-package-lock\.json
+package-lock\.json
+
+build/
+coverage.json
+coverage/
+
 \.nyc_output/
