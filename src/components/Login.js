@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Login = () => {
-  document.title = 'Pagina 2 - POW';
+  document.title = 'Marvin - Login';
   return (
     <div className="login">
       <h4>Login!</h4>

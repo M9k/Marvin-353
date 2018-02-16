@@ -1,17 +1,16 @@
 import React from 'react';
 import ButtonHelp from './buttons/ButtonHelp';
-import ButtonBackToHome from './buttons/ButtonBackToHome';
 import Header from './global/Header';
 
 const Price = () => (
   <div className="page-home">
     <Header>
+      <span className="btn btn-default-select">Price</span>
       <ButtonHelp />
     </Header>
-    <h1>Price</h1>
+    <h1 className="title">Price</h1>
     <p>Block number: TODO</p>
     <p>TODO</p>
-    <ButtonBackToHome />
   </div>
 );
 

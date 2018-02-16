@@ -23,17 +23,44 @@ body {
     a:hover {
       background-color: $red-marvin;
       border-color: white;
+      color: white;
     }
   }
 }
 
-.page-content a, #headerLinks a {
-  background: none;
-  border: none;
-  box-shadow: none;
-  color: $gray-marvin;
-  font-size: 2rem;
+h1 {
   text-transform: uppercase;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: $gray-marvin;
+}
+
+a {
+  color: $red-marvin;
+}
+
+a:hover {
+  color: $red-marvin;
+  text-decoration: underline;
+  text-decoration-color: $red-marvin;
+}
+
+/* id */
+
+#header {
+  overflow: hidden;
+  min-height: 4rem;
+  padding: 1%;
+}
+
+#headerLinks {
+  float: right;
 }
 
 #footer {
@@ -49,21 +76,35 @@ body {
   }
 }
 
-#header {
-  overflow: hidden;
-  min-height: 4rem;
-  padding: 1%;
+/* class */
+.btn-default,
+.btn-default-select {
+  background: none;
+  border: none;
+  box-shadow: none;
+  color: $gray-marvin;
+  font-size: 2rem;
+  text-transform: uppercase;
+  vertical-align: middle;
 }
 
-#headerLinks {
-  float: right;
+.btn-default-select {
+  cursor: initial;
+  color: $red-marvin;
+}
 
-  a {
-    margin: 0.25rem 0.5rem;
-  }
+.btn-default:hover,
+.btn-default-select:hover,
+.btn-default:focus,
+.btn-default-select:focus,
+.btn-default:active,
+.btn-default-select:active {
+  color: $red-marvin;
+  background-color: unset;
+  border: unset;
+  box-shadow: unset;
+}
 
-  a:hover {
-    text-decoration-line: underline;
-    text-decoration-color: $red-marvin;
-  }
+.title {
+  text-align: center;
 }

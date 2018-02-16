@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Button = props => (
-  <a className="btn btn-primary" href={props.link} >
+  <a className="btn btn-default" href={props.link} >
     {props.children}
-  </a>);
+  </a>
+);
 
 Button.propTypes = {
   link: PropTypes.string.isRequired,

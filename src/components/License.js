@@ -1,12 +1,16 @@
 import React from 'react';
-import ButtonBackToHome from './buttons/ButtonBackToHome';
+import ButtonHelp from './buttons/ButtonHelp';
+import ButtonPrice from './buttons/ButtonPrice';
 import Header from './global/Header';
 
 // Not found page component
 const License = () => (
   <div className="license-page">
-    <Header />
-    <h1>The MIT License</h1>
+    <Header>
+      <ButtonPrice />
+      <ButtonHelp />
+    </Header>
+    <h1 className="title">The MIT License</h1>
     <p>Copyright 2018, <i>353</i></p>
     <p>
       Permission is hereby granted, free of charge, to any person obtaining a copy of this software
@@ -27,7 +31,6 @@ const License = () => (
       ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
       SOFTWARE.
     </p>
-    <ButtonBackToHome />
   </div>
 );
 

@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import ImageLabel from './ImageLabel';
 
 const WelcomeLabel = props => (
-  <ImageLabel image="media/logo.png" text={props.text} alt="Logo" />
+  <a href="/" title="Go back home">
+    <ImageLabel image="media/logo.png" text={props.text} alt="Marvin logo" />
+  </a>
 );
 
 WelcomeLabel.propTypes = {
