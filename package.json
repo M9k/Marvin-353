@@ -29,8 +29,10 @@
   },
   "nyc": {
     "exclude": [
-      "**test/**"
-    ]
+      "**test/**",
+      "**testnpm/**"
+    ],
+    "report-dir": "./coverage"
   },
   "babel": {
     "presets": [
