@@ -9,7 +9,6 @@ describe('App component', () => {
     it('should render the component', () => {
       const props = { text: '', alt: '', image: '' };
       const wrapper = shallow(<ImageLabel {...props} />);
-      console.log(wrapper.text());
       assert.equal(wrapper.length, 1);
     });
     it('should render the right text as paragraph', () => {
