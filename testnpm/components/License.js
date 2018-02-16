@@ -4,7 +4,7 @@ import assert from 'assert';
 import License from '../../src/components/License';
 
 // unit tests for the Home component
-describe('License', () => {
+describe('License component', () => {
   describe('render()', () => {
     it('should render the component', () => {
       const wrapper = shallow(<License />);

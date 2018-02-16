@@ -4,7 +4,7 @@ import assert from 'assert';
 import Button from '../../../src/components/buttons/Button';
 
 // unit tests for the App component
-describe('App component', () => {
+describe('Button component', () => {
   describe('render()', () => {
     it('should render the component', () => {
       const props = { link: '' };

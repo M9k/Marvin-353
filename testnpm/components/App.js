@@ -8,7 +8,7 @@ describe('App component', () => {
   describe('render()', () => {
     it('should render the component', () => {
       const props = { dispatch: () => {}, users: [] };
-      const wrapper = shallow(<App {...props} />);
+      const wrapper = shallow(<App {...props} >Children</App>);
       assert.equal(wrapper.length, 1);
     });
   });

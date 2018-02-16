@@ -3,11 +3,11 @@ import { shallow } from 'enzyme';
 import assert from 'assert';
 import WelcomeLabel from '../../../src/components/label/WelcomeLabel';
 
-//mock
-const ImageLabel = props => (<div>{props.alt} {props.text} {props.image}</div>);
 
 // unit tests for the App component
-describe('App component', () => {
+describe('WelcomeLabel component', () => {
+  //mock
+  const ImageLabel = props => (<div>{props.alt} {props.text} {props.image}</div>);
   describe('render()', () => {
     it('should render the component', () => {
       const props = { text: '' };
