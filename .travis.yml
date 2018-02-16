@@ -22,6 +22,7 @@ install:
 before_script:
   - npm run testrpc
 script:
+  - npm run test
   - npm run truffle-test
   - npm run build-dev
   - npm run build-prod

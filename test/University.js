@@ -1,4 +1,4 @@
-let University = artifacts.require('./University.sol');
+let University = artifacts.require('./contracts/University.sol');
 
 contract('University', function(accounts) {
     let contract;
