@@ -11,10 +11,6 @@ describe('NotFound component', () => {
       const wrapper = shallow(<NotFound />);
       assert.equal(wrapper.length, 1);
     });
-    it('should display the return to home page button', () => {
-      const wrapper = shallow(<NotFound />);
-      assert.equal(wrapper.contains(<ButtonBackToHome />), true);
-    });
     it('should display an error message', () => {
       const wrapper = shallow(<NotFound />);
       const message = 'Page not found!';

@@ -24,10 +24,10 @@ describe('App component', () => {
       const wrapper = shallow(<WelcomeLabel {...props} />);
       assert.equal(wrapper.html().search('right text') !== -1, true);
     });
-    it('should use "Logo"', () => {
+    it('should use "Marvin logo"', () => {
       const props = { text: '' };
       const wrapper = shallow(<WelcomeLabel {...props} />);
-      assert.equal(wrapper.html().search('Logo') !== -1, true);
+      assert.equal(wrapper.html().search('Marvin logo') !== -1, true);
     });
   });
 });
