@@ -26,10 +26,6 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.json$/,
-        loader: 'json-loader',
-      },
-      {
         // https://github.com/jtangelder/sass-loader
         test: /\.scss$/,
         loaders: ['style', 'css', 'sass'],
@@ -37,6 +33,10 @@ module.exports = {
       {
         test: /\.css$/,
         loaders: ['style', 'css'],
+      },
+      {
+        test: /\.json$/,
+        loader: 'json-loader',
       },
     ],
   },

@@ -54,3 +54,5 @@ coverage.json
 coverage/
 
 \.nyc_output/
+
+css/
