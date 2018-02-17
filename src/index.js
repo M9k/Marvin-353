@@ -12,7 +12,12 @@ let web3;
 getWeb3.then((results) => {
   web3 = results;
 })
-  .catch(() => { console.log('Error in web3 initialization.'); });
+  .catch(() => {
+    console.log('React should display the guide to install Metamask!');
+    //this.props.history.push('/install');//un componente install con la guida metamask tolta da help?
+    //senza andare su Home che lancia eccezione
+  });
+
 
 // render the main component
 ReactDOM.render(
