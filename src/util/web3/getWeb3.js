@@ -17,7 +17,7 @@ const getWeb3 = new Promise(((resolve, reject) => {
     } else {
       console.log('Metamask!');
     }
-    return web3;
+    resolve(web3);
   });
 }));
 
