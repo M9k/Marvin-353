@@ -11,20 +11,19 @@ import getWeb3 from './util/web3/getWeb3';
 // TODO: account nello stato Redux
 // poi connect con il main, così quando l'account cambia il setInterval lo rileva e fa ricaricare
 // tutta la pagina automaticamente, senza bisogno di azioni extra
-
-let account = null;
+let account = null; // TODO REDUX
 
 let web3 = getWeb3.then((results) => {
   web3 = results;
   account = web3.eth.accounts[0]; // TODO REDUX
-  console.log(account); // TODO DEBUG ONLY
+  console.log(account); // TODO DEBUG ONLY - DA RIMUOVERE
 });
 
 const checkSwitchAccount = setInterval(() => {
   if (account !== null && web3.eth.accounts[0] !== account) {
     account = web3.eth.accounts[0]; // TODO REDUX
-    console.log('SWITCH ACCOUNT!'); // TODO DEBUG ONLY
-    console.log(account); // TODO DEBUG ONLY
+    console.log('SWITCH ACCOUNT!'); // TODO DEBUG ONLY - DA RIMUOVERE
+    console.log(account); // TODO DEBUG ONLY - DA RIMUOVERE
   }
 }, 100);
 
