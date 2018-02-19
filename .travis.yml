@@ -14,9 +14,6 @@ cache:
 env:
   global:
     - NODE_ENV=development
-  matrix:
-    - TEST_TYPE=test
-    - TEST_TYPE=truffle-test
 install:
   - npm install
   - sudo apt-get install python-pip python-dev
@@ -25,7 +22,8 @@ install:
 before_script:
   - npm run testrpc
 script:
-  - "npm run $TEST_TYPE"
+  - npm run test
+  - npm run truffle-test
   - npm run build-dev
   - npm run build-prod
 after_script:
