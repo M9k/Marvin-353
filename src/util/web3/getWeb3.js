@@ -13,10 +13,9 @@ const getWeb3 = new Promise(((resolve, reject) => {
       console.log('No Metamask!');
       reject();//execute promise reject and go back to index
     }
-
     console.log('Metamask!');
 
-    return web3;
+    resolve(web3);
   });
 }));
 
