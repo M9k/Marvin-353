@@ -28,7 +28,7 @@
     "testrpc": "./node_modules/.bin/testrpc-sc > /dev/null &",
     "make-coverage": "python scripts/js-coverage.py && python scripts/solidity-coverage.py",
     "merge-coverage": "cp js-coverage/lcov.info report.lcov && echo \"$(cat coverage/lcov.info)\" >> report.lcov",
-    "push-coverage": "cat report.lcov | coveralls",
+    "push-coverage": "cat report.lcov | ./node_modules/.bin/coveralls",
     "clean-coverage": "rm -r report.lcov coverage.json coverage/ js-coverage/"
   },
   "nyc": {
