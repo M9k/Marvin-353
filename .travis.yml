@@ -14,6 +14,8 @@ cache:
 env:
   global:
     - NODE_ENV=development
+before_install:
+  - openssl aes-256-cbc -K $encrypted_25e5e99d9d5c_key -iv $encrypted_25e5e99d9d5c_iv -in .coveralls.yml.enc -out .coveralls.yml -d
 install:
   - npm install
   - sudo apt-get install python-pip python-dev
