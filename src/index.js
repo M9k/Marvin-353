@@ -9,6 +9,9 @@ import './stylesheets/main.scss';
 import getWeb3 from './util/web3/getWeb3';
 
 // TODO: account nello stato Redux
+// poi connect con il main, così quando l'account cambia il setInterval lo rileva e fa ricaricare
+// tutta la pagina automaticamente, senza bisogno di azioni extra
+
 let account = null;
 
 let web3 = getWeb3.then((results) => {
