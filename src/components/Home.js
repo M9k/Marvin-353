@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './global/Header';
 import Button from './buttons/Button';
+import ButtonLogin from './buttons/buttonLogin/container';
 
 // Home page component
 // TODO: Cambiare la home in base se l'utente è già autenticato nel sistema
@@ -11,6 +12,8 @@ const Home = (props) => {
     <div className="page-home">
       <Header />
       <div className="page-content">
+        <ButtonLogin /><br /><br />
+
         <Button link="/login">Login</Button><br />
         <Button link="/register">Register</Button><br />
         <h2>Metamask installato: {typeof web3 !== 'undefined' ? 'SI' : 'NO'}</h2><br />

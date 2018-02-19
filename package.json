@@ -17,6 +17,7 @@
   },
   "scripts": {
     "start": "start http://localhost:8080 & webpack-dev-server --inline --hot --history-api-fallback --host localhost --port 8080 --devtool source-map",
+    "migrate": "./node_modules/.bin/truffle migrate --network ganache",
     "build-dev": "webpack --config webpack.dev.config.js",
     "build-prod": "webpack -p --config webpack.prod.config.js",
     "test": "nyc mocha testnpm --recursive --compilers js:babel-register --require babel-polyfill --require ignore-styles",
@@ -66,6 +67,7 @@
     "redux-form": "^6.4.3",
     "redux-freeze": "^0.1.5",
     "redux-saga": "^0.14.3",
+    "truffle-contract": "latest",
     "web3": "^0.19.0"
   },
   "devDependencies": {

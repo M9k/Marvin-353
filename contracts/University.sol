@@ -17,7 +17,7 @@ contract University {
   mapping (address => bool) private administrators;
 
   //Costruttore
-  function newUniversity()public {
+  function University()public {
     universityAddress=msg.sender;
   }
 
@@ -59,6 +59,11 @@ contract University {
     }
   }
 
+  //Function to check if an address is of the university creator
+  function isUniveristyFounder(address possibleUniversityAddress) public view returns(bool) {
+    return possibleUniversityAddress == universityAddress;
+  }
+
   //Funzione per verificare se esiste uno studente dato un address
   function isStudent(address studentAddress) public view returns(bool) {
     return students[studentAddress];
@@ -89,4 +94,21 @@ contract University {
     return countAdministrators;
   }
 
+  function login() constant
+  public
+  returns (bytes32) {
+  if(isUniveristyFounder(msg.sender))
+    return 'university';
+
+  if(isAdmin(msg.sender))
+    return 'admin';
+
+  if(isTeacher(msg.sender))
+    return 'teacher';
+
+  if(isStudent(msg.sender))
+    return 'student';
+
+  return 'notRegistered';
+  }
 }
