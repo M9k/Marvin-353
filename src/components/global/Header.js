@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import WelcomeLabel from '../label/WelcomeLabel';
+import AccountTypes from '../AccountEnum';
+import ButtonFactory from '../buttons/ButtonFactory';
 
 const Header = props => (
   <div id="header">
@@ -16,7 +18,7 @@ Header.propTypes = {
 
 Header.defaultProps = {
   welcome: 'Welcome to Marvin',
-  children: '',
+  children: <ButtonFactory AccountType={AccountTypes.NOTLOGGED} />,
 };
 
 export default Header;

@@ -1,8 +1,6 @@
 import React from 'react';
 import Header from './global/Header';
 import Button from './buttons/Button';
-import ButtonFactory from './buttons/ButtonFactory';
-import AccountTypes from './AccountEnum';
 
 // Home page component
 // TODO: Cambiare la home in base se l'utente è già autenticato nel sistema
@@ -11,9 +9,7 @@ const Home = (props) => {
   // TODO: Prelevare il tipo di account da Redux
   return (
     <div className="page-home">
-      <Header>
-        <ButtonFactory AccountType={AccountTypes.NOTLOGGED} />
-      </Header>
+      <Header />
       <div className="page-content">
         <Button link="/login">Login</Button><br />
         <Button link="/register">Register</Button><br />

@@ -1,15 +1,11 @@
 import React from 'react';
-import ButtonPrice from './buttons/ButtonPrice';
 import Header from './global/Header';
 
 const Help = () => {
   document.title = 'Help - Marvin';
   return (
-    <div className="page-home">
-      <Header>
-        <ButtonPrice />
-        <span className="btn btn-default-select">Help</span>
-      </Header>
+    <div className="page-help">
+      <Header />
       <h1 className="title">Help</h1>
       <h2>What it is Marvin?</h2>
       Marvin is a ÐApp for universities, teachers and students.
