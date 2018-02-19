@@ -14,8 +14,10 @@ getWeb3.then((results) => {
 })
   .catch(() => {
     console.log('React should display the guide to install Metamask!');
-    //this.props.history.push('/install');//un componente install con la guida metamask tolta da help?
-    //senza andare su Home che lancia eccezione
+    // eslint-disable-next-line no-trailing-spaces,no-alert
+    alert('Install METAMASK');
+    // this.props.history.push('/install');//un componente install con la guida metamask tolta da help?
+    // senza andare su Home che lancia eccezione
   });
 
 
