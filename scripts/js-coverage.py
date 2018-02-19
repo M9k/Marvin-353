@@ -6,7 +6,6 @@ run, error = subprocess.Popen(["npm", "run", "test"], stdout=subprocess.PIPE).co
 if error is None:
     subprocess.Popen(["./node_modules/.bin/nyc", "report", "--reporter=lcov"]).communicate()
     coverage_report.push("JS")
-    shutil.rmtree("./coverage")
 else:
     print error
     exit(1)

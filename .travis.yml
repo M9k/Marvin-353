@@ -27,6 +27,5 @@ script:
   - npm run build-dev
   - npm run build-prod
 after_script:
-  - python js-coverage.py
-  - python solidity-coverage.py
+  - npm run make-coverage && npm run merge-coverage && npm run push-coverage
 

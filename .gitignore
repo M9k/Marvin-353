@@ -52,6 +52,9 @@ package-lock\.json
 build/
 coverage.json
 coverage/
+js-coverage/
+report.lcov
+.coveralls.yml
 
 \.nyc_output/
 
