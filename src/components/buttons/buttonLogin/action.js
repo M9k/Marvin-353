@@ -12,14 +12,13 @@ function userLoggedIn(user) {
   };
 }
 
+// Login function dispatched from the middleware inside container.js
 export function loginUser() {
-  alert('login user');
-
   const web3 = store.getState().web3.web3Instance;
 
   // Double-check web3's status.
   if (typeof web3 !== 'undefined') {
-    return function (dispatch) {
+    return (dispatch) => {
       // Using truffle-contract we create the authentication object.
       const login = contract(UniversityLoginContract);
       login.setProvider(web3.currentProvider);
@@ -43,7 +42,7 @@ export function loginUser() {
               // If no error, login user.
               const typeUser = web3.toUtf8(result);
 
-              alert(`You're a : ${typeUser}`);
+              console.log(`HEY! You're a : ${typeUser}`);
 
               dispatch(userLoggedIn({ type: typeUser }));
 
@@ -60,4 +59,5 @@ export function loginUser() {
     };
   }
   console.error('Web3 is not initialized.');
+  return 'no web3';
 }
