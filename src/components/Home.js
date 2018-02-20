@@ -11,6 +11,7 @@ const Home = (props) => {
     <div className="page-home">
       <Header />
       <div className="page-content">
+        <h1>Deploy da tutit i branch!</h1>
         <Button link="/login/">Login</Button><br />
         <Button link="/register/">Register</Button><br />
         <h2>Metamask installato: {typeof web3 !== 'undefined' ? 'SI' : 'NO'}</h2><br />

@@ -3,8 +3,6 @@ dist: trusty
 language: node_js
 node_js:
   - '8'
-python:
-  - "2.7"
 notifications:
   email: false
   slack: 353swe:TBr27Dyzfxr9mmz1qYaWjJiv
@@ -16,12 +14,12 @@ env:
     - NODE_ENV=development
 install:
   - npm install
-before_script:
-  - npm run testrpc
 script:
   - npm run build-prod
 deploy:
   provider: surge
   project: ./static/
   domain: marvin.surge.sh
+  on:
+    all_branches: true
 
