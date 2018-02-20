@@ -16,18 +16,12 @@ env:
     - NODE_ENV=development
 install:
   - npm install
-  - sudo apt-get install python-pip python-dev
-  - sudo pip install bs4
-  - sudo pip install unirest
 before_script:
   - npm run testrpc
 script:
-  - npm run test
-  - npm run truffle-test
-  - npm run build-dev
   - npm run build-prod
-after_script:
-  - npm run make-coverage && npm run merge-coverage
-  - cat report.lcov | COVERALLS_REPO_TOKEN=$repo_token COVERALLS_SERVICE_NAME=travis-pro ./node_modules/.bin/coveralls
-
+deploy:
+  provider: surge
+  project: ./static/
+  domain: marvin.surge.sh
 
