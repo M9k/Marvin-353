@@ -2,28 +2,28 @@ import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { store } from './store';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from './store';
 import router from './router';
 import Footer from './components/global/Footer';
 import './stylesheets/main.scss';
 import getWeb3 from './util/web3/getWeb3';
+import { userAction } from './reducers/user';
 
-// TODO: account nello stato Redux
-// poi connect con il main, così quando l'account cambia il setInterval lo rileva e fa ricaricare
-// tutta la pagina automaticamente, senza bisogno di azioni extra
-let account = null; // TODO REDUX
+let account = null;
 
 let web3 = getWeb3.then((results) => {
   web3 = results;
-  account = web3.eth.accounts[0]; // TODO REDUX
-  console.log(account); // TODO DEBUG ONLY - DA RIMUOVERE
+  account = web3.eth.accounts[0];
+  store.dispatch({ type: userAction.METAMASK });
+  store.dispatch({ type: userAction.EDIT_ADDRESS, address: web3.eth.accounts[0] });
 });
 
-const checkSwitchAccount = setInterval(() => {
+setInterval(() => {
   if (account !== null && web3.eth.accounts[0] !== account) {
-    account = web3.eth.accounts[0]; // TODO REDUX
+    account = web3.eth.accounts[0];
+    store.dispatch({ type: userAction.EDIT_ADDRESS, address: web3.eth.accounts[0] });
     console.log('SWITCH ACCOUNT!'); // TODO DEBUG ONLY - DA RIMUOVERE
-    console.log(account); // TODO DEBUG ONLY - DA RIMUOVERE
   }
 }, 100);
 
@@ -31,7 +31,9 @@ const checkSwitchAccount = setInterval(() => {
 ReactDOM.render(
   <div id="page">
     <Provider store={store}>
-      {router}
+      <PersistGate loading={null} persistor={persistor}>
+        {router}
+      </PersistGate>
     </Provider>
     <Footer />
   </div>,

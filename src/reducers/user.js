@@ -1,4 +1,6 @@
 const initialState = {
+  metamask: false,
+  account: null,
   trylogin: false,
   logged: false,
   role: null,
@@ -9,6 +11,8 @@ const userAction = {
   USER_UPDATED: 'USER_UPDATED',
   USER_LOGGED_OUT: 'USER_LOGGED_OUT',
   USER_TRY_LOGIN: 'USER_TRY_LOGIN',
+  METAMASK: 'METAMASK',
+  EDIT_ADDRESS: 'EDIT_ADDRESS',
 };
 
 const userLogger = (state = initialState, action) => {
@@ -33,6 +37,16 @@ const userLogger = (state = initialState, action) => {
       trylogin: true,
       logged: false,
       role: null,
+    });
+  }
+  if (action.type === userAction.METAMASK) {
+    return Object.assign({}, state, {
+      metamask: true,
+    });
+  }
+  if (action.type === userAction.EDIT_ADDRESS) {
+    return Object.assign({}, state, {
+      address: action.address,
     });
   }
 
