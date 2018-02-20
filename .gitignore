@@ -54,6 +54,7 @@ coverage/
 js-coverage/
 report.lcov
 .coveralls.yml
+build/
 
 \.nyc_output/
 
