@@ -1,21 +1,42 @@
 const initialState = {
-  data: null,
+  trylogin: false,
+  logged: false,
+  role: null,
 };
 
-const user = (state = initialState, action) => {
-  if (action.type === 'USER_LOGGED_IN' || action.type === 'USER_UPDATED') {
+const userAction = {
+  USER_LOGGED_IN: 'USER_LOGGED_IN',
+  USER_UPDATED: 'USER_UPDATED',
+  USER_LOGGED_OUT: 'USER_LOGGED_OUT',
+  USER_TRY_LOGIN: 'USER_TRY_LOGIN',
+};
+
+const userLogger = (state = initialState, action) => {
+  if (action.type === userAction.USER_LOGGED_IN || action.type === userAction.USER_UPDATED) {
     return Object.assign({}, state, {
-      data: action.payload,
+      trylogin: false,
+      logged: true,
+      role: action.role,
     });
   }
 
-  if (action.type === 'USER_LOGGED_OUT') {
+  if (action.type === userAction.USER_LOGGED_OUT) {
     return Object.assign({}, state, {
-      data: null,
+      trylogin: false,
+      logged: false,
+      role: null,
+    });
+  }
+
+  if (action.type === userAction.USER_TRY_LOGIN) {
+    return Object.assign({}, state, {
+      trylogin: true,
+      logged: false,
+      role: null,
     });
   }
 
   return state;
 };
 
-export default user;
+export { userLogger, userAction };

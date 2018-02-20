@@ -33,7 +33,7 @@ const ButtonFactory = (props) => {
 };
 
 ButtonFactory.ButtonFactory = {
-  AccountType: PropTypes.oneOf(AccountTypes).isRequired,
+  AccountType: PropTypes.oneOf(Object.keys(AccountTypes)).isRequired,
 };
 
 export default ButtonFactory;
