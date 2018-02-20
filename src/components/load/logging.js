@@ -25,6 +25,7 @@ class Logging extends React.Component {
       );
     }
     // se non sta più cercando di effettuare il login torna alla home
+    // TODO: questo comando non va bene, fa resettare lo stato a Redux, si deve usare il router!
     window.location.replace('/');
     // TODO completare
     return (<div>Se non vieni rediretto alla home entro tot clicka qui: link alla home</div>);
