@@ -3,9 +3,10 @@
 const appRoot = 'src'; // the app root folder: src, src_users, etc
 const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-
 module.exports = {
   app_root: appRoot, // the app root folder, needed by the other webpack configs
+  devtool: 'source-map',
+  context: __dirname,
   entry: [
     // http://gaearon.github.io/react-hot-loader/getstarted/
     'webpack-dev-server/client?http://localhost:8080',
@@ -15,8 +16,9 @@ module.exports = {
   ],
   output: {
     path: path.join(__dirname, 'public'),
-    publicPath: 'js/',
+    publicPath: '/',
     filename: 'bundle.js',
+    libraryTarget: 'umd'
   },
   module: {
     loaders: [
@@ -45,10 +47,10 @@ module.exports = {
     contentBase: path.join(__dirname, 'public'),
   },
   plugins: [
-    new CleanWebpackPlugin(['css/main.css', 'js/bundle.js'], {
+    new CleanWebpackPlugin(['public/main.css', 'public/bundle.js'], {
       root: path.join(__dirname, 'public'),
       verbose: true,
       dry: false, // true for simulation
-    }),
+    })
   ],
 };

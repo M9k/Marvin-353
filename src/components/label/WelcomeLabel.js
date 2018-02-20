@@ -4,7 +4,7 @@ import ImageLabel from './ImageLabel';
 
 const WelcomeLabel = props => (
   <a href="/" title="Go to the home">
-    <ImageLabel image="media/logo.png" text={props.text} alt="Marvin logo" />
+    <ImageLabel image="/media/logo.png" text={props.text} alt="Marvin logo" />
   </a>
 );
 

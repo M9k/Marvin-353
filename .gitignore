@@ -49,7 +49,6 @@ src/stylesheets/imageLabel\.css
 
 package-lock\.json
 
-build/
 coverage.json
 coverage/
 js-coverage/

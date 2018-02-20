@@ -6,6 +6,8 @@ import freeze from 'redux-freeze';
 import reducers from './reducers/index';
 import { sagas } from './sagas/index';
 
+const _window = (window === undefined ? global.window : window);
+
 // add the middlewares
 const middlewares = [];
 
