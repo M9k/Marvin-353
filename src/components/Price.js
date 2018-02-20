@@ -4,10 +4,7 @@ import Header from './global/Header';
 
 const Price = () => (
   <div className="page-home">
-    <Header>
-      <span className="btn btn-default-select">Price</span>
-      <ButtonHelp />
-    </Header>
+    <Header />
     <h1 className="title">Price</h1>
     <p>Block number: TODO</p>
     <p>TODO</p>

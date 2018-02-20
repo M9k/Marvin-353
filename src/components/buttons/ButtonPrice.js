@@ -1,10 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Button from './Button';
-import { store } from '../../store';
 
-const ButtonPrice = () => {
-  if (typeof store.getState().routing.locationBeforeTransitions.pathname !== 'undefined' &&
-    store.getState().routing.locationBeforeTransitions.pathname === '/price') {
+const ButtonPrice = (props) => {
+  if (props.active === '/price') {
     return (
       <span className="btn btn-default-select">
         Price
@@ -18,4 +18,17 @@ const ButtonPrice = () => {
   );
 };
 
-export default ButtonPrice;
+ButtonPrice.propTypes = {
+  active: PropTypes.string,
+};
+
+ButtonPrice.defaultProp = {
+  active: '/',
+};
+
+const mapStateToProps = state => ({
+  active: state.routing.locationBeforeTransitions.pathname,
+});
+
+export default connect(mapStateToProps)(ButtonPrice);
+

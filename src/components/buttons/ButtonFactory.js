@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ButtonPrice from './ButtonPrice';
 import ButtonHelp from './ButtonHelp';
@@ -6,7 +7,8 @@ import ButtonLogOut from './ButtonLogOut';
 import AccountTypes from '../AccountEnum';
 
 const ButtonFactory = (props) => {
-  switch (props.AccountType) {
+  switch (props.accountType) {
+    case null:
     case AccountTypes.NOTLOGGED:
       return (
         <div id="ButtonGroup">
@@ -27,14 +29,21 @@ const ButtonFactory = (props) => {
       );
     default:
       return (
-        <div id="ButtonGroup" />
+        <div id="ButtonGroup" className={props.accountType} />
       );
   }
 };
 
-ButtonFactory.ButtonFactory = {
-  AccountType: PropTypes.oneOf(Object.keys(AccountTypes)).isRequired,
+ButtonFactory.propTypes = {
+  accountType: PropTypes.oneOf(Object.values(AccountTypes)),
 };
 
-export default ButtonFactory;
+ButtonFactory.defaultProp = {
+  accountType: null,
+};
 
+const mapStateToProps = state => ({
+  accountType: state.user.role,
+});
+
+export default connect(mapStateToProps)(ButtonFactory);
