@@ -14,25 +14,34 @@ class Logging extends React.Component {
     if (this.props.isGoing) {
       return (
         <div>
-          Please wait...
+          Please wait for the blockchain...
+        </div>
+      );
+    } else if (!this.props.isLogged) {
+      return (
+        <div>
+          Logging...
         </div>
       );
     }
-    setTimeout(window.location.replace('/'), 5000);
+    setTimeout(window.location.replace('/'), 2000);
     return (<div>Logged! If you are not redirect to the homepage in 5 seconds <a href="/">click here</a></div>);
   }
 }
 
 Logging.propTypes = {
   isGoing: PropTypes.bool,
+  isLogged: PropTypes.bool,
 };
 
 Logging.defaultProps = {
   isGoing: false,
+  isLogged: false,
 };
 
 const mapStateToProps = state => ({
   isGoing: state.user.trylogin,
+  isLogged: state.user.logged,
 });
 
 /*
