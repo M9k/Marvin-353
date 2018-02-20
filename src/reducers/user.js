@@ -23,15 +23,6 @@ const userLogger = (state = initialState, action) => {
       role: action.role,
     });
   }
-
-  if (action.type === userAction.USER_LOGGED_OUT) {
-    return Object.assign({}, state, {
-      trylogin: false,
-      logged: false,
-      role: null,
-    });
-  }
-
   if (action.type === userAction.USER_TRY_LOGIN) {
     return Object.assign({}, state, {
       trylogin: true,
@@ -45,8 +36,20 @@ const userLogger = (state = initialState, action) => {
     });
   }
   if (action.type === userAction.EDIT_ADDRESS) {
+    if (typeof action.address !== 'undefined') {
+      return Object.assign({}, state, {
+        account: action.address,
+      });
+    }
     return Object.assign({}, state, {
-      address: action.address,
+      account: null,
+    });
+  }
+  if (action.type === userAction.USER_LOGGED_OUT) {
+    return Object.assign({}, state, {
+      trylogin: false,
+      logged: false,
+      role: null,
     });
   }
 
