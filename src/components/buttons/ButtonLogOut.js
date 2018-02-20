@@ -12,7 +12,7 @@ const ButtonBackToHome = () => {
     );
   }
   return (
-    <Button link="/logout">
+    <Button link="/logout/">
       Logout
     </Button>
   );

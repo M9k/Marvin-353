@@ -12,7 +12,7 @@ const ButtonPrice = () => {
     );
   }
   return (
-    <Button link="/price">
+    <Button link="/price/">
       Price
     </Button>
   );

@@ -12,7 +12,7 @@ const ButtonHelp = () => {
     );
   }
   return (
-    <Button link="/help">
+    <Button link="/help/">
       Help
     </Button>
   );
