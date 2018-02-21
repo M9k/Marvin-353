@@ -1,10 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Button from './Button';
 
 const ButtonBackToHome = (props) => {
-  if (props.active === '/logout') {
+  if (props.path === '/logout/') {
     return (
       <span className="btn btn-default-select">
         Logout
@@ -19,16 +18,12 @@ const ButtonBackToHome = (props) => {
 };
 
 ButtonBackToHome.propTypes = {
-  active: PropTypes.string,
+  path: PropTypes.string,
 };
 
 ButtonBackToHome.defaultProp = {
-  active: '/',
+  path: '/',
 };
 
-const mapStateToProps = state => ({
-  active: state.routing.locationBeforeTransitions.pathname,
-});
-
-export default connect(mapStateToProps)(ButtonBackToHome);
+export default ButtonBackToHome;
 

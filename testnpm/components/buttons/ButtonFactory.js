@@ -13,8 +13,8 @@ describe('ButtonFactory component', () => {
     it('should render the component', () => {
       const wrapper = shallow(<ButtonFactory
         store={mockStore({
-          user:
-            { role: 0 },
+          routing:
+            { locationBeforeTransitions: { pathname: '/' } },
         })}
       />);
       assert.equal(wrapper.length, 1);
@@ -22,18 +22,17 @@ describe('ButtonFactory component', () => {
     it('without a correct role should render a empty ButtonFactory', () => {
       const wrapper = shallow(<ButtonFactory
         store={mockStore({
-          user:
-            { role: 123456789 },
+          routing:
+            { locationBeforeTransitions: { pathname: '/' } },
         })}
       />);
       assert.equal(wrapper.html(), '<div id="ButtonGroup"></div>');
     });
     it('with AccountTypes.NOTLOGGED as role should render price and help ', () => {
       const wrapper = shallow(<ButtonFactory
-        accountType={AccountTypes.NOTLOGGED}
         store={mockStore({
-          user:
-            { role: AccountTypes.NOTLOGGED },
+          routing:
+            { locationBeforeTransitions: { pathname: '/' } },
         })}
       />);
       // TODO: come?

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import ButtonPrice from './ButtonPrice';
 import ButtonHelp from './ButtonHelp';
 import ButtonLogOut from './ButtonLogOut';
@@ -11,8 +12,8 @@ const ButtonFactory = (props) => {
     case AccountTypes.NOTLOGGED:
       return (
         <div id="ButtonGroup">
-          <ButtonPrice />
-          <ButtonHelp />
+          <ButtonPrice path={props.path} />
+          <ButtonHelp path={props.path} />
         </div>
       );
     case AccountTypes.UNIVERSITY:
@@ -21,9 +22,9 @@ const ButtonFactory = (props) => {
     case AccountTypes.STUDENT:
       return (
         <div id="ButtonGroup">
-          <ButtonPrice />
-          <ButtonHelp />
-          <ButtonLogOut />
+          <ButtonPrice path={props.path} />
+          <ButtonHelp path={props.path} />
+          <ButtonLogOut path={props.path} />
         </div>
       );
     default:
@@ -35,10 +36,16 @@ const ButtonFactory = (props) => {
 
 ButtonFactory.propTypes = {
   accountType: PropTypes.oneOf(Object.values(AccountTypes)),
+  path: PropTypes.string,
 };
 
 ButtonFactory.defaultProp = {
   accountType: null,
+  path: '/',
 };
 
-export default ButtonFactory;
+const mapStateToProps = state => ({
+  path: state.routing.locationBeforeTransitions.pathname,
+});
+
+export default connect(mapStateToProps)(ButtonFactory);

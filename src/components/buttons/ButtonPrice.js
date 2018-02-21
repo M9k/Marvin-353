@@ -1,10 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Button from './Button';
 
 const ButtonPrice = (props) => {
-  if (props.active === '/price') {
+  if (props.path === '/price/') {
     return (
       <span className="btn btn-default-select">
         Price
@@ -19,16 +18,12 @@ const ButtonPrice = (props) => {
 };
 
 ButtonPrice.propTypes = {
-  active: PropTypes.string,
+  path: PropTypes.string,
 };
 
 ButtonPrice.defaultProp = {
-  active: '/',
+  path: '/',
 };
 
-const mapStateToProps = state => ({
-  active: state.routing.locationBeforeTransitions.pathname,
-});
-
-export default connect(mapStateToProps)(ButtonPrice);
+export default ButtonPrice;
 

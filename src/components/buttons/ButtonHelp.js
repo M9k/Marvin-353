@@ -1,10 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Button from './Button';
 
 const ButtonHelp = (props) => {
-  if (props.active === '/help') {
+  if (props.path === '/help/') {
     return (
       <span className="btn btn-default-select">
         Help
@@ -19,15 +18,11 @@ const ButtonHelp = (props) => {
 };
 
 ButtonHelp.propTypes = {
-  active: PropTypes.string,
+  path: PropTypes.string,
 };
 
 ButtonHelp.defaultProp = {
-  active: '/',
+  path: '/',
 };
 
-const mapStateToProps = state => ({
-  active: state.routing.locationBeforeTransitions.pathname,
-});
-
-export default connect(mapStateToProps)(ButtonHelp);
+export default ButtonHelp;
