@@ -14,20 +14,29 @@ cache:
 env:
   global:
     - NODE_ENV=development
-install:
-  - npm install
-  - sudo apt-get install python-pip python-dev
-  - sudo pip install bs4
-  - sudo pip install unirest
-before_script:
-  - npm run testrpc
-script:
-  - npm run test
-  - npm run truffle-test
-  - npm run build-dev
-  - npm run build-prod
-after_script:
-  - npm run make-coverage && npm run merge-coverage
-  - cat report.lcov | COVERALLS_REPO_TOKEN=$repo_token COVERALLS_SERVICE_NAME=travis-pro ./node_modules/.bin/coveralls
-
-
+jobs:
+  include:
+    - stage: test
+      install: npm install
+      before_script: npm run testrpc
+      script:
+        - npm run test
+        - npm run truffle-test
+    - stage: code-coverage
+      if: branch = master
+      before_script: npm run testrpc
+      install:
+        - sudo apt-get install python-pip python-dev
+        - sudo pip install bs4
+        - sudo pip install unirest
+      script:
+       - npm run make-coverage && npm run merge-coverage
+       - cat report.lcov | COVERALLS_REPO_TOKEN=$repo_token COVERALLS_SERVICE_NAME=travis-pro ./node_modules/.bin/coveralls
+    - stage: deploy-to-production
+      if: branch = master
+      script: npm run build-prod
+      deploy:
+        provider: surge
+        project: ./build/
+        domain: marvin.surge.sh
+        skip_cleanup: true
