@@ -1,5 +1,5 @@
-var University = artifacts.require("./University.sol");
+const University = artifacts.require('./University.sol');
 
-module.exports = function(deployer) {
+module.exports = function (deployer) {
   deployer.deploy(University);
 };

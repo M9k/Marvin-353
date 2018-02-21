@@ -27,7 +27,7 @@ contract University {
   }
 
   //Per aggiungere uno studente.
-  function newStudent(address studentAddress)  public {
+  function newStudent(address studentAddress)  public onlyAllowed{
     if(studentAddress!=0){
       if(isStudent(studentAddress)){
         return;
@@ -38,7 +38,7 @@ contract University {
   }
 
   //Per aggiungere uno docente.
-  function newTeacher(address teacherAddress)  public {
+  function newTeacher(address teacherAddress)  public onlyAllowed{
     if(teacherAddress!=0){
       if(isTeacher(teacherAddress)){
         return;
@@ -49,7 +49,7 @@ contract University {
   }
 
   //Per aggiungere un admin.
-  function newAdmin(address adminAddress)  public {
+  function newAdmin(address adminAddress)  public onlyAllowed{
     if(adminAddress!=0){
       if(isAdmin(adminAddress)){
         return;
@@ -60,7 +60,7 @@ contract University {
   }
 
   //Function to check if an address is of the university creator
-  function isUniveristyFounder(address possibleUniversityAddress) public view returns(bool) {
+  function isUniversityFounder(address possibleUniversityAddress) public view returns(bool) {
     return possibleUniversityAddress == universityAddress;
   }
 
@@ -94,21 +94,29 @@ contract University {
     return countAdministrators;
   }
 
-  function login() constant
-  public
-  returns (bytes32) {
-  if(isUniveristyFounder(msg.sender))
-    return 'university';
+  /*
+  NOTLOGGED: 0,
+  UNIVERSITY: 1,
+  ADMIN: 2,
+  PROFESSOR: 3,
+  STUDENT: 4,
+*/
+  function login()
+  public view
+  returns (uint typeUser) {
+
+    typeUser = 0; //notRegistered
+
+  if(isUniversityFounder(msg.sender))
+    typeUser = 1; //University
 
   if(isAdmin(msg.sender))
-    return 'admin';
+    typeUser = 2; //Admin
 
   if(isTeacher(msg.sender))
-    return 'teacher';
+    typeUser = 3; //Professor
 
   if(isStudent(msg.sender))
-    return 'student';
-
-  return 'notRegistered';
+    typeUser = 4; //Student
   }
 }
