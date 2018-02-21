@@ -7,18 +7,20 @@ import ButtonFactory from '../buttons/ButtonFactory';
 const Header = props => (
   <div id="header">
     <WelcomeLabel id="headerWelcome" text={props.welcome} />
-    <div id="headerLinks">{props.children}</div>
+    <div id="headerLinks">
+      <ButtonFactory accountType={props.accountType} />
+    </div>
   </div>
 );
 
 Header.propTypes = {
   welcome: PropTypes.string,
-  children: PropTypes.node,
+  accountType: PropTypes.oneOf(Object.values(AccountTypes)),
 };
 
 Header.defaultProps = {
   welcome: 'Welcome to Marvin',
-  children: <ButtonFactory AccountType={AccountTypes.NOTLOGGED} />,
+  accountType: null,
 };
 
 export default Header;

@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ButtonPrice from './ButtonPrice';
 import ButtonHelp from './ButtonHelp';
@@ -42,8 +41,4 @@ ButtonFactory.defaultProp = {
   accountType: null,
 };
 
-const mapStateToProps = state => ({
-  accountType: state.user.role,
-});
-
-export default connect(mapStateToProps)(ButtonFactory);
+export default ButtonFactory;
