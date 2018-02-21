@@ -19,14 +19,23 @@ describe('ButtonHelp component', () => {
       />);
       assert.equal(wrapper.length, 1);
     });
-    it('should indicate the help page', () => {
+    it('should indicate the help page if the path isn\'t "/help"', () => {
       const wrapper = shallow(<ButtonHelp
         store={mockStore({
           routing:
-            { locationBeforeTransitions: { pathname: 'test' } },
+            { locationBeforeTransitions: { pathname: '' } },
         })}
       />);
       assert.equal(wrapper.html().search('/help') !== -1, true);
+    });
+    it('should NOT indicate the help page if the path is "/help"', () => {
+      const wrapper = shallow(<ButtonHelp
+        store={mockStore({
+          routing:
+            { locationBeforeTransitions: { pathname: '/help' } },
+        })}
+      />);
+      assert.equal(wrapper.html().search('/help') !== -1, false);
     });
     it('should have "Help" as text', () => {
       const wrapper = shallow(<ButtonHelp
@@ -36,6 +45,15 @@ describe('ButtonHelp component', () => {
         })}
       />);
       assert.equal(wrapper.html().search('Help') !== -1, true);
+    });
+    it('should be a span if the path is "/help"', () => {
+      const wrapper = shallow(<ButtonHelp
+        store={mockStore({
+          routing:
+            { locationBeforeTransitions: { pathname: '/help' } },
+        })}
+      />);
+      assert.equal(wrapper.html().search('<span') !== -1, true);
     });
   });
 });
