@@ -12,13 +12,12 @@ const Help = () => {
       <h2>What software do I need to use Marvin?</h2>
       You need:
       <ul>
-        <li>A computer with <a href="https://www.google.com/intl/en/chrome/">Chrome</a> or
-          <a href="https://www.mozilla.org/en-US/firefox/new/">Firefox</a> browser install;</li>
+        <li>A computer with <a href="https://www.google.com/intl/en/chrome/">Chrome</a> or <a href="https://www.mozilla.org/en-US/firefox/new/">Firefox</a> browser install;</li>
         <li>A MetaMask digital wallet.</li>
       </ul>
-      <h2>How do I install MetaMask?</h2>
+      <h2 name="installMetaMask">How do I install MetaMask?</h2>
       <ul>
-        <li>If you use Chrome, go <a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn">here</a>and click &quot;Add to Chrome&quot;. Or, if you use Firefox go <a href="https://addons.mozilla.org/en-US/firefox/addon/ether-metamask/">here</a> and click &quot;Add to Firefox&quot;;</li>
+        <li>If you use Chrome, go <a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn">here</a> and click &quot;Add to Chrome&quot;. Or, if you use Firefox go <a href="https://addons.mozilla.org/en-US/firefox/addon/ether-metamask/">here</a> and click &quot;Add to Firefox&quot;;</li>
         <li>Click &quot;Add Extension&quot; on the pop-up;</li>
         <li>Accept the Privacy Policy and agree to the TOS;</li>
         <li>Set up your MetaMask account;</li>
@@ -27,6 +26,8 @@ const Help = () => {
       </ul>
       <p>Note: for security purposes, MetaMask browser extensions will periodically request
         that you log back in to your account.</p>
+      <h2>How do I unlock MetaMask</h2>
+      <p>Click on the MetaMask plug-in icon and inset the password. Then, press 'Unlock'.</p>
     </div>
   );
 };
