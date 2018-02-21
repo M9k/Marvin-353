@@ -20,8 +20,8 @@ jobs:
       install: npm install
       before_script: npm run testrpc
       script:
-        -npm run test
-        -npm run truffle-test
+        - npm run test
+        - npm run truffle-test
     - stage: code-coverage
       if: branch = master
       before_script: npm run testrpc
