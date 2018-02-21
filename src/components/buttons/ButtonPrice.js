@@ -12,7 +12,7 @@ const ButtonPrice = (props) => {
     );
   }
   return (
-    <Button link="/price">
+    <Button link="/price/">
       Price
     </Button>
   );

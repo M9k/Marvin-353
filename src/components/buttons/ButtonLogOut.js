@@ -12,7 +12,7 @@ const ButtonBackToHome = (props) => {
     );
   }
   return (
-    <Button link="/logout">
+    <Button link="/logout/">
       Logout
     </Button>
   );

@@ -29,5 +29,11 @@ script:
 after_script:
   - npm run make-coverage && npm run merge-coverage
   - cat report.lcov | COVERALLS_REPO_TOKEN=$repo_token COVERALLS_SERVICE_NAME=travis-pro ./node_modules/.bin/coveralls
-
+deploy:
+  provider: surge
+  project: ./build/
+  domain: marvin.surge.sh
+  skip_cleanup: true
+  on:
+    all_branches: true
 
