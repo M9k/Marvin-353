@@ -1,15 +1,27 @@
 import React from 'react';
 import Header from './global/Header';
 import Button from './buttons/Button';
+import AlertDismissable from './alert/AlertDismissable';
 
 // Home page component
 // TODO: Cambiare la home in base se l'utente è già autenticato nel sistema
 const Home = (props) => {
   document.title = 'Home - Marvin';
   // TODO: Prelevare il tipo di account da Redux
+  let alert = null;
+  if ((typeof web3) === 'undefined') {
+    alert = <AlertDismissable type="danger"> MetaMask is not installed. Click <a href="/help#installMetaMask">here</a> for more info.</AlertDismissable>;
+  } else {
+    if ((typeof web3) !== 'undefined' && (typeof web3.eth.accounts[0]) === 'undefined') {
+      alert = <AlertDismissable type="danger"> MetaMask is locked. Click <a href="/help#unlockMetaMask">here</a> for more info.</AlertDismissable>;
+      // TODO: quando un account si sblocca, non viene riconosciuto l'account se non si riavvia l'app
+    }
+  }
+
   return (
     <div className="page-home">
       <Header />
+      {alert}
       <div className="page-content">
         <Button link="/login">Login</Button><br />
         <Button link="/register">Register</Button><br />
