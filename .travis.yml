@@ -16,17 +16,19 @@ env:
     - NODE_ENV=development
 install:
   - npm install
-  - sudo apt-get install python-pip python-dev
-  - sudo pip install bs4
-  - sudo pip install unirest
-before_script:
-  - npm run testrpc
-script:
-  - npm run test
-  - npm run truffle-test
 jobs:
   include:
+    - stage: test
+      script: npm run test
+    - stage: test
+      before_script: npm run testrpc
+      script: npm run truffle-test
     - stage: code-coverage
+      before_script: npm run testrpc
+      install:
+        - sudo apt-get install python-pip python-dev
+        - sudo pip install bs4
+        - sudo pip install unirest
       script:
        - npm run make-coverage && npm run merge-coverage
        - cat report.lcov | COVERALLS_REPO_TOKEN=$repo_token COVERALLS_SERVICE_NAME=travis-pro ./node_modules/.bin/coveralls
