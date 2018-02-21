@@ -7,7 +7,6 @@ import ButtonHelp from '../../../src/components/buttons/ButtonHelp';
 // unit tests for the App component
 describe('ButtonHelp component', () => {
   // mock
-  const Button = props => (<div>{props.link} {props.children}</div>);
   const mockStore = configureStore();
   describe('render()', () => {
     it('should render the component', () => {

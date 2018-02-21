@@ -2,16 +2,16 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import assert from 'assert';
 import configureStore from 'redux-mock-store';
-import ButtonPrice from '../../../src/components/buttons/ButtonPrice';
+import ButtonLogOut from '../../../src/components/buttons/ButtonLogOut';
 
 
 // unit tests for the App component
-describe('ButtonPrice component', () => {
+describe('ButtonLogOut component', () => {
   //mock
   const mockStore = configureStore();
   describe('render()', () => {
     it('should render the component', () => {
-      const wrapper = shallow(<ButtonPrice
+      const wrapper = shallow(<ButtonLogOut
         store={mockStore({
           routing:
             { locationBeforeTransitions: { pathname: '' } },
@@ -19,38 +19,38 @@ describe('ButtonPrice component', () => {
       />);
       assert.equal(wrapper.length, 1);
     });
-    it('should indicate the price page if the path isn\'t /price', () => {
-      const wrapper = shallow(<ButtonPrice
+    it('should indicate the logout page if the path isn\'t /logout', () => {
+      const wrapper = shallow(<ButtonLogOut
         store={mockStore({
           routing:
             { locationBeforeTransitions: { pathname: '' } },
         })}
       />);
-      assert.equal(wrapper.html().search('/price') !== -1, true);
+      assert.equal(wrapper.html().search('/logout') !== -1, true);
     });
-    it('should NOT indicate the price page if the path is /price', () => {
-      const wrapper = shallow(<ButtonPrice
+    it('should NOT indicate the logout page if the path is /logout', () => {
+      const wrapper = shallow(<ButtonLogOut
         store={mockStore({
           routing:
-            { locationBeforeTransitions: { pathname: '/price' } },
+            { locationBeforeTransitions: { pathname: '/logout' } },
         })}
       />);
-      assert.equal(wrapper.html().search('/price') !== -1, false);
+      assert.equal(wrapper.html().search('/logout') !== -1, false);
     });
-    it('should have "Price" as text', () => {
-      const wrapper = shallow(<ButtonPrice
+    it('should have "Logout" as text', () => {
+      const wrapper = shallow(<ButtonLogOut
         store={mockStore({
           routing:
             { locationBeforeTransitions: { pathname: '' } },
         })}
       />);
-      assert.equal(wrapper.html().search('Price') !== -1, true);
+      assert.equal(wrapper.html().search('Logout') !== -1, true);
     });
-    it('should be a span if the path is "/price"', () => {
-      const wrapper = shallow(<ButtonPrice
+    it('should be a span if the path is "/logout"', () => {
+      const wrapper = shallow(<ButtonLogOut
         store={mockStore({
           routing:
-            { locationBeforeTransitions: { pathname: '/price' } },
+            { locationBeforeTransitions: { pathname: '/logout' } },
         })}
       />);
       assert.equal(wrapper.html().search('<span') !== -1, true);
