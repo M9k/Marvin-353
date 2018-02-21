@@ -29,7 +29,7 @@ const ButtonFactory = (props) => {
       );
     default:
       return (
-        <div id="ButtonGroup" className={props.accountType} />
+        <div id="ButtonGroup" />
       );
   }
 };

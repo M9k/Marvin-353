@@ -8,7 +8,6 @@ import ButtonPrice from '../../../src/components/buttons/ButtonPrice';
 // unit tests for the App component
 describe('ButtonPrice component', () => {
   //mock
-  const Button = props => (<div>{props.link} {props.children}</div>);
   const mockStore = configureStore();
   describe('render()', () => {
     it('should render the component', () => {
