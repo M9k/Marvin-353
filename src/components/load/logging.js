@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-// TODO: capire il modo migliore di fare gli import per favorire i test - con mapDispatchToProps?
-import { store } from '../../store';
 import { userAction } from '../../reducers/user';
 
 class Logging extends React.Component {
@@ -11,7 +9,7 @@ class Logging extends React.Component {
     this.state = { cantLoginUntilReload: false };
   }
   componentDidMount() {
-    store.dispatch({ type: userAction.USER_TRY_LOGIN });
+    this.props.tryLogin();
   }
 
   render() {
@@ -55,6 +53,7 @@ Logging.propTypes = {
   isLogged: PropTypes.bool,
   metamask: PropTypes.bool,
   account: PropTypes.string,
+  tryLogin: PropTypes.func,
 };
 
 Logging.defaultProps = {
@@ -62,6 +61,7 @@ Logging.defaultProps = {
   isLogged: false,
   metamask: false,
   account: null,
+  tryLogin: null,
 };
 
 const mapStateToProps = state => ({
@@ -71,14 +71,13 @@ const mapStateToProps = state => ({
   account: state.user.account,
 });
 
-/*
-const mapDispatchToProps = dispatch => ({
-  tryLogin: () => dispatch({
-    type: userAction.USER_LOGGED_IN,
-  }),
-});
-*/
+function mapDispatchToProps(dispatch) {
+  return {
+    tryLogin: () => dispatch({
+      type: userAction.USER_TRY_LOGIN,
+    }),
+  };
+}
 
-// , mapDispatchToProps
-export default connect(mapStateToProps)(Logging);
+export default connect(mapStateToProps, mapDispatchToProps)(Logging);
 
