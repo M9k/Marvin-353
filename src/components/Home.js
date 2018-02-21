@@ -10,10 +10,10 @@ const Home = (props) => {
   // TODO: Prelevare il tipo di account da Redux
   let alert = null;
   if ((typeof web3) === 'undefined') {
-    alert = <AlertDismissable type="danger"> MetaMask is not installed. Click <a href="/help#installMetaMask">here</a> for more info.</AlertDismissable>;
+    alert = <AlertDismissable type="danger"> MetaMask is not installed. Click <a href="/help/">here</a> for more info.</AlertDismissable>;
   } else {
     if ((typeof web3) !== 'undefined' && (typeof web3.eth.accounts[0]) === 'undefined') {
-      alert = <AlertDismissable type="danger"> MetaMask is locked. Click <a href="/help#unlockMetaMask">here</a> for more info.</AlertDismissable>;
+      alert = <AlertDismissable type="danger"> MetaMask is locked. Click <a href="/help/">here</a> for more info.</AlertDismissable>;
       // TODO: quando un account si sblocca, non viene riconosciuto l'account se non si riavvia l'app
     }
   }
