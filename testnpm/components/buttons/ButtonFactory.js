@@ -29,14 +29,15 @@ describe('ButtonFactory component', () => {
       assert.equal(wrapper.html(), '<div id="ButtonGroup"></div>');
     });
     it('with AccountTypes.NOTLOGGED as role should render price and help ', () => {
-      const wrapper = shallow(<ButtonFactory accountType={AccountTypes.NOTLOGGED}
+      const wrapper = shallow(<ButtonFactory
+        accountType={AccountTypes.NOTLOGGED}
         store={mockStore({
           user:
             { role: AccountTypes.NOTLOGGED },
         })}
       />);
       // TODO: come?
-      assert.equal(wrapper.length, 1);
+      // assert.equal(wrapper.contains('div'), true);
     });
   });
 });
