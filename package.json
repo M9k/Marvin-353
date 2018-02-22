@@ -18,6 +18,7 @@
   "scripts": {
     "start": "start http://localhost:8080 & webpack-dev-server --inline --hot --history-api-fallback --host localhost --port 8080 --devtool source-map",
     "migrate": "./node_modules/.bin/truffle migrate --network ganache",
+    "migrate-win": "./node_modules/.bin/truffle.cmd migrate --network ganache",
     "build-dev": "webpack --config webpack.dev.config.js",
     "build-prod": "webpack -p --config webpack.prod.config.js",
     "test": "mocha testnpm --recursive --compilers js:babel-register --require babel-polyfill --require ignore-styles",
@@ -28,6 +29,7 @@
     "solidity-coverage": "./node_modules/.bin/solidity-coverage",
     "js-coverage": "nyc mocha testnpm --recursive --compilers js:babel-register --require babel-polyfill --require ignore-styles",
     "testrpc": "./node_modules/.bin/testrpc-sc > /dev/null &",
+    "testrpc-win": "./node_modules/.bin/testrpc-sc",
     "make-coverage": "python scripts/js-coverage.py && python scripts/solidity-coverage.py",
     "merge-coverage": "cp js-coverage/lcov.info report.lcov && echo \"$(cat coverage/lcov.info)\" >> report.lcov",
     "push-coverage": "cat report.lcov | ./node_modules/.bin/coveralls",
