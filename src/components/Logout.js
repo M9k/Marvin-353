@@ -6,7 +6,7 @@ const Logout = () => {
   return (
     <div className="page-logout">
       <Header />
-      <h2>TODO</h2>
+      <h2>TODO: guida su come sloggare da Metamask, il resto è automatico</h2>
     </div>
   );
 };
