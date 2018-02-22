@@ -8,14 +8,6 @@ import AccountTypes from '../AccountEnum';
 
 const ButtonFactory = (props) => {
   switch (props.accountType) {
-    case null:
-    case AccountTypes.NOTLOGGED:
-      return (
-        <div id="ButtonGroup">
-          <ButtonPrice path={props.path} />
-          <ButtonHelp path={props.path} />
-        </div>
-      );
     case AccountTypes.UNIVERSITY:
     case AccountTypes.ADMIN:
     case AccountTypes.PROFESSOR:
@@ -25,6 +17,14 @@ const ButtonFactory = (props) => {
           <ButtonPrice path={props.path} />
           <ButtonHelp path={props.path} />
           <ButtonLogOut path={props.path} />
+        </div>
+      );
+    case AccountTypes.NOTLOGGED:
+    case null:
+      return (
+        <div id="ButtonGroup">
+          <ButtonPrice path={props.path} />
+          <ButtonHelp path={props.path} />
         </div>
       );
     default:
