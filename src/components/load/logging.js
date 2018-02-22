@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { userAction } from '../../reducers/user';
+import RedirectToHome from './RedirectToHome';
 
 class Logging extends React.Component {
   constructor(props) {
@@ -43,8 +44,9 @@ class Logging extends React.Component {
         </div>
       );
     }
-    setTimeout(window.location.replace('/'), 2000);
-    return (<div>Logged! If you are not redirect to the homepage in 5 seconds <a href="/">click here</a></div>);
+    return (
+      <RedirectToHome time={2000} />
+    );
   }
 }
 
