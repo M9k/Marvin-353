@@ -20,7 +20,7 @@ Header.propTypes = {
 
 Header.defaultProps = {
   welcome: 'Welcome to Marvin',
-  accountType: null,
+  accountType: AccountTypes.NOTLOGGED,
 };
 
 export default Header;

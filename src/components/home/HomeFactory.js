@@ -30,7 +30,6 @@ const HomeFactory = (props) => {
           TODO - studente
         </div>
       );
-    case null:
     case AccountTypes.NOTLOGGED:
       return (
         <HomeDefault
@@ -63,7 +62,7 @@ HomeFactory.defaultProps = {
   metamask: false,
   account: null,
   isLogged: false,
-  accountType: null,
+  accountType: AccountTypes.NOTLOGGED,
 };
 
 export default HomeFactory;

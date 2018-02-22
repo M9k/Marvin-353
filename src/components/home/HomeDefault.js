@@ -39,7 +39,7 @@ HomeDefault.defaultProps = {
   metamask: false,
   account: null,
   isLogged: false,
-  accountType: null,
+  accountType: AccountTypes.NOTLOGGED,
 };
 
 export default HomeDefault;

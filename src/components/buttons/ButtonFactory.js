@@ -20,7 +20,6 @@ const ButtonFactory = (props) => {
         </div>
       );
     case AccountTypes.NOTLOGGED:
-    case null:
       return (
         <div id="ButtonGroup">
           <ButtonPrice path={props.path} />
@@ -35,12 +34,11 @@ const ButtonFactory = (props) => {
 };
 
 ButtonFactory.propTypes = {
-  accountType: PropTypes.oneOf(Object.values(AccountTypes)),
+  accountType: PropTypes.oneOf(Object.values(AccountTypes)).isRequired,
   path: PropTypes.string,
 };
 
 ButtonFactory.defaultProp = {
-  accountType: null,
   path: '/',
 };
 

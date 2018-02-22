@@ -8,12 +8,12 @@ import AccountTypes from './AccountEnum';
 // Home page component
 const Home = props => (
   <div id="home">
-    <Header accountType={props.accountType} />
+    <Header accountType={props.accountType !== null ? props.accountType : AccountTypes.NOTLOGGED} />
     <HomeFactory
       metamask={props.metamask}
       account={props.account}
       isLogged={props.isLogged}
-      accountType={props.accountType}
+      accountType={props.accountType !== null ? props.accountType : AccountTypes.NOTLOGGED}
     />
   </div>
 );
@@ -29,7 +29,7 @@ Home.defaultProps = {
   metamask: false,
   account: null,
   isLogged: false,
-  accountType: null,
+  accountType: AccountTypes.NOTLOGGED,
 };
 
 const mapStateToProps = state => ({

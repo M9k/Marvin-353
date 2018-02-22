@@ -55,18 +55,6 @@ describe('ButtonFactory component', () => {
       assert.equal(wrapper.dive().find('ButtonHelp').length, 1);
       assert.equal(wrapper.dive().find('ButtonLogOut').length, 0);
     });
-    it('with null as role should render price and help, without the logout ', () => {
-      const wrapper = shallow(<ButtonFactory
-        accountType={null}
-        store={mockStore({
-          routing:
-            { locationBeforeTransitions: { pathname: '/' } },
-        })}
-      />);
-      assert.equal(wrapper.dive().find('ButtonPrice').length, 1);
-      assert.equal(wrapper.dive().find('ButtonHelp').length, 1);
-      assert.equal(wrapper.dive().find('ButtonLogOut').length, 0);
-    });
     it('with AccountTypes.UNIVERSITY as role should render price, help and logout ', () => {
       const wrapper = shallow(<ButtonFactory
         accountType={AccountTypes.UNIVERSITY}
