@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from './Button';
 
-const ButtonBackToHome = (props) => {
+const ButtonLogOut = (props) => {
   if (props.path === '/logout/') {
     return (
       <span className="btn btn-default-select">
@@ -17,13 +17,13 @@ const ButtonBackToHome = (props) => {
   );
 };
 
-ButtonBackToHome.propTypes = {
+ButtonLogOut.propTypes = {
   path: PropTypes.string,
 };
 
-ButtonBackToHome.defaultProp = {
+ButtonLogOut.defaultProp = {
   path: '/',
 };
 
-export default ButtonBackToHome;
+export default ButtonLogOut;
 

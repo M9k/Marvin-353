@@ -67,7 +67,6 @@ describe('ButtonFactory component', () => {
       assert.equal(wrapper.dive().find('ButtonHelp').length, 1);
       assert.equal(wrapper.dive().find('ButtonLogOut').length, 0);
     });
-    // TODO una volta fixato copiare lo stesso test per le altre cateogrie dello stesso gruppo
     it('with AccountTypes.UNIVERSITY as role should render price, help and logout ', () => {
       const wrapper = shallow(<ButtonFactory
         accountType={AccountTypes.UNIVERSITY}
@@ -78,10 +77,43 @@ describe('ButtonFactory component', () => {
       />);
       assert.equal(wrapper.dive().find('ButtonPrice').length, 1);
       assert.equal(wrapper.dive().find('ButtonHelp').length, 1);
-      // TODO: Perché ButtonBackToHome al posto di ButtonLogOut ???????????
-      // assert.equal(wrapper.dive().text(), 1);
-      assert.equal(wrapper.dive().find('ButtonBackToHome').length, 1);
-      // assert.equal(wrapper.dive().find('ButtonLogOut').length, 0);
+      assert.equal(wrapper.dive().find('ButtonLogOut').length, 1);
+    });
+    it('with AccountTypes.ADMIN as role should render price, help and logout ', () => {
+      const wrapper = shallow(<ButtonFactory
+        accountType={AccountTypes.ADMIN}
+        store={mockStore({
+          routing:
+            { locationBeforeTransitions: { pathname: '/' } },
+        })}
+      />);
+      assert.equal(wrapper.dive().find('ButtonPrice').length, 1);
+      assert.equal(wrapper.dive().find('ButtonHelp').length, 1);
+      assert.equal(wrapper.dive().find('ButtonLogOut').length, 1);
+    });
+    it('with AccountTypes.PROFESSOR as role should render price, help and logout ', () => {
+      const wrapper = shallow(<ButtonFactory
+        accountType={AccountTypes.PROFESSOR}
+        store={mockStore({
+          routing:
+            { locationBeforeTransitions: { pathname: '/' } },
+        })}
+      />);
+      assert.equal(wrapper.dive().find('ButtonPrice').length, 1);
+      assert.equal(wrapper.dive().find('ButtonHelp').length, 1);
+      assert.equal(wrapper.dive().find('ButtonLogOut').length, 1);
+    });
+    it('with AccountTypes.STUDENT as role should render price, help and logout ', () => {
+      const wrapper = shallow(<ButtonFactory
+        accountType={AccountTypes.STUDENT}
+        store={mockStore({
+          routing:
+            { locationBeforeTransitions: { pathname: '/' } },
+        })}
+      />);
+      assert.equal(wrapper.dive().find('ButtonPrice').length, 1);
+      assert.equal(wrapper.dive().find('ButtonHelp').length, 1);
+      assert.equal(wrapper.dive().find('ButtonLogOut').length, 1);
     });
     it('with incorrect value as role should render nothing ', () => {
       const wrapper = shallow(<ButtonFactory

@@ -6,6 +6,30 @@ import AccountTypes from '../AccountEnum';
 
 const HomeFactory = (props) => {
   switch (props.accountType) {
+    case AccountTypes.UNIVERSITY:
+      return (
+        <div id="TODO-HOME">
+          TODO - università
+        </div>
+      );
+    case AccountTypes.ADMIN:
+      return (
+        <div id="TODO-HOME">
+          TODO - admin
+        </div>
+      );
+    case AccountTypes.PROFESSOR:
+      return (
+        <div id="TODO-HOME">
+          TODO - professore
+        </div>
+      );
+    case AccountTypes.STUDENT:
+      return (
+        <div id="TODO-HOME">
+          TODO - studente
+        </div>
+      );
     case null:
     case AccountTypes.NOTLOGGED:
       return (
@@ -15,15 +39,6 @@ const HomeFactory = (props) => {
           isLogged={props.isLogged}
           accountType={props.accountType}
         />
-      );
-    case AccountTypes.UNIVERSITY:
-    case AccountTypes.ADMIN:
-    case AccountTypes.PROFESSOR:
-    case AccountTypes.STUDENT:
-      return (
-        <div id="TODO-HOME">
-          TODO
-        </div>
       );
     default:
       return (
