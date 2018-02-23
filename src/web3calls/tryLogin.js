@@ -3,9 +3,8 @@
 
 const contract = require('truffle-contract');
 
-function funzioneTest() {
-  const returnType = 0;
-  // TODO: da spostare
+function tryLoginWeb3() {
+  // TODO: da spostare in un Singleton
   const contractUniversityJson = require('../../build/contracts/University.json');
 
   const contractUniversity = contract(contractUniversityJson);
@@ -14,7 +13,6 @@ function funzioneTest() {
   return contractUniversity.deployed().then(instance =>
     // Attempt to login user.
     instance.login.call({ from: web3.eth.accounts[0] })).then(result => result);
-  // return returnType;
 }
 
-export default funzioneTest;
+export default tryLoginWeb3;
