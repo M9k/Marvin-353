@@ -1,14 +1,11 @@
-import Web3 from 'web3';
-import AccountTypes from '../components/AccountEnum';
+// import Web3 from 'web3';
+// import AccountTypes from '../components/AccountEnum';
 
 const contract = require('truffle-contract');
 
-// console.log(source);
-// const contracts = JSON.parse(source).contracts;
-// const contrattoUni = new Web3.eth.Contract('contracts/University.json');
-
 function funzioneTest() {
   let returnType = 0;
+  // TODO: da spostare
   const contractUniversityJson = require('../../build/contracts/University.json');
 
   const contractUniversity = contract(contractUniversityJson);
@@ -21,14 +18,13 @@ function funzioneTest() {
     if (error) {
       console.error(`account metamask ${error}`);
     }
-
     contractUniversity.deployed().then((instance) => {
       // Attempt to login user.
       instance.login({ from: coinbase })
         .then((result) => {
         // If no error, login user.
           alert(`result network ${(result)}`);
-          returnType = result;
+          returnType = result; // TODO -  ERRORE! il valore è assegnato dopo il ritorno
         });
     });
   });

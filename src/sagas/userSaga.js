@@ -13,6 +13,7 @@ export function* tryLogin(action) {
   // finta attesa per dimostrare che è asincrono
   yield delay(1000);
   // azione di login avvenuta con successo
+  alert(userType);
   yield put({ type: userAction.USER_LOGGED_IN, role: userType });
   console.log('OK');
 }
