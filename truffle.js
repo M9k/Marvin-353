@@ -1,3 +1,8 @@
+var HDWalletProvider = require("truffle-hdwallet-provider");
+
+var infura_apikey = "dJdeB6osExnc9NaMwkkI";
+var mnemonic = "earth muscle flash impose wait paper curtain pigeon observe urge beef caution";
+
 module.exports = {
   networks: {
     develop: {
@@ -18,6 +23,11 @@ module.exports = {
       network_id: '*',
       port: 8545,
     },
+    ropsten: {
+      provider: new HDWalletProvider(mnemonic, "https://ropsten.infura.io/"+infura_apikey),
+      network_id: 3,
+      gas: 2900000,
+    }
   },
   mocha: {
     reporter: 'eth-gas-reporter',
