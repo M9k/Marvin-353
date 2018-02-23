@@ -19,12 +19,12 @@ contract('University', (accounts) => {
 
 
   // Controlla che account 0 è università
-  it('001 - Chai assert module test: Should say it\' university!', async () => {
+  it('001 - Chai assert module test: Should say it\'s university!', async () => {
     assert.equal(await contract.isUniversityFounder(accounts[0]), true);
   });
 
   // Controlla che account 1 non sia università
-  it('002 - Chai assert module test: Should say it\' not university!', async () => {
+  it('002 - Chai assert module test: Should say it\'s not university!', async () => {
     assert.equal(await contract.isUniversityFounder(accounts[1]), false);
   });
 

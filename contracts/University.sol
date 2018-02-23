@@ -94,6 +94,11 @@ contract University {
     return countAdministrators;
   }
 
+  function alreadyRegistered() public returns(bool registered){
+    registered = false;
+  }
+
+
   /*
   NOTLOGGED: 0,
   UNIVERSITY: 1,
