@@ -28,7 +28,7 @@ contract University {
 
   //Per aggiungere uno studente.
   function newStudent(address studentAddress)  public onlyAllowed{
-    if(studentAddress!=0){
+    if(studentAddress!=0 && !alreadyRegistered(studentAddress)){
       if(isStudent(studentAddress)){
         return;
       }
@@ -39,7 +39,7 @@ contract University {
 
   //Per aggiungere uno docente.
   function newTeacher(address teacherAddress)  public onlyAllowed{
-    if(teacherAddress!=0){
+    if(teacherAddress!=0 && !alreadyRegistered(teacherAddress)){
       if(isTeacher(teacherAddress)){
         return;
       }
@@ -50,7 +50,7 @@ contract University {
 
   //Per aggiungere un admin.
   function newAdmin(address adminAddress)  public onlyAllowed{
-    if(adminAddress!=0){
+    if(adminAddress!=0 && !alreadyRegistered(adminAddress)){
       if(isAdmin(adminAddress)){
         return;
       }
@@ -94,34 +94,39 @@ contract University {
     return countAdministrators;
   }
 
-  function alreadyRegistered() public returns(bool registered){
-    registered = false;
-  }
-
-
   /*
   NOTLOGGED: 0,
   UNIVERSITY: 1,
   ADMIN: 2,
   PROFESSOR: 3,
   STUDENT: 4,
-*/
+  */
+  function loginAddr(address userAddr) private returns (uint typeUser){
+    typeUser = 0; //notRegistered
+
+    if(isUniversityFounder(userAddr))
+      typeUser = 1; //University
+
+    if(isAdmin(userAddr))
+      typeUser = 2; //Admin
+
+    if(isTeacher(userAddr))
+      typeUser = 3; //Professor
+
+    if(isStudent(userAddr))
+      typeUser = 4; //Student
+  }
+
+  /**
+  return bool registered, true if already in the system users -> false if not
+  */
+  function alreadyRegistered(address userAddr) public view returns(bool registered){
+    registered = (loginAddr(userAddr) != 0);
+  }
+
   function login()
   public view
   returns (uint typeUser) {
-
-    typeUser = 0; //notRegistered
-
-  if(isUniversityFounder(msg.sender))
-    typeUser = 1; //University
-
-  if(isAdmin(msg.sender))
-    typeUser = 2; //Admin
-
-  if(isTeacher(msg.sender))
-    typeUser = 3; //Professor
-
-  if(isStudent(msg.sender))
-    typeUser = 4; //Student
+    typeUser = loginAddr(msg.sender);
   }
 }

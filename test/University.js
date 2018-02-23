@@ -17,7 +17,13 @@ contract('University', (accounts) => {
     contract = await University.deployed({ from: accounts[0] });
   });
 
-
+  it('000 - Chai assert module test: Should say Universtiy is registered others no!', async () => {
+    assert.equal(await contract.alreadyRegistered(accounts[0]), true);
+    assert.equal(await contract.alreadyRegistered(accounts[1]), false);
+    assert.equal(await contract.alreadyRegistered(accounts[2]), false);
+    assert.equal(await contract.alreadyRegistered(accounts[3]), false);
+    assert.equal(await contract.alreadyRegistered(accounts[4]), false);
+  });
   // Controlla che account 0 è università
   it('001 - Chai assert module test: Should say it\'s university!', async () => {
     assert.equal(await contract.isUniversityFounder(accounts[0]), true);
@@ -26,6 +32,7 @@ contract('University', (accounts) => {
   // Controlla che account 1 non sia università
   it('002 - Chai assert module test: Should say it\'s not university!', async () => {
     assert.equal(await contract.isUniversityFounder(accounts[1]), false);
+    assert.equal(await contract.alreadyRegistered(accounts[1]), false);
   });
 
   // Check that university login return univ
@@ -42,6 +49,7 @@ contract('University', (accounts) => {
     await contract.newAdmin(accounts[2]);
     assert.equal(await contract.isAdmin(accounts[2]), true);
     assert.equal(await contract.getAdminsNumber(), 1);
+    assert.equal(await contract.alreadyRegistered(accounts[2]), true);
   });
 
   it("006 - Chai assert module test: Adding existing admin! Shouldn't add existing admin!", async () => {
@@ -130,7 +138,6 @@ contract('University', (accounts) => {
     assert.isFalse(res2);
   });
 
-
   // TEST with BDD Chai's module:
   it('019 - Chai BDD expect module test: It should add new student', async () => {
     await contract.newStudent('0xBCD5F98A16d2C0A5A2bB834a211dF0617C45C1FD', { from: accounts[0] });
@@ -140,5 +147,12 @@ contract('University', (accounts) => {
     // Altri test che si possono essere utilizzati per controllare le liste ecc..
     expect(null).to.be.a('null');
     expect([1, 2]).to.be.an('array').that.does.not.include(3);
+  });
+
+  it("020 - Chai assert module test: Shouldn't add a user if already in the system!", async () => {
+    assert.equal(await contract.alreadyRegistered(accounts[0]), true);
+    const numTeacher = await contract.getTeachersNumber();
+    await contract.newTeacher(accounts[0]);
+    assert.equal(await contract.getTeachersNumber(), numTeacher);
   });
 });
