@@ -33,7 +33,7 @@
 	
     "//": "Migrate on Windows",
 	"testrpc-win": "testrpc",
-    "migrate-win": "./node_modules/.bin/truffle.cmd migrate --network ganache",
+    "migrate-win": "./node_modules/.bin/truffle.cmd migrate --network develop",
 
     "//": "Coverage",
     "solidity-coverage": "./node_modules/.bin/solidity-coverage",
