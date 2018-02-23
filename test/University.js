@@ -1,7 +1,7 @@
 const University = artifacts.require('./contracts/University.sol');
 const assert = require('chai').assert;
 const expect = require('chai').expect;
-
+const BigNumber = require('bignumber.js');
 // accounts[0] University
 // accounts[1] NotRegistered
 // accounts[2] Admin
@@ -23,7 +23,7 @@ contract('University', (accounts) => {
     assert.equal(await contract.alreadyRegistered(accounts[2]), false);
     assert.equal(await contract.alreadyRegistered(accounts[3]), false);
     assert.equal(await contract.alreadyRegistered(accounts[4]), false);
-  });
+  }); 
   // Controlla che account 0 è università
   it('001 - Chai assert module test: Should say it\'s university!', async () => {
     assert.equal(await contract.isUniversityFounder(accounts[0]), true);
@@ -148,13 +148,13 @@ contract('University', (accounts) => {
     expect(null).to.be.a('null');
     expect([1, 2]).to.be.an('array').that.does.not.include(3);
   });
-  // TODO - correggere
-/*
+
   it("020 - Chai assert module test: Shouldn't add a user if already in the system!", async () => {
     assert.equal(await contract.alreadyRegistered(accounts[0]), true);
-    const numTeacher = await contract.getTeachersNumber();
+    const numTeacherBefore = new BigNumber(await contract.getTeachersNumber());
     await contract.newTeacher(accounts[0]);
-    assert.equal(await contract.getTeachersNumber(), numTeacher);
+    const numTeacherAfter = new BigNumber(await contract.getTeachersNumber());
+    expect(numTeacherBefore.isEqualTo(numTeacherAfter)).to.be.true;
   });
-  */
+
 });
