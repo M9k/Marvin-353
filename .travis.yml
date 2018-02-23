@@ -21,7 +21,7 @@ jobs:
       before_script: npm run testrpc
       script:
         - npm run test
-        - npm run truffle-test
+        - npm run soltest
     - stage: code-coverage
       if: branch = master
       before_script: npm run testrpc
