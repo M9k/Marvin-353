@@ -9,13 +9,13 @@ import funzioneTest from '../web3calls/tryLogin';
 export function* tryLogin(action) {
   // call the web3call for try to login
   const userType = yield call(funzioneTest);
-  alert(userType);
+  // alert(userType);
   // TODO rimuovere
   // finta attesa per dimostrare che è asincrono
-  yield delay(1000);
+  // yield delay(1000);
   // azione di login avvenuta con successo
   // alert(userType);
-  yield put({ type: userAction.USER_LOGGED_IN, role: userType });
+  yield put({ type: userAction.USER_LOGGED_IN, role: Number(userType) });
   console.log('OK');
 }
 
