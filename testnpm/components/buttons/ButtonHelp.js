@@ -17,16 +17,16 @@ describe('ButtonHelp component', () => {
       const wrapper = shallow(<ButtonHelp path="test" />);
       assert.equal(wrapper.html().search('/help') !== -1, true);
     });
-    it('should NOT indicate the help page if the path is "/help/"', () => {
-      const wrapper = shallow(<ButtonHelp path="/help/" />);
-      assert.equal(wrapper.html().search('/help/') !== -1, false);
+    it('should NOT indicate the help page if the path is "/help"', () => {
+      const wrapper = shallow(<ButtonHelp path="/help" />);
+      assert.equal(wrapper.html().search('/help') !== -1, false);
     });
     it('should have "Help" as text', () => {
       const wrapper = shallow(<ButtonHelp path="test" />);
       assert.equal(wrapper.html().search('Help') !== -1, true);
     });
-    it('should be a span if the path is "/help/"', () => {
-      const wrapper = shallow(<ButtonHelp path="/help/" />);
+    it('should be a span if the path is "/help"', () => {
+      const wrapper = shallow(<ButtonHelp path="/help" />);
       assert.equal(wrapper.html().search('<span') !== -1, true);
     });
   });

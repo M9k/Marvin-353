@@ -17,8 +17,8 @@ const HomeDefault = (props) => {
     <div className="page-home">
       {alert}
       <div className="page-content">
-        <Button link="/login/">Login</Button><br />
-        <Button link="/register/">Register</Button><br />
+        <Button link="/login">Login</Button><br />
+        <Button link="/register">Register</Button><br />
         <h2>Metamask installato: {props.metamask ? 'SI' : 'NO'}</h2><br />
         <h2>Metamask sbloccato: {props.account !== null ? 'SI' : 'NO'}</h2><br />
         <h2>Versione di Web3: {typeof web3 !== 'undefined' && web3 !== null ? web3.version.api : 'NOT FOUND!!'}</h2><br />

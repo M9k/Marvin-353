@@ -16,7 +16,7 @@ describe('Footer component', () => {
     });
     it('should link the license page', () => {
       const wrapper = shallow(<Footer />);
-      assert.equal(wrapper.html().search('href="/license/"') !== -1, 1);
+      assert.equal(wrapper.html().search('href="/license"') !== -1, 1);
     });
   });
 });

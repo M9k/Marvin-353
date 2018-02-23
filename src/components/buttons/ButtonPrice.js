@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Button from './Button';
 
 const ButtonPrice = (props) => {
-  if (props.path === '/price/') {
+  if (props.path === '/price') {
     return (
       <span className="btn btn-default-select">
         Price
@@ -11,7 +11,7 @@ const ButtonPrice = (props) => {
     );
   }
   return (
-    <Button link="/price/">
+    <Button link="/price">
       Price
     </Button>
   );

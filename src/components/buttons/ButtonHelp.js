@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Button from './Button';
 
 const ButtonHelp = (props) => {
-  if (props.path === '/help/') {
+  if (props.path === '/help') {
     return (
       <span className="btn btn-default-select">
         Help
@@ -11,7 +11,7 @@ const ButtonHelp = (props) => {
     );
   }
   return (
-    <Button link="/help/">
+    <Button link="/help">
       Help
     </Button>
   );
