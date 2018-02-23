@@ -28,13 +28,13 @@
     "//": "Truffle",
     "soltest": "./node_modules/.bin/truffle test --compile-all",
 
-	"compile": "./node_modules/.bin/truffle compile --all"
+	"compile": "./node_modules/.bin/truffle compile --all",
     "migrate": "./node_modules/.bin/truffle migrate --network ganache",
     "soltestmigrate": "./node_modules/.bin/truffle test --compile-all --network ganache",
 	
     "//": "Migrate on Windows",
 	"testrpc-win": "./node_modules/.bin/testrpc-sc.cmd",
-	"compile-win": "./node_modules/.bin/truffle.cmd compile --all"
+	"compile-win": "./node_modules/.bin/truffle.cmd compile --all",
     "migrate-win": "./node_modules/.bin/truffle.cmd migrate --network develop",
 
     "//": "Coverage",
