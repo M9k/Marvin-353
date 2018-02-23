@@ -32,7 +32,7 @@
     "soltestmigrate": "./node_modules/.bin/truffle test --compile-all --network ganache",
 	
     "//": "Migrate on Windows",
-	"testrpc-win": "testrpc",
+	"testrpc-win": "./node_modules/.bin/testrpc-sc.cmd",
     "migrate-win": "./node_modules/.bin/truffle.cmd migrate --network develop",
 
     "//": "Coverage",
