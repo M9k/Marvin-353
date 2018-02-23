@@ -11,16 +11,13 @@ function funzioneTest() {
   const contractUniversity = contract(contractUniversityJson);
   contractUniversity.setProvider(web3.currentProvider);
 
-  contractUniversity.deployed().then((instance) => {
+  return contractUniversity.deployed().then((instance) => {
     // Attempt to login user.
-    instance.login()
-      .then((result) => {
-      // If no error, login user.
-        alert(`result network ${(result)}`);
-        returnType = result; // TODO - ERRORE! il valore è assegnato dopo il ritorno
-      });
+    return instance.login();
+  }).then((result) => {
+    return result;
   });
-  return returnType;
+  //return returnType;
 }
 
 export default funzioneTest;
