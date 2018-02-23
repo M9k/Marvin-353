@@ -12,6 +12,7 @@ import { userAction } from './reducers/user';
 
 let account = null;
 
+// init web3
 let web3 = getWeb3.then((results) => {
   web3 = results;
   account = web3.eth.accounts[0];
@@ -27,6 +28,9 @@ setInterval(() => {
     console.log('SWITCH ACCOUNT!'); // TODO DEBUG ONLY - DA RIMUOVERE
   }
 }, 100);
+
+// init contracts
+// TODO
 
 // render the main component
 ReactDOM.render(

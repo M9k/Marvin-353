@@ -6,9 +6,8 @@ import AccountTypes from '../components/AccountEnum';
 // const contrattoUni = new Web3.eth.Contract('contracts/University.json');
 
 function funzioneTest() {
-  // TODO: da fare all'avvio, non ad ogni chiamata, qui solo per test
-  // const contractUniversityJson = CARICA JSON IN QUALCHE MODO('contracts/University.json');
-  // console.log(contractUniversityJson);
+  const contractUniversityJson = require('../../public/contracts/University.json');
+  console.log(contractUniversityJson);
   // controllo sia nel formato corretto, deve apparire come
   /*
   {
@@ -26,12 +25,14 @@ function funzioneTest() {
 
   // lo converto in ABI
   // const contractUniversityABI = Web3.eth.abi.encodeFunctionSignature(contractUniversityJson);
-  // console.log(contractUniversity);
+  console.log(contractUniversityJson.abi);
 
   // creo il contratto
-  // const contractUniversity = web3.eth.contract(contractUniversityABI);
+  const contractUniversity = web3.eth.contract(contractUniversityJson.abi);
+  console.log(contractUniversity);
 
-  // indico il suo indirizzo sulla rete
+  // TODO
+  // indico il suo indirizzo sulla rete - di quello caricato
   // contractUniversity.options.address = '0x01235f2ab45345.....';
 
   // invoco il login
