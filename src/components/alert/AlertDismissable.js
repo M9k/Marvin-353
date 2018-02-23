@@ -19,10 +19,29 @@ class AlertDismissable extends React.Component {
   }
 
   render() {
+    let title = null;
+    switch (this.type) {
+      case 'success':
+        title = 'Success!';
+        break;
+      case 'warning':
+        title = 'Warning!';
+        break;
+      case 'danger':
+        title = 'Error!';
+        break;
+      case 'info':
+        title = 'Info!';
+        break;
+      default:
+        title = null;
+        break;
+    }
+
     if (this.state.show) {
       return (
         <Alert bsStyle={this.type} onDismiss={this.handleDismiss}>
-          <h4>Error</h4>
+          <h4>{title}</h4>
           <p>
             {this.children}
           </p>
