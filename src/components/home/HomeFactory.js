@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import HomeDefault from './HomeDefault';
 import AccountTypes from '../AccountEnum';
+import Button from '../buttons/Button';
 
 const HomeFactory = (props) => {
   switch (props.accountType) {
@@ -15,7 +16,11 @@ const HomeFactory = (props) => {
     case AccountTypes.ADMIN:
       return (
         <div id="TODO-HOME">
-          TODO - admin
+          <div className="page-content">
+            <Button link="/gestioneUtenti/">Gestione Utenti</Button><br />
+            <Button link="/">Gestione Anni Accademici</Button><br />
+            <Button link="/">Gestione Corsi di Laurea</Button><br />
+          </div>
         </div>
       );
     case AccountTypes.PROFESSOR:

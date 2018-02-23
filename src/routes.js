@@ -9,6 +9,7 @@ import Help from './components/Help';
 import Price from './components/Price';
 import NotFound from './components/NotFound';
 import License from './components/License';
+import GestioneUtenti from './components/GestioneUtenti';
 
 
 const routes = (
@@ -20,6 +21,7 @@ const routes = (
     <Route path="license/" component={License} />
     <Route path="help/" component={Help} />
     <Route path="price/" component={Price} />
+    <Route path="gestioneUtenti/" component={GestioneUtenti} />
     <Route path="*" component={NotFound} />
   </Route>
 );
