@@ -8,12 +8,15 @@ import AccountTypes from './AccountEnum';
 // Home page component
 const Home = props => (
   <div id="home">
-    <Header accountType={props.accountType !== null ? props.accountType : AccountTypes.NOTLOGGED} />
+    <Header accountType={props.accountType !== null && props.account !== null ?
+      props.accountType : AccountTypes.NOTLOGGED}
+    />
     <HomeFactory
       metamask={props.metamask}
       account={props.account}
       isLogged={props.isLogged}
-      accountType={props.accountType !== null ? props.accountType : AccountTypes.NOTLOGGED}
+      accountType={props.accountType !== null && props.account !== null ?
+        props.accountType : AccountTypes.NOTLOGGED}
     />
   </div>
 );
