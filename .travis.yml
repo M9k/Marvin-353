@@ -20,6 +20,7 @@ jobs:
       install: npm install
       before_script: npm run testrpc
       script:
+        - npm run compile
         - npm run test
         - npm run soltest
     - stage: code-coverage
