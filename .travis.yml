@@ -35,7 +35,9 @@ jobs:
        - cat report.lcov | COVERALLS_REPO_TOKEN=$repo_token COVERALLS_SERVICE_NAME=travis-pro ./node_modules/.bin/coveralls
     - stage: deploy-to-production
       if: branch = master
-      script: npm run build-prod
+      script:
+        - npm run compile
+        - npm run build-prod
       deploy:
         provider: surge
         project: ./build/
