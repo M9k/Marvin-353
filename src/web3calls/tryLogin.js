@@ -1,44 +1,38 @@
 import Web3 from 'web3';
 import AccountTypes from '../components/AccountEnum';
 
+const contract = require('truffle-contract');
+
 // console.log(source);
 // const contracts = JSON.parse(source).contracts;
 // const contrattoUni = new Web3.eth.Contract('contracts/University.json');
 
 function funzioneTest() {
+  let returnType = 0;
   const contractUniversityJson = require('../../build/contracts/University.json');
-  console.log(contractUniversityJson);
-  // controllo sia nel formato corretto, deve apparire come
-  /*
-  {
-      name: 'myMethod',
-      type: 'function',
-      inputs: [{
-        type: 'uint256',
-        name: 'myNumber'
-      },{
-        type: 'string',
-        name: 'myString'
-      }]
-    }
-   */
 
-  // lo converto in ABI
-  // const contractUniversityABI = Web3.eth.abi.encodeFunctionSignature(contractUniversityJson);
-  console.log(contractUniversityJson.abi);
+  const contractUniversity = contract(contractUniversityJson);
+  contractUniversity.setProvider(web3.currentProvider);
 
-  // creo il contratto
-  const contractUniversity = web3.eth.contract(contractUniversityJson.abi);
   console.log(contractUniversity);
 
-  // TODO
-  // indico il suo indirizzo sulla rete - di quello caricato
-  // contractUniversity.options.address = '0x01235f2ab45345.....';
+  web3.eth.getCoinbase((error, coinbase) => {
+    // Log errors, if any.
+    if (error) {
+      console.error(`account metamask ${error}`);
+    }
 
-  // invoco il login
-  // contractUniversity.methods.metodo_di_login([parametri... ]).then({ function(result){ ...  });});
-
-  return 2;
+    contractUniversity.deployed().then((instance) => {
+      // Attempt to login user.
+      instance.login({ from: coinbase })
+        .then((result) => {
+        // If no error, login user.
+          alert(`result network ${(result)}`);
+          returnType = result;
+        });
+    });
+  });
+  return returnType;
 }
 
 export default funzioneTest;
