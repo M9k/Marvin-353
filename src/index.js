@@ -30,7 +30,7 @@ setInterval(() => {
 }, 100);
 
 // init contracts
-// TODO
+// TODO - Singleton?
 
 // render the main component
 ReactDOM.render(
