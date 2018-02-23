@@ -29,8 +29,11 @@
     "soltest": "./node_modules/.bin/truffle test --compile-all",
 
     "migrate": "./node_modules/.bin/truffle migrate --network ganache",
-    "migratewin": "./node_modules/.bin/truffle migrate --network ganache && movecontracts.bat",
     "soltestmigrate": "./node_modules/.bin/truffle test --compile-all --network ganache",
+	
+    "//": "Migrate on Windows",
+	"testrpc-win": "testrpc",
+    "migrate-win": "./node_modules/.bin/truffle.cmd migrate --network ganache",
 
     "//": "Coverage",
     "solidity-coverage": "./node_modules/.bin/solidity-coverage",

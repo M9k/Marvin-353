@@ -1,1 +1,0 @@
-mv build/contracts public

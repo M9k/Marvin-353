@@ -6,7 +6,7 @@ import AccountTypes from '../components/AccountEnum';
 // const contrattoUni = new Web3.eth.Contract('contracts/University.json');
 
 function funzioneTest() {
-  const contractUniversityJson = require('../../public/contracts/University.json');
+  const contractUniversityJson = require('../../build/contracts/University.json');
   console.log(contractUniversityJson);
   // controllo sia nel formato corretto, deve apparire come
   /*
