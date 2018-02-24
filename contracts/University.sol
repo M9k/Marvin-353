@@ -35,7 +35,7 @@ contract University {
     }
 
     modifier registrableAddress(address _address) {
-        require(!registered[_address]);
+        require(!registered[_address] && _address!=0);
         _;
     }
 
