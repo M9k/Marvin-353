@@ -29,9 +29,6 @@ contract University {
   //Per aggiungere uno studente.
   function newStudent(address studentAddress)  public onlyAllowed{
     if(studentAddress!=0 && !alreadyRegistered(studentAddress)){
-      if(isStudent(studentAddress)){
-        return;
-      }
       students[studentAddress] = true;
       countStudents=countStudents+1;
     }
@@ -40,9 +37,6 @@ contract University {
   //Per aggiungere uno docente.
   function newTeacher(address teacherAddress)  public onlyAllowed{
     if(teacherAddress!=0 && !alreadyRegistered(teacherAddress)){
-      if(isTeacher(teacherAddress)){
-        return;
-      }
       teachers[teacherAddress] = true;
       countTeachers=countTeachers+1;
     }
@@ -51,9 +45,6 @@ contract University {
   //Per aggiungere un admin.
   function newAdmin(address adminAddress)  public onlyAllowed{
     if(adminAddress!=0 && !alreadyRegistered(adminAddress)){
-      if(isAdmin(adminAddress)){
-        return;
-      }
       administrators[adminAddress] = true;
       countAdministrators=countAdministrators+1;
     }
