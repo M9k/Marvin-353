@@ -28,7 +28,8 @@ contract('University', (accounts) => {
     assert.equal(await contract.alreadyRegistered(accounts[2]), false);
     assert.equal(await contract.alreadyRegistered(accounts[3]), false);
     assert.equal(await contract.alreadyRegistered(accounts[4]), false);
-  }); 
+  });
+  
   // Controlla che account 0 è università
   it('001 - Chai assert module test: Should say it\'s university!', async () => {
     assert.equal(await contract.isUniversityFounder(accounts[0]), true);
@@ -57,10 +58,14 @@ contract('University', (accounts) => {
     assert.equal(await contract.alreadyRegistered(accounts[2]), true);
   });
 
-//  it("006 - Chai assert module test: Adding existing admin! Shouldn't add existing admin!", async () => {
-//    await contract.newAdmin(accounts[2]);
-//    assert.equal(await contract.getAdminsNumber(), 1);
-//  });
+  it("006 - Chai assert module test: Adding existing admin! Shouldn't add existing admin!", async () => {
+    try {
+      await contract.newAdmin(accounts[2]);
+    } catch (e) {
+      return true;
+    }
+    throw new Error("Test 6 failed!");
+  });
 
 //  it("007 - Chai assert module test: Shouldn't add new admin with address null!", async () => {
 //    await contract.newAdmin('');

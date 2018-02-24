@@ -1,4 +1,4 @@
-pragma solidity ^0.4.19;
+pragma solidity ^0.4.2;
 
 
 contract University {
@@ -7,7 +7,7 @@ contract University {
 
       // IN SOTTOCONTRATTI!
     mapping (address => bool) private registered;
-      
+
     //Tutti gli studenti
     uint private countStudents;
     mapping (address => bool) private students;
@@ -43,7 +43,7 @@ contract University {
         require(_address != 0);
         _;
     }
-    
+
       // IN SOTTOCONTRATTI!
     //Per aggiungere uno studente.
     function newStudent(address studentAddress) public onlyFounder
@@ -53,7 +53,7 @@ contract University {
         studentsByIndex[countStudents] = studentAddress;
         countStudents += 1;
     }
-  
+
     //Per aggiungere uno docente.
     function newTeacher(address teacherAddress) public onlyFounder
     registrableAddress(teacherAddress) validAddress(teacherAddress) {
@@ -62,7 +62,7 @@ contract University {
         teachersByIndex[countStudents] = teacherAddress;
         countTeachers += 1;
     }
-    
+
     //Per aggiungere un admin.
     function newAdmin(address adminAddress)  public onlyFounder
     registrableAddress(adminAddress) validAddress(adminAddress) {
@@ -71,7 +71,7 @@ contract University {
         administratorsByIndex[countStudents] = adminAddress;
         countAdministrators += 1;
     }
-  
+
     //Function to check if an address is of the university creator
     function isUniversityFounder(address possibleUniversityAddress) public view returns(bool) {
         return possibleUniversityAddress == universityAddress;
@@ -102,7 +102,7 @@ contract University {
     function getTeachersNumber() public view returns(uint) {
         return countTeachers;
     }
-    
+
     //Ritorna numero dei admin
     function getAdminsNumber() public view returns(uint) {
         return countAdministrators;
@@ -133,7 +133,7 @@ contract University {
   */
     function loginAddr(address userAddr) private view returns (uint typeUser) {
         typeUser = 0; //notRegistered
-  
+
         if (isUniversityFounder(userAddr))
             typeUser = 1; //University
 
