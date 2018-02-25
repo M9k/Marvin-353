@@ -67,53 +67,29 @@ contract('University', (accounts) => {
     throw new Error("Test 006 failed!");
   });
 
-  // null, cioè 0, è un indirizzo valido fino a prova contraria fornita dal CRC, che va controllato in JS, non in Solidity
-/*
-  it("007 - Chai assert module test: Shouldn't add new admin with address null!", async () => {
-    try {
-      await contract.newAdmin('');
-    } catch (e) {
-      return true;
-    }
-    throw new Error("Test 007 failed!");
-  });
-*/
-
-  it('008 - Chai assert module test: checking if admin exist or not! Should return true if admin exist false if not!', async () => {
+  it('007 - Chai assert module test: checking if admin exist or not! Should return true if admin exist false if not!', async () => {
     const res = await contract.isAdmin(accounts[2]);
     const res2 = await contract.isAdmin(accounts[1]);
     assert.isTrue(res);
     assert.isFalse(res2);
   });
 
-  it('009 - Chai assert module test: Adding new teacher! Should add new teacher!', async () => {
+  it('008 - Chai assert module test: Adding new teacher! Should add new teacher!', async () => {
     await contract.newTeacher(accounts[3]);
     assert.equal(await contract.isTeacher(accounts[3]), true);
     assert.equal(await contract.getTeachersNumber(), 1);
   });
 
-  it("010 - Chai assert module test: Adding existing teacher! Shouldn't add existing teacher!", async () => {
+  it("009 - Chai assert module test: Adding existing teacher! Shouldn't add existing teacher!", async () => {
     try {
       await contract.newTeacher(accounts[3]);
     } catch (e) {
       return true;
     }
-    throw new Error("Test 010 failed!");
+    throw new Error("Test 009 failed!");
   });
 
-  // null, cioè 0, è un indirizzo valido fino a prova contraria fornita dal CRC, che va controllato in JS, non in Solidity
-/*
-  it("011 - Chai assert module test: Shouldn't add new teacher with address null!", async () => {
-    try {
-      await contract.newTeacher('');
-    } catch (e) {
-      return true;
-    }
-    throw new Error("Test 011 failed!");
-  });
-*/
-
-  it('012 - Chai assert module test: checking if teacher exist or not! Should return true if teacher exist false if not!', async () => {
+  it('010 - Chai assert module test: checking if teacher exist or not! Should return true if teacher exist false if not!', async () => {
     const res = await contract.isTeacher(accounts[3]);
     const res2 = await contract.isTeacher(accounts[1]);
     assert.isTrue(res);
@@ -121,17 +97,17 @@ contract('University', (accounts) => {
   });
 
 
-  it('013 - Chai assert module test: Adding new student! Should add new student!', async () => {
+  it('011 - Chai assert module test: Adding new student! Should add new student!', async () => {
     await contract.newStudent(accounts[4], { from: accounts[0] });
     assert.equal(await contract.isStudent(accounts[4]), true);
     assert.equal(await contract.getStudentsNumber(), 1);
   });
 
-  it('014 - Chai assert module test: Should return Student 4!', async () => {
+  it('012 - Chai assert module test: Should return Student 4!', async () => {
     assert.equal(await contract.login({ from: accounts[4] }), 4);
   });
 
-  it("015 - Chai assert module test: Adding existing student! Shouldn't add existing student!", async () => {
+  it("013 - Chai assert module test: Adding existing student! Shouldn't add existing student!", async () => {
     try {
       await contract.newStudent(accounts[4]);
     } catch (e) {
@@ -140,7 +116,7 @@ contract('University', (accounts) => {
     throw new Error("Test 015 failed!");
   });
 
-  it("016 - Adding new student without admin shouldn't add this student!", async () => {
+  it("014 - Adding new student without admin. Shouldn't add this student!", async () => {
     try {
       (await contract.newStudent(accounts[5], { from: accounts[1] }));
     } catch (errore) {
@@ -152,20 +128,8 @@ contract('University', (accounts) => {
     assert.equal(await contract.isStudent(accounts[5]), false);
     assert.equal(await contract.getStudentsNumber(), 1);
   });
-  
-	// null, cioè 0, è un indirizzo valido fino a prova contraria fornita dal CRC, che va controllato in JS, non in Solidity
-/*
-  it("017 - Chai assert module test: Shouldn't add student with address null!", async () => {
-    try {
-      await contract.newStudent('');
-    } catch (e) {
-      return true;
-    }
-    throw new Error("Test 017 failed!");
-  });
-*/
 
-  it('018 - Chai assert module test: Checking if student exist or not! Should return true if student exist false if not!', async () => {
+  it('015 - Chai assert module test: Checking if student exist or not! Should return true if student exist false if not!', async () => {
     const res = await contract.isStudent(accounts[4]);
     const res2 = await contract.isStudent(accounts[1]);
     assert.isTrue(res);
@@ -173,7 +137,7 @@ contract('University', (accounts) => {
   });
 
   // TEST with BDD Chai's module:
-  it('019 - Chai BDD expect module test: It should add new student', async () => {
+  it('016 - Chai BDD expect module test: It should add new student', async () => {
     await contract.newStudent('0xBCD5F98A16d2C0A5A2bB834a211dF0617C45C1FD', { from: accounts[0] });
     expect(await contract.isStudent('0xBCD5F98A16d2C0A5A2bB834a211dF0617C45C1FD')).to.equal(true);
     expect(await contract.getStudentsNumber()).to.not.equal(1);
@@ -183,7 +147,7 @@ contract('University', (accounts) => {
     expect([1, 2]).to.be.an('array').that.does.not.include(3);
   });
 
-  it("020 - Chai assert module test: Shouldn't add a user if already in the system!", async () => {
+  it("017 - Chai assert module test: Shouldn't add a user if already in the system!", async () => {
     assert.equal(await contract.alreadyRegistered(accounts[0]), true);
     try {
       await contract.newTeacher(accounts[0]);
