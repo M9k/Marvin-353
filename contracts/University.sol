@@ -35,19 +35,14 @@ contract University {
     }
 
     modifier registrableAddress(address _address) {
-        require(!registered[_address] && _address!=0);
-        _;
-    }
-
-    modifier validAddress(address _address) {
-        require(_address != 0);
+        require(!registered[_address]);
         _;
     }
 
       // IN SOTTOCONTRATTI!
     //Per aggiungere uno studente.
     function newStudent(address studentAddress) public onlyFounder
-    registrableAddress(studentAddress) validAddress(studentAddress) {
+    registrableAddress(studentAddress) {
         registered[studentAddress] = true;
         students[studentAddress] = true;
         studentsByIndex[countStudents] = studentAddress;
@@ -56,7 +51,7 @@ contract University {
 
     //Per aggiungere uno docente.
     function newTeacher(address teacherAddress) public onlyFounder
-    registrableAddress(teacherAddress) validAddress(teacherAddress) {
+    registrableAddress(teacherAddress) {
         registered[teacherAddress] = true;
         teachers[teacherAddress] = true;
         teachersByIndex[countStudents] = teacherAddress;
@@ -65,7 +60,7 @@ contract University {
 
     //Per aggiungere un admin.
     function newAdmin(address adminAddress)  public onlyFounder
-    registrableAddress(adminAddress) validAddress(adminAddress) {
+    registrableAddress(adminAddress) {
         registered[adminAddress] = true;
         administrators[adminAddress] = true;
         administratorsByIndex[countStudents] = adminAddress;

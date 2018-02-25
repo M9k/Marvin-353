@@ -67,6 +67,8 @@ contract('University', (accounts) => {
     throw new Error("Test 006 failed!");
   });
 
+  // null, cioè 0, è un indirizzo valido fino a prova contraria fornita dal CRC, che va controllato in JS, non in Solidity
+/*
   it("007 - Chai assert module test: Shouldn't add new admin with address null!", async () => {
     try {
       await contract.newAdmin('');
@@ -75,6 +77,7 @@ contract('University', (accounts) => {
     }
     throw new Error("Test 007 failed!");
   });
+*/
 
   it('008 - Chai assert module test: checking if admin exist or not! Should return true if admin exist false if not!', async () => {
     const res = await contract.isAdmin(accounts[2]);
@@ -98,6 +101,8 @@ contract('University', (accounts) => {
     throw new Error("Test 010 failed!");
   });
 
+  // null, cioè 0, è un indirizzo valido fino a prova contraria fornita dal CRC, che va controllato in JS, non in Solidity
+/*
   it("011 - Chai assert module test: Shouldn't add new teacher with address null!", async () => {
     try {
       await contract.newTeacher('');
@@ -106,6 +111,7 @@ contract('University', (accounts) => {
     }
     throw new Error("Test 011 failed!");
   });
+*/
 
   it('012 - Chai assert module test: checking if teacher exist or not! Should return true if teacher exist false if not!', async () => {
     const res = await contract.isTeacher(accounts[3]);
@@ -146,7 +152,9 @@ contract('University', (accounts) => {
     assert.equal(await contract.isStudent(accounts[5]), false);
     assert.equal(await contract.getStudentsNumber(), 1);
   });
-
+  
+	// null, cioè 0, è un indirizzo valido fino a prova contraria fornita dal CRC, che va controllato in JS, non in Solidity
+/*
   it("017 - Chai assert module test: Shouldn't add student with address null!", async () => {
     try {
       await contract.newStudent('');
@@ -155,6 +163,7 @@ contract('University', (accounts) => {
     }
     throw new Error("Test 017 failed!");
   });
+*/
 
   it('018 - Chai assert module test: Checking if student exist or not! Should return true if student exist false if not!', async () => {
     const res = await contract.isStudent(accounts[4]);
