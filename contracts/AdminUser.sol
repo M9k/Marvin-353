@@ -1,6 +1,6 @@
 pragma solidity ^0.4.2;
 
-import "User.sol";
+import './User.sol';
 
 contract AdminUser is User {
 
@@ -18,5 +18,5 @@ contract AdminUser is User {
         return surname;
     }
 
-    //Altre funzionalità o valori per gli aministraoti
+    //Altre funzionalità o valori per gli amministratori
 }

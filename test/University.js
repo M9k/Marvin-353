@@ -32,44 +32,44 @@ contract('University', (accounts) => {
   }
 
   it(testTitle('Chai assert module test: Should say Universtiy is registered others no!'), async () => {
-    assert.equal(await contract.alreadyRegistered(accounts[0]), true);
-    assert.equal(await contract.alreadyRegistered(accounts[1]), false);
-    assert.equal(await contract.alreadyRegistered(accounts[2]), false);
-    assert.equal(await contract.alreadyRegistered(accounts[3]), false);
-    assert.equal(await contract.alreadyRegistered(accounts[4]), false);
+    assert.equal(await contract.alreadyRegistered.call(accounts[0]), true);
+    assert.equal(await contract.alreadyRegistered.call(accounts[1]), false);
+    assert.equal(await contract.alreadyRegistered.call(accounts[2]), false);
+    assert.equal(await contract.alreadyRegistered.call(accounts[3]), false);
+    assert.equal(await contract.alreadyRegistered.call(accounts[4]), false);
   });
 
   // Controlla che account 0 è università
   it(testTitle('Chai assert module test: Should say it\'s university!'), async () => {
-    assert.equal(await contract.isUniversityFounder(accounts[0]), true);
+    assert.equal(await contract.isUniversityFounder.call(accounts[0]), true);
   });
 
   // Controlla che account 1 non sia università
   it(testTitle('Chai assert module test: Should say it\'s not university!'), async () => {
-    assert.equal(await contract.isUniversityFounder(accounts[1]), false);
-    assert.equal(await contract.alreadyRegistered(accounts[1]), false);
+    assert.equal(await contract.isUniversityFounder.call(accounts[1]), false);
+    assert.equal(await contract.alreadyRegistered.call(accounts[1]), false);
   });
 
   // Check that university login return univ
   it(testTitle('Chai assert module test: Should return university 1!'), async () => {
-    assert.equal(await contract.login({ from: accounts[0] }), 1);
+    assert.equal(await contract.login.call({ from: accounts[0] }), 1);
   });
 
   // Check that university login return univ
   it(testTitle('Chai assert module test: Should return not registered 0!'), async () => {
-    assert.equal(await contract.login({ from: accounts[1] }), 0);
+    assert.equal(await contract.login.call({ from: accounts[1] }), 0);
   });
 
   it(testTitle('Chai assert module test: Adding new admin! Should add new admin!'), async () => {
     await contract.newAdmin(accounts[2]);
-    assert.equal(await contract.isAdmin(accounts[2]), true);
-    assert.equal(await contract.getAdminsNumber(), 1);
-    assert.equal(await contract.alreadyRegistered(accounts[2]), true);
+    assert.equal(await contract.isAdmin.call(accounts[2]), true);
+    assert.equal(await contract.getAdminsNumber.call(), 1);
+    assert.equal(await contract.alreadyRegistered.call(accounts[2]), true);
   });
 
   it(testTitle('Chai assert module test: Adding existing admin! Shouldn\'t add existing admin!'), async () => {
     try {
-      await contract.newAdmin(accounts[2]);
+      await contract.newAdmin.call(accounts[2]);
     } catch (e) {
       return true;
     }
@@ -77,16 +77,16 @@ contract('University', (accounts) => {
   });
 
   it(testTitle('Chai assert module test: checking if admin exist or not! Should return true if admin exist false if not!'), async () => {
-    const res = await contract.isAdmin(accounts[2]);
-    const res2 = await contract.isAdmin(accounts[1]);
+    const res = await contract.isAdmin.call(accounts[2]);
+    const res2 = await contract.isAdmin.call(accounts[1]);
     assert.isTrue(res);
     assert.isFalse(res2);
   });
 
   it(testTitle('Chai assert module test: Adding new teacher! Should add new teacher!'), async () => {
     await contract.newTeacher(accounts[3]);
-    assert.equal(await contract.isTeacher(accounts[3]), true);
-    assert.equal(await contract.getTeachersNumber(), 1);
+    assert.equal(await contract.isTeacher.call(accounts[3]), true);
+    assert.equal(await contract.getTeachersNumber.call(), 1);
   });
 
   it(testTitle('Chai assert module test: Adding existing teacher! Shouldn\'t add existing teacher!'), async () => {
@@ -99,8 +99,8 @@ contract('University', (accounts) => {
   });
 
   it(testTitle('Chai assert module test: checking if teacher exist or not! Should return true if teacher exist false if not!'), async () => {
-    const res = await contract.isTeacher(accounts[3]);
-    const res2 = await contract.isTeacher(accounts[1]);
+    const res = await contract.isTeacher.call(accounts[3]);
+    const res2 = await contract.isTeacher.call(accounts[1]);
     assert.isTrue(res);
     assert.isFalse(res2);
   });
@@ -108,12 +108,12 @@ contract('University', (accounts) => {
 
   it(testTitle('Chai assert module test: Adding new student! Should add new student!'), async () => {
     await contract.newStudent(accounts[4], { from: accounts[0] });
-    assert.equal(await contract.isStudent(accounts[4]), true);
-    assert.equal(await contract.getStudentsNumber(), 1);
+    assert.equal(await contract.isStudent.call(accounts[4]), true);
+    assert.equal(await contract.getStudentsNumber.call(), 1);
   });
 
   it(testTitle('Chai assert module test: Should return Student 4!'), async () => {
-    assert.equal(await contract.login({ from: accounts[4] }), 4);
+    assert.equal(await contract.login.call({ from: accounts[4] }), 4);
   });
 
   it(testTitle('Chai assert module test: Adding existing student! Shouldn\'t add existing student!'), async () => {
@@ -125,7 +125,7 @@ contract('University', (accounts) => {
     throw new Error('Test 015 failed!');
   });
 
-  it(testTitle(" - Adding new student without admin. Shouldn't add this student!"), async () => {
+  it(testTitle("Adding new student without admin. Shouldn't add this student!"), async () => {
     try {
       (await contract.newStudent(accounts[5], { from: accounts[1] }));
     } catch (errore) {
@@ -134,13 +134,13 @@ contract('University', (accounts) => {
     }
     // expect(await contract.newStudent(accounts[5], { from: accounts[1] })).to.throw(Error);
 
-    assert.equal(await contract.isStudent(accounts[5]), false);
-    assert.equal(await contract.getStudentsNumber(), 1);
+    assert.equal(await contract.isStudent.call(accounts[5]), false);
+    assert.equal(await contract.getStudentsNumber.call(), 1);
   });
 
   it(testTitle('Chai assert module test: Checking if student exist or not! Should return true if student exist false if not!'), async () => {
-    const res = await contract.isStudent(accounts[4]);
-    const res2 = await contract.isStudent(accounts[1]);
+    const res = await contract.isStudent.call(accounts[4]);
+    const res2 = await contract.isStudent.call(accounts[1]);
     assert.isTrue(res);
     assert.isFalse(res2);
   });
@@ -148,8 +148,8 @@ contract('University', (accounts) => {
   // TEST with BDD Chai's module:
   it(testTitle('Chai BDD expect module test: It should add new student'), async () => {
     await contract.newStudent('0xBCD5F98A16d2C0A5A2bB834a211dF0617C45C1FD', { from: accounts[0] });
-    expect(await contract.isStudent('0xBCD5F98A16d2C0A5A2bB834a211dF0617C45C1FD')).to.equal(true);
-    expect(await contract.getStudentsNumber()).to.not.equal(1);
+    expect(await contract.isStudent.call('0xBCD5F98A16d2C0A5A2bB834a211dF0617C45C1FD')).to.equal(true);
+    expect(await contract.getStudentsNumber.call()).to.not.equal(1);
 
     // Altri test che si possono essere utilizzati per controllare le liste ecc..
     expect(null).to.be.a('null');
@@ -157,7 +157,7 @@ contract('University', (accounts) => {
   });
 
   it(testTitle("Chai assert module test: Shouldn't add a user if already in the system!"), async () => {
-    assert.equal(await contract.alreadyRegistered(accounts[0]), true);
+    assert.equal(await contract.alreadyRegistered.call(accounts[0]), true);
     try {
       await contract.newTeacher(accounts[0]);
     } catch (e) {
@@ -168,7 +168,7 @@ contract('University', (accounts) => {
 
   it(testTitle('Chai assert module test: Should return last inserted admin'), async () => {
     await contract.newAdmin(accounts[5]);
-    const adminMaxIndex = await contract.getAdminsNumber();
-    assert.equal(await contract.getAdminAt(adminMaxIndex), accounts[5]);
+    const adminMaxIndex = await contract.getAdminsNumber.call();
+    assert.equal(await contract.getAdminAt.call(adminMaxIndex), accounts[5]);
   });
 });
