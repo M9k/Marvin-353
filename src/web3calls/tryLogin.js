@@ -2,7 +2,7 @@ const contract = require('truffle-contract');
 
 function tryLoginWeb3() {
   // TODO: da spostare in un Singleton --> Definire bene l'architettura
-  const contractUniversityJson = require('../../build/contracts/University.json');
+  const contractUniversityJson = require('../../build/contracts/UniversityAdmin.json');
   // Set up the contract abstraction
   const contractUniversity = contract(contractUniversityJson);
   // Set the provider used by metamask
