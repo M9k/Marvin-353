@@ -44,7 +44,7 @@ contract UniversityAdmin is UniversityBase {
 
     //return the admin ad index _index
     function getAdminAt(uint _index) public view validAdminIndex(_index) returns(address) {
-        return administratorsByIndex[_index];
+        return administratorsByIndex[_index-1];
     }
     //get index of admin with address of not usefull
 
