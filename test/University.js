@@ -11,10 +11,10 @@ const BigNumber = require('bignumber.js');
 contract('University', (accounts) => {
   let contract;
 
-// ATTENZIONE!
-	// await non utilizzabile nel caso i parametri non rispettino i modifier
-	// la chiamata in quel caso non sarà mai invocata e non ci sarà mai un ritorno
-	// le EVM si devono rifiutare di eseguire qualsiasi fuzione se vietate da un modifier
+  // ATTENZIONE!
+  // await non utilizzabile nel caso i parametri non rispettino i modifier
+  // la chiamata in quel caso non sarà mai invocata e non ci sarà mai un ritorno
+  // le EVM si devono rifiutare di eseguire qualsiasi fuzione se vietate da un modifier
 
   // Prima di fare qualsiasi altro test verifico che sia stato caricato il contratto
   beforeEach('Deploy University contract on blockchain', async () => {
@@ -64,7 +64,7 @@ contract('University', (accounts) => {
     } catch (e) {
       return true;
     }
-    throw new Error("Test 006 failed!");
+    throw new Error('Test 006 failed!');
   });
 
   it('007 - Chai assert module test: checking if admin exist or not! Should return true if admin exist false if not!', async () => {
@@ -86,7 +86,7 @@ contract('University', (accounts) => {
     } catch (e) {
       return true;
     }
-    throw new Error("Test 009 failed!");
+    throw new Error('Test 009 failed!');
   });
 
   it('010 - Chai assert module test: checking if teacher exist or not! Should return true if teacher exist false if not!', async () => {
@@ -113,7 +113,7 @@ contract('University', (accounts) => {
     } catch (e) {
       return true;
     }
-    throw new Error("Test 015 failed!");
+    throw new Error('Test 015 failed!');
   });
 
   it("014 - Adding new student without admin. Shouldn't add this student!", async () => {
@@ -154,7 +154,6 @@ contract('University', (accounts) => {
     } catch (e) {
       return true;
     }
-    throw new Error("Test 017 failed!");
+    throw new Error('Shouldn\'t add users if already in the system!');
   });
-
 });

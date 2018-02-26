@@ -4,13 +4,18 @@ import PropTypes from 'prop-types';
 import HomeDefault from './HomeDefault';
 import AccountTypes from '../AccountEnum';
 import Button from '../buttons/Button';
+import WelcomeLabel from '../label/WelcomeLabel';
 
 const HomeFactory = (props) => {
   switch (props.accountType) {
     case AccountTypes.UNIVERSITY:
       return (
         <div id="TODO-HOME">
-          TODO - università
+          <h1>Benvenuto fondatore</h1>
+          <div className="page-content">
+            <Button link="/">Gestione Admin</Button><br />
+            <Button link="/">Metti in pausa sistema</Button><br />
+          </div>
         </div>
       );
     case AccountTypes.ADMIN:
