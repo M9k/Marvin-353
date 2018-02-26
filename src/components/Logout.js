@@ -6,7 +6,14 @@ const Logout = () => {
   return (
     <div className="page-logout">
       <Header />
-      <h2>TODO: guida su come sloggare da Metamask, il resto è automatico</h2>
+      <h1 class="title">Logout</h1>
+      <p>For logout from Marvin, you have to logout from MetaMask:
+        <ul>
+          <li>Click on MetaMask plug-in icon;</li>
+          <li>Click on the menu button in the top right corner;</li>
+          <li>Click 'Log Out'.</li>
+        </ul>
+      </p>
     </div>
   );
 };
