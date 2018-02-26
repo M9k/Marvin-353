@@ -1,43 +1,31 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import HomeDefault from './HomeDefault';
 import AccountTypes from '../AccountEnum';
-import Button from '../buttons/Button';
-import WelcomeLabel from '../label/WelcomeLabel';
+import HomeDefault from './HomeDefault';
+import HomeUniversity from './HomeUniversity';
 
 const HomeFactory = (props) => {
   switch (props.accountType) {
     case AccountTypes.UNIVERSITY:
       return (
-        <div id="TODO-HOME">
-          <h1>Benvenuto fondatore</h1>
-          <div className="page-content">
-            <Button link="/">Gestione Admin</Button><br />
-            <Button link="/">Metti in pausa sistema</Button><br />
-          </div>
-        </div>
+        <HomeUniversity />
       );
     case AccountTypes.ADMIN:
       return (
         <div id="TODO-HOME">
-          <div className="page-content">
-            <Button link="/gestioneUtenti/">Gestione Utenti</Button><br />
-            <Button link="/">Gestione Anni Accademici</Button><br />
-            <Button link="/">Gestione Corsi di Laurea</Button><br />
-          </div>
+          TODO - admin
         </div>
       );
     case AccountTypes.PROFESSOR:
       return (
         <div id="TODO-HOME">
-          TODO - professore
+          TODO - professor
         </div>
       );
     case AccountTypes.STUDENT:
       return (
         <div id="TODO-HOME">
-          TODO - studente
+          TODO - student
         </div>
       );
     case AccountTypes.NOTLOGGED:

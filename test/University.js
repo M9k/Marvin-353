@@ -1,3 +1,4 @@
+/*
 const University = artifacts.require('./contracts/University.sol');
 const assert = require('chai').assert;
 const expect = require('chai').expect;
@@ -172,3 +173,5 @@ contract('University', (accounts) => {
     assert.equal(await contract.getAdminAt.call(adminMaxIndex), accounts[5]);
   });
 });
+*/
+
