@@ -29,7 +29,7 @@ const Help = () => {
       <h2>How do I unlock MetaMask</h2>
       <p>Click on the MetaMask plug-in icon and inset the password. Then, press 'Unlock'.</p>
       <h2>How can I logout from Marvin?</h2>
-      <p>For logout from Marvin, you have to logout from MetaMask:
+      <p>To logout from Marvin, you have to logout from MetaMask:
         <ul>
           <li>Click on MetaMask plug-in icon;</li>
           <li>Click on the menu button in the top right corner;</li>
