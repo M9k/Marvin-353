@@ -17,7 +17,7 @@
   },
   "scripts": {
     "//": "Coverage",
-    "start": "start http://localhost:8080 & webpack-dev-server --inline --hot --history-api-fallback --host localhost --port 8080 --devtool source-map",
+    "start": "start http://localhost:8080 & webpack-dev-server --inline --hot --watch --history-api-fallback --host localhost --port 8080 --devtool source-map",
     "build-dev": "webpack --config webpack.dev.config.js",
     "build-prod": "webpack -p --config webpack.prod.config.js",
     "test": "mocha testnpm --recursive --compilers js:babel-register --require babel-polyfill --require ignore-styles",

@@ -1,8 +1,9 @@
 import { call, put } from 'redux-saga/effects';
 import { universityAction } from '../reducers/university';
+import numAdmin from '../web3calls/numAdmin';
 
 
 export function* adminNumber() {
-  //const administratorNumber = yield call();
-  //yield put({ type: universityAction.ADMIN_NUMBER, adminNumber: Number(administratorNumber) });
+  const administratorNumber = yield call(numAdmin);
+  yield put({ type: universityAction.ADMIN_NUMBER, adminNumber: Number(administratorNumber) });
 }
