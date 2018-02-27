@@ -9,6 +9,8 @@ import Help from './components/Help';
 import Price from './components/Price';
 import NotFound from './components/NotFound';
 import License from './components/License';
+import ManageAdmin from './components/ManageAdmin';
+
 
 const routes = (
   <Route path="/" component={App}>
@@ -19,6 +21,7 @@ const routes = (
     <Route path="license" component={License} />
     <Route path="help" component={Help} />
     <Route path="price" component={Price} />
+    <Route path="manageAdmin" component={ManageAdmin} />
     <Route path="*" component={NotFound} />
   </Route>
 );
