@@ -1,9 +1,6 @@
 import { call, put } from 'redux-saga/effects';
 import { userAction } from '../reducers/user';
 import login from '../web3calls/login';
-import numAdmin from '../web3calls/numAdmin';
-import getAdmin from '../web3calls/getAdmin';
-import addAdmin from '../web3calls/addAdmin';
 
 export function* tryLogin(action) {
   // call the web3call for try to login

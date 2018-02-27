@@ -4,9 +4,9 @@ import UniversityAdmin from './UniversityAdmin';
 function getAdmin(adminIndex) {
   alert(`I'm going to get you at ${adminIndex}`);
 
-  const admin = UniversityAdmin();
+  const contractUniversityAdmin = UniversityAdmin();
 
-  return admin.deployed().then(instance =>
+  return contractUniversityAdmin.then(instance =>
     // Call the university getAdmin function
     instance.getAdminAt.call(
       adminIndex,

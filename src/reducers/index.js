@@ -4,24 +4,24 @@ import { reducer as formReducer } from 'redux-form';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { userLogger } from './user';
-import { numberOfAdmin } from './university';
+import { universityData } from './university';
 
 
 const persistConfig = {
   key: 'root',
   storage,
+  blacklist: ['routing', 'form'],
 };
 
-const persistentUserLogger = persistReducer(persistConfig, userLogger);
-const persistentUniversity = persistReducer(persistConfig, numberOfAdmin);
 
 // main reducers
 const reducers = combineReducers({
   routing: routerReducer,
   form: formReducer,
-  user: persistentUserLogger,
-  university: persistentUniversity,
+  user: userLogger,
+  university: universityData,
 });
 
+const persistentReducer = persistReducer(persistConfig, reducers);
 
-export default reducers;
+export default persistentReducer;

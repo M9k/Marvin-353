@@ -4,9 +4,9 @@ import UniversityAdmin from './UniversityAdmin';
 function addAdmin(addressToAdd) {
   alert(`I'm going to add you -> ${addressToAdd}`);
 
-  const admin = UniversityAdmin();
+  const contractUniversityAdmin = UniversityAdmin();
 
-  return admin.deployed().then(instance =>
+  return contractUniversityAdmin.then(instance =>
     // Call the university addAdmin function
     instance.newAdmin(
       addressToAdd,

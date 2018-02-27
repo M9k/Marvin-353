@@ -2,9 +2,9 @@
 import UniversityAdmin from './UniversityAdmin';
 
 function numAdmin() {
-  const admin = UniversityAdmin();
+  const contractUniversityAdmin = UniversityAdmin();
 
-  return admin.deployed().then(instance =>
+  return contractUniversityAdmin.then(instance =>
     // Call the university getAdminsNumber function
     instance.getAdminsNumber.call({ from: web3.eth.accounts[0] })).then(adminNumber => adminNumber);
 }

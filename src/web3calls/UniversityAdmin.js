@@ -1,13 +1,12 @@
 const contract = require('truffle-contract');
+const contractUniversityJson = require('../../build/contracts/UniversityAdmin.json');
 
 function UniversityAdmin() {
-  const contractUniversityJson = require('../../build/contracts/UniversityAdmin.json');
-
   const contractUniversity = contract(contractUniversityJson);
 
   contractUniversity.setProvider(web3.currentProvider);
 
-  return contractUniversity;
+  return contractUniversity.deployed();
 }
 
 export default UniversityAdmin;
