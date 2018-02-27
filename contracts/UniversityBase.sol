@@ -1,5 +1,6 @@
-pragma solidity ^0.4.2;
+pragma solidity ^0.4.19;
 import "./Student.sol";
+
 
 contract UniversityBase {
     address private universityAddress;
@@ -33,18 +34,4 @@ contract UniversityBase {
         if (isUniversityFounder(msg.sender))
             typeUser = 1; //University
     }
-
-
-    event NewStudentAdded(address studentAddr);
-
-    function createStudent(bytes32 _name, bytes32 _surname) public {
-      address studentAddr = new Student(_name,_surname);
-      NewStudentAdded(studentAddr);
-    }
-
-    function getStudentName(address studentToRegister) public view returns(bytes32 name) {
-      Student stud = Student(studentToRegister);
-      name = stud.name();
-    }
-
 }
