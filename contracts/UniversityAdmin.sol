@@ -1,4 +1,4 @@
-pragma solidity ^0.4.19;
+pragma solidity ^0.4.2;
 import "./UniversityBase.sol";
 
 
@@ -25,7 +25,8 @@ contract UniversityAdmin is UniversityBase {
 
     //add an admin
     function newAdmin(address _adminAddress) public onlyFounder
-    registrableAddress(_adminAddress) {
+    registrableAddress(_adminAddress) 
+    {
         registered[_adminAddress] = true;
         administrators[_adminAddress] = countAdministrators;
         administratorsByIndex[countAdministrators] = _adminAddress;

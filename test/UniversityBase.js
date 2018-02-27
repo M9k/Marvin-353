@@ -1,3 +1,4 @@
+require('./Student');
 
 const UniversityBase = artifacts.require('./contracts/UniversityBase.sol');
 const assert = require('chai').assert;
@@ -32,6 +33,10 @@ contract('UniversityBase', (accounts) => {
     return `${testN} - ${_testT}`;
   }
 
+  function bytes32ToString(stringToConvert) {
+    return web3.toAscii(stringToConvert).replace(/\u0000/g, '');
+  }
+
   it(testTitle('Chai assert module test: Should say Universtiy is account 0!'), async () => {
     assert.equal(await contract.isUniversityFounder.call(accounts[0]), true);
   });
@@ -44,7 +49,15 @@ contract('UniversityBase', (accounts) => {
     assert.equal(await contract.login.call({ from: accounts[1] }), 0);
   });
 
+  it(testTitle('Chai assert module test: Should add a new user with name gianfranco!'), async () => {
+    const transactionStudentCreation = await contract.createStudent('gianfranco', 'surnamecarino');
 
+    assert.equal(transactionStudentCreation.logs[0].event, 'NewStudentAdded');
+
+    const addrStud = transactionStudentCreation.logs[0].args.studentAddr;
+
+    assert.equal(bytes32ToString(await contract.getStudentName.call(addrStud)), 'gianfranco');
+  });
 });
 /*
 
