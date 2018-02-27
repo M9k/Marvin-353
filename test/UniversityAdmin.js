@@ -52,4 +52,42 @@ contract('UniversityAdmin', (accounts) => {
     }
     throw new Error('Test failed!');
   });
+
+  // Testing isAdmin
+  it(testTitle('Should return true if is admin!'), async () =>{
+    assert.equal(await contract.isAdmin.call(accounts[0]), false);
+    assert.equal(await contract.isAdmin.call(accounts[1]), true);
+    assert.equal(await contract.isAdmin.call(accounts[2]), false);
+  });
+
+  // Testing login function 2 - admin login
+  it(testTitle('Should login with university and admin accounts!'), async () => {
+    assert.equal(await contract.login.call({ from: accounts[0] }), 1);
+    assert.equal(await contract.login.call({ from: accounts[1] }), 2);
+    assert.equal(await contract.login.call({ from: accounts[2] }), 0);
+    assert.equal(await contract.login.call({ from: accounts[3] }), 0);
+  });
+
+  // Testing getAdminsNumber function
+  it(testTitle('Should return correct number of admins!'), async () =>{
+    assert.notEqual(await contract.getAdminsNumber.call(), 0);
+    assert.equal(await contract.getAdminsNumber.call(), 1);
+    assert.notEqual(await contract.getAdminsNumber.call(), 2);
+  });
+
+  /* Testing getAdminAt function
+  it(testTitle('Should return correct admin admin account!'), async () =>{
+    assert.notEqual(await contract.getAdminAt.call(1), accounts[0]);
+    assert.equal(await contract.getAdminAt.call(1), accounts[1]);
+    assert.notEqual(await contract.getAdminAt.call(1), accounts[2]);
+  });
+  */
+
+  // Testing removeAdmin function
+  it(testTitle('Should remove admin account!'), async () =>{
+    assert.equal(await contract.isAdmin.call(accounts[1]), true);
+    await contract.isAdmin.call(accounts[1]);
+    assert.equal(await contract.isAdmin.call(accounts[2]), false);
+  });
 });
+
