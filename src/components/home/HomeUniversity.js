@@ -5,7 +5,7 @@ const HomeUniversity = () => (
   <div className="page-home">
     <h1>Welcome founder!</h1>
     <div className="page-content">
-      <Button link="/">Manage admins</Button><br />
+      <Button link="manageadmin">Manage admins</Button><br />
       <Button link="/">Manage academic years</Button><br />
     </div>
   </div>

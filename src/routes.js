@@ -21,7 +21,7 @@ const routes = (
     <Route path="license" component={License} />
     <Route path="help" component={Help} />
     <Route path="price" component={Price} />
-    <Route path="manageAdmin" component={ManageAdmin} />
+    <Route path="manageadmin" component={ManageAdmin} />
     <Route path="*" component={NotFound} />
   </Route>
 );
