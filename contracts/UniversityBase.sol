@@ -1,5 +1,4 @@
 pragma solidity ^0.4.19;
-import "./Student.sol";
 
 
 contract UniversityBase {

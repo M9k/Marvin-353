@@ -1,5 +1,5 @@
 pragma solidity ^0.4.19;
-import "./Teacher.sol";
+import "./User.sol";
 
 
 contract Teacher is User {
