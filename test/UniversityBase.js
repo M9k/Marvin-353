@@ -48,6 +48,8 @@ contract('UniversityBase', (accounts) => {
   it(testTitle('Chai assert module test: Should login other User not registred with value 0!'), async () => {
     assert.equal(await contract.login.call({ from: accounts[1] }), 0);
   });
+});
+/*
 
   it(testTitle('Chai assert module test: Should add a new user with name gianfranco!'), async () => {
     const transactionStudentCreation = await contract.createStudent('gianfranco', 'surnamecarino');
@@ -58,8 +60,6 @@ contract('UniversityBase', (accounts) => {
 
     assert.equal(bytes32ToString(await contract.getStudentName.call(addrStud)), 'gianfranco');
   });
-});
-/*
 
   // Controlla che account 0 è università
   it(testTitle('Chai assert module test: Should say it\'s university!'), async () => {
