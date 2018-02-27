@@ -1,5 +1,5 @@
-/*
-const University = artifacts.require('./contracts/University.sol');
+
+const UniversityBase = artifacts.require('./contracts/UniversityBase.sol');
 const assert = require('chai').assert;
 const expect = require('chai').expect;
 const BigNumber = require('bignumber.js');
@@ -10,7 +10,7 @@ const BigNumber = require('bignumber.js');
 // accounts[4] Student
 // accounts[5] Admin last!
 
-contract('University', (accounts) => {
+contract('UniversityBase', (accounts) => {
   let contract;
   let test = 0;
   let testN = '';
@@ -23,7 +23,7 @@ contract('University', (accounts) => {
   // Prima di fare qualsiasi altro test verifico che sia stato caricato il contratto
   beforeEach('Deploy University contract on blockchain', async () => {
     // Il deploy del contratto viene fatto usando il primo account con indice [0]
-    contract = await University.deployed({ from: accounts[0] });
+    contract = await UniversityBase.deployed({ from: accounts[0] });
   });
 
   function testTitle(_testT) {
@@ -32,13 +32,21 @@ contract('University', (accounts) => {
     return `${testN} - ${_testT}`;
   }
 
-  it(testTitle('Chai assert module test: Should say Universtiy is registered others no!'), async () => {
-    assert.equal(await contract.alreadyRegistered.call(accounts[0]), true);
-    assert.equal(await contract.alreadyRegistered.call(accounts[1]), false);
-    assert.equal(await contract.alreadyRegistered.call(accounts[2]), false);
-    assert.equal(await contract.alreadyRegistered.call(accounts[3]), false);
-    assert.equal(await contract.alreadyRegistered.call(accounts[4]), false);
+  it(testTitle('Chai assert module test: Should say Universtiy is account 0!'), async () => {
+    assert.equal(await contract.isUniversityFounder.call(accounts[0]), true);
   });
+
+  it(testTitle('Chai assert module test: Should login Universtiy with value 1!'), async () => {
+    assert.equal(await contract.login.call({ from: accounts[0] }), 1);
+  });
+
+  it(testTitle('Chai assert module test: Should login other User not registred with value 0!'), async () => {
+    assert.equal(await contract.login.call({ from: accounts[1] }), 0);
+  });
+
+
+});
+/*
 
   // Controlla che account 0 è università
   it(testTitle('Chai assert module test: Should say it\'s university!'), async () => {
