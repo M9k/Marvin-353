@@ -13,7 +13,7 @@ const HomeFactory = (props) => {
     case AccountTypes.ADMIN:
       return (
         <div id="TODO-HOME">
-          <h1>ADMIN - Control some Students and Professors! </h1>
+          TODO - Admin
         </div>
       );
     case AccountTypes.PROFESSOR:
@@ -30,15 +30,12 @@ const HomeFactory = (props) => {
       );
     case AccountTypes.NOTLOGGED:
       return (
-        <div id="TODO-HOME">
-          <h1>NOT REGISTERED/LOGGED</h1>
-          <HomeDefault
-            metamask={props.metamask}
-            account={props.account}
-            isLogged={props.isLogged}
-            accountType={props.accountType}
-          />
-        </div>
+        <HomeDefault
+          metamask={props.metamask}
+          account={props.account}
+          isLogged={props.isLogged}
+          accountType={props.accountType}
+        />
       );
     default:
       return (
