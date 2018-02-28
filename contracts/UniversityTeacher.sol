@@ -23,9 +23,9 @@ contract UniversityTeacher is UniversityAdmin {
     }
 
     //ask for teacher account
-    function askForTeacherAccount(bytes32 _name, bytes32 _surname) public registrableAddress(msg.sender)
-    isUnconfirmedTeacherAddress(msg.sender) {
+    function askForTeacherAccount(bytes32 _name, bytes32 _surname) public registrableAddress(msg.sender) {
         address _teacher = new Teacher(_name, _surname);
+        registered[_teacher] = true;
         unconfirmedTeachersByIndex[countUnconfirmedTeachers] = _teacher;
         unconfirmedTeachers[_teacher] = countUnconfirmedTeachers;
         countUnconfirmedTeachers++;
@@ -68,12 +68,14 @@ contract UniversityTeacher is UniversityAdmin {
     }
 
     function removeUnconfirmedTeacher(address _address) public isUnconfirmedTeacherAddress(_address) {
+        registered[_teacher] = false;
         unconfirmedTeachersByIndex[unconfirmedTeachers[_address]] =
             unconfirmedTeachersByIndex[countUnconfirmedTeachers];
         unconfirmedTeachers[_address] = 0;
         countUnconfirmedTeachers -= 1;
     }
 
+    // return the current user type
     function login() public view returns (uint typeUser) {
         typeUser = super.login();
 
@@ -81,12 +83,13 @@ contract UniversityTeacher is UniversityAdmin {
             typeUser = 3; //Teacher
 
         if (isUnconfirmedTeacher(msg.sender))
-            typeUser = 403; /* TODO: da implementare? Non basta caricare una pagina nella UI con 
-                            scritto "l'account deve ancora essere confermato" quando ritorna 403 */
+            typeUser = 403; /* TODO: da implementare nella GUI e nel reducer */
     }
 
-    function addTeacher(address _address) private isUnconfirmedTeacherAddress(_address) {
-        registered[_address] = true;
+    // add new teacher, cannot be called directly without asking and confirm the account
+    // no check, because the _address is now removed from the unregistered list
+    function addTeacher(address _address) private {
+        registered[_teacher] = true;
         teachers[_address] = countTeachers;
         teachersByIndex[countTeachers] = _address;
         countTeachers += 1;
