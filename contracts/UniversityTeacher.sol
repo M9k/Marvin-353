@@ -26,7 +26,6 @@ contract UniversityTeacher is UniversityAdmin {
     function askForTeacherAccount(bytes32 _name, bytes32 _surname) public registrableAddress(msg.sender) 
     {
         address _teacher = new Teacher(_name, _surname);
-        registered[_teacher] = true;
         unconfirmedTeachersByIndex[countUnconfirmedTeachers] = _teacher;
         unconfirmedTeachers[_teacher] = countUnconfirmedTeachers;
         countUnconfirmedTeachers++;
@@ -83,7 +82,8 @@ contract UniversityTeacher is UniversityAdmin {
             typeUser = 3; //Teacher
 
         if (isUnconfirmedTeacher(msg.sender))
-            typeUser = 403; // TODO: da implementare
+            typeUser = 403; /* TODO: da implementare? Non basta caricare una pagina nella UI con 
+                            scritto "l'account deve ancora essere confermato" quando ritorna 403 */ 
     }
 
     function addTeacher(address _address) private isUnconfirmedTeacherAddress(_address) {
