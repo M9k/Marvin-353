@@ -24,8 +24,8 @@ contract UniversityTeacher is UniversityAdmin {
 
     //ask for teacher account
     function askForTeacherAccount(bytes32 _name, bytes32 _surname) public registrableAddress(msg.sender) {
+        registered[msg.sender] = true;
         address _teacher = new Teacher(_name, _surname);
-        registered[_teacher] = true;
         unconfirmedTeachersByIndex[countUnconfirmedTeachers] = _teacher;
         unconfirmedTeachers[_teacher] = countUnconfirmedTeachers;
         countUnconfirmedTeachers++;
@@ -61,14 +61,14 @@ contract UniversityTeacher is UniversityAdmin {
     }
     
     function removeTeacher(address _address) public isTeacherAddress(_address) {
-        registered[_address] = false;
+        registered[msg.sender] = false;
         teachersByIndex[teachers[_address]] = teachersByIndex[countTeachers];
         teachers[_address] = 0;
         countTeachers -= 1;
     }
 
     function removeUnconfirmedTeacher(address _address) public isUnconfirmedTeacherAddress(_address) {
-        registered[_teacher] = false;
+        registered[msg.sender] = false;
         unconfirmedTeachersByIndex[unconfirmedTeachers[_address]] =
             unconfirmedTeachersByIndex[countUnconfirmedTeachers];
         unconfirmedTeachers[_address] = 0;
@@ -89,7 +89,7 @@ contract UniversityTeacher is UniversityAdmin {
     // add new teacher, cannot be called directly without asking and confirm the account
     // no check, because the _address is now removed from the unregistered list
     function addTeacher(address _address) private {
-        registered[_teacher] = true;
+        registered[msg.sender] = true;
         teachers[_address] = countTeachers;
         teachersByIndex[countTeachers] = _address;
         countTeachers += 1;
