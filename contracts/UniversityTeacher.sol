@@ -23,8 +23,8 @@ contract UniversityTeacher is UniversityAdmin {
     }
 
     //ask for teacher account
-    function askForTeacherAccount(bytes32 _name, bytes32 _surname) public registrableAddress(msg.sender) 
-    {
+    function askForTeacherAccount(bytes32 _name, bytes32 _surname) public registrableAddress(msg.sender)
+    isUnconfirmedTeacherAddress(msg.sender) {
         address _teacher = new Teacher(_name, _surname);
         unconfirmedTeachersByIndex[countUnconfirmedTeachers] = _teacher;
         unconfirmedTeachers[_teacher] = countUnconfirmedTeachers;
@@ -68,7 +68,6 @@ contract UniversityTeacher is UniversityAdmin {
     }
 
     function removeUnconfirmedTeacher(address _address) public isUnconfirmedTeacherAddress(_address) {
-        registered[_address] = false;
         unconfirmedTeachersByIndex[unconfirmedTeachers[_address]] =
             unconfirmedTeachersByIndex[countUnconfirmedTeachers];
         unconfirmedTeachers[_address] = 0;
@@ -83,7 +82,7 @@ contract UniversityTeacher is UniversityAdmin {
 
         if (isUnconfirmedTeacher(msg.sender))
             typeUser = 403; /* TODO: da implementare? Non basta caricare una pagina nella UI con 
-                            scritto "l'account deve ancora essere confermato" quando ritorna 403 */ 
+                            scritto "l'account deve ancora essere confermato" quando ritorna 403 */
     }
 
     function addTeacher(address _address) private isUnconfirmedTeacherAddress(_address) {
