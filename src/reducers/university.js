@@ -5,6 +5,7 @@ const initialState = {
 const universityAction = {
   ADMIN_NUMBER: 'ADMIN_NUMBER',
   GET_ADMIN_NUMBER: 'GET_ADMIN_NUMBER',
+  ADD_NEW_ADMIN: 'ADD_NEW_ADMIN',
 };
 
 const universityData = (state = initialState, action) => {

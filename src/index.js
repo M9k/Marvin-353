@@ -23,9 +23,21 @@ let web3 = getWeb3.then((results) => {
 setInterval(() => {
   if (account !== null && web3.eth.accounts[0] !== account) {
     [account] = [web3.eth.accounts[0]];
+    // TODO - move this in a more appropiate place
     store.dispatch({ type: userAction.USER_LOGGED_OUT });
     store.dispatch({ type: userAction.EDIT_ADDRESS, address: web3.eth.accounts[0] });
-    console.log('SWITCH ACCOUNT!'); // TODO DEBUG ONLY - DA RIMUOVERE
+
+    // redirect with blacklist
+    if (
+      window.location.pathname !== '/price' &&
+      window.location.pathname !== '/help' &&
+      window.location.pathname !== '/license' &&
+      window.location.pathname !== '/'
+    ) {
+      window.location.replace('/');
+    }
+    // TODO DEBUG ONLY - DA RIMUOVERE
+    console.log('SWITCH ACCOUNT!');
   }
 }, 100);
 

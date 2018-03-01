@@ -21,7 +21,7 @@ ButtonLogOut.propTypes = {
   path: PropTypes.string,
 };
 
-ButtonLogOut.defaultProp = {
+ButtonLogOut.defaultProps = {
   path: '/',
 };
 

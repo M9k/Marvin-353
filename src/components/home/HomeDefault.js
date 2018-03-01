@@ -6,16 +6,15 @@ import AlertDismissable from '../alert/AlertDismissable';
 
 const HomeDefault = (props) => {
   document.title = 'Home - Marvin';
-  let alert = null;
-  if (!props.metamask) {
-    alert = <AlertDismissable type="danger"> MetaMask is not installed. Click <a href="/help#installMetaMask">here</a> for more info.</AlertDismissable>;
-  } else if (props.account === null) {
-    alert = <AlertDismissable type="danger"> MetaMask is locked. Click <a href="/help#unlockMetaMask">here</a> for more info.</AlertDismissable>;
-  }
 
   return (
     <div className="page-home">
-      {alert}
+      {!props.metamask &&
+      <AlertDismissable type="danger"> MetaMask is not installed. Click <a href="/help#installMetaMask">here</a> for more info.</AlertDismissable>
+      }
+      {props.metamask && props.account === null &&
+        <AlertDismissable type="danger"> MetaMask is locked. Click <a href="/help#unlockMetaMask">here</a> for more info.</AlertDismissable>
+      }
       <div className="page-content">
         <Button link="/login">Login</Button><br />
         <Button link="/register">Register</Button><br />
@@ -29,17 +28,10 @@ const HomeDefault = (props) => {
 };
 
 HomeDefault.propTypes = {
-  metamask: PropTypes.bool,
-  account: PropTypes.string,
-  // isLogged: PropTypes.bool,
-  // accountType: PropTypes.oneOf(Object.values(AccountTypes)),
-};
-
-HomeDefault.defaultProps = {
-  metamask: false,
-  account: null,
-  // isLogged: false,
-  // accountType: AccountTypes.NOTLOGGED,
+  metamask: PropTypes.bool.isRequired,
+  account: PropTypes.string.isRequired,
+  // isLogged: PropTypes.bool.isRequired,
+  // accountType: PropTypes.oneOf(Object.values(AccountTypes)).isRequired,
 };
 
 export default HomeDefault;

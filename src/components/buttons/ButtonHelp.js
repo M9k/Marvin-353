@@ -21,7 +21,7 @@ ButtonHelp.propTypes = {
   path: PropTypes.string,
 };
 
-ButtonHelp.defaultProp = {
+ButtonHelp.defaultProps = {
   path: '/',
 };
 

@@ -21,7 +21,7 @@ ButtonPrice.propTypes = {
   path: PropTypes.string,
 };
 
-ButtonPrice.defaultProp = {
+ButtonPrice.defaultProps = {
   path: '/',
 };
 
