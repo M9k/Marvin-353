@@ -25,13 +25,16 @@ jobs:
         - npm run soltest
     - stage: code-coverage
       if: branch = master
-      before_script: npm run testrpc
+      before_script: npm run rpcov
       install:
         - sudo apt-get install python-pip python-dev
         - sudo pip install bs4
         - sudo pip install unirest
       script:
-       - npm run make-coverage && npm run merge-coverage
+       - python scripts/js-coverage.py
+       - python scripts/solidity-coverage.py
+      after_success:
+       - npm run merge-coverage
        - cat report.lcov | COVERALLS_REPO_TOKEN=$repo_token COVERALLS_SERVICE_NAME=travis-pro ./node_modules/.bin/coveralls
     - stage: deploy-to-production
       if: branch = master
