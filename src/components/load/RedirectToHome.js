@@ -1,13 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { history } from '../../store';
 
 class RedirectToHome extends React.Component {
   componentDidMount() {
-    setTimeout(() => { window.location.replace('/'); }, this.props.time);
+    setTimeout(() => { history.push('/'); }, this.props.time);
   }
   render() {
     return (
-      <div>Logged! If you are not redirect to the homepage in {Math.round(this.props.time / 1000) + 3} seconds <a href="/">click here</a></div>
+      <div>
+        Logged! If you are not redirect to the homepage in&nbsp;
+        {Math.round(this.props.time / 1000) + 3} seconds&nbsp;
+        <a href="/">click here</a>
+      </div>
     );
   }
 }
