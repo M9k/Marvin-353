@@ -20,6 +20,11 @@ const universityData = (state = initialState, action) => {
       adminNumber: action.adminNumber,
     });
   }
+  if (action.type === universityAction.ADD_NEW_ADMIN) {
+    return Object.assign({}, state, {
+      adminNumber: action.adminNumber,
+    });
+  }
   return state;
 };
 

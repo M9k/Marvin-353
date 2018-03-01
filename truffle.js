@@ -1,7 +1,7 @@
-var HDWalletProvider = require("truffle-hdwallet-provider");
+var HDWalletProvider = require('truffle-hdwallet-provider');
 
-var infura_apikey = "dJdeB6osExnc9NaMwkkI";
-var mnemonic = "earth muscle flash impose wait paper curtain pigeon observe urge beef caution";
+var infura_apikey = 'dJdeB6osExnc9NaMwkkI';
+var mnemonic = 'earth muscle flash impose wait paper curtain pigeon observe urge beef caution';
 
 module.exports = {
   networks: {
