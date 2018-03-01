@@ -2,8 +2,6 @@
 import UniversityAdmin from './UniversityAdmin';
 
 function getAdmin(adminIndex) {
-  alert(`I'm going to get you at ${adminIndex}`);
-
   const contractUniversityAdmin = UniversityAdmin();
 
   return contractUniversityAdmin.then(instance =>

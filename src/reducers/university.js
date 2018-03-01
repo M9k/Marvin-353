@@ -11,9 +11,7 @@ const universityAction = {
 const universityData = (state = initialState, action) => {
   // reset
   if (action.type === universityAction.GET_ADMIN_NUMBER) {
-    return Object.assign({}, state, {
-      adminNumber: 0,
-    });
+    return Object.assign({}, state, {});
   }
   if (action.type === universityAction.ADMIN_NUMBER) {
     return Object.assign({}, state, {

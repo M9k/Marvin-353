@@ -10,8 +10,12 @@ export function* adminNumber() {
 }
 
 export function* addAdmin(action) {
-  yield call(addAdminWeb3(action.address));
-  const nAdmin = yield call(numAdmin);
-  yield put({ type: universityAction.ADD_NEW_ADMIN, adminNumber: Number(nAdmin) });
+  try {
+    yield call(addAdminWeb3, action.address);
+  } catch (e) {
+    console.log('Failed!');
+  }
+  // const nAdmin = yield call(numAdmin);
+  // yield put({ type: universityAction.ADD_NEW_ADMIN, adminNumber: Number(nAdmin) });
 }
 

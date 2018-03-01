@@ -15,12 +15,15 @@ class ManageAdmin extends React.Component {
     };
     this.handleAddressChange = this.handleAddressChange.bind(this);
   }
+  componentWillMount() {
+    this.props.getAdminNumber();
+  }
 
   getValidationState() {
     if (this.state.newAddress.length === 0) {
       return 'warning';
     }
-    if (!/^(0x)?[0-9a-f]{40}$/i.test(this.state.newAddress)) {
+    if (!/^(0x)[0-9a-f]{40}$/i.test(this.state.newAddress) || !web3.isAddress(this.state.newAddress)) {
       return 'error';
     }
     return 'success';
