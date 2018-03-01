@@ -38,7 +38,7 @@ ButtonFactory.propTypes = {
   path: PropTypes.string,
 };
 
-ButtonFactory.defaultProp = {
+ButtonFactory.defaultProps = {
   path: '/',
 };
 
