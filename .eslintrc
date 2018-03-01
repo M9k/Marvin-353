@@ -9,7 +9,9 @@
   },
   "rules": {
     //"semi": ["error", "always"],
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    // TODO - only for debug
+    "no-console": "off"
   },
   "env": {
     "browser": true,

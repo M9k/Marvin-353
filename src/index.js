@@ -22,7 +22,7 @@ let web3 = getWeb3.then((results) => {
 
 setInterval(() => {
   if (account !== null && web3.eth.accounts[0] !== account) {
-    [account] = [web3.eth.accounts[0]]
+    [account] = [web3.eth.accounts[0]];
     // TODO - move this in a more appropiate place
     store.dispatch({ type: userAction.USER_LOGGED_OUT });
     store.dispatch({ type: userAction.EDIT_ADDRESS, address: web3.eth.accounts[0] });
