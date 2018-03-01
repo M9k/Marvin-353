@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '../buttons/Button';
+import { Button } from 'react-bootstrap';
 // import AccountTypes from '../AccountEnum';
 import AlertDismissable from '../alert/AlertDismissable';
 
@@ -10,14 +10,14 @@ const HomeDefault = (props) => {
   return (
     <div className="page-home">
       {!props.metamask &&
-      <AlertDismissable type="danger"> MetaMask is not installed. Click <a href="/help#installMetaMask">here</a> for more info.</AlertDismissable>
+        <AlertDismissable type="danger"> MetaMask is not installed. Click <a href="/help#installMetaMask">here</a> for more info.</AlertDismissable>
       }
       {props.metamask && props.account === null &&
         <AlertDismissable type="danger"> MetaMask is locked. Click <a href="/help#unlockMetaMask">here</a> for more info.</AlertDismissable>
       }
       <div className="page-content">
-        <Button link="/login">Login</Button><br />
-        <Button link="/register">Register</Button><br />
+        <Button href="/login">Login</Button><br />
+        <Button href="/register">Register</Button><br />
         <h2>Metamask installato: {props.metamask ? 'SI' : 'NO'}</h2><br />
         <h2>Metamask sbloccato: {props.account !== null ? 'SI' : 'NO'}</h2><br />
         <h2>Versione di Web3: {typeof web3 !== 'undefined' && web3 !== null ? web3.version.api : 'NOT FOUND!!'}</h2><br />

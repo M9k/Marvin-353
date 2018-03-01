@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from './Button';
+import { Button } from 'react-bootstrap';
 
 const ButtonLogOut = (props) => {
   if (props.path === '/logout') {
@@ -11,7 +11,7 @@ const ButtonLogOut = (props) => {
     );
   }
   return (
-    <Button link="/logout">
+    <Button href="/logout">
       Logout
     </Button>
   );

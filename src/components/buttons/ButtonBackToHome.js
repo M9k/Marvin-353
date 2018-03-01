@@ -1,8 +1,8 @@
 import React from 'react';
-import Button from './Button';
+import { Button } from 'react-bootstrap';
 
 const ButtonBackToHome = () => (
-  <Button link="/">
+  <Button href="/">
     Go back to home
   </Button>
 );

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from './Button';
+import { Button } from 'react-bootstrap';
 
 const ButtonPrice = (props) => {
   if (props.path === '/price') {
@@ -11,7 +11,7 @@ const ButtonPrice = (props) => {
     );
   }
   return (
-    <Button link="/price">
+    <Button href="/price">
       Price
     </Button>
   );

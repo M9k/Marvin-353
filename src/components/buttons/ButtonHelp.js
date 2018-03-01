@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from './Button';
+import { Button } from 'react-bootstrap';
 
 const ButtonHelp = (props) => {
   if (props.path === '/help') {
@@ -11,7 +11,7 @@ const ButtonHelp = (props) => {
     );
   }
   return (
-    <Button link="/help">
+    <Button href="/help">
       Help
     </Button>
   );

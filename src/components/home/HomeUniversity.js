@@ -1,12 +1,12 @@
 import React from 'react';
-import Button from '../buttons/Button';
+import { Button } from 'react-bootstrap';
 
 const HomeUniversity = () => (
   <div className="page-home">
     <h1>Welcome founder!</h1>
     <div className="page-content">
-      <Button link="manageadmin">Manage admins</Button><br />
-      <Button link="/">Manage academic years</Button><br />
+      <Button href="manageadmin">Manage admins</Button><br />
+      <Button href="/">Manage academic years</Button><br />
     </div>
   </div>
 );
