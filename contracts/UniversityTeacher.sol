@@ -1,4 +1,4 @@
-pragma solidity ^0.4.19;
+pragma solidity ^0.4.18;
 import "./UniversityAdmin.sol";
 import "./Teacher.sol";
 
@@ -11,6 +11,8 @@ contract UniversityTeacher is UniversityAdmin {
     uint private countUnconfirmedTeachers = 1;
     mapping (address => uint) private unconfirmedTeachers;
     mapping (uint => address) private unconfirmedTeachersByIndex;
+    
+    mapping (address => address) private teacherContract;
 
     modifier isTeacherAddress(address _address) {
         require(teachers[_address] != 0);
@@ -26,8 +28,9 @@ contract UniversityTeacher is UniversityAdmin {
     function askForTeacherAccount(bytes32 _name, bytes32 _surname) public registrableAddress(msg.sender) {
         registered[msg.sender] = true;
         address _teacher = new Teacher(_name, _surname);
-        unconfirmedTeachersByIndex[countUnconfirmedTeachers] = _teacher;
-        unconfirmedTeachers[_teacher] = countUnconfirmedTeachers;
+        unconfirmedTeachersByIndex[countUnconfirmedTeachers] = msg.sender;
+        unconfirmedTeachers[msg.sender] = countUnconfirmedTeachers;
+        teacherContract[msg.sender] = _teacher;
         countUnconfirmedTeachers++;
     }
 
@@ -86,6 +89,10 @@ contract UniversityTeacher is UniversityAdmin {
             typeUser = 403; /* TODO: da implementare nella GUI e nel reducer */
     }
 
+    function getTeacherContractAddress(address _teacher) public view returns(address) {
+        return teacherContract[_teacher];
+    }
+
     // add new teacher, cannot be called directly without asking and confirm the account
     // no check, because the _address is now removed from the unregistered list
     function addTeacher(address _address) private {
@@ -94,4 +101,6 @@ contract UniversityTeacher is UniversityAdmin {
         teachersByIndex[countTeachers] = _address;
         countTeachers += 1;
     }
+    
+    
 }
