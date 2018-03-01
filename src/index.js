@@ -15,14 +15,14 @@ let account = null;
 // init web3
 let web3 = getWeb3.then((results) => {
   web3 = results;
-  account = web3.eth.accounts[0];
+  [account] = [web3.eth.accounts[0]];
   store.dispatch({ type: userAction.METAMASK });
   store.dispatch({ type: userAction.EDIT_ADDRESS, address: web3.eth.accounts[0] });
 });
 
 setInterval(() => {
   if (account !== null && web3.eth.accounts[0] !== account) {
-    account = web3.eth.accounts[0];
+    [account] = [web3.eth.accounts[0]];
     store.dispatch({ type: userAction.USER_LOGGED_OUT });
     store.dispatch({ type: userAction.EDIT_ADDRESS, address: web3.eth.accounts[0] });
     console.log('SWITCH ACCOUNT!'); // TODO DEBUG ONLY - DA RIMUOVERE

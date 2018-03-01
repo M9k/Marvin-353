@@ -21,19 +21,26 @@ const Help = () => {
         <li>Click &quot;Add Extension&quot; on the pop-up;</li>
         <li>Accept the Privacy Policy and agree to the TOS;</li>
         <li>Set up your MetaMask account;</li>
-        <li>Copy the 12 seed words and file them away somewhere safe
-          (this helps to secure your account).</li>
+        <li>
+          Copy the 12 seed words and file them away somewhere safe
+          (this helps to secure your account).
+        </li>
       </ul>
-      <p>Note: for security purposes, MetaMask browser extensions will periodically request
-        that you log back in to your account.</p>
+      <p>
+        Note: for security purposes, MetaMask browser extensions will periodically request
+        that you log back in to your account.
+      </p>
       <h2>How do I unlock MetaMask</h2>
-      <p>Click on the MetaMask plug-in icon and inset the password. Then, press 'Unlock'.</p>
+      <p>
+        Click on the MetaMask plug-in icon and inset the password.
+        Then, press &#39;Unlock&#39;.
+      </p>
       <h2>How can I logout from Marvin?</h2>
       <p>To logout from Marvin, you have to logout from MetaMask:
         <ul>
           <li>Click on MetaMask plug-in icon;</li>
           <li>Click on the menu button in the top right corner;</li>
-          <li>Click 'Log Out'.</li>
+          <li>Click &#39;Log Out&#39;.</li>
         </ul>
       </p>
     </div>

@@ -2,7 +2,7 @@ import { call, put } from 'redux-saga/effects';
 import { userAction } from '../reducers/user';
 import login from '../web3calls/login';
 
-export function* tryLogin(action) {
+export function* tryLogin() {
   // call the web3call for try to login
   const userType = yield call(login);
   // update the user state via reducer

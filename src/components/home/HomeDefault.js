@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '../buttons/Button';
-import AccountTypes from '../AccountEnum';
+// import AccountTypes from '../AccountEnum';
 import AlertDismissable from '../alert/AlertDismissable';
 
 const HomeDefault = (props) => {
@@ -31,15 +31,15 @@ const HomeDefault = (props) => {
 HomeDefault.propTypes = {
   metamask: PropTypes.bool,
   account: PropTypes.string,
-  isLogged: PropTypes.bool,
-  accountType: PropTypes.oneOf(Object.values(AccountTypes)),
+  // isLogged: PropTypes.bool,
+  // accountType: PropTypes.oneOf(Object.values(AccountTypes)),
 };
 
 HomeDefault.defaultProps = {
   metamask: false,
   account: null,
-  isLogged: false,
-  accountType: AccountTypes.NOTLOGGED,
+  // isLogged: false,
+  // accountType: AccountTypes.NOTLOGGED,
 };
 
 export default HomeDefault;

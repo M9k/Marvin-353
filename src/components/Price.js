@@ -1,5 +1,4 @@
 import React from 'react';
-import ButtonHelp from './buttons/ButtonHelp';
 import Header from './global/Header';
 
 const Price = () => (

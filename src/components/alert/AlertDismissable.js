@@ -54,7 +54,7 @@ class AlertDismissable extends React.Component {
 
 AlertDismissable.propTypes = {
   type: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
 
 export default AlertDismissable;
