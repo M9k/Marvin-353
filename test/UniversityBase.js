@@ -37,19 +37,19 @@ contract('UniversityBase', (accounts) => {
     return web3.toAscii(stringToConvert).replace(/\u0000/g, '');
   }
 
-  it(testTitle('Chai assert module test: Should say Universtiy is Founder!'), async () => {
+  it(testTitle('Should say Universtiy is Founder!'), async () => {
     assert.equal(await contract.isUniversityFounder.call(accounts[0]), true);
   });
 
-  it(testTitle('Chai assert module test: Should say random user is not Founder!'), async () => {
+  it(testTitle('Should say random user is not Founder!'), async () => {
     assert.equal(await contract.isUniversityFounder.call(accounts[1]), false);
   });
 
-  it(testTitle('Chai assert module test: Should login Universtiy with value 1!'), async () => {
+  it(testTitle('Should login Universtiy with value 1!'), async () => {
     assert.equal(await contract.login.call({ from: accounts[0] }), 1);
   });
 
-  it(testTitle('Chai assert module test: Should login user not registred with value 0!'), async () => {
+  it(testTitle('Should login user not registred with value 0!'), async () => {
     assert.equal(await contract.login.call({ from: accounts[1] }), 0);
   });
 
