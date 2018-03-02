@@ -6,6 +6,7 @@ const universityAction = {
   ADMIN_NUMBER: 'ADMIN_NUMBER',
   GET_ADMIN_NUMBER: 'GET_ADMIN_NUMBER',
   ADD_NEW_ADMIN: 'ADD_NEW_ADMIN',
+  GET_ADMIN: 'GET_ADMIN',
 };
 
 const universityData = (state = initialState, action) => {
@@ -21,6 +22,11 @@ const universityData = (state = initialState, action) => {
   if (action.type === universityAction.ADD_NEW_ADMIN) {
     return Object.assign({}, state, {
       adminNumber: action.adminNumber,
+    });
+  }
+  if (action.type === universityAction.GET_ADMIN) {
+    return Object.assign({}, state, {
+      account: action.account,
     });
   }
   return state;

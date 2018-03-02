@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 import Header from './global/Header';
 import { universityAction } from '../reducers/university';
 
@@ -34,13 +34,18 @@ class ManageAdmin extends React.Component {
   }
 
   render() {
+    const list = [];
+    for (let i = 0; i < this.props.adminNumber; i += 1) {
+      const nr = this.props.getAdmin(i);
+      console.log(nr);
+      //list.push(<ListGroupItem>{nr}</ListGroupItem>);
+    }
+
     return (
       <div id="ManageAdmin">
         <Header />
-        <div className="page-content">
-          <Button onClick={this.props.getAdminNumber}>Admins number:</Button>
-         ={this.props.adminNumber}<br />
-        </div>
+        <h1 className="title">Manage admin</h1>
+        <h2>Add new admin</h2>
         <FormGroup validationState={this.getValidationState()}>
           <ControlLabel>New admin address:</ControlLabel>
           <FormControl
@@ -51,22 +56,28 @@ class ManageAdmin extends React.Component {
           />
           {this.getValidationState() === 'success' ? <Button onClick={() => this.props.addAdmin(this.state.newAddress)}>Add</Button> : <Button disabled>Add</Button>}
         </FormGroup>
+        <h2>Admin list</h2>
+        <Button onClick={this.props.getAdminNumber}>Admins number</Button>
+        ={this.props.adminNumber}<br />
+        <ListGroup>
+        </ListGroup>
       </div>
     );
   }
 }
 
-
 ManageAdmin.propTypes = {
   adminNumber: PropTypes.number,
   getAdminNumber: PropTypes.func,
   addAdmin: PropTypes.func,
+  getAdmin: PropTypes.func,
 };
 
 ManageAdmin.defaultProps = {
   adminNumber: 0,
   getAdminNumber: () => {},
   addAdmin: () => {},
+  getAdmin: () => {},
 };
 
 const mapStateToProps = state => ({
@@ -75,12 +86,20 @@ const mapStateToProps = state => ({
 
 function mapDispatchToProps(dispatch) {
   return {
+    // return the number of admins
     getAdminNumber: () => dispatch({
       type: universityAction.GET_ADMIN_NUMBER,
     }),
+    // add a new admin
     addAdmin: _address => dispatch({
       type: universityAction.ADD_NEW_ADMIN,
       address: _address,
+    }),
+    // return the address of a admin
+    getAdmin: _number => dispatch({
+      type: universityAction.GET_ADMIN,
+      number: _number,
+      account: null,
     }),
   };
 }
