@@ -5,16 +5,16 @@ import "./UniversityBase.sol";
 contract UniversityAdmin is UniversityBase {
     // zero = not found
     uint private countAdministrators = 1;
-    mapping (address => uint) private administrators;
-    mapping (uint => address) private administratorsByIndex;
+    mapping (address => uint) internal administrators;
+    mapping (uint => address) internal administratorsByIndex;
 
-    modifier onlyAdmin {
-        require(administrators[msg.sender] != 0);
+    modifier validAdminAddress(address _address) {
+        if (administrators[_address] == 0) revert();
         _;
     }
 
-    modifier validAdminAddress(address _address) {
-        require(administrators[_address] != 0);
+    modifier onlyAdmin {
+        if (administrators[msg.sender] == 0) revert();
         _;
     }
 
@@ -40,7 +40,7 @@ contract UniversityAdmin is UniversityBase {
 
     //return the admin ad index _index
     function getAdminAt(uint _index) public view returns(address) {
-        return administratorsByIndex[_index-1];
+        return administratorsByIndex[_index + 1];
     }
     //get index of admin with address of not usefull
 

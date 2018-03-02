@@ -13,12 +13,12 @@ contract UniversityBase {
     }
 
     modifier onlyFounder {
-        require(msg.sender == universityAddress);
+        if (msg.sender != universityAddress) revert();
         _;
     }
 
     modifier registrableAddress(address _address) {
-        require(!registered[_address]);
+        if (registered[_address]) revert();
         _;
     }
 

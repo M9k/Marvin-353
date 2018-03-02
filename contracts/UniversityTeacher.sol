@@ -1,4 +1,4 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.19;
 import "./UniversityAdmin.sol";
 import "./Teacher.sol";
 
@@ -15,12 +15,12 @@ contract UniversityTeacher is UniversityAdmin {
     mapping (address => address) private teacherContract;
 
     modifier isTeacherAddress(address _address) {
-        require(teachers[_address] != 0);
+        if (teachers[_address] == 0) revert();
         _;
     }
 
     modifier isUnconfirmedTeacherAddress(address _address) {
-        require(unconfirmedTeachers[_address] != 0);
+        if (unconfirmedTeachers[_address] == 0) revert();
         _;
     }
 
@@ -95,7 +95,7 @@ contract UniversityTeacher is UniversityAdmin {
 
     // add new teacher, cannot be called directly without asking and confirm the account
     // no check, because the _address is now removed from the unregistered list
-    function addTeacher(address _address) private {
+    function addTeacher(address _address) private onlyAdmin {
         registered[msg.sender] = true;
         teachers[_address] = countTeachers;
         teachersByIndex[countTeachers] = _address;
