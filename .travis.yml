@@ -18,7 +18,9 @@ jobs:
   include:
     - stage: test
       install: npm install
-      before_script: npm run testrpc
+      before_script:
+        - npm run testrpc
+        - npm run eslint
       script:
         - npm run compile
         - npm run test
