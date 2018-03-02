@@ -15,12 +15,12 @@ contract UniversityTeacher is UniversityAdmin {
     mapping (address => address) private teacherContract;
 
     modifier isTeacherAddress(address _address) {
-        require(teachers[_address] != 0);
+        if (teachers[_address] == 0) revert();
         _;
     }
 
     modifier isUnconfirmedTeacherAddress(address _address) {
-        require(unconfirmedTeachers[_address] != 0);
+        if (unconfirmedTeachers[_address] == 0) revert();
         _;
     }
 

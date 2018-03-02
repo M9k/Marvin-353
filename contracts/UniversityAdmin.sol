@@ -9,12 +9,12 @@ contract UniversityAdmin is UniversityBase {
     mapping (uint => address) internal administratorsByIndex;
 
     modifier validAdminAddress(address _address) {
-        require(administrators[_address] != 0);
+        if (administrators[_address] == 0) revert();
         _;
     }
 
     modifier onlyAdmin {
-        require(administrators[msg.sender] != 0);
+        if (administrators[msg.sender] == 0) revert();
         _;
     }
 
