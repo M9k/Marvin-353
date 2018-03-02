@@ -19,6 +19,11 @@ const universityData = (state = initialState, action) => {
       adminNumber: action.adminNumber,
     });
   }
+  if (action.type === universityAction.GET_ADMIN) {
+    return Object.assign({}, state, {
+      account: action.account,
+    });
+  }
   return state;
 };
 

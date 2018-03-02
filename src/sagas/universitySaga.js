@@ -18,3 +18,18 @@ export function* addAdmin(action) {
   // yield put({ type: universityAction.ADD_NEW_ADMIN, adminNumber: Number(nAdmin) });
 }
 
+export function* getAdmin(action) {
+  console.log(Number(action.number));
+  // console.log(action.account);
+  const num = Number(action.number);
+  const admin = yield call(getAdminWeb3, num);
+  console.log(admin);
+  /*
+  yield put({
+    type: universityAction.GET_ADMIN,
+    number: num,
+    account: Number(admin),
+  });
+  */
+}
+
