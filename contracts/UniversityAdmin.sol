@@ -20,7 +20,7 @@ contract UniversityAdmin is UniversityBase {
 
     //add an admin
     function newAdmin(address _adminAddress) public onlyFounder
-    registrableAddress(_adminAddress) 
+    registrableAddress(_adminAddress)
     {
         registered[_adminAddress] = true;
         administrators[_adminAddress] = countAdministrators;
@@ -52,11 +52,13 @@ contract UniversityAdmin is UniversityBase {
         countAdministrators -= 1;
     }
 
-    function login() public view returns (uint typeUser) {
-        typeUser = super.login();
+    function login() public view returns (uint8) {
+        uint8 typeUser = super.login();
 
         if (isAdmin(msg.sender))
             typeUser = 2; //Admin
+
+        return typeUser;
 /*
         if (isTeacher(_userAddr))
             typeUser = 3; //Professor

@@ -1,36 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { FormGroup, ControlLabel, FormControl, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Button, ListGroup, ListGroupItem  } from 'react-bootstrap';
 import Header from './global/Header';
 import { universityAction } from '../reducers/university';
+import FormAddAdmin from './form/FormAddAdmin';
 
 class ManageAdmin extends React.Component {
   constructor(props) {
     super(props);
     document.title = 'Manage Admin - Marvin';
-
-    this.state = {
-      newAddress: '',
-    };
-    this.handleAddressChange = this.handleAddressChange.bind(this);
   }
   componentWillMount() {
     this.props.getAdminNumber();
-  }
-
-  getValidationState() {
-    if (this.state.newAddress.length === 0) {
-      return 'warning';
-    }
-    if (!/^(0x)[0-9a-f]{40}$/i.test(this.state.newAddress) || !web3.isAddress(this.state.newAddress)) {
-      return 'error';
-    }
-    return 'success';
-  }
-
-  handleAddressChange(e) {
-    this.setState({ newAddress: e.target.value });
   }
 
   render() {
@@ -44,20 +26,12 @@ class ManageAdmin extends React.Component {
     return (
       <div id="ManageAdmin">
         <Header />
-        <h1 className="title">Manage admin</h1>
-        <h2>Add new admin</h2>
-        <FormGroup validationState={this.getValidationState()}>
-          <ControlLabel>New admin address:</ControlLabel>
-          <FormControl
-            id="formControlsText"
-            type="text"
-            placeholder="0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf"
-            onChange={this.handleAddressChange}
-          />
-          {this.getValidationState() === 'success' ? <Button onClick={() => this.props.addAdmin(this.state.newAddress)}>Add</Button> : <Button disabled>Add</Button>}
-        </FormGroup>
+        <div className="page-content">
+          <Button onClick={this.props.getAdminNumber}>Admins number:</Button>
+         ={this.props.adminNumber}<br />
+        </div>
+        <FormAddAdmin addAdmin={this.props.addAdmin} />
         <h2>Admin list</h2>
-        <Button onClick={this.props.getAdminNumber}>Admins number</Button>
         ={this.props.adminNumber}<br />
         <ListGroup>
         </ListGroup>

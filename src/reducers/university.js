@@ -1,12 +1,7 @@
+import { universityAction } from '../actions/actions';
+
 const initialState = {
   adminNumber: 0,
-};
-
-const universityAction = {
-  ADMIN_NUMBER: 'ADMIN_NUMBER',
-  GET_ADMIN_NUMBER: 'GET_ADMIN_NUMBER',
-  ADD_NEW_ADMIN: 'ADD_NEW_ADMIN',
-  GET_ADMIN: 'GET_ADMIN',
 };
 
 const universityData = (state = initialState, action) => {
@@ -32,4 +27,4 @@ const universityData = (state = initialState, action) => {
   return state;
 };
 
-export { universityData, universityAction };
+export { universityData };

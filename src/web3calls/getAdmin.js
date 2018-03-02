@@ -6,10 +6,7 @@ function getAdmin(adminIndex) {
 
   return contractUniversityAdmin.then(instance =>
     // Call the university getAdmin function
-    instance.getAdminAt.call(
-      adminIndex,
-      { from: web3.eth.accounts[0] },
-    )).then(adminAddress => adminAddress);
+    instance.getAdminAt.call(adminIndex)).then(adminAddress => adminAddress);
 }
 
 export default getAdmin;
