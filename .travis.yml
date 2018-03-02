@@ -20,9 +20,9 @@ jobs:
       install: npm install
       before_script:
         - npm run testrpc
+        - npm run compile
         - npm run eslint
       script:
-        - npm run compile
         - npm run test
         - npm run soltest
     - stage: code-coverage
