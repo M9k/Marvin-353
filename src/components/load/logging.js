@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { userAction } from '../../reducers/user';
+import PropTypes from 'prop-types';;
+import { userAction } from '../../actions/actions';
 import RedirectToHome from './RedirectToHome';
 
 class Logging extends React.Component {

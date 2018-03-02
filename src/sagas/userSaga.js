@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import { userAction } from '../reducers/user';
+import { userAction } from '../actions/actions';
 import login from '../web3calls/login';
 
 export function* tryLogin() {

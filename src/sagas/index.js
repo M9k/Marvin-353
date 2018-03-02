@@ -1,6 +1,5 @@
 import { fork, takeLatest } from 'redux-saga/effects';
-import { userAction } from '../reducers/user';
-import { universityAction } from '../reducers/university';
+import { userAction, universityAction } from '../actions/actions';
 import { tryLogin } from './userSaga';
 import { adminNumber, addAdmin } from './universitySaga';
 

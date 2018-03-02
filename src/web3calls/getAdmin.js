@@ -1,4 +1,3 @@
-
 import UniversityAdmin from './UniversityAdmin';
 
 function getAdmin(adminIndex) {

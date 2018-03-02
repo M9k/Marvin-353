@@ -8,7 +8,7 @@ import router from './router';
 import Footer from './components/global/Footer';
 import './stylesheets/main.scss';
 import getWeb3 from './util/web3/getWeb3';
-import { userAction } from './reducers/user';
+import { userAction } from './actions/actions';
 
 let account = null;
 
