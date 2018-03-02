@@ -97,8 +97,8 @@ contract('UniversityAdmin', (accounts) => {
   // Testing removeAdmin function
   it(testTitle('Should remove admin account!'), async () =>{
     assert.equal(await contract.isAdmin.call(accounts[1]), true);
-    await contract.isAdmin.call(accounts[1]);
-    assert.equal(await contract.isAdmin.call(accounts[2]), false);
+    await contract.removeAdmin(accounts[1]);
+    assert.equal(await contract.isAdmin.call(accounts[1]), false);
   });
 });
 

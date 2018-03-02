@@ -5,13 +5,8 @@ import "./UniversityBase.sol";
 contract UniversityAdmin is UniversityBase {
     // zero = not found
     uint private countAdministrators = 1;
-    mapping (address => uint) private administrators;
-    mapping (uint => address) private administratorsByIndex;
-
-    modifier onlyAdmin {
-        require(administrators[msg.sender] != 0);
-        _;
-    }
+    mapping (address => uint) internal administrators;
+    mapping (uint => address) internal administratorsByIndex;
 
     modifier validAdminAddress(address _address) {
         require(administrators[_address] != 0);

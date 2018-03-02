@@ -24,6 +24,11 @@ contract UniversityTeacher is UniversityAdmin {
         _;
     }
 
+    modifier onlyAdmin {
+        require(administrators[msg.sender] != 0);
+        _;
+    }
+
     //ask for teacher account
     function askForTeacherAccount(bytes32 _name, bytes32 _surname) public registrableAddress(msg.sender) {
         registered[msg.sender] = true;
@@ -95,7 +100,7 @@ contract UniversityTeacher is UniversityAdmin {
 
     // add new teacher, cannot be called directly without asking and confirm the account
     // no check, because the _address is now removed from the unregistered list
-    function addTeacher(address _address) private {
+    function addTeacher(address _address) private onlyAdmin {
         registered[msg.sender] = true;
         teachers[_address] = countTeachers;
         teachersByIndex[countTeachers] = _address;
