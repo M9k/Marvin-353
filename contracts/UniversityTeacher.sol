@@ -79,14 +79,16 @@ contract UniversityTeacher is UniversityAdmin {
     }
 
     // return the current user type
-    function login() public view returns (uint typeUser) {
-        typeUser = super.login();
+    function login() public view returns (uint8) {
+        uint8 typeUser = super.login();
 
         if (isTeacher(msg.sender))
             typeUser = 3; //Teacher
 
         if (isUnconfirmedTeacher(msg.sender))
-            typeUser = 403; /* TODO: da implementare nella GUI e nel reducer */
+            typeUser = 103; /* TODO: da implementare nella GUI e nel reducer */
+
+        return typeUser;
     }
 
     function getTeacherContractAddress(address _teacher) public view returns(address) {

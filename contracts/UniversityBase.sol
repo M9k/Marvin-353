@@ -23,14 +23,16 @@ contract UniversityBase {
     }
 
     //Function to check if an address is of the university creator
-    function isUniversityFounder(address possibleUniversityAddress) public view returns(bool) {
-        return possibleUniversityAddress == universityAddress;
+    function isUniversityFounder(address _address) public view returns(bool) {
+        return _address == universityAddress;
     }
 
-    function login() public view returns (uint typeUser) {
-        typeUser = 0; //notRegistered
+    function login() public view returns (uint8) {
+        uint8 typeUser = 0; //notRegistered
 
         if (isUniversityFounder(msg.sender))
             typeUser = 1; //University
+
+        return typeUser;
     }
 }
