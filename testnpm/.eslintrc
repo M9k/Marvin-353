@@ -8,20 +8,15 @@
     }
   },
   "rules": {
-    //"semi": ["error", "always"],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    // TODO - only for debug
-    "no-console": "off"
+    "no-console": "off",
+    "import/no-extraneous-dependencies": "off"
   },
   "env": {
-    "browser": true,
-    "node": true
+    "jasmine": true
   },
   "plugins": [
     "react"
   ],
-  "globals": {
-    "web3": false
-  },
   "parser": "babel-eslint"
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import assert from 'assert';
 import NotFound from '../../src/components/NotFound';
-import ButtonBackToHome from '../../src/components/buttons/ButtonBackToHome';
+// import ButtonBackToHome from '../../src/components/buttons/ButtonBackToHome';
 
 // unit tests for the NotFound component
 describe('NotFound component', () => {

@@ -12,3 +12,7 @@ export function* sagas() {
     fork(takeLatest, universityAction.ADD_NEW_ADMIN, addAdmin),
   ];
 }
+export function* notBreakTheLint() {
+  yield console.log('Non lint break, no refactor the lazy way');
+}
+

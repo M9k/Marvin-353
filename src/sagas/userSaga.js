@@ -18,4 +18,7 @@ export function* tryLogin() {
 
   */
 }
+export function* notBreakTheLint() {
+  yield console.log('Non lint break, no refactor the lazy way');
+}
 

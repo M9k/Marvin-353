@@ -38,7 +38,7 @@ class ManageAdmin extends React.Component {
       <div id="ManageAdmin">
         <Header />
         <div className="page-content">
-          <a className="btn btn-default" onClick={this.props.getAdminNumber}>Admins number:</a>
+          <Button onClick={this.props.getAdminNumber}>Admins number:</Button>
          ={this.props.adminNumber}<br />
         </div>
         <FormGroup validationState={this.getValidationState()}>

@@ -6,8 +6,8 @@ import ButtonBackToHome from '../../../src/components/buttons/ButtonBackToHome';
 
 // unit tests for the App component
 describe('ButtonBackToHome component', () => {
-  //mock
-  const Button = props => (<div>{props.link} {props.children}</div>);
+  // mock
+  // const Button = props => (<div>{props.link} {props.children}</div>);
   describe('render()', () => {
     it('should render the component', () => {
       const wrapper = shallow(<ButtonBackToHome />);

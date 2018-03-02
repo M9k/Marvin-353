@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactTestUtils from 'react-dom/test-utils';
+// import ReactTestUtils from 'react-dom/test-utils';
 import { shallow } from 'enzyme';
 import assert from 'assert';
 import AlertDismissable from '../../../src/components/alert/AlertDismissable';

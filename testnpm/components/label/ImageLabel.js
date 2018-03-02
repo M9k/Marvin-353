@@ -22,9 +22,9 @@ describe('ImageLabel component', () => {
       assert.equal(wrapper.containsMatchingElement(<img src="right image.jpg" alt="" />), true);
     });
     it('should render the right alt for the image', () => {
-      const props = { text: '', alt: 'right alt for the image', image: '' };
+      const props = { text: '', alt: 'right alt', image: '' };
       const wrapper = shallow(<ImageLabel {...props} />);
-      assert.equal(wrapper.containsMatchingElement(<img src="" alt="right alt for the image" />), true);
+      assert.equal(wrapper.containsMatchingElement(<img src="" alt="right alt" />), true);
     });
     it('should render the right text, image and alt together', () => {
       const props = { text: 'text', alt: 'alt', image: 'image' };

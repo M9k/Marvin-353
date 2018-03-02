@@ -56,6 +56,5 @@ describe('HomeFactory component', () => {
     //                                                 TODO OTHER USER CASE
     //                                                 TODO OTHER USER CASE
     //                                                 TODO OTHER USER CASE
-
   });
 });

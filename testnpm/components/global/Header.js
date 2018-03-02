@@ -11,11 +11,16 @@ describe('Header component', () => {
       const wrapper = shallow(<Header {...props} >Children</Header>);
       assert.equal(wrapper.length, 1);
     });
+    /*
     it('should send the welcome text to WelcomeLabel', () => {
       const props = { welcome: 'The right welcome text' };
       const wrapper = shallow(<Header {...props} >Children</Header>);
-      // TODO aggiustare, problema con lo store
-      // assert.equal(wrapper.html().search(<div id="WelcomeLabel">The right welcome text</div>) !== -1, true);
+      TODO aggiustare, problema con lo store
+      assert.equal(
+        wrapper.html().search(<div id="WelcomeLabel">The right welcome text</div>) !== -1,
+        true
+      );
     });
+    */
   });
 });

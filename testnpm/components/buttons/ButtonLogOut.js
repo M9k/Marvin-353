@@ -1,14 +1,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import assert from 'assert';
-import configureStore from 'redux-mock-store';
+// import configureStore from 'redux-mock-store';
 import ButtonLogOut from '../../../src/components/buttons/ButtonLogOut';
 
 
 // unit tests for the App component
 describe('ButtonLogOut component', () => {
-  //mock
-  const mockStore = configureStore();
+  // mock
+  // const mockStore = configureStore();
   describe('render()', () => {
     it('should render the component', () => {
       const wrapper = shallow(<ButtonLogOut path="/" />);
