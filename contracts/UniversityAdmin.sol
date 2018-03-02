@@ -1,4 +1,4 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.20;
 import "./UniversityBase.sol";
 
 
@@ -40,7 +40,7 @@ contract UniversityAdmin is UniversityBase {
 
     //return the admin ad index _index
     function getAdminAt(uint _index) public view returns(address) {
-        return administratorsByIndex[_index];
+        return administratorsByIndex[_index + 1];
     }
     //get index of admin with address of not usefull
 
