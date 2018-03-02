@@ -2,6 +2,7 @@ export const universityAction = {
   ADMIN_NUMBER: 'ADMIN_NUMBER',
   GET_ADMIN_NUMBER: 'GET_ADMIN_NUMBER',
   ADD_NEW_ADMIN: 'ADD_NEW_ADMIN',
+  GET_ADMIN: 'GET_ADMIN',
 };
 
 export const userAction = {
