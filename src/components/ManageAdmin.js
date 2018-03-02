@@ -1,7 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button, ListGroup, ListGroupItem  } from 'react-bootstrap';
+// TODO - riabilitare ESLint
+/* eslint-disable */
+import { Button, ListGroup, ListGroupItem } from 'react-bootstrap';
+// TODO - riabilitare ESLint
+/* eslint-enable */
 import Header from './global/Header';
 import { universityAction } from '../actions/actions';
 import FormAddAdmin from './form/FormAddAdmin';
@@ -15,6 +19,8 @@ class ManageAdmin extends React.Component {
     this.props.getAdminNumber();
   }
 
+  // TODO - riabilitare ESLint
+/* eslint-disable */
   render() {
     const list = [];
     for (let i = 0; i < this.props.adminNumber; i += 1) {
@@ -38,6 +44,8 @@ class ManageAdmin extends React.Component {
       </div>
     );
   }
+  // TODO - riabilitare ESLint
+  /* eslint-enable */
 }
 
 ManageAdmin.propTypes = {

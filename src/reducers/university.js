@@ -27,4 +27,4 @@ const universityData = (state = initialState, action) => {
   return state;
 };
 
-export { universityData };
+export { universityData, initialState };
