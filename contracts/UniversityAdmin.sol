@@ -13,6 +13,11 @@ contract UniversityAdmin is UniversityBase {
         _;
     }
 
+    modifier onlyAdmin {
+        require(administrators[msg.sender] != 0);
+        _;
+    }
+
     //add an admin
     function newAdmin(address _adminAddress) public onlyFounder
     registrableAddress(_adminAddress) 

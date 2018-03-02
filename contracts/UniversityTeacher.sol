@@ -24,11 +24,6 @@ contract UniversityTeacher is UniversityAdmin {
         _;
     }
 
-    modifier onlyAdmin {
-        require(administrators[msg.sender] != 0);
-        _;
-    }
-
     //ask for teacher account
     function askForTeacherAccount(bytes32 _name, bytes32 _surname) public registrableAddress(msg.sender) {
         registered[msg.sender] = true;
