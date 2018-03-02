@@ -6,7 +6,7 @@ function numAdmin() {
 
   return contractUniversityAdmin.then(instance =>
     // Call the university getAdminsNumber function
-    instance.getAdminsNumber.call({ from: web3.eth.accounts[0] })).then(adminNumber => adminNumber);
+    instance.getAdminsNumber.call());
 }
 
 export default numAdmin;
