@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Button, ListGroup, ListGroupItem  } from 'react-bootstrap';
 import Header from './global/Header';
-import { universityAction } from '../reducers/university';
+import { universityAction } from '../actions/actions';
 import FormAddAdmin from './form/FormAddAdmin';
 
 class ManageAdmin extends React.Component {
