@@ -1,18 +1,11 @@
+import { userAction } from '../actions/actions';
+
 const initialState = {
   metamask: false,
   account: null,
   trylogin: false,
   logged: false,
   role: null,
-};
-
-const userAction = {
-  USER_LOGGED_IN: 'USER_LOGGED_IN',
-  USER_UPDATED: 'USER_UPDATED',
-  USER_LOGGED_OUT: 'USER_LOGGED_OUT',
-  USER_TRY_LOGIN: 'USER_TRY_LOGIN',
-  METAMASK: 'METAMASK',
-  EDIT_ADDRESS: 'EDIT_ADDRESS',
 };
 
 const userLogger = (state = initialState, action) => {
@@ -56,4 +49,4 @@ const userLogger = (state = initialState, action) => {
   return state;
 };
 
-export { userLogger, userAction };
+export { userLogger, initialState };
