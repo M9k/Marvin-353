@@ -41,10 +41,9 @@ jobs:
     - stage: deploy-to-production
       if: branch = master
       script:
-        - npm run compile
         - npm run build-prod
       deploy:
         provider: surge
-        project: ./build/
+        project: ./dist/
         domain: marvin.surge.sh
         skip_cleanup: true
