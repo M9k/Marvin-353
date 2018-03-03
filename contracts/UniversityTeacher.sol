@@ -51,11 +51,11 @@ contract UniversityTeacher is UniversityAdmin {
     }
 
     function getTeacherAtIndex(uint _index) public view returns(address) {
-        return teachersByIndex[_index-1];
+        return teachersByIndex[_index+1];
     }
 
     function getUnconfirmedTeacherAtIndex(uint _index) public view returns(address) {
-        return unconfirmedTeachersByIndex[_index-1];
+        return unconfirmedTeachersByIndex[_index+1];
     }
 
     function confirmTeacher(address _address) public onlyFounder
@@ -72,6 +72,7 @@ contract UniversityTeacher is UniversityAdmin {
 
     function removeTeacher(address _address) public isTeacherAddress(_address) {
         registered[_address] = false;
+        teacherContract[msg.sender] = 0;
         teachersByIndex[teachers[_address]] = teachersByIndex[countTeachers];
         teachers[_address] = 0;
         countTeachers -= 1;

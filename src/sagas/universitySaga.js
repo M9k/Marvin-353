@@ -31,7 +31,7 @@ export function* getAllAdmins() {
   yield put({
     type: universityAction.RETURN_ALL_ADMINS,
     number: num,
-    account: new Array(admins),
+    account: admins,
   });
 }
 

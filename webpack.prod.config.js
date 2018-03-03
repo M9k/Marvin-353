@@ -13,8 +13,8 @@ module.exports.entry = {
   ]
 };
 module.exports.output = {
-  path: path.join(__dirname, 'build'),
-  publicPath: '/build',
+  path: path.join(__dirname, 'dist'),
+  publicPath: '/dist',
   filename: 'bundle.js'
 };
 
@@ -44,7 +44,8 @@ module.exports.plugins.push(new CopyWebpackPlugin(
     { from: 'public/media', to: 'media/' },
     { from: 'public/favicon.ico' },
     { from: 'public/index.html' },
-    { from: 'public/index.html', to: "200.html" }
+    { from: 'public/index.html', to: "200.html" },
+    { from: "build", to: "build/"}
   ]
 ));
 module.exports.plugins.push(new ExtractTextPlugin('main.css'));

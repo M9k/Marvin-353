@@ -2,7 +2,7 @@ require('./UniversityBase'); // require the UniversityBase test to pass first th
 // it will execute those tests too
 
 const UniversityAdmin = artifacts.require('./contracts/UniversityAdmin.sol');
-const assert = require('chai').assert;
+const { assert } = require('chai');
 // const expect = require('chai').expect;
 // const BigNumber = require('bignumber.js');
 
@@ -54,7 +54,7 @@ contract('UniversityAdmin', (accounts) => {
   });
 
   // Testing isAdmin
-  it(testTitle('Should return true if is admin!'), async () =>{
+  it(testTitle('Should return true if is admin!'), async () => {
     assert.equal(await contract.isAdmin.call(accounts[0]), false);
     assert.equal(await contract.isAdmin.call(accounts[1]), true);
     assert.equal(await contract.isAdmin.call(accounts[2]), false);
@@ -69,21 +69,21 @@ contract('UniversityAdmin', (accounts) => {
   });
 
   // Testing getAdminsNumber function
-  it(testTitle('Should return correct number of admins!'), async () =>{
+  it(testTitle('Should return correct number of admins!'), async () => {
     assert.notEqual(await contract.getAdminsNumber.call(), 0);
     assert.equal(await contract.getAdminsNumber.call(), 1);
     assert.notEqual(await contract.getAdminsNumber.call(), 2);
   });
 
   // Testing getAdminAt function
-  it(testTitle('Should return correct admin account!'), async () =>{
+  it(testTitle('Should return correct admin account!'), async () => {
     assert.notEqual(await contract.getAdminAt.call(1), accounts[0]);
     assert.equal(await contract.getAdminAt.call(0), accounts[1]);
     assert.notEqual(await contract.getAdminAt.call(2), accounts[2]);
   });
-  
+
   // Testing removeAdmin modifiers
-  it(testTitle('Should not remove admin account using not founder account!'), async () =>{
+  it(testTitle('Should not remove admin account using not founder account!'), async () => {
     assert.equal(await contract.isAdmin.call(accounts[1]), true);
     try {
       await contract.isAdmin.call(accounts[1], { from: accounts2 });
@@ -95,7 +95,7 @@ contract('UniversityAdmin', (accounts) => {
   });
 
   // Testing removeAdmin function
-  it(testTitle('Should remove admin account!'), async () =>{
+  it(testTitle('Should remove admin account!'), async () => {
     assert.equal(await contract.isAdmin.call(accounts[1]), true);
     await contract.removeAdmin(accounts[1]);
     assert.equal(await contract.isAdmin.call(accounts[1]), false);

@@ -23,8 +23,8 @@ class ManageAdmin extends React.Component {
 
   render() {
     const list = [];
-    const admin = this.props.adminAccount[0];
-    for (let i = 0; i < admin.length; i += 1) {
+    const admin = this.props.adminAccount;
+    for (let i = 0; admin !== null && i < admin.length; i += 1) {
       list.push(<ListGroupItem>{admin[i]}</ListGroupItem>);
     }
 
