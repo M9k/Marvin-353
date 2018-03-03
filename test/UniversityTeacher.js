@@ -1,5 +1,4 @@
-require('./UniversityAdmin'); // require the UniversityAdmin test to pass first then
-// it will execute those tests too
+require('./UniversityAdmin');
 
 const UniversityTeacher = artifacts.require('./contracts/UniversityTeacher.sol');
 const assert = require('chai').assert;
@@ -12,22 +11,40 @@ contract('UniversityTeacher', (accounts) => {
   let testN = '';
 
   beforeEach('Deploy University contract on blockchain', async () => {
-    // Il deploy del contratto viene fatto usando il primo account con indice [0]
     contract = await UniversityTeacher.deployed({ from: accounts[0] });
   });
 
   function testTitle(_testT) {
-    test += 1;// next test
+    test += 1;
     testN = test.toString().padStart(3, '0');
     return `${testN} - ${_testT}`;
   }
 
-  // Testing isUniversityFounder function
-  it(testTitle('Should say Universtiy is registered others no!'), async () => {
-    assert.equal(await contract.isUniversityFounder.call(accounts[0]), true);
-    assert.equal(await contract.isUniversityFounder.call(accounts[1]), false);
-    assert.equal(await contract.isUniversityFounder.call(accounts[2]), false);
-    assert.equal(await contract.isUniversityFounder.call(accounts[3]), false);
+
+  it(testTitle('Should say Universtiy found isn\'t a teacher!'), async () => {
+    assert.equal(await contract.isTeacher.call(accounts[0]), false);
+  });
+
+  it(testTitle('Should say Universtiy has no teachers and no Unconfirmed!'), async () => {
+    assert.equal(await contract.getTeachersNumber.call({ from: accounts[0] }), 0);
+    assert.equal(await contract.getUnconfirmedTeachersNumber.call({ from: accounts[0] }), 0);
+  });
+
+  it(testTitle('Should say add unconfirmed Teacher and then confirm it!'), async () => {
+
+    // TWO STEP ACCOUNT CREATION!
+    await contract.askForTeacherAccount('nomeprof', 'congomoeprof', { from: accounts[1] });
+    assert.equal(await contract.isUnconfirmedTeacher.call(accounts[1]), true);
+    assert.equal(await contract.isTeacher.call(accounts[1]), false);
+    assert.equal(await contract.getTeachersNumber.call({ from: accounts[0] }), 0);
+    assert.equal(await contract.getUnconfirmedTeachersNumber.call({ from: accounts[0] }), 1);
+
+    // now confirm it
+    await contract.confirmTeacher(accounts[1], { from: accounts[0] });
+    assert.equal(await contract.isUnconfirmedTeacher.call(accounts[1]), false);
+    assert.equal(await contract.isTeacher.call(accounts[1]), true);
+    assert.equal(await contract.getTeachersNumber.call({ from: accounts[0] }), 1);
+    assert.equal(await contract.getUnconfirmedTeachersNumber.call({ from: accounts[0] }), 0);
   });
 });
 

@@ -11,7 +11,7 @@ contract UniversityTeacher is UniversityAdmin {
     uint private countUnconfirmedTeachers = 1;
     mapping (address => uint) private unconfirmedTeachers;
     mapping (uint => address) private unconfirmedTeachersByIndex;
-    
+
     mapping (address => address) private teacherContract;
 
     modifier isTeacherAddress(address _address) {
@@ -62,18 +62,17 @@ contract UniversityTeacher is UniversityAdmin {
         removeUnconfirmedTeacher(_address);
         addTeacher(_address);
     }
-    
+
     function removeTeacher(address _address) public isTeacherAddress(_address) {
-        registered[msg.sender] = false;
+        registered[_address] = false;
         teachersByIndex[teachers[_address]] = teachersByIndex[countTeachers];
         teachers[_address] = 0;
         countTeachers -= 1;
     }
 
     function removeUnconfirmedTeacher(address _address) public isUnconfirmedTeacherAddress(_address) {
-        registered[msg.sender] = false;
-        unconfirmedTeachersByIndex[unconfirmedTeachers[_address]] =
-            unconfirmedTeachersByIndex[countUnconfirmedTeachers];
+        registered[_address] = false;
+        unconfirmedTeachersByIndex[unconfirmedTeachers[_address]] = unconfirmedTeachersByIndex[countUnconfirmedTeachers];
         unconfirmedTeachers[_address] = 0;
         countUnconfirmedTeachers -= 1;
     }
@@ -95,14 +94,11 @@ contract UniversityTeacher is UniversityAdmin {
         return teacherContract[_teacher];
     }
 
-    // add new teacher, cannot be called directly without asking and confirm the account
-    // no check, because the _address is now removed from the unregistered list
-    function addTeacher(address _address) private onlyAdmin {
-        registered[msg.sender] = true;
+    function addTeacher(address _address) private{
+        registered[_address] = true;
         teachers[_address] = countTeachers;
         teachersByIndex[countTeachers] = _address;
         countTeachers += 1;
     }
-    
-    
+
 }

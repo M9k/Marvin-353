@@ -59,12 +59,5 @@ contract UniversityAdmin is UniversityBase {
             typeUser = 2; //Admin
 
         return typeUser;
-/*
-        if (isTeacher(_userAddr))
-            typeUser = 3; //Professor
-
-        if (isStudent(_userAddr))
-            typeUser = 4; //Student
-*/
     }
 }

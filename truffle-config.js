@@ -30,6 +30,7 @@ module.exports = {
     }
   },
   mocha: {
+    enableTimeouts: false,
     reporter: 'eth-gas-reporter',
     reporterOptions: {
       currency: 'EUR',
