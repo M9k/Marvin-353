@@ -19,14 +19,14 @@ export function* addAdmin(action) {
   // yield put({ type: universityAction.ADD_NEW_ADMIN, adminNumber: Number(nAdmin) });
 }
 
-export function* getAdmin(action) {
+export function* getAllAdmins(action) {
   const num = Number(action.number);
   const admins = [];
   for (let i = 0; i < num; i += 1) {
     admins[i] = yield call(getAdminWeb3, i);
   }
   yield put({
-    type: universityAction.GET_ADMIN,
+    type: universityAction.RETURN_ALL_ADMINS,
     number: num,
     account: Array(admins),
   });

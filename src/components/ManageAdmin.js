@@ -74,7 +74,7 @@ function mapDispatchToProps(dispatch) {
     }),
     // return the address of a admin
     getAdmin: _number => dispatch({
-      type: universityAction.GET_ADMIN,
+      type: universityAction.GET_ALL_ADMINS,
       number: _number,
     }),
   };
