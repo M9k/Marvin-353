@@ -46,5 +46,23 @@ contract('UniversityTeacher', (accounts) => {
     assert.equal(await contract.getTeachersNumber.call({ from: accounts[0] }), 1);
     assert.equal(await contract.getUnconfirmedTeachersNumber.call({ from: accounts[0] }), 0);
   });
+
+  it(testTitle('Should add unconfirmed Teacher and then remove it!'), async () => {
+
+    // TWO STEP ACCOUNT CREATION!
+    await contract.askForTeacherAccount('nomeprof', 'congomoeprof', { from: accounts[2] });
+    assert.equal(await contract.isUnconfirmedTeacher.call(accounts[2]), true);
+    assert.equal(await contract.isTeacher.call(accounts[2]), false);
+    assert.equal(await contract.getTeachersNumber.call({ from: accounts[0] }), 1);
+    assert.equal(await contract.getUnconfirmedTeachersNumber.call({ from: accounts[0] }), 1);
+
+    // now dont confirm  this teacher
+    await contract.dontConfirmTeacher(accounts[2], { from: accounts[0] });
+    assert.equal(await contract.isUnconfirmedTeacher.call(accounts[2]), false);
+    assert.equal(await contract.isTeacher.call(accounts[2]), false);
+    assert.equal(await contract.getTeachersNumber.call({ from: accounts[0] }), 1);
+    assert.equal(await contract.getUnconfirmedTeachersNumber.call({ from: accounts[0] }), 0);
+  });
+
 });
 

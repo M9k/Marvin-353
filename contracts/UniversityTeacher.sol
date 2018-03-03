@@ -58,9 +58,16 @@ contract UniversityTeacher is UniversityAdmin {
         return unconfirmedTeachersByIndex[_index-1];
     }
 
-    function confirmTeacher(address _address) public onlyFounder {
+    function confirmTeacher(address _address) public onlyFounder
+    isUnconfirmedTeacherAddress(_address) {
         removeUnconfirmedTeacher(_address);
         addTeacher(_address);
+    }
+    
+    function dontConfirmTeacher(address _address) public onlyFounder 
+    isUnconfirmedTeacherAddress(_address) {
+        teacherContract[_address] = 0;
+        removeUnconfirmedTeacher(_address);
     }
 
     function removeTeacher(address _address) public isTeacherAddress(_address) {
@@ -68,13 +75,6 @@ contract UniversityTeacher is UniversityAdmin {
         teachersByIndex[teachers[_address]] = teachersByIndex[countTeachers];
         teachers[_address] = 0;
         countTeachers -= 1;
-    }
-
-    function removeUnconfirmedTeacher(address _address) public isUnconfirmedTeacherAddress(_address) {
-        registered[_address] = false;
-        unconfirmedTeachersByIndex[unconfirmedTeachers[_address]] = unconfirmedTeachersByIndex[countUnconfirmedTeachers];
-        unconfirmedTeachers[_address] = 0;
-        countUnconfirmedTeachers -= 1;
     }
 
     // return the current user type
@@ -94,11 +94,18 @@ contract UniversityTeacher is UniversityAdmin {
         return teacherContract[_teacher];
     }
 
-    function addTeacher(address _address) private{
+    function removeUnconfirmedTeacher(address _address) private {
+        registered[_address] = false;
+        unconfirmedTeachersByIndex[unconfirmedTeachers[_address]] = 
+        unconfirmedTeachersByIndex[countUnconfirmedTeachers];
+        unconfirmedTeachers[_address] = 0;
+        countUnconfirmedTeachers -= 1;
+    }
+
+    function addTeacher(address _address) private {
         registered[_address] = true;
         teachers[_address] = countTeachers;
         teachersByIndex[countTeachers] = _address;
         countTeachers += 1;
     }
-
 }
