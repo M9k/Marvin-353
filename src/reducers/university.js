@@ -10,7 +10,7 @@ const universityData = (state = initialState, action) => {
   if (action.type === universityAction.GET_ADMIN_NUMBER) {
     return Object.assign({}, state, {});
   }
-  if (action.type === universityAction.ADMIN_NUMBER) {
+  if (action.type === universityAction.RETURN_ADMIN_NUMBER) {
     return Object.assign({}, state, {
       adminNumber: action.adminNumber,
     });

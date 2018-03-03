@@ -6,7 +6,7 @@ import getAdminWeb3 from '../web3calls/getAdmin';
 
 export function* adminNumber() {
   const administratorNumber = yield call(numAdmin);
-  yield put({ type: universityAction.ADMIN_NUMBER, adminNumber: Number(administratorNumber) });
+  yield put({ type: universityAction.RETURN_ADMIN_NUMBER, adminNumber: Number(administratorNumber) });
 }
 
 export function* addAdmin(action) {
