@@ -20,7 +20,7 @@ contract('User', (accounts) => {
     return web3.toAscii(stringToConvert).replace(/\u0000/g, '');
   }
 
-  it(testTitle('Chai assert module test: Should give the deployed User'), async () => {
+  it(testTitle('Should give the deployed User'), async () => {
     assert.equal(bytes32ToString(await contract.name.call()), 'mario');
     assert.equal(bytes32ToString(await contract.surname.call()), 'rossi');
 
