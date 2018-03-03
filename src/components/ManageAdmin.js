@@ -31,15 +31,15 @@ class ManageAdmin extends React.Component {
     return (
       <div id="ManageAdmin">
         <Header />
-        <div className="page-content">
-          <FormAddAdmin addAdmin={this.props.addAdmin} />
-          <h2>Admin list</h2>
-          <Button onClick={this.refreshData}>Refresh</Button><br />
-          Number of admins: {this.props.adminNumber}<br />
-          <ListGroup>
-            {list}
-          </ListGroup>
-        </div>
+        <h1 className="title">Manage admins</h1>
+        <h2>Add a new admin</h2>
+        <FormAddAdmin addAdmin={this.props.addAdmin} />
+        <h2>Admin list</h2>
+        <Button onClick={this.refreshData}>Refresh</Button><br />
+        Number of admins: {this.props.adminNumber}<br />
+        <ListGroup>
+          {list}
+        </ListGroup>
       </div>
     );
   }

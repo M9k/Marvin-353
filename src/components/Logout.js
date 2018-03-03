@@ -13,6 +13,7 @@ const Logout = () => {
           <li>Click on the menu button in the top right corner;</li>
           <li>Click &#39;Log Out&#39;.</li>
         </ul>
+        More information <a href="/help#logout">here</a>.
       </p>
     </div>
   );
