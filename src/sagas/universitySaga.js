@@ -20,17 +20,15 @@ export function* addAdmin(action) {
 }
 
 export function* getAdmin(action) {
-  console.log(Number(action.number));
-  // console.log(action.account);
   const num = Number(action.number);
-  const admin = yield call(getAdminWeb3, web3.eth.accounts[0], num);
-  console.log(admin);
-  /*
+  const admins = [];
+  for (let i = 0; i < num; i += 1) {
+    admins[i] = yield call(getAdminWeb3, i);
+  }
   yield put({
     type: universityAction.GET_ADMIN,
     number: num,
-    account: Number(admin),
+    account: Array(admins),
   });
-  */
 }
 

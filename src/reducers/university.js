@@ -2,6 +2,7 @@ import { universityAction } from '../actions/actions';
 
 const initialState = {
   adminNumber: 0,
+  adminAccount: null,
 };
 
 const universityData = (state = initialState, action) => {
@@ -21,7 +22,7 @@ const universityData = (state = initialState, action) => {
   }
   if (action.type === universityAction.GET_ADMIN) {
     return Object.assign({}, state, {
-      account: action.account,
+      adminAccount: action.account,
     });
   }
   return state;
