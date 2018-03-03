@@ -39,8 +39,8 @@
     "merge-coverage": "cp js-coverage/lcov.info report.lcov && echo \"$(cat coverage/lcov.info)\" >> report.lcov",
     "push-coverage": "cat report.lcov | ./node_modules/.bin/coveralls",
     "clean-coverage": "rm -r report.lcov coverage.json coverage/ js-coverage/",
-    "eslint": "./node_modules/.bin/eslint src testnpm",
-    "eslint-win": "./node_modules/.bin/eslint.cmd src testnpm",
+    "eslint": "./node_modules/.bin/eslint src testnpm test",
+    "eslint-win": "./node_modules/.bin/eslint.cmd src testnpm test",
     "check-build": "npm run eslint && npm run test && npm run soltest",
     "check-build-win": "npm run eslint-win && npm run test && npm run soltest-win"
   },

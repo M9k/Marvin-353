@@ -1,7 +1,7 @@
 require('./UniversityAdmin');
 
 const UniversityTeacher = artifacts.require('./contracts/UniversityTeacher.sol');
-const assert = require('chai').assert;
+const { assert } = require('chai');
 // const expect = require('chai').expect;
 // const BigNumber = require('bignumber.js');
 
@@ -31,7 +31,6 @@ contract('UniversityTeacher', (accounts) => {
   });
 
   it(testTitle('Should say add unconfirmed Teacher and then confirm it!'), async () => {
-
     // TWO STEP ACCOUNT CREATION!
     await contract.askForTeacherAccount('nomeprof', 'congomoeprof', { from: accounts[1] });
     assert.equal(await contract.isUnconfirmedTeacher.call(accounts[1]), true);
@@ -48,7 +47,6 @@ contract('UniversityTeacher', (accounts) => {
   });
 
   it(testTitle('Should add unconfirmed Teacher and then remove it!'), async () => {
-
     // TWO STEP ACCOUNT CREATION!
     await contract.askForTeacherAccount('nomeprof', 'congomoeprof', { from: accounts[2] });
     assert.equal(await contract.isUnconfirmedTeacher.call(accounts[2]), true);
@@ -63,6 +61,5 @@ contract('UniversityTeacher', (accounts) => {
     assert.equal(await contract.getTeachersNumber.call({ from: accounts[0] }), 1);
     assert.equal(await contract.getUnconfirmedTeachersNumber.call({ from: accounts[0] }), 0);
   });
-
 });
 

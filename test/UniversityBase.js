@@ -1,9 +1,9 @@
 require('./User');
 
 const UniversityBase = artifacts.require('./contracts/UniversityBase.sol');
-const assert = require('chai').assert;
-const expect = require('chai').expect;
-const BigNumber = require('bignumber.js');
+const { assert } = require('chai');
+// const expect = require('chai').expect;
+// const BigNumber = require('bignumber.js');
 // accounts[0] University
 // accounts[1] NotRegistered
 // accounts[2] Admin
@@ -33,9 +33,11 @@ contract('UniversityBase', (accounts) => {
     return `${testN} - ${_testT}`;
   }
 
+  /*
   function bytes32ToString(stringToConvert) {
     return web3.toAscii(stringToConvert).replace(/\u0000/g, '');
   }
+  */
 
   it(testTitle('Should say Universtiy is Founder!'), async () => {
     assert.equal(await contract.isUniversityFounder.call(accounts[0]), true);
@@ -52,9 +54,7 @@ contract('UniversityBase', (accounts) => {
   it(testTitle('Should login user not registred with value 0!'), async () => {
     assert.equal(await contract.login.call({ from: accounts[1] }), 0);
   });
-
 });
-
 /*
 // Controlla che account 0 è università
 it(testTitle('Chai assert module test: Should say it\'s university!'), async () => {

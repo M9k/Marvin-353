@@ -1,5 +1,5 @@
 const User = artifacts.require('./contracts/User.sol');
-const assert = require('chai').assert;
+const { assert } = require('chai');
 
 contract('User', (accounts) => {
   let contract;

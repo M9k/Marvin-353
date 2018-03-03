@@ -1,0 +1,23 @@
+{
+  "extends": ["airbnb"],
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
+    "no-console": "off",
+    "max-len": ["error", { "ignoreComments": true, "code": 100 }]
+  },
+  "globals": {
+    "it": false,
+    "artifacts": false,
+    "expect": false,
+    "beforeEach": false,
+    "contract": false,
+    "accounts2": false
+  },
+  "parser": "babel-eslint"
+}
