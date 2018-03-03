@@ -69,12 +69,14 @@ contract('UniversityTeacher', (accounts) => {
     assert.equal(await contract.getTeachersNumber.call({ from: accounts[0] }), 1);
     assert.equal(await contract.getUnconfirmedTeachersNumber.call({ from: accounts[0] }), 1);
   });
-
-  // Testing get functions 
-  it(testTitle('Should return correct teacher and unconfirmed teacher with given index!'), async () => {
-    assert.equal(await contract.getTeacherAtIndex.call(0), accounts[1]);
-    assert.equal(await contract.getUnconfirmedTeacherAtIndex.call(0), accounts[4]);
-  });
+  // Testing get functions
+  it(
+    testTitle('Should return correct teacher and unconfirmed teacher with given index!'),
+    async () => {
+      assert.equal(await contract.getTeacherAtIndex.call(0), accounts[1]);
+      assert.equal(await contract.getUnconfirmedTeacherAtIndex.call(0), accounts[4]);
+    },
+  );
 
   // Testing login function
   it(testTitle('Should login with university, teacher and unconfirmed accounts!'), async () => {
