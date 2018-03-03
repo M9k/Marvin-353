@@ -9,11 +9,16 @@ import FormAddAdmin from './form/FormAddAdmin';
 class ManageAdmin extends React.Component {
   constructor(props) {
     super(props);
+    this.refreshData = this.refreshData.bind(this);
     document.title = 'Manage Admin - Marvin';
   }
   componentWillMount() {
+    this.refreshData();
+  }
+
+  refreshData() {
     this.props.getAdminNumber();
-    this.props.getAdmin(this.props.adminNumber);
+    this.props.getAllAdmin();
   }
 
   render() {
@@ -27,14 +32,14 @@ class ManageAdmin extends React.Component {
       <div id="ManageAdmin">
         <Header />
         <div className="page-content">
-          <Button onClick={this.props.getAdminNumber}>Admins number:</Button>
-         ={this.props.adminNumber}<br />
+          <FormAddAdmin addAdmin={this.props.addAdmin} />
+          <h2>Admin list</h2>
+          <Button onClick={this.refreshData}>Refresh</Button><br />
+          Number of admins: {this.props.adminNumber}<br />
+          <ListGroup>
+            {list}
+          </ListGroup>
         </div>
-        <FormAddAdmin addAdmin={this.props.addAdmin} />
-        <h2>Admin list</h2>
-        <ListGroup>
-          {list}
-        </ListGroup>
       </div>
     );
   }
@@ -45,7 +50,7 @@ ManageAdmin.propTypes = {
   adminAccount: PropTypes.arrayOf(String),
   getAdminNumber: PropTypes.func,
   addAdmin: PropTypes.func,
-  getAdmin: PropTypes.func,
+  getAllAdmin: PropTypes.func,
 };
 
 ManageAdmin.defaultProps = {
@@ -53,7 +58,7 @@ ManageAdmin.defaultProps = {
   adminAccount: [],
   getAdminNumber: () => {},
   addAdmin: () => {},
-  getAdmin: () => {},
+  getAllAdmin: () => {},
 };
 
 const mapStateToProps = state => ({
@@ -73,7 +78,7 @@ function mapDispatchToProps(dispatch) {
       address: _address,
     }),
     // return the address of a admin
-    getAdmin: _number => dispatch({
+    getAllAdmin: _number => dispatch({
       type: universityAction.GET_ALL_ADMINS,
       number: _number,
     }),

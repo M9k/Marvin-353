@@ -6,7 +6,10 @@ import getAdminWeb3 from '../web3calls/getAdmin';
 
 export function* adminNumber() {
   const administratorNumber = yield call(numAdmin);
-  yield put({ type: universityAction.RETURN_ADMIN_NUMBER, adminNumber: Number(administratorNumber) });
+  yield put({
+    type: universityAction.RETURN_ADMIN_NUMBER,
+    adminNumber: Number(administratorNumber),
+  });
 }
 
 export function* addAdmin(action) {
@@ -19,8 +22,8 @@ export function* addAdmin(action) {
   // yield put({ type: universityAction.ADD_NEW_ADMIN, adminNumber: Number(nAdmin) });
 }
 
-export function* getAllAdmins(action) {
-  const num = Number(action.number);
+export function* getAllAdmins() {
+  const num = yield call(numAdmin);
   const admins = [];
   for (let i = 0; i < num; i += 1) {
     admins[i] = yield call(getAdminWeb3, i);
@@ -28,7 +31,7 @@ export function* getAllAdmins(action) {
   yield put({
     type: universityAction.RETURN_ALL_ADMINS,
     number: num,
-    account: Array(admins),
+    account: new Array(admins),
   });
 }
 
