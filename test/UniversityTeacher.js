@@ -23,23 +23,25 @@ contract('UniversityTeacher', (accounts) => {
 
   it(testTitle('Should say Universtiy found isn\'t a teacher!'), async () => {
     assert.equal(await contract.isTeacher.call(accounts[0]), false);
+    await contract.newAdmin(accounts[5]);
+    assert.equal(await contract.isAdmin.call(accounts[5]), true);
   });
 
   it(testTitle('Should say Universtiy has no teachers and no Unconfirmed!'), async () => {
-    assert.equal(await contract.getTeachersNumber.call({ from: accounts[0] }), 0);
+    assert.equal(await contract.getTeachersNumber.call({ from: accounts[1] }), 0);
     assert.equal(await contract.getUnconfirmedTeachersNumber.call({ from: accounts[0] }), 0);
   });
 
   it(testTitle('Should say add unconfirmed Teacher and then confirm it!'), async () => {
     // TWO STEP ACCOUNT CREATION!
-    await contract.askForTeacherAccount('nomeprof', 'congomoeprof', { from: accounts[1] });
+    await contract.askForTeacherAccount('nomeprof', 'cognomeprof', { from: accounts[1] });
     assert.equal(await contract.isUnconfirmedTeacher.call(accounts[1]), true);
     assert.equal(await contract.isTeacher.call(accounts[1]), false);
     assert.equal(await contract.getTeachersNumber.call({ from: accounts[0] }), 0);
     assert.equal(await contract.getUnconfirmedTeachersNumber.call({ from: accounts[0] }), 1);
 
     // now confirm it
-    await contract.confirmTeacher(accounts[1], { from: accounts[0] });
+    await contract.confirmTeacher(accounts[1], { from: accounts[5] });
     assert.equal(await contract.isUnconfirmedTeacher.call(accounts[1]), false);
     assert.equal(await contract.isTeacher.call(accounts[1]), true);
     assert.equal(await contract.getTeachersNumber.call({ from: accounts[0] }), 1);
@@ -48,14 +50,14 @@ contract('UniversityTeacher', (accounts) => {
 
   it(testTitle('Should add unconfirmed Teacher and then remove it!'), async () => {
     // TWO STEP ACCOUNT CREATION!
-    await contract.askForTeacherAccount('nomeprof', 'congomoeprof', { from: accounts[2] });
+    await contract.askForTeacherAccount('nomeprof', 'cognomeprof', { from: accounts[2] });
     assert.equal(await contract.isUnconfirmedTeacher.call(accounts[2]), true);
     assert.equal(await contract.isTeacher.call(accounts[2]), false);
     assert.equal(await contract.getTeachersNumber.call({ from: accounts[0] }), 1);
     assert.equal(await contract.getUnconfirmedTeachersNumber.call({ from: accounts[0] }), 1);
 
     // now dont confirm  this teacher
-    await contract.dontConfirmTeacher(accounts[2], { from: accounts[0] });
+    await contract.dontConfirmTeacher(accounts[2], { from: accounts[5] });
     assert.equal(await contract.isUnconfirmedTeacher.call(accounts[2]), false);
     assert.equal(await contract.isTeacher.call(accounts[2]), false);
     assert.equal(await contract.getTeachersNumber.call({ from: accounts[0] }), 1);
@@ -85,6 +87,7 @@ contract('UniversityTeacher', (accounts) => {
     assert.equal(await contract.login.call({ from: accounts[1] }), 3);
     assert.equal(await contract.login.call({ from: accounts[2] }), 0);
     assert.equal(await contract.login.call({ from: accounts[4] }), 103);
+    assert.equal(await contract.login.call({ from: accounts[5] }), 2);
   });
 
   it(testTitle('Should remove teacher!'), async () => {
