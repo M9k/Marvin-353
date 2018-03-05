@@ -14,7 +14,7 @@ export function* adminNumber() {
 
 export function* addAdmin(action) {
   try {
-    yield call(addAdminWeb3, web3.eth.accounts[0], action.address);
+    yield call(addAdminWeb3, action.address);
   } catch (e) {
     console.log('Failed!');
   }

@@ -4,11 +4,9 @@ import login from '../web3calls/login';
 
 export function* tryLogin() {
   // call the web3call for try to login
-  // console.log('your address is');
-  // console.log(web3.eth.accounts[0]);
-  const userType = yield call(login, web3.eth.accounts[0]);
-  // console.log('You are a: ');
-  // console.log(Numver(userType));
+  const userType = yield call(login);
+  console.log('You are a: ');
+  console.log(Number(userType));
   // update the user state via reducer
   yield put({ type: userAction.USER_LOGGED_IN, role: Number(userType) });
 
