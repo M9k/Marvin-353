@@ -8,13 +8,12 @@ const getWeb3 = new Promise(((resolve, reject) => {
     // Checking if Web3 has been injected by the browser (Mist/MetaMask)
     if (typeof window.web3 !== 'undefined') {
       // Use Mist/MetaMask's provider.
+      console.log('Metamask!');
       web3 = new Web3(window.web3.currentProvider);
     } else {
       console.log('No Metamask!');
       reject();// execute promise reject and go back to index
     }
-    console.log('Metamask!');
-
     resolve(web3);
   });
 }));
