@@ -32,11 +32,10 @@ const userLogger = (state = initialState, action) => {
         return Object.assign({}, state, {
           account: action.address,
         });
-      } else {
-        return Object.assign({}, state, {
-          account: '',
-        });
       }
+      return Object.assign({}, state, {
+        account: '',
+      });
     case (userAction.USER_LOGGED_OUT):
       return Object.assign({}, state, {
         trylogin: false,
