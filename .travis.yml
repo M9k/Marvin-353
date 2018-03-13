@@ -31,6 +31,7 @@ jobs:
           on_failure: always
     - stage: code-coverage
       if: branch = master
+      before_script: npm run rpcov
       install:
         - sudo apt-get install python-pip python-dev
         - sudo pip install bs4
