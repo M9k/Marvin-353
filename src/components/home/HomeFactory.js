@@ -29,14 +29,6 @@ const HomeFactory = (props) => {
         </div>
       );
     case AccountTypes.NOTLOGGED:
-      return (
-        <HomeDefault
-          metamask={props.metamask}
-          account={props.account}
-          isLogged={props.isLogged}
-          accountType={props.accountType}
-        />
-      );
     default:
       return (
         <HomeDefault
