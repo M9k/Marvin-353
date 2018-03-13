@@ -25,9 +25,5 @@ describe('ButtonHelp component', () => {
       const wrapper = shallow(<ButtonHelp path="test" />);
       assert.equal(wrapper.html().search('Help') !== -1, true);
     });
-    it('should be a span if the path is "/help"', () => {
-      const wrapper = shallow(<ButtonHelp path="/help" />);
-      assert.equal(wrapper.html().search('<span') !== -1, true);
-    });
   });
 });

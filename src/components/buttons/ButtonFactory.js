@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { ButtonToolbar } from 'react-bootstrap';
 import ButtonPrice from './ButtonPrice';
 import ButtonHelp from './ButtonHelp';
 import ButtonLogOut from './ButtonLogOut';
@@ -13,22 +14,22 @@ const ButtonFactory = (props) => {
     case AccountTypes.PROFESSOR:
     case AccountTypes.STUDENT:
       return (
-        <div id="ButtonGroup">
+        <ButtonToolbar>
           <ButtonPrice path={props.path} />
           <ButtonHelp path={props.path} />
           <ButtonLogOut path={props.path} />
-        </div>
+        </ButtonToolbar>
       );
     case AccountTypes.NOTLOGGED:
       return (
-        <div id="ButtonGroup">
+        <ButtonToolbar id="ButtonGroup">
           <ButtonPrice path={props.path} />
           <ButtonHelp path={props.path} />
-        </div>
+        </ButtonToolbar>
       );
     default:
       return (
-        <div id="ButtonGroup" />
+        <ButtonToolbar />
       );
   }
 };

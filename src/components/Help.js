@@ -1,12 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Image } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 import Header from './global/Header';
+import AccountTypes from './AccountEnum';
 
-const Help = () => {
+const Help = (props) => {
   document.title = 'Help - Marvin';
   return (
     <div className="page-help">
-      <Header />
+      <Header
+        accountType={props.accountType !== null ? props.accountType : AccountTypes.NOTLOGGED}
+      />
       <h1 className="title">Help</h1>
       <h2>What it is Marvin?</h2>
       Marvin is a ÐApp for universities, teachers and students.
@@ -58,4 +63,16 @@ const Help = () => {
   );
 };
 
-export default Help;
+Help.propTypes = {
+  accountType: PropTypes.oneOf(Object.values(AccountTypes)),
+};
+
+Help.defaultProps = {
+  accountType: AccountTypes.NOTLOGGED,
+};
+
+const mapStateToProps = state => ({
+  accountType: state.user.role,
+});
+
+export default connect(mapStateToProps)(Help);

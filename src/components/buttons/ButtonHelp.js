@@ -5,9 +5,9 @@ import { Button } from 'react-bootstrap';
 const ButtonHelp = (props) => {
   if (props.path === '/help') {
     return (
-      <span className="btn btn-default-select">
+      <Button active>
         Help
-      </span>
+      </Button>
     );
   }
   return (

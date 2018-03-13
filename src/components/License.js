@@ -1,15 +1,13 @@
 import React from 'react';
-import ButtonHelp from './buttons/ButtonHelp';
-import ButtonPrice from './buttons/ButtonPrice';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Header from './global/Header';
+import AccountTypes from './AccountEnum';
 
 // Not found page component
-const License = () => (
+const License = props => (
   <div className="license-page">
-    <Header>
-      <ButtonPrice />
-      <ButtonHelp />
-    </Header>
+    <Header accountType={props.accountType !== null ? props.accountType : AccountTypes.NOTLOGGED} />
     <h1 className="title">The MIT License</h1>
     <p>Copyright 2018, <i>353</i></p>
     <p>
@@ -34,4 +32,16 @@ const License = () => (
   </div>
 );
 
-export default License;
+License.propTypes = {
+  accountType: PropTypes.oneOf(Object.values(AccountTypes)),
+};
+
+License.defaultProps = {
+  accountType: AccountTypes.NOTLOGGED,
+};
+
+const mapStateToProps = state => ({
+  accountType: state.user.role,
+});
+
+export default connect(mapStateToProps)(License);

@@ -5,9 +5,9 @@ import { Button } from 'react-bootstrap';
 const ButtonLogOut = (props) => {
   if (props.path === '/logout') {
     return (
-      <span className="btn btn-default-select">
+      <Button active>
         Logout
-      </span>
+      </Button>
     );
   }
   return (
