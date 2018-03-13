@@ -26,9 +26,5 @@ describe('ButtonPrice component', () => {
       const wrapper = shallow(<ButtonPrice path="/" />);
       assert.equal(wrapper.html().search('Price') !== -1, true);
     });
-    it('should be a span if the path is "/price"', () => {
-      const wrapper = shallow(<ButtonPrice path="/price" />);
-      assert.equal(wrapper.html().search('<span') !== -1, true);
-    });
   });
 });

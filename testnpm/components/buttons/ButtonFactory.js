@@ -1,4 +1,5 @@
 import React from 'react';
+import { ButtonToolbar } from 'react-bootstrap';
 import { shallow, configure } from 'enzyme';
 import assert from 'assert';
 import Adapter from 'enzyme-adapter-react-15';
@@ -22,14 +23,14 @@ describe('ButtonFactory component', () => {
       />);
       assert.equal(wrapper.length, 1);
     });
-    it('Should render a div with id="ButtonGroup"', () => {
+    it('Should render a ButtonToolbar', () => {
       const wrapper = shallow(<ButtonFactory
         store={mockStore({
           routing:
             { locationBeforeTransitions: { pathname: '/' } },
         })}
       />);
-      assert.equal(wrapper.html(), '<div id="ButtonGroup"></div>');
+      assert.equal(wrapper.dive().find(ButtonToolbar).length, 1);
     });
     it('with null as role should render price and help, without the logout ', () => {
       const wrapper = shallow(<ButtonFactory

@@ -5,6 +5,7 @@ import { Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 import Header from './global/Header';
 import { universityAction } from '../actions/actions';
 import FormAddAdmin from './form/FormAddAdmin';
+import AccountTypes from './AccountEnum';
 
 class ManageAdmin extends React.Component {
   constructor(props) {
@@ -30,7 +31,7 @@ class ManageAdmin extends React.Component {
 
     return (
       <div id="ManageAdmin">
-        <Header />
+        <Header accountType={AccountTypes.UNIVERSITY} />
         <h1 className="title">Manage admins</h1>
         <h2>Add a new admin</h2>
         <FormAddAdmin addAdmin={this.props.addAdmin} />

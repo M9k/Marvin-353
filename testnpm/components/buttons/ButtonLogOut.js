@@ -26,9 +26,5 @@ describe('ButtonLogOut component', () => {
       const wrapper = shallow(<ButtonLogOut path="test" />);
       assert.equal(wrapper.html().search('Logout') !== -1, true);
     });
-    it('should be a span if the path is "/logout"', () => {
-      const wrapper = shallow(<ButtonLogOut path="/logout" />);
-      assert.equal(wrapper.html().search('<span') !== -1, true);
-    });
   });
 });

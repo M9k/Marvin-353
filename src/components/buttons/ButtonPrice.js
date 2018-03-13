@@ -5,9 +5,9 @@ import { Button } from 'react-bootstrap';
 const ButtonPrice = (props) => {
   if (props.path === '/price') {
     return (
-      <span className="btn btn-default-select">
+      <Button active>
         Price
-      </span>
+      </Button>
     );
   }
   return (
