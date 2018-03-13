@@ -45,11 +45,11 @@
     "check-build": "yarn run eslint && yarn run test && yarn run soltest"
   },
   "nyc": {
-    "exclude": [
-      "**test/**",
-      "**testnpm/**"
+    "include": [
+      "src/**/*.js"
     ],
-    "report-dir": "./js-coverage"
+    "report-dir": "./js-coverage",
+    "all": true
   },
   "babel": {
     "presets": [
