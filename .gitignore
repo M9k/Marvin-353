@@ -57,7 +57,7 @@ report.lcov
 build/
 dist/
 \.nyc_output/
-
+*pyc
 css/
 
 public/contracts/
