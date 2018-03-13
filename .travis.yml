@@ -27,6 +27,10 @@ jobs:
         - npm run soltest
     - stage: code-coverage
       if: branch = master
+      notifications:
+        slack:
+          on_success: never
+          on_failure: always
       before_script: npm run rpcov
       install:
         - sudo apt-get install python-pip python-dev
@@ -39,6 +43,10 @@ jobs:
        - npm run merge-coverage
        - cat report.lcov | COVERALLS_REPO_TOKEN=$repo_token COVERALLS_SERVICE_NAME=travis-pro ./node_modules/.bin/coveralls
     - stage: deploy-to-production
+      notifications:
+        slack:
+          on_success: never
+          on_failure: always
       if: branch = master
       script:
         - npm run build-prod
