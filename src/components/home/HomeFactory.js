@@ -42,17 +42,10 @@ const HomeFactory = (props) => {
 };
 
 HomeFactory.propTypes = {
-  metamask: PropTypes.bool,
-  account: PropTypes.string,
-  isLogged: PropTypes.bool,
-  accountType: PropTypes.oneOf(Object.values(AccountTypes)),
-};
-
-HomeFactory.defaultProps = {
-  metamask: false,
-  account: null,
-  isLogged: false,
-  accountType: AccountTypes.NOTLOGGED,
+  metamask: PropTypes.bool.isRequired,
+  account: PropTypes.string.isRequired,
+  isLogged: PropTypes.bool.isRequired,
+  accountType: PropTypes.oneOf(Object.values(AccountTypes)).isRequired,
 };
 
 export default HomeFactory;

@@ -1,8 +1,8 @@
 import { userAction } from '../actions/actions';
 
 const initialState = {
-  metamask: false,
-  account: null,
+  metamask: true,
+  account: '',
   trylogin: false,
   logged: false,
   role: null,
@@ -23,9 +23,9 @@ const userLogger = (state = initialState, action) => {
       role: null,
     });
   }
-  if (action.type === userAction.METAMASK) {
+  if (action.type === userAction.METAMASK_NOT_FOUND) {
     return Object.assign({}, state, {
-      metamask: true,
+      metamask: false,
     });
   }
   if (action.type === userAction.EDIT_ADDRESS) {
@@ -35,7 +35,7 @@ const userLogger = (state = initialState, action) => {
       });
     }
     return Object.assign({}, state, {
-      account: null,
+      account: '',
     });
   }
   if (action.type === userAction.USER_LOGGED_OUT) {

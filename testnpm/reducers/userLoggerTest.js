@@ -7,7 +7,7 @@ describe('userLogger reducer', () => {
     expect(userLogger(undefined, {})).to.deep.equal(initialState);
   });
 
-  it('shouldhandle USER_LOGGED_IN', () => {
+  it('shouldh andle USER_LOGGED_IN', () => {
     const action = { type: types.userAction.USER_LOGGED_IN };
     expect(userLogger({}, action)).to.deep.equal({
       trylogin: false,
@@ -43,24 +43,24 @@ describe('userLogger reducer', () => {
     });
   });
 
-  it('should handle METAMASK', () => {
-    const action = { type: types.userAction.METAMASK };
+  it('should handle METAMASK_NOT_FOUND', () => {
+    const action = { type: types.userAction.METAMASK_NOT_FOUND };
     expect(userLogger({}, action)).to.deep.equal({
-      metamask: true,
+      metamask: false,
     });
   });
 
   it('should handle EDIT_ADDRESS undefined', () => {
     const actionUndefined = { type: types.userAction.EDIT_ADDRESS, address: undefined };
     expect(userLogger({}, actionUndefined)).to.deep.equal({
-      account: null,
+      account: '',
     });
   });
 
   it('should handle EDIT_ADDRESS defined', () => {
     const actionDefined = { address: '0xciao', type: types.userAction.EDIT_ADDRESS };
     expect(userLogger(initialState, actionDefined)).to.deep.equal({
-      metamask: false,
+      metamask: true,
       account: '0xciao',
       trylogin: false,
       logged: false,

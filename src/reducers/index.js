@@ -10,7 +10,12 @@ import { universityData } from './university';
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['routing', 'form'],
+  blacklist: ['routing', 'form', 'user'],
+};
+const userPersistConfig = {
+  key: 'user',
+  storage,
+  blacklist: ['metamask'],
 };
 
 
@@ -18,7 +23,7 @@ const persistConfig = {
 const reducers = combineReducers({
   routing: routerReducer,
   form: formReducer,
-  user: userLogger,
+  user: persistReducer(userPersistConfig, userLogger),
   university: universityData,
 });
 

@@ -6,7 +6,6 @@ import AlertDismissable from '../alert/AlertDismissable';
 
 const HomeDefault = (props) => {
   document.title = 'Home - Marvin';
-
   return (
     <div className="page-home">
       {!props.metamask &&
@@ -19,9 +18,9 @@ const HomeDefault = (props) => {
         <Button href="/login">Login</Button><br />
         <Button href="/register">Register</Button><br />
         <h2>Metamask installato: {props.metamask ? 'SI' : 'NO'}</h2><br />
-        <h2>Metamask sbloccato: {props.account !== null ? 'SI' : 'NO'}</h2><br />
+        <h2>Metamask sbloccato: {props.account !== '' ? 'SI' : 'NO'}</h2><br />
         <h2>Versione di Web3: {typeof web3 !== 'undefined' && web3 !== null ? web3.version.api : 'NOT FOUND!!'}</h2><br />
-        <h2>Account in uso: {props.account !== null ? props.account : 'NOT FOUND!!'}</h2><br />
+        <h2>Account in uso: {props.account !== '' ? props.account : 'NOT FOUND!!'}</h2><br />
       </div>
     </div>
   );

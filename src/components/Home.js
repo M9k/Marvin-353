@@ -30,7 +30,7 @@ Home.propTypes = {
 
 Home.defaultProps = {
   metamask: false,
-  account: null,
+  account: '',
   isLogged: false,
   accountType: AccountTypes.NOTLOGGED,
 };

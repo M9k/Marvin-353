@@ -7,7 +7,7 @@ import getAdminWeb3 from '../web3calls/getAdmin';
 export function* adminNumber() {
   const administratorNumber = yield call(numAdmin);
   yield put({
-    type: universityAction.RETURN_ADMIN_NUMBER,
+    type: universityAction.SET_ADMIN_NUMBER,
     adminNumber: Number(administratorNumber),
   });
 }
@@ -18,8 +18,8 @@ export function* addAdmin(action) {
   } catch (e) {
     console.log('Failed!');
   }
-  // const nAdmin = yield call(numAdmin);
-  // yield put({ type: universityAction.ADD_NEW_ADMIN, adminNumber: Number(nAdmin) });
+  // automatic update of Redux state
+  yield put({ type: universityAction.GET_ALL_ADMINS });
 }
 
 export function* getAllAdmins() {
@@ -29,7 +29,7 @@ export function* getAllAdmins() {
     admins[i] = yield call(getAdminWeb3, i);
   }
   yield put({
-    type: universityAction.RETURN_ALL_ADMINS,
+    type: universityAction.SET_ADMINS_LIST,
     number: num,
     account: admins,
   });
