@@ -7,12 +7,7 @@ python:
   - "2.7"
 notifications:
   email: false
-  slack:
-    rooms:
-      353swe:TBr27Dyzfxr9mmz1qYaWjJiv
-      on_success: never
-      on_failure: never
-
+  slack: 353swe:TBr27Dyzfxr9mmz1qYaWjJiv
 cache:
   directories:
     - node_modules
@@ -36,10 +31,6 @@ jobs:
           on_failure: always
     - stage: code-coverage
       if: branch = master
-      notifications:
-        slack:
-          on_success: never
-          on_failure: always
       before_script: npm run rpcov
       install:
         - sudo apt-get install python-pip python-dev
@@ -52,10 +43,6 @@ jobs:
        - npm run merge-coverage
        - cat report.lcov | COVERALLS_REPO_TOKEN=$repo_token COVERALLS_SERVICE_NAME=travis-pro ./node_modules/.bin/coveralls
     - stage: deploy-to-production
-      notifications:
-        slack:
-          on_success: never
-          on_failure: always
       if: branch = master
       script:
         - npm run build-prod
