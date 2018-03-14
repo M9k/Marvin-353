@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import * as types from '../../src/actions/actions';
-import  { universityData } from '../../src/reducers/university';
+import { universityData } from '../../src/reducers/university';
+
 const correctInitialState = {
   adminNumber: 0,
   adminAccount: null,
@@ -14,17 +15,18 @@ describe('university reducer', () => {
   it('should have the correct initial state ', () => {
     expect(universityData(undefined, {})).to.deep.equal(correctInitialState);
   });
-  superPureActions.forEach((action_name) => {
-    it(`should have the previous state with ${action_name}`, () => {
-      expect(universityData(undefined, {type: action_name})).to.deep.equal(correctInitialState);
+  superPureActions.forEach((actionName) => {
+    it(`should have the previous state with ${actionName}`, () => {
+      expect(universityData(undefined, { type: actionName })).to.deep.equal(correctInitialState);
     });
   });
   it('should return return the state with the correct admin number', () => {
-    expect(
-      universityData(undefined, {type: types.universityAction.SET_ADMIN_NUMBER, adminNumber: 5})
-    ).to.deep.equal({
+    expect(universityData(undefined, {
+      type: types.universityAction.SET_ADMIN_NUMBER,
       adminNumber: 5,
-      adminAccount: null
+    })).to.deep.equal({
+      adminNumber: 5,
+      adminAccount: null,
     });
   });
 });
