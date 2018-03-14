@@ -18,8 +18,6 @@ export function* addAdmin(action) {
   } catch (e) {
     console.log('Failed!');
   }
-  // automatic update of Redux state
-  yield put({ type: universityAction.GET_ALL_ADMINS });
 }
 
 export function* getAllAdmins() {
