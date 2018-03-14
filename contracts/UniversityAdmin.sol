@@ -42,7 +42,6 @@ contract UniversityAdmin is UniversityBase {
     function getAdminAt(uint _index) public view returns(address) {
         return administratorsByIndex[_index + 1];
     }
-    //get index of admin with address of not usefull
 
     //remove the admin with address _address
     function removeAdmin(address _address) public onlyFounder validAdminAddress(_address) {

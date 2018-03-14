@@ -22,13 +22,10 @@ jobs:
         - npm run testrpc
         - npm run compile
         - npm run eslint
+        - npm run solhint
       script:
         - npm run test
         - npm run soltest
-      notifications:
-        slack:
-          on_success: always
-          on_failure: always
     - stage: code-coverage
       if: branch = master
       before_script: npm run rpcov

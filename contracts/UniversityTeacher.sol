@@ -58,14 +58,18 @@ contract UniversityTeacher is UniversityAdmin {
         return unconfirmedTeachersByIndex[_index+1];
     }
 
-    function confirmTeacher(address _address) public onlyAdmin
-    isUnconfirmedTeacherAddress(_address) {
+    function confirmTeacher(address _address) public
+    onlyAdmin
+    isUnconfirmedTeacherAddress(_address)
+    {
         removeUnconfirmedTeacher(_address);
         addTeacher(_address);
     }
 
-    function dontConfirmTeacher(address _address) public onlyAdmin
-    isUnconfirmedTeacherAddress(_address) {
+    function dontConfirmTeacher(address _address) public
+    onlyAdmin
+    isUnconfirmedTeacherAddress(_address)
+    {
         teacherContract[_address] = 0;
         removeUnconfirmedTeacher(_address);
     }
@@ -97,8 +101,7 @@ contract UniversityTeacher is UniversityAdmin {
 
     function removeUnconfirmedTeacher(address _address) private {
         registered[_address] = false;
-        unconfirmedTeachersByIndex[unconfirmedTeachers[_address]] =
-        unconfirmedTeachersByIndex[countUnconfirmedTeachers];
+        unconfirmedTeachersByIndex[unconfirmedTeachers[_address]] = unconfirmedTeachersByIndex[countUnconfirmedTeachers];
         unconfirmedTeachers[_address] = 0;
         countUnconfirmedTeachers -= 1;
     }

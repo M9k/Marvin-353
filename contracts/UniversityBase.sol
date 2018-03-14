@@ -4,7 +4,7 @@ pragma solidity ^0.4.19;
 contract UniversityBase {
     address private universityAddress;
 
-    mapping (address => bool) registered;
+    mapping (address => bool) public registered;
 
     //Constructor
     function UniversityBase() public {

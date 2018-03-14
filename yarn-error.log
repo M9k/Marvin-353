@@ -1,17 +1,17 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js run test
+  /usr/local/heroku/bin/node /usr/share/yarn/bin/yarn.js run eslint
 
 PATH: 
-  C:\Python27\;C:\Python27\Scripts;D:\Ruby24-x64\bin;C:\Ruby24-x64\bin;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0\bin;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0\libnvvp;c:\program files (x86)\intel\icls client\;c:\program files\intel\icls client\;c:\windows\system32;c:\windows;c:\windows\system32\wbem;c:\windows\system32\windowspowershell\v1.0\;c:\program files (x86)\intel\intel(r) management engine components\dal;c:\program files\intel\intel(r) management engine components\dal;c:\program files (x86)\intel\intel(r) management engine components\ipt;c:\program files\intel\intel(r) management engine components\ipt;c:\program files\java\jdk1.8.0_101\bin;c:\program files (x86)\windows kits\10\windows performance toolkit\;c:\program files\microsoft sql server\130\tools\binn\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\TortoiseSVN\bin;C:\Program Files (x86)\Skype\Phone\;C:\Program Files\MiKTeX 2.9\miktex\bin\x64\;C:\Program Files\nodejs\;C:\Program Files (x86)\Yarn\bin\;C:\Program Files (x86)\Nmap;C:\Program Files\LLVM\bin;C:\Python27;D:\Android\platform-tools;D:\Android\tools;C:\Program Files\7-Zip;C:\Program Files\Git\bin;C:\Program Files (x86)\scala\bin;C:\Program Files\Go\bin;C:\Program Files\nodejs\;C:\Users\M9k\AppData\Roaming\npm;C:\Program Files (x86)\Nmap;C:\Program Files (x86)\Dev-Cpp\MinGW64\bin;C:\Program Files (x86)\Dev-Cpp\MinGW32\bin;C:\QT\5.7\mingw53_32\bin;C:\Program Files\MiKTeX 2.9\miktex\bin\x64\;C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Tools\MSVC\14.10.25017\bin\HostX64\x64;D:\PROGRAMMI SN\cmake\bin;D:\lib\SDL\bin;D:\PROGRAMMI SN\apache-maven\bin;D:\PROGRAMMI SN\Gradle\bin;D:\Perl64\bin;D:\Perl64\site\bin;D:\Cygwin\bin;C:\Program Files (x86)\Vim\vim80;C:\Program Files (x86)\Yarn\bin
+  /usr/local/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/home/maztek/UNIPD/Corsi/SWE/Progetto/PoC-Marvin-353/node_modules/.bin:/home/maztek/bin:/home/maztek/.local/bin:/usr/local/heroku/bin:/home/maztek/.rvm/gems/ruby-2.3.0/bin:/home/maztek/.rvm/gems/ruby-2.3.0@global/bin:/home/maztek/.rvm/rubies/ruby-2.3.0/bin:/home/maztek/bin:/home/maztek/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/maztek/.rvm/bin:/home/maztek/.rvm/bin:/snap/bin:/home/maztek/.rvm/bin:/home/maztek/.rvm/bin:/opt/gradle/gradle-4.3.1/bin:/home/maztek/.rvm/bin:/home/maztek/.rvm/bin
 
 Yarn version: 
   1.5.1
 
 Node version: 
-  8.9.4
+  8.4.0
 
 Platform: 
-  win32 x64
+  linux x64
 
 npm manifest: 
   {
@@ -32,7 +32,8 @@ npm manifest:
       "url": "https://github.com/353swe"
     },
     "config": {
-      "rpc": "\"0xcafecafecafecafecafecafecafecafecafecafecafecafecafecafecafecafe,1000000000000000000\" --account=\"0x0000000000000000000000000000000000000000000000000000000000000001,100000000000000000000\" --account=\"0x0000000000000000000000000000000000000000000000000000000000000002,1000000000000000000\" --account=\"0x0000000000000000000000000000000000000000000000000000000000000003,1000000000000000000\" --account=\"0x0000000000000000000000000000000000000000000000000000000000000004,1000000000000000000\" --account=\"0x0000000000000000000000000000000000000000000000000000000000000005,1000000000000000000\" --account=\"0x0000000000000000000000000000000000000000000000000000000000000006,1000000000000000000\" --account=\"0x0000000000000000000000000000000000000000000000000000000000000007,1000000000000000000\" --account=\"0x0000000000000000000000000000000000000000000000000000000000000008,1000000000000000000\" --account=\"0x0000000000000000000000000000000000000000000000000000000000000009,1000000000000000000\" --account=\"0x0000000000000000000000000000000000000000000000000000000000000010,1000000000000000000\" --account=\"0x0000000000000000000000000000000000000000000000000000000000000011,1000000000000000000\" --account=\"0x0000000000000000000000000000000000000000000000000000000000000012,1000000000000000000\" --account=\"0x0000000000000000000000000000000000000000000000000000000000000013,1000000000000000000\" --account=\"0x0000000000000000000000000000000000000000000000000000000000000014,1000000000000000000\""
+      "prc": "--account=0xcafecafecafecafecafecafecafecafecafecafecafecafecafecafecafecafe,1000000000000000000 --account=0x0000000000000000000000000000000000000000000000000000000000000001,1000000000000000000 --account=0x0000000000000000000000000000000000000000000000000000000000000002,1000000000000000000 --account=0x0000000000000000000000000000000000000000000000000000000000000003,1000000000000000000 --account=0x0000000000000000000000000000000000000000000000000000000000000004,1000000000000000000 --account=0x0000000000000000000000000000000000000000000000000000000000000005,1000000000000000000 --account=0x0000000000000000000000000000000000000000000000000000000000000006,1000000000000000000 --account=0x0000000000000000000000000000000000000000000000000000000000000007,1000000000000000000 --account=0x0000000000000000000000000000000000000000000000000000000000000008,1000000000000000000 --account=0x0000000000000000000000000000000000000000000000000000000000000009,1000000000000000000 --account=0x0000000000000000000000000000000000000000000000000000000000000010,1000000000000000000 --account=0x0000000000000000000000000000000000000000000000000000000000000011,1000000000000000000 --account=0x0000000000000000000000000000000000000000000000000000000000000012,1000000000000000000 --account=0x0000000000000000000000000000000000000000000000000000000000000013,1000000000000000000 --account=0x0000000000000000000000000000000000000000000000000000000000000014,1000000000000000000",
+      "rpc": "--account=\"0xcafecafecafecafecafecafecafecafecafecafecafecafecafecafecafecafe,1000000000000000000\" --account=\"0x0000000000000000000000000000000000000000000000000000000000000001,1000000000000000000\" --account=\"0x0000000000000000000000000000000000000000000000000000000000000002,1000000000000000000\" --account=\"0x0000000000000000000000000000000000000000000000000000000000000003,1000000000000000000\" --account=\"0x0000000000000000000000000000000000000000000000000000000000000004,1000000000000000000\" --account=\"0x0000000000000000000000000000000000000000000000000000000000000005,1000000000000000000\" --account=\"0x0000000000000000000000000000000000000000000000000000000000000006,1000000000000000000\" --account=\"0x0000000000000000000000000000000000000000000000000000000000000007,1000000000000000000\" --account=\"0x0000000000000000000000000000000000000000000000000000000000000008,1000000000000000000\" --account=\"0x0000000000000000000000000000000000000000000000000000000000000009,1000000000000000000\" --account=\"0x0000000000000000000000000000000000000000000000000000000000000010,1000000000000000000\" --account=\"0x0000000000000000000000000000000000000000000000000000000000000011,1000000000000000000\" --account=\"0x0000000000000000000000000000000000000000000000000000000000000012,1000000000000000000\" --account=\"0x0000000000000000000000000000000000000000000000000000000000000013,1000000000000000000\" --account=\"0x0000000000000000000000000000000000000000000000000000000000000014,1000000000000000000\""
     },
     "scripts": {
       "frontendC": "echo Frontend",
@@ -46,8 +47,8 @@ npm manifest:
       "compile": "./node_modules/.bin/truffle compile --all",
       "migrate": "./node_modules/.bin/truffle migrate --network develop",
       "migratetest": "./node_modules/.bin/truffle test --compile-all --network develop",
-      "testrpc-win": "./node_modules/.bin/testrpc-sc.cmd --account= %npm_package_config_rpc%",
-      "testrpc": "./node_modules/.bin/testrpc-sc --account= $npm_package_config_rpc  > /dev/null &",
+      "testrpc-win": "./node_modules/.bin/testrpc-sc %npm_package_config_rpc%",
+      "testrpc": "./node_modules/.bin/testrpc-sc $npm_package_config_prc > /dev/null &",
       "coverageC": "echo Coverage",
       "solidity-coverage": "./node_modules/.bin/solidity-coverage",
       "js-coverage": "nyc mocha testnpm --recursive --compilers js:babel-register --require babel-polyfill --require ignore-styles",
@@ -9262,16 +9263,16 @@ Lockfile:
 
 Trace: 
   Error: Command failed.
-  Exit code: 3
-  Command: C:\Windows\system32\cmd.exe
-  Arguments: /d /s /c mocha testnpm --recursive --compilers js:babel-register --require babel-polyfill --require ignore-styles
-  Directory: C:\Users\M9k\Desktop\SWE\PROGETTO2017\POC\PoC-Marvin-353
+  Exit code: 1
+  Command: sh
+  Arguments: -c ./node_modules/.bin/eslint src testnpm test
+  Directory: /home/maztek/UNIPD/Corsi/SWE/Progetto/PoC-Marvin-353
   Output:
   
-      at ProcessTermError.MessageError (C:\Program Files (x86)\Yarn\lib\cli.js:186:110)
-      at new ProcessTermError (C:\Program Files (x86)\Yarn\lib\cli.js:226:113)
-      at ChildProcess.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:30281:17)
-      at emitTwo (events.js:126:13)
-      at ChildProcess.emit (events.js:214:7)
-      at maybeClose (internal/child_process.js:925:16)
-      at Process.ChildProcess._handle.onexit (internal/child_process.js:209:5)
+      at ProcessTermError.MessageError (/usr/share/yarn/lib/cli.js:186:110)
+      at new ProcessTermError (/usr/share/yarn/lib/cli.js:226:113)
+      at ChildProcess.<anonymous> (/usr/share/yarn/lib/cli.js:30281:17)
+      at emitTwo (events.js:125:13)
+      at ChildProcess.emit (events.js:213:7)
+      at maybeClose (internal/child_process.js:927:16)
+      at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
