@@ -26,6 +26,7 @@
     "build-prod": "webpack -p --config webpack.prod.config.js",
     "test": "mocha testnpm --recursive --compilers js:babel-register --require babel-polyfill --require ignore-styles",
     "test-watch": "npm test -- --watch",
+    "custom-test": "mocha --compilers js:babel-register --require babel-polyfill --require ignore-styles",
     "solidityC": "echo Solidity",
     "soltest": "./node_modules/.bin/truffle test --compile-all --show-events",
     "compile": "./node_modules/.bin/truffle compile --all",
