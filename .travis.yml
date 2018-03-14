@@ -14,6 +14,8 @@ cache:
 env:
   global:
     - NODE_ENV=development
+git:
+  depth: 1
 jobs:
   include:
     - stage: test

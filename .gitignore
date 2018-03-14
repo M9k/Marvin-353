@@ -48,6 +48,8 @@ src/stylesheets/imageLabel\.css
 *.map
 
 package-lock\.json
+yarn.lock
+yarn-error.log
 
 coverage.json
 coverage/
