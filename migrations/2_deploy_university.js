@@ -7,10 +7,10 @@ module.exports = function (deployer) {
   deployer.deploy(User, 'mario', 'rossi');
 
   // ONLY FOR SOLTEST! NOT FOR DEPLOY
-  deployer.deploy(UniversityBase);
+  deployer.deploy(UniversityBase, {gas: 0xfffffffffff});
   // ONLY FOR SOLTEST! NOT FOR DEPLOY
   deployer.link(UniversityBase, UniversityAdmin);
-  deployer.deploy(UniversityAdmin);
+  deployer.deploy(UniversityAdmin, {gas: 0xfffffffffff});
   deployer.link(UniversityAdmin, UniversityTeacher);
-  deployer.deploy(UniversityTeacher, {gas: 4600000});
+  deployer.deploy(UniversityTeacher, {gas: 0xfffffffffff});
 };
