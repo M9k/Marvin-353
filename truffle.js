@@ -4,6 +4,12 @@ var infura_apikey = 'dJdeB6osExnc9NaMwkkI';
 var mnemonic = 'earth muscle flash impose wait paper curtain pigeon observe urge beef caution';
 
 module.exports = {
+  solc: {
+    optimizer: {
+      enabled: true,
+      runs: 200
+    }
+  },
   networks: {
     develop: {
       host: '127.0.0.1',
