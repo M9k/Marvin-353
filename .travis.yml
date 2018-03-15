@@ -28,7 +28,7 @@ jobs:
         - npm run soltest
     - stage: code-coverage
       if: branch = master
-      before_script: npm run rpcov
+      before_script: npm run testrpc
       install:
         - sudo apt-get install python-pip python-dev
         - sudo pip install bs4
