@@ -71,7 +71,7 @@
       ]
     ]
   },
-  "author": "Catalin Luntraru",
+  "author": "353",
   "license": "MIT",
   "dependencies": {
     "babel-eslint": "^8.2.2",
@@ -132,7 +132,7 @@
     "redux-mock-store": "^1.5.1",
     "sass-loader": "^4.1.1",
     "solhint": "^1.1.10",
-    "solidity-coverage": "^0.4.9",
+    "solidity-coverage": "^0.4.12",
     "style-loader": "^0.13.1",
     "surge": "^0.19.0",
     "truffle": "^4.0.7",
