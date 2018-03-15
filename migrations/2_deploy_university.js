@@ -12,5 +12,5 @@ module.exports = function (deployer) {
   deployer.link(UniversityBase, UniversityAdmin);
   deployer.deploy(UniversityAdmin);
   deployer.link(UniversityAdmin, UniversityTeacher);
-  deployer.deploy(UniversityTeacher);
+  deployer.deploy(UniversityTeacher, {gas: 4600000});
 };
