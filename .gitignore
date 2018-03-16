@@ -52,7 +52,7 @@ yarn.lock
 yarn-error.log
 
 coverage.json
-coverage/
+/coverage/
 js-coverage/
 report.lcov
 .coveralls.yml
