@@ -19,7 +19,8 @@ jobs:
   include:
     - stage: test
       env:
-        - STAGE_NAME=test
+        global:
+          - STAGE_NAME=test
       install: npm install
       before_script:
         - npm run testrpc
@@ -32,7 +33,8 @@ jobs:
     - stage: code-coverage
       if: branch = master
       env:
-        - STAGE_NAME=coverage
+        global:
+          - STAGE_NAME=coverage
       before_script: npm run rpcov
       install:
         - sudo apt-get install python-pip python-dev
@@ -47,7 +49,8 @@ jobs:
     - stage: deploy-to-production
       if: branch = master
       env:
-        - STAGE_NAME=deploy
+        global:
+          - STAGE_NAME=deploy
       script:
         - npm run build-prod
       deploy:
