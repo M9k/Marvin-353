@@ -14,13 +14,9 @@ cache:
 env:
   global:
     - NODE_ENV=development
-after_failure: python scripts/travis/failed_build.py $STAGE_NAME "$TRAVIS_COMMIT_MESSAGE"
 jobs:
   include:
     - stage: test
-      env:
-        global:
-          - STAGE_NAME=test
       install: npm install
       before_script:
         - npm run testrpc
@@ -30,11 +26,9 @@ jobs:
       script:
         - npm run test
         - npm run soltest
+      after_failure: python scripts/travis/failed_build.py test "$TRAVIS_COMMIT_MESSAGE"
     - stage: code-coverage
       if: branch = master
-      env:
-        global:
-          - STAGE_NAME=coverage
       before_script: npm run rpcov
       install:
         - sudo apt-get install python-pip python-dev
@@ -46,13 +40,12 @@ jobs:
       after_success:
        - npm run merge-coverage
        - cat report.lcov | COVERALLS_REPO_TOKEN=$repo_token COVERALLS_SERVICE_NAME=travis-pro ./node_modules/.bin/coveralls
+      after_failure: python scripts/travis/failed_build.py coverage "$TRAVIS_COMMIT_MESSAGE"
     - stage: deploy-to-production
       if: branch = master
-      env:
-        global:
-          - STAGE_NAME=deploy
       script:
         - npm run build-prod
+      after_failure: python scripts/travis/failed_build.py deploy "$TRAVIS_COMMIT_MESSAGE"
       deploy:
         provider: surge
         project: ./dist/
