@@ -17,7 +17,7 @@ env:
 before_install:
   - export COMMITTER_EMAIL="$(git log -1 $TRAVIS_COMMIT --pretty="%cE")"
   - export AUTHOR_NAME="$(git log -1 $TRAVIS_COMMIT --pretty="%aN")"
-after_failure: python scripts/travis/failed_build.py "$STAGE_NAME" "$TRAVIS_COMMIT_MESSAGE" "$TRAVIS_BRANCH" "$COMMITER_EMAIL"
+after_failure: python scripts/travis/failed_build.py "$STAGE_NAME" "$TRAVIS_COMMIT_MESSAGE" "$TRAVIS_BRANCH" "$AUTHOR_NAME"
 jobs:
   include:
     - stage: test
