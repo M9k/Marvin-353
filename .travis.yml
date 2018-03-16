@@ -17,7 +17,10 @@ env:
 jobs:
   include:
     - stage: test
-      install: npm install
+      install:
+        - npm install
+        - sudo apt-get install python-pip python-dev
+        - sudo pip install unirest
       before_script:
         - npm run testrpc
         - npm run compile
