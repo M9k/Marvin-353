@@ -14,9 +14,14 @@ cache:
 env:
   global:
     - NODE_ENV=development
+before_install:
+  - export COMMITTER_EMAIL="$(git log -1 $TRAVIS_COMMIT --pretty="%cE")"
+  - export AUTHOR_NAME="$(git log -1 $TRAVIS_COMMIT --pretty="%aN")"
+after_failure: python scripts/travis/failed_build.py "$STAGE_NAME" "$TRAVIS_COMMIT_MESSAGE" "$TRAVIS_BRANCH" "$COMMITER_EMAIL"
 jobs:
   include:
     - stage: test
+      before_install: export STAGE_NAME=test
       install:
         - npm install
         - sudo pip install unirest
@@ -26,9 +31,9 @@ jobs:
         - python scripts/travis/exec_and_report.py lint
       script:
         - python scripts/travis/exec_and_report.py test
-      after_failure: python scripts/travis/failed_build.py test "$TRAVIS_COMMIT_MESSAGE"
     - stage: code-coverage
       if: branch = master
+      before_install: export STAGE_NAME=coverage
       install:
         - sudo pip install unirest
         - sudo pip install bs4
@@ -39,12 +44,11 @@ jobs:
       after_success:
        - npm run merge-coverage
        - cat report.lcov | COVERALLS_REPO_TOKEN=$repo_token COVERALLS_SERVICE_NAME=travis-pro ./node_modules/.bin/coveralls
-      after_failure: python scripts/travis/failed_build.py coverage "$TRAVIS_COMMIT_MESSAGE"
     - stage: deploy-to-production
       if: branch = master
+      before_install: export STAGE_NAME=deploy
       script:
         - npm run build-prod
-      after_failure: python scripts/travis/failed_build.py deploy "$TRAVIS_COMMIT_MESSAGE"
       deploy:
         provider: surge
         project: ./dist/
