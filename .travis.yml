@@ -19,7 +19,6 @@ jobs:
     - stage: test
       install:
         - npm install
-        - sudo apt-get install python-pip python-dev
         - sudo pip install unirest
       before_script:
         - npm run testrpc
@@ -30,11 +29,10 @@ jobs:
       after_failure: python scripts/travis/failed_build.py test "$TRAVIS_COMMIT_MESSAGE"
     - stage: code-coverage
       if: branch = master
-      before_script: npm run rpcov
       install:
-        - sudo apt-get install python-pip python-dev
-        - sudo pip install bs4
         - sudo pip install unirest
+        - sudo pip install bs4
+      before_script: npm run rpcov
       script:
        - python scripts/coverage/js-coverage.py
        - python scripts/coverage/solidity-coverage.py
