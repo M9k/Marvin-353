@@ -21,11 +21,9 @@ jobs:
       before_script:
         - npm run testrpc
         - npm run compile
-        - npm run eslint
-        - npm run solhint
+        - python scripts/travis/exec_and_report.py lint
       script:
-        - npm run test
-        - npm run soltest
+        - python scripts/travis/exec_and_report.py test
       after_failure: python scripts/travis/failed_build.py test "$TRAVIS_COMMIT_MESSAGE"
     - stage: code-coverage
       if: branch = master
