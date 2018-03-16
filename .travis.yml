@@ -17,12 +17,12 @@ env:
 before_install:
   - export COMMITTER_EMAIL="$(git log -1 $TRAVIS_COMMIT --pretty="%cE")"
   - export AUTHOR_NAME="$(git log -1 $TRAVIS_COMMIT --pretty="%aN")"
-after_failure: python scripts/travis/failed_build.py "$STAGE_NAME" "$TRAVIS_COMMIT_MESSAGE" "$TRAVIS_BRANCH" "$COMMITTER_EMAIL"
+after_failure: python scripts/travis/failed_build.py "$STAGE_NAME" "$TRAVIS_COMMIT_MESSAGE" "$TRAVIS_BRANCH" "$AUTHOR_NAME"
 jobs:
   include:
     - stage: test
-      before_install: export STAGE_NAME=test
       install:
+        - export STAGE_NAME=test
         - npm install
         - sudo pip install unirest
       before_script:
@@ -33,8 +33,9 @@ jobs:
         - python scripts/travis/exec_and_report.py test
     - stage: code-coverage
       if: branch = master
-      before_install: export STAGE_NAME=coverage
+      before_install:
       install:
+        - export STAGE_NAME=coverage
         - sudo pip install unirest
         - sudo pip install bs4
       before_script: npm run rpcov
@@ -46,7 +47,7 @@ jobs:
        - cat report.lcov | COVERALLS_REPO_TOKEN=$repo_token COVERALLS_SERVICE_NAME=travis-pro ./node_modules/.bin/coveralls
     - stage: deploy-to-production
       if: branch = master
-      before_install: export STAGE_NAME=deploy
+      before_script: export STAGE_NAME=deploy
       script:
         - npm run build-prod
       deploy:
