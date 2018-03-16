@@ -28,8 +28,8 @@ jobs:
       before_script:
         - npm run testrpc
         - npm run compile
-        - python scripts/travis/exec_and_report.py lint
       script:
+        - python scripts/travis/exec_and_report.py lint
         - python scripts/travis/exec_and_report.py test
     - stage: code-coverage
       if: branch = master
