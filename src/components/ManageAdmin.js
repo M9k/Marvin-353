@@ -26,7 +26,7 @@ class ManageAdmin extends React.Component {
     const list = [];
     const admin = this.props.adminAccount;
     for (let i = 0; admin !== null && i < admin.length; i += 1) {
-      list.push(<ListGroupItem>{admin[i]}</ListGroupItem>);
+      list.push(<ListGroupItem>{admin[i]} <Button onClick={() => this.props.removeAdmin(admin[i])} bsClass="deleteBtn" bsSize="small">Remove</Button></ListGroupItem>);
     }
 
     return (
@@ -51,6 +51,7 @@ ManageAdmin.propTypes = {
   adminAccount: PropTypes.arrayOf(String),
   getAdminNumber: PropTypes.func,
   addAdmin: PropTypes.func,
+  removeAdmin: PropTypes.func,
   getAllAdmin: PropTypes.func,
 };
 
@@ -59,6 +60,7 @@ ManageAdmin.defaultProps = {
   adminAccount: [],
   getAdminNumber: () => {},
   addAdmin: () => {},
+  removeAdmin: () => {},
   getAllAdmin: () => {},
 };
 
@@ -76,6 +78,11 @@ function mapDispatchToProps(dispatch) {
     // add a new admin
     addAdmin: _address => dispatch({
       type: universityAction.ADD_NEW_ADMIN,
+      address: _address,
+    }),
+    // delete a new admin
+    removeAdmin: _address => dispatch({
+      type: universityAction.REMOVE_ADMIN,
       address: _address,
     }),
     // return the address of a admin

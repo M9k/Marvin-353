@@ -2,6 +2,7 @@ import { call, put } from 'redux-saga/effects';
 import { universityAction } from '../actions/actions';
 import numAdmin from '../web3calls/numAdmin';
 import addAdminWeb3 from '../web3calls/addAdmin';
+import removeAdminWeb3 from '../web3calls/removeAdmin';
 import getAdminWeb3 from '../web3calls/getAdmin';
 
 export function* adminNumber() {
@@ -15,6 +16,14 @@ export function* adminNumber() {
 export function* addAdmin(action) {
   try {
     yield call(addAdminWeb3, action.address);
+  } catch (e) {
+    console.log('Failed!');
+  }
+}
+
+export function* removeAdmin(action) {
+  try {
+    yield call(removeAdminWeb3, action.address);
   } catch (e) {
     console.log('Failed!');
   }
