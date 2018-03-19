@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow, configure } from 'enzyme';
 import assert from 'assert';
-import Adapter from 'enzyme-adapter-react-15';
+import Adapter from 'enzyme-adapter-react-16';
 import HomeFactory from '../../../src/components/home/HomeFactory';
 import AccountTypes from '../../../src/components/AccountEnum';
 
