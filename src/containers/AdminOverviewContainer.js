@@ -1,29 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { universityAction } from '../actions/actions'
 import { Button } from 'react-bootstrap';
+import { universityAction } from '../actions/actions';
 import RemoveList from '../components/lists/RemoveList';
 
 class AdminOverviewContainer extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.refreshData = this.refreshData.bind(this);
   }
-  componentDidMount(){
-    if(this.props.adminAccount.length == 0) this.refreshData();
+  componentDidMount() {
+    if (this.props.adminAccount.length === 0) this.refreshData();
   }
-  refreshData(){
+  refreshData() {
     this.props.getAdminNumber();
     this.props.getAllAdmin();
   }
-  render(){
+  render() {
     return (
       <div id="admin-overview">
         <h2>AdminList</h2>
-        <Button onClick={this.refreshData}>Refresh</Button><br/>
+        <Button onClick={this.refreshData}>Refresh</Button><br />
         <p>Number of admins: {this.props.adminNumber}</p>
-        <RemoveList elements={this.props.adminAccount} removeFnc={this.props.removeAdmin}/>
+        <RemoveList elements={this.props.adminAccount} removeFnc={this.props.removeAdmin} />
       </div>
     );
   }
@@ -44,11 +44,11 @@ AdminOverviewContainer.defaultProps = {
   getAllAdmin: () => {},
 };
 
-const mapStateToProps = state =>({
+const mapStateToProps = state => ({
   adminNumber: state.university.adminNumber,
   adminAccount: state.university.adminAccount,
 });
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch) {
   return {
     getAdminNumber: () => dispatch({
       type: universityAction.GET_ADMIN_NUMBER,

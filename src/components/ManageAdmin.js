@@ -14,8 +14,8 @@ class ManageAdmin extends React.Component {
       <div id="ManageAdmin">
         <Header accountType={AccountTypes.UNIVERSITY} />
         <h1 className="title">Manage admins</h1>
-        <AdminEmployerContainer/>
-        <AdminOverviewContainer/>
+        <AdminEmployerContainer />
+        <AdminOverviewContainer />
       </div>
     );
   }
