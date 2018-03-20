@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import { Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 
 class RemoveList extends React.Component {
+  constructor(props){
+    super(props);
+    this.removeTrigger = this.removeTrigger.bind(this);
+  }
   getElements() {
     return this.props.elements.map((element, index) => (
       <ListGroupItem>
