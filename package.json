@@ -122,6 +122,8 @@
     "eslint-plugin-react": "^7.7.0",
     "eth-gas-reporter": "^0.1.1",
     "ignore-styles": "^5.0.1",
+    "jsdom": "11.6.2",
+    "jsdom-global": "3.0.2",
     "mocha": "^3.2.0",
     "node-sass": "^4.3.0",
     "npm-run-all": "^4.1.2",
