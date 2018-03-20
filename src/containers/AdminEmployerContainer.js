@@ -26,14 +26,16 @@ AdminEmployerContainer.propTypes = {
 AdminEmployerContainer.defaultProps = {
   addAdmin: () => {}
 };
-
+function mapStateToProps(){
+  return {}
+}
 function mapDispatchToProps(dispatch){
   return {
     addAdmin: _address => dispatch({
-      type: universityAction.REMOVE_ADMIN,
+      type: universityAction.ADD_NEW_ADMIN,
       address: _address,
     })
   }
 }
 
-export default connect(() => {}, mapDispatchToProps)(AdminEmployerContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(AdminEmployerContainer);
