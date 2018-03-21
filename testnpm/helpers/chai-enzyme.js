@@ -1,4 +1,4 @@
-/*
+/**
  * Little helper to setup the enzyme, chai-enzyme and js-dom
  * environment to test react pure components
  *
