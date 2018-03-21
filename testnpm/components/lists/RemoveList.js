@@ -1,16 +1,8 @@
 import React from 'react';
-import { shallow, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import chai from 'chai';
-import chaiEnzyme from 'chai-enzyme';
+import { shallow, mount } from 'enzyme';
 import { ListGroupItem, ListGroup, Button } from 'react-bootstrap';
 import RemoveList from '../../../src/components/lists/RemoveList';
-
-require('jsdom-global')();
-
-chai.use(chaiEnzyme());
-const { expect } = chai;
-configure({ adapter: new Adapter() });
+import { expect } from '../../helpers/react-setup';
 
 describe('<RemoveList/>', () => {
   it('should render the correct elements', () => {
