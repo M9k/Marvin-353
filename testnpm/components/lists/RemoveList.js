@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { ListGroupItem, ListGroup, Button } from 'react-bootstrap';
 import RemoveList from '../../../src/components/lists/RemoveList';
-import { expect } from '../../helpers/react-setup';
+import { expect } from '../../helpers/chai-enzyme';
 
 describe('<RemoveList/>', () => {
   it('should render the correct elements', () => {
