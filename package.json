@@ -43,6 +43,7 @@
     "clean-coverage": "rm -r report.lcov coverage.json coverage/ js-coverage/",
     "travisC": "echo Build and Linting",
     "eslint": "./node_modules/.bin/eslint src testnpm test",
+    "eslint-fix": "./node_modules/.bin/eslint src testnpm test --fix",
     "solhint": "./node_modules/.bin/solhint contracts/**/*.sol",
     "check-build": "yarn run eslint && yarn run solhint && yarn run test && yarn run soltest"
   },

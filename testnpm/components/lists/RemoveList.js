@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import { ListGroupItem, ListGroup, Button } from 'react-bootstrap';
 import RemoveList from '../../../src/components/lists/RemoveList';
 import { expect } from '../../helpers/react-setup';
