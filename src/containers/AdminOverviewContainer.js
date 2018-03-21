@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap';
 import { universityAction } from '../actions/actions';
 import RemoveList from '../components/lists/RemoveList';
 
-class AdminOverviewContainer extends React.Component {
+export class AdminOverviewComponent extends React.Component {
   constructor(props) {
     super(props);
     this.refreshData = this.refreshData.bind(this);
@@ -29,14 +29,14 @@ class AdminOverviewContainer extends React.Component {
   }
 }
 
-AdminOverviewContainer.propTypes = {
+AdminOverviewComponent.propTypes = {
   adminNumber: PropTypes.number,
   adminAccount: PropTypes.arrayOf(String),
   getAdminNumber: PropTypes.func,
   removeAdmin: PropTypes.func,
   getAllAdmin: PropTypes.func,
 };
-AdminOverviewContainer.defaultProps = {
+AdminOverviewComponent.defaultProps = {
   adminNumber: 0,
   adminAccount: [],
   getAdminNumber: () => {},
@@ -64,4 +64,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminOverviewContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(AdminOverviewComponent);

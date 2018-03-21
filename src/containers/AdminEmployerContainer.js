@@ -5,18 +5,18 @@ import { universityAction } from '../actions/actions';
 
 import FormAddAdmin from '../components/form/FormAddAdmin';
 
-const AdminEmployerContainer = ({ addAdmin }) => (
+export const AdminEmployerComponent = ({ addAdmin }) => (
   <div id="admin-employer">
     <h2>Add a new admin</h2>
     <FormAddAdmin addAdmin={addAdmin} />
   </div>
 );
 
-AdminEmployerContainer.propTypes = {
+AdminEmployerComponent.propTypes = {
   addAdmin: PropTypes.func,
 };
 
-AdminEmployerContainer.defaultProps = {
+AdminEmployerComponent.defaultProps = {
   addAdmin: () => {},
 };
 function mapDispatchToProps(dispatch) {
@@ -28,4 +28,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(() => ({}), mapDispatchToProps)(AdminEmployerContainer);
+export default connect(() => ({}), mapDispatchToProps)(AdminEmployerComponent);
