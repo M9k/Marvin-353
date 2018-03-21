@@ -7,7 +7,7 @@ import { expect } from '../helpers/chai-enzyme';
 
 describe('<AdminEmplyoerCointainer/>', () => {
   it('should render correctly', () => {
-    const wrapper = shallowWithStore(<AdminEmployerComponent />, createMockStore({}));
+    const wrapper = shallowWithStore(<AdminEmployerComponent />, {});
     expect(wrapper).to.have.exactly(1).descendants('h2');
     expect(wrapper).to.have.exactly(1).descendants(FormAddAdmin);
     expect(wrapper.find('div').first()).to.have.id('admin-employer');
@@ -24,5 +24,7 @@ describe('<AdminEmplyoerCointainer/>', () => {
       type: universityAction.ADD_NEW_ADMIN,
       address: 'pippoooooo',
     })).to.be.false;
+    expect(store.isActionTypeDispatched(universityAction.REMOVE_ADMIN)).to.be.false;
+    expect(store.isActionTypeDispatched(universityAction.ADD_NEW_ADMIN)).to.be.true;
   });
 });
