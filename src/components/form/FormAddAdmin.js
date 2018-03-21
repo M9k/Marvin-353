@@ -5,8 +5,6 @@ import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 class FormAddAdmin extends React.Component {
   constructor(props) {
     super(props);
-    document.title = 'Manage Admin - Marvin';
-
     this.state = {
       newAddress: '',
     };
