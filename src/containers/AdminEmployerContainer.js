@@ -5,17 +5,12 @@ import { universityAction } from '../actions/actions';
 
 import FormAddAdmin from '../components/form/FormAddAdmin';
 
-class AdminEmployerContainer extends React.Component {
-  componentDidMount() {}
-  render() {
-    return (
-      <div id="admin-employer">
-        <h2>Add a new admin</h2>
-        <FormAddAdmin addAdmin={this.props.addAdmin} />
-      </div>
-    );
-  }
-}
+const AdminEmployerContainer = ({ addAdmin }) => (
+  <div id="admin-employer">
+    <h2>Add a new admin</h2>
+    <FormAddAdmin addAdmin={addAdmin} />
+  </div>
+);
 
 AdminEmployerContainer.propTypes = {
   addAdmin: PropTypes.func,
@@ -24,9 +19,6 @@ AdminEmployerContainer.propTypes = {
 AdminEmployerContainer.defaultProps = {
   addAdmin: () => {},
 };
-function mapStateToProps() {
-  return {};
-}
 function mapDispatchToProps(dispatch) {
   return {
     addAdmin: _address => dispatch({
@@ -36,4 +28,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminEmployerContainer);
+export default connect(() => ({}), mapDispatchToProps)(AdminEmployerContainer);
