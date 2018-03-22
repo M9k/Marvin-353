@@ -5,7 +5,7 @@ function numAdmin() {
 
   return contractUniversityAdmin.then(instance =>
     // Call the university getAdminsNumber function
-    instance.getAdminsNumber.call());
+    instance.getAdminNumber.call());
 }
 
 export default numAdmin;
