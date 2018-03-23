@@ -34,12 +34,12 @@ describe('university reducer with SET_ADMIN_NUMBER action', () => {
 });
 describe('university reducer with SET_ADMIN_LIST action', () => {
   it('should return the state with the given list', () => {
-    expect(universityData({adminNumber: 1, adminAccount: null}, {
+    expect(universityData({ adminNumber: 1, adminAccount: null }, {
       type: types.universityAction.SET_ADMINS_LIST,
-      account: ['pippo']
+      account: ['pippo'],
     })).to.deep.equal({
       adminNumber: 1,
-      adminAccount: ['pippo']
+      adminAccount: ['pippo'],
     });
   });
 });
