@@ -10,11 +10,13 @@ import Price from './components/Price';
 import NotFound from './components/NotFound';
 import License from './components/License';
 import ManageAdmin from './components/ManageAdmin';
+import TestAll from './components/TestAll';
 
 
 const routes = (
   <Route path="/" component={App}>
     <IndexRoute component={Home} />
+    <Route path="testall" component={TestAll} />
     <Route path="login" component={Login} />
     <Route path="logout" component={Logout} />
     <Route path="register" component={NotFound} />
