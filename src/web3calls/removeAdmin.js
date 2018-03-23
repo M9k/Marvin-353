@@ -6,8 +6,10 @@ function removeAdmin(addressToRemove) {
   return contractUniversityAdmin.then(instance =>
     // Call the university addAdmin function
     instance.removeAdmin(addressToRemove, { from: web3.eth.accounts[0], gas: 60000 }))
-    .catch((err) => {
-      console.log('cannot remove admin!');
+    .then(() => {
+      console.log('admin rimosso correttamente');
+    }).catch(() => {
+      console.log('cannot remove admin');
     });
 }
 

@@ -6,8 +6,10 @@ function login() {
   return contractUniversityAdmin.then(instance =>
     // Call the university login function
     instance.login.call({ from: web3.eth.accounts[0] })).then(accountType => accountType)
-    .catch((err) => {
-      console.log('cannot log in');
+    .then(() => {
+      console.log('ti sei loggato correttamente');
+    }).catch(() => {
+      console.log('ooops problems');
     });
 }
 

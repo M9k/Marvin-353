@@ -5,7 +5,7 @@ function getAdmin(adminIndex) {
 
   return contractUniversityAdmin.then(instance =>
     // Call the university getAdmin function
-    instance.getAdminAt.call(adminIndex)).then(adminAddress => adminAddress).catch((err) => {
+    instance.getAdminAt.call(adminIndex)).then(adminAddress => adminAddress).catch(() => {
     console.log('failed to get admin infos!');
   });
 }
