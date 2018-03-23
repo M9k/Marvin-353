@@ -24,15 +24,3 @@ contract('User', (accounts) => {
     assert.equal(await contract.getPublicAddress.call(), accounts[1]);
   });
 });
-/*
-  it(testTitle('Chai assert module test: Should add a new user with name gianfranco!'), async () => {
-    const transactionStudentCreation = await contract.createStudent('gianfranco', 'surnamecarino');
-
-    assert.equal(transactionStudentCreation.logs[0].event, 'NewStudentAdded');
-
-    const addrStud = transactionStudentCreation.logs[0].args.studentAddr;
-
-    assert.equal(bytes32ToString(await contract.getStudentName.call(addrStud)), 'gianfranco');
-  });
-*/
-
