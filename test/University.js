@@ -14,11 +14,11 @@ contract('University', (accounts) => {
     contract = await University.new({ from: accounts[0] });
   });
 
-  it('Should say Universtiy is Founder!', async () => {
+  it('Should say University is Founder', async () => {
     assert.equal(await contract.isUniversityFounder.call(accounts[0]), true);
   });
 
-  it('Should say random user is not Founder!', async () => {
+  it('Should say random user is not Founder', async () => {
     assert.equal(await contract.isUniversityFounder.call(accounts[1]), false);
   });
 
