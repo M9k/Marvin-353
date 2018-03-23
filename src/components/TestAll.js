@@ -1,6 +1,15 @@
 import React from 'react';
 
-import { Button, Checkbox, ControlLabel, FormControl, FormGroup, PageHeader, Pager, Panel, Radio, Table } from 'react-bootstrap';
+import Button from 'react-bootstrap/lib/Button';
+import Checkbox from 'react-bootstrap/lib/Checkbox';
+import ControlLabel from 'react-bootstrap/lib/ControlLabel';
+import FormControl from 'react-bootstrap/lib/FormControl';
+import FormGroup from 'react-bootstrap/lib/FormGroup';
+import PageHeader from 'react-bootstrap/lib/PageHeader';
+import Panel from 'react-bootstrap/lib/Panel';
+import Radio from 'react-bootstrap/lib/Radio';
+import Table from 'react-bootstrap/lib/Table';
+import Pager from 'react-bootstrap/lib/Pager';
 
 function TestAll() {
   return (
