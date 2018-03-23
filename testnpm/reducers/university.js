@@ -20,13 +20,26 @@ describe('university reducer', () => {
       expect(universityData(undefined, { type: actionName })).to.deep.equal(correctInitialState);
     });
   });
-  it('should return return the state with the correct admin number', () => {
+});
+describe('university reducer with SET_ADMIN_NUMBER action', () => {
+  it('should return the state with the correct admin number', () => {
     expect(universityData(undefined, {
       type: types.universityAction.SET_ADMIN_NUMBER,
       adminNumber: 5,
     })).to.deep.equal({
       adminNumber: 5,
       adminAccount: null,
+    });
+  });
+});
+describe('university reducer with SET_ADMIN_LIST action', () => {
+  it('should return the state with the given list', () => {
+    expect(universityData({adminNumber: 1, adminAccount: null}, {
+      type: types.universityAction.SET_ADMINS_LIST,
+      account: ['pippo']
+    })).to.deep.equal({
+      adminNumber: 1,
+      adminAccount: ['pippo']
     });
   });
 });
