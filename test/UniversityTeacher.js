@@ -29,7 +29,7 @@ contract('UniversityTeacher', (accounts) => {
     assert.equal(await contract.getTeacherNumber.call(), 0);
   });
 
-  it('A registered user cannot ask a teacher account', async () => {
+  it('A registered user can\'t ask a teacher account', async () => {
     try {
       await contract.requestTeacherAccount('name', 'surname', { from: accounts[0] });
     } catch (e) {
@@ -38,7 +38,7 @@ contract('UniversityTeacher', (accounts) => {
     throw new Error('Test failed!');
   });
 
-  it('An user cannot ask two times an account', async () => {
+  it('An user can\'t ask two times an account', async () => {
     await contract.requestTeacherAccount('name', 'surname', { from: accounts[1] });
     try {
       await contract.requestTeacherAccount('name', 'surname', { from: accounts[1] });
@@ -72,56 +72,94 @@ contract('UniversityTeacher', (accounts) => {
     throw new Error('Test failed!');
   });
 
-  /*
+  it('Souldn\'t confirm invalid contract address', async () => {
+    await contract.newAdmin(accounts[1], { from: accounts[0] });
+    try {
+      await contract.confirmTeacher(accounts[4], { from: accounts[1] });
+    } catch (e) {
+      return true;
+    }
+    throw new Error('Test failed!');
+  });
 
-        it('Should add unconfirmed Teacher and then remove it!', async () => {
-          // TWO STEP ACCOUNT CREATION!
-          await contract.askForTeacherAccount('nomeprof', 'cognomeprof', { from: accounts[2] });
-          assert.equal(await contract.isUnconfirmedTeacher.call(accounts[2]), true);
-          assert.equal(await contract.isTeacher.call(accounts[2]), false);
-          assert.equal(await contract.getTeachersNumber.call({ from: accounts[0] }), 1);
-          assert.equal(await contract.getUnconfirmedTeachersNumber.call({ from: accounts[0] }), 1);
+  it('An invalid teacher contract shouldn\'t be remove', async () => {
+    await contract.newAdmin(accounts[1], { from: accounts[0] });
+    try {
+      await contract.removeTeacher(accounts[4], { from: accounts[1] });
+    } catch (e) {
+      return true;
+    }
+    throw new Error('Test failed!');
+  });
 
-          // now dont confirm  this teacher
-          await contract.dontConfirmTeacher(accounts[2], { from: accounts[5] });
-          assert.equal(await contract.isUnconfirmedTeacher.call(accounts[2]), false);
-          assert.equal(await contract.isTeacher.call(accounts[2]), false);
-          assert.equal(await contract.getTeachersNumber.call({ from: accounts[0] }), 1);
-          assert.equal(await contract.getUnconfirmedTeachersNumber.call({ from: accounts[0] }), 0);
-        });
+  it('A non approved teacher contract shouldn\'t be remove', async () => {
+    await contract.newAdmin(accounts[1], { from: accounts[0] });
+    await contract.requestTeacherAccount('name', 'surname', { from: accounts[2] });
+    try {
+      await contract.removeTeacher(accounts[2], { from: accounts[1] });
+    } catch (e) {
+      return true;
+    }
+    throw new Error('Test failed!');
+  });
 
-        it('Should add unconfirmed teacher!', async () => {
-          await contract.askForTeacherAccount('nomeprof', 'congomoeprof', { from: accounts[4] });
-          assert.equal(await contract.isUnconfirmedTeacher.call(accounts[4]), true);
-          assert.equal(await contract.isTeacher.call(accounts[4]), false);
-          assert.equal(await contract.getTeachersNumber.call({ from: accounts[0] }), 1);
-          assert.equal(await contract.getUnconfirmedTeachersNumber.call({ from: accounts[0] }), 1);
-        });
+  it('Should ask, approve and remove a teacher', async () => {
+    await contract.newAdmin(accounts[1], { from: accounts[0] });
+    await contract.requestTeacherAccount('name', 'surname', { from: accounts[2] });
+    assert.equal(await contract.getTeacherNumber.call(), 0);
+    assert.equal(await contract.isNotConfirmedTeacher.call(accounts[2]), true);
+    const askingAccount = await contract.getNotApprovedTeacherContractAddressAt.call(0);
+    assert.equal(String(askingAccount).length, 42);
+    // confirm
+    await contract.confirmTeacher(
+      await contract.getNotApprovedTeacherContractAddressAt.call(0),
+      { from: accounts[1] },
+    );
+    assert.equal(await contract.isNotConfirmedTeacher.call(accounts[2]), false);
+    assert.equal(await contract.getTeacherNumber.call(), 1);
+    const confirmedAccount = await contract.getTeacherContractAddressAt.call(0);
+    assert.equal(confirmedAccount, askingAccount);
+    const confirmedAccountFromPublicAddress =
+      await contract.getTeacherContractFromPublicAddress.call(accounts[2]);
+    assert.equal(confirmedAccount, confirmedAccountFromPublicAddress);
+    // remove
+    await contract.removeTeacher(
+      await contract.getTeacherContractFromPublicAddress.call(accounts[2]),
+      { from: accounts[1] },
+    );
+    assert.equal(await contract.isNotConfirmedTeacher.call(accounts[2]), false);
+    assert.equal(await contract.getTeacherNumber.call(), 0);
+  });
 
-        it('Should return correct account with given index!', async () => {
-          assert.equal(await contract.getTeacherAtIndex.call(0), accounts[1]);
-          assert.equal(await contract.getUnconfirmedTeacherAtIndex.call(0), accounts[4]);
-        });
+  it('Should ask but not approve a teacher', async () => {
+    await contract.newAdmin(accounts[1], { from: accounts[0] });
+    await contract.requestTeacherAccount('name', 'surname', { from: accounts[2] });
+    assert.equal(await contract.getTeacherNumber.call(), 0);
+    assert.equal(await contract.isNotConfirmedTeacher.call(accounts[2]), true);
+    const askingAccount = await contract.getNotApprovedTeacherContractAddressAt.call(0);
+    assert.equal(String(askingAccount).length, 42);
+    // not confirm
+    await contract.denyTeacher(
+      await contract.getNotApprovedTeacherContractAddressAt.call(0),
+      { from: accounts[1] },
+    );
+    assert.equal(await contract.isNotConfirmedTeacher.call(accounts[2]), false);
+    assert.equal(await contract.getTeacherNumber.call(), 0);
+  });
 
-        it('Should return teacher contract address!', async () => {
-          assert.notEqual(await contract.getTeacherContractAddress.call(accounts[1]), 0);
-        });
+  it('Should get the correct role for asking teacher and confirmed teacher', async () => {
+    await contract.newAdmin(accounts[1], { from: accounts[0] });
+    await contract.requestTeacherAccount('name', 'surname', { from: accounts[2] });
+    await contract.requestTeacherAccount('name', 'surname', { from: accounts[3] });
+    // confirm [2]
+    await contract.confirmTeacher(
+      await contract.getNotApprovedTeacherContractAddressAt.call(0),
+      { from: accounts[1] },
+    );
+    assert.equal(await contract.getRoleByAddress.call(accounts[2]), 3);
+    assert.equal(await contract.getRoleByAddress.call(accounts[3]), 13);
+  });
 
-        // Testing login function
-        it('Should login with university, teacher and unconfirmed accounts!', async () => {
-          assert.equal(await contract.login.call({ from: accounts[0] }), 1);
-          assert.equal(await contract.login.call({ from: accounts[1] }), 3);
-          assert.equal(await contract.login.call({ from: accounts[2] }), 0);
-          assert.equal(await contract.login.call({ from: accounts[4] }), 103);
-          assert.equal(await contract.login.call({ from: accounts[5] }), 2);
-        });
-
-        it('Should remove teacher!', async () => {
-          assert.equal(await contract.isTeacher.call(accounts[1]), true);
-          await contract.removeTeacher(accounts[1], { from: accounts[0] });
-          assert.equal(await contract.isTeacher.call(accounts[1]), false);
-        });
-        */
   it('Should not remove teacher with invalid address', async () => {
     try {
       await contract.removeTeacher(accounts[1], { from: accounts[0] });
