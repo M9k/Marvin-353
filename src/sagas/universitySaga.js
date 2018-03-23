@@ -1,4 +1,4 @@
-import { call, put } from 'redux-saga/effects';
+import { call, put, all } from 'redux-saga/effects';
 import { universityAction } from '../actions/actions';
 import numAdmin from '../web3calls/numAdmin';
 import addAdminWeb3 from '../web3calls/addAdmin';
@@ -30,11 +30,10 @@ export function* removeAdmin(action) {
 }
 
 export function* getAllAdmins() {
-  const num = yield call(numAdmin);
-  const admins = [];
-  for (let i = 0; i < num; i += 1) {
-    admins[i] = yield call(getAdminWeb3, i);
-  }
+  let num = yield call(numAdmin);
+  num = Number(num);
+  const apiCalls = Array(num).fill().map((_, i) => call(getAdminWeb3, i));
+  const admins = yield all(apiCalls);
   yield put({
     type: universityAction.SET_ADMINS_LIST,
     number: num,

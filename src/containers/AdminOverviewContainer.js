@@ -15,7 +15,7 @@ export class AdminOverviewComponent extends React.Component {
   }
   refreshData() {
     this.props.getAdminNumber();
-    this.props.getAllAdmin();
+    this.props.getAllAdmin(this.props.adminNumber);
   }
   render() {
     return (
