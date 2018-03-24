@@ -11,7 +11,7 @@ class RemoveList extends React.Component {
     return this.props.elements.map((element, index) => (
       <ListGroupItem key={element}>
         {element}
-        <Button onClick={this.removeTrigger} id={index} bsClass="deleteBtn" bsSize="small">
+        <Button onClick={this.removeTrigger} id={element} bsClass="deleteBtn" bsSize="small">
             remove
         </Button>
       </ListGroupItem>

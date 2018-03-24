@@ -4,7 +4,7 @@ import { reducer as formReducer } from 'redux-form';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { userLogger } from './user';
-import { universityData } from './university';
+import universityReducer from '../modules/universityAdmin';
 
 
 const persistConfig = {
@@ -24,7 +24,7 @@ const reducers = combineReducers({
   routing: routerReducer,
   form: formReducer,
   user: persistReducer(userPersistConfig, userLogger),
-  university: universityData,
+  university: universityReducer,
 });
 
 const persistentReducer = persistReducer(persistConfig, reducers);

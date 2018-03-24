@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { universityAction } from '../actions/actions';
-
+import * as universitySagaAction from '../sagas/universitySaga';
 import FormAddAdmin from '../components/form/FormAddAdmin';
 
 export const AdminEmployerComponent = ({ addAdmin }) => (
@@ -21,10 +20,7 @@ AdminEmployerComponent.defaultProps = {
 };
 function mapDispatchToProps(dispatch) {
   return {
-    addAdmin: _address => dispatch({
-      type: universityAction.ADD_NEW_ADMIN,
-      address: _address,
-    }),
+    addAdmin: address => dispatch(universitySagaAction.addNewAdminAction(address)),
   };
 }
 

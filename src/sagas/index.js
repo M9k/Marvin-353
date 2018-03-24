@@ -1,16 +1,16 @@
 import { fork, takeLatest } from 'redux-saga/effects';
-import { userAction, universityAction } from '../actions/actions';
+import { userAction } from '../actions/actions';
 import { tryLogin } from './userSaga';
-import { adminNumber, addAdmin, removeAdmin, getAllAdmins } from './universitySaga';
+import * as uSaga from './universitySaga';
 
 // main saga generators
 export function* sagas() {
   yield [
     fork(takeLatest, userAction.USER_TRY_LOGIN, tryLogin),
-    fork(takeLatest, universityAction.GET_ADMIN_NUMBER, adminNumber),
-    fork(takeLatest, universityAction.ADD_NEW_ADMIN, addAdmin),
-    fork(takeLatest, universityAction.REMOVE_ADMIN, removeAdmin),
-    fork(takeLatest, universityAction.GET_ALL_ADMINS, getAllAdmins),
+    fork(takeLatest, uSaga.GET_ADMIN_NUMBER, uSaga.adminNumber),
+    fork(takeLatest, uSaga.ADD_NEW_ADMIN, uSaga.addAdmin),
+    fork(takeLatest, uSaga.REMOVE_ADMIN, uSaga.removeAdmin),
+    fork(takeLatest, uSaga.GET_ALL_ADMINS, uSaga.getAllAdmins),
   ];
 }
 export function* notBreakTheLint() {

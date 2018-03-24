@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
-import { universityAction } from '../actions/actions';
+import * as universitySagaAction from '../sagas/universitySaga';
 import RemoveList from '../components/lists/RemoveList';
 
 export class AdminOverviewComponent extends React.Component {
@@ -50,17 +50,9 @@ const mapStateToProps = state => ({
 });
 function mapDispatchToProps(dispatch) {
   return {
-    getAdminNumber: () => dispatch({
-      type: universityAction.GET_ADMIN_NUMBER,
-    }),
-    removeAdmin: _address => dispatch({
-      type: universityAction.REMOVE_ADMIN,
-      address: _address,
-    }),
-    getAllAdmin: _number => dispatch({
-      type: universityAction.GET_ALL_ADMINS,
-      number: _number,
-    }),
+    getAdminNumber: () => dispatch(universitySagaAction.getAdminNumberAction()),
+    removeAdmin: address => dispatch(universitySagaAction.removeAdminAction(address)),
+    getAllAdmin: () => dispatch(universitySagaAction.getAllAdminsAction()),
   };
 }
 
