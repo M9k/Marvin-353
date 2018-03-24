@@ -4,7 +4,8 @@ import { expect } from '../helpers/chai-enzyme';
 import { shallowWithStore, createMockStore } from '../helpers/component-with-store';
 import AdminOverviewContainer, { AdminOverviewComponent } from '../../src/containers/AdminOverviewContainer';
 import RemoveList from '../../src/components/lists/RemoveList';
-import { universityAction } from '../../src/actions/actions';
+import * as uSagaAction from '../../src/sagas/universitySaga';
+import * as universityAction from '../../src/modules/universityAdmin';
 
 const defaultStore = {
   university: {
@@ -32,17 +33,11 @@ describe('<AdminOverviewContainer/>', () => {
     wrapper.props().getAdminNumber();
     wrapper.props().getAllAdmin(1);
     wrapper.props().removeAdmin('pippo');
-    expect(store.isActionTypeDispatched(universityAction.GET_ADMIN_NUMBER)).to.be.true;
-    expect(store.isActionDispatched({
-      type: universityAction.GET_ALL_ADMINS,
-      number: 1,
-    })).to.be.true;
-    expect(store.isActionDispatched({
-      type: universityAction.REMOVE_ADMIN,
-      address: 'pippo',
-    })).to.be.true;
-    expect(store.isActionTypeDispatched(universityAction.ADD_NEW_ADMIN)).to.be.false;
-    expect(store.isActionTypeDispatched(universityAction.SET_ADMIN_NUMBER)).to.be.false;
-    expect(store.isActionTypeDispatched(universityAction.SET_ADMINS_LIST)).to.be.false;
+    expect(store.isActionTypeDispatched(uSagaAction.GET_ADMIN_NUMBER)).to.be.true;
+    expect(store.isActionDispatched(uSagaAction.getAllAdminsAction())).to.be.true;
+    expect(store.isActionDispatched(uSagaAction.removeAdminAction('pippo'))).to.be.true;
+    expect(store.isActionTypeDispatched(uSagaAction.ADD_NEW_ADMIN)).to.be.false;
+    expect(store.isActionTypeDispatched(universityAction.setAdminNumber(1).type)).to.be.false;
+    expect(store.isActionTypeDispatched(universityAction.setAdminsList([]).type)).to.be.false;
   });
 });

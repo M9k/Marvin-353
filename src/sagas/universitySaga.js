@@ -1,5 +1,5 @@
 import { call, put, all } from 'redux-saga/effects';
-import * as actionCreators from '../modules/universityAdmin'
+import * as actionCreators from '../modules/universityAdmin';
 import numAdmin from '../web3calls/numAdmin';
 import addAdminWeb3 from '../web3calls/addAdmin';
 import removeAdminWeb3 from '../web3calls/removeAdmin';
