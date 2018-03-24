@@ -61,6 +61,8 @@ dist/
 *pyc
 css/
 
+testnpm/prove.js
+
 public/contracts/
 .node-xmlhttprequest-sync-10856
 .node-xmlhttprequest-sync-4612

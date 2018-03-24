@@ -17,12 +17,6 @@ const universityData = (state = initialState, action) => {
         ...state,
         adminAccount: action.account,
       };
-
-    /* Trigger for sagas */
-    case (universityAction.GET_ADMIN_NUMBER):
-    case (universityAction.ADD_NEW_ADMIN):
-    case (universityAction.REMOVE_ADMIN):
-    case (universityAction.GET_ALL_ADMINS):
     default:
       return state;
   }
