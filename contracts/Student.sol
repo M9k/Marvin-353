@@ -27,6 +27,16 @@ contract Student is User {
         _;
     }
 
+    modifier notEnrolled(uint _index) {
+        if (subscription[_index] != false) revert();
+        _;
+    }
+
+    modifier enrolled(uint _index) {
+        if (subscription[_index] != true) revert();
+        _;
+    }
+
     function Student(bytes32 _name, bytes32 _surname, address _publicAddress, Course _course)
     public User(_name, _surname, _publicAddress) {
         course = _course;
@@ -50,7 +60,7 @@ contract Student is User {
     function getExamContractAt(uint _index) public view returns(Exam) {
         return listExam[_index];
     }
-    
+
     function getExamSubscriptionAt(uint _index) public view returns(bool) {
         return subscription[_index];
     }
@@ -59,19 +69,20 @@ contract Student is User {
         return valuation[_index];
     }
 
-    function enrollToOptionalExam(uint _index) public onlySubject {
+    function enrollToOptionalExam(uint _index) public onlySubject notEnrolled(_index) {
         subscription[_index] = true;
         listExam[_index].addSubscribers();
     }
 
-    function registerValuation(uint _exam, uint8 _valuation) public
-    correctValuation(_valuation) byCorrectProfessor(_exam) confirmedStudent {
-        valuation[_exam] = _valuation;
+    function registerValuation(uint _index, uint8 _valuation) public
+        correctValuation(_valuation) byCorrectProfessor(_index) confirmedStudent enrolled(_index) {
+        valuation[_index] = _valuation;
     }
 
     function getIndexOfExam(Exam exam) public view returns(uint) {
         for (uint index = 0; index < countListExam; index++)
             if (listExam[index] == exam)
                 return index;
+        revert();
     }
 }
