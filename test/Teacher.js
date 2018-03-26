@@ -64,6 +64,7 @@ contract('Teacher', (accounts) => {
     await teacher.registerNewVoteStudentExam(0, 0, 19, { from: accounts[2] });
     assert.equal(await student.getExamValuationAt.call(0), 19);
   });
+
   it('Shouldn\'t register incorrect valuation (negative)', async () => {
     try {
       await teacher.registerNewVoteStudentExam(0, 0, -1, { from: accounts[2] });
@@ -82,8 +83,50 @@ contract('Teacher', (accounts) => {
     throw new Error('Test failed!');
   });
 
-  // TODO:
-  // register to a unconfirmed student
-  // register by the incorrect professor
-  // register only if the student is enrolled
+  it('Shouldn\'t register a student not enrolled', async () => {
+    try {
+      await teacher.registerNewVoteStudentExam(1, 0, 22, { from: accounts[2] });
+    } catch (e) {
+      return true;
+    }
+    throw new Error('Test failed!');
+  });
+
+  it('Shouldn\'t register a valuation to student not confirmed by ad admin', async () => {
+    await university.requestStudentAccount(123, 456, course.address, { from: accounts[4] });
+    try {
+      await teacher.registerNewVoteStudentExam(0, 1, 22, { from: accounts[2] });
+    } catch (e) {
+      return true;
+    }
+    throw new Error('Test failed!');
+  });
+
+  it('Shouldn\'t register a valuation if isn\'t the correct professor', async () => {
+    // add a teacher
+    await university.requestTeacherAccount(123, 456, { from: accounts[4] });
+    await university.confirmTeacher(
+      await university.getNotApprovedTeacherContractAddressAt.call(0),
+      { from: accounts[1] },
+    );
+    try {
+      await teacher.registerNewVoteStudentExam(0, 0, 22, { from: accounts[4] });
+    } catch (e) {
+      return true;
+    }
+    throw new Error('Test failed!');
+  });
+
+  it('Should return the number of the exams', async () => {
+    // add a teacher
+    await university.requestTeacherAccount(123, 456, { from: accounts[4] });
+    await university.confirmTeacher(
+      await university.getNotApprovedTeacherContractAddressAt.call(0),
+      { from: accounts[1] },
+    );
+    const teacher2 =
+      Teacher.at(await university.getTeacherContractFromPublicAddress.call(accounts[4]));
+    assert.equal(await teacher.getExamNumber.call(), 2);
+    assert.equal(await teacher2.getExamNumber.call(), 0);
+  });
 });
