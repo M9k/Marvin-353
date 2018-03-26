@@ -11,7 +11,7 @@ contract('User', (accounts) => {
     university = await UniversityYear.new({ from: accounts[0] });
     await university.addNewAcademicYear(2018, { from: accounts[0] });
     contract = Year.at(await university.getAcademicYearContractByYear.call(2018));
-    await university.newAdmin(accounts[1], { from: accounts[0] });
+    await university.addNewAdmin(accounts[1], { from: accounts[0] });
   });
 
   it('Should have the correct default data', async () => {

@@ -11,7 +11,7 @@ contract('Course', (accounts) => {
   beforeEach('Deploy Student contract on blockchain', async () => {
     university = await UniversityExam.new({ from: accounts[0] });
     // add an admin
-    await university.newAdmin(accounts[1], { from: accounts[0] });
+    await university.addNewAdmin(accounts[1], { from: accounts[0] });
     // add a teacher
     await university.requestTeacherAccount(
       0x7b00000000000000000000000000000000000000000000000000000000000000,
