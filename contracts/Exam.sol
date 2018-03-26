@@ -36,7 +36,7 @@ contract Exam {
     function getEnrolledContractAt(uint _index) public view returns(Student) {
         return listSubscriberByIndex[_index + 1];
     }
-    
+
     function getCourse() public view returns(Course) {
         return course;
     }
@@ -57,6 +57,7 @@ contract Exam {
         return credits;
     }
 
+    //TODO: restringere a solo gli studenti dell'università, registrati e in attesa
     function addSubscribers() public {
         listSubscriber[msg.sender] = countListSubscriberByIndex;
         listSubscriberByIndex[countListSubscriberByIndex] = Student(msg.sender);

@@ -7,7 +7,7 @@ contract UniversityTeacher is UniversityAdmin {
     uint private countTeachersByIndex = 1;
     mapping (address => uint) internal teachers;
     mapping (uint => Teacher) internal teachersByIndex;
-    
+
     uint private countUnconfirmedTeachersByIndex = 1;
     mapping (address => uint) internal unconfirmedTeachers;
     mapping (uint => Teacher) internal unconfirmedTeachersByIndex;
@@ -29,7 +29,7 @@ contract UniversityTeacher is UniversityAdmin {
     function getTeacherNumber() public view returns(uint) {
         return countTeachersByIndex - 1;
     }
-    
+
     //Return the teacher at the index
     function getTeacherContractAddressAt(uint _index) public view returns(Teacher) {
         return teachersByIndex[_index + 1];
@@ -44,7 +44,7 @@ contract UniversityTeacher is UniversityAdmin {
     function getNotApprovedTeacherContractAddressAt(uint _index) public view returns(Teacher) {
         return unconfirmedTeachersByIndex[_index + 1];
     }
-    
+
     function getTeacherContractFromPublicAddress(address _address) public view returns(Teacher) {
         return teacherAddressToContract[_address];
     }
@@ -88,7 +88,7 @@ contract UniversityTeacher is UniversityAdmin {
         //remove from unconfirmed
         removeUnconfirmedTeacher(askingAccount, _teacher);
     }
-    
+
     function denyTeacher(Teacher _teacher) public onlyAdmin isValidContractUnconfirmedTeacher(_teacher) {
         address askingAccount = _teacher.getPublicAddress();
         //clean the address from registred
@@ -110,6 +110,7 @@ contract UniversityTeacher is UniversityAdmin {
 
         //correct the map public address => contract address
         delete teacherAddressToContract[account];
+        //TODO: togliere sottoscrizioni esami
     }
 
     function removeUnconfirmedTeacher(address _askingAccount, Teacher _teacher) private {

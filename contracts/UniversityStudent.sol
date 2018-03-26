@@ -7,14 +7,14 @@ contract UniversityStudent is UniversityTeacher {
     uint private countStudentsByIndex = 1;
     mapping (address => uint) internal students;
     mapping (uint => Student) internal studentsByIndex;
-    
+
     uint private countUnconfirmedStudentsByIndex = 1;
     mapping (address => uint) internal unconfirmedStudents;
     mapping (uint => Student) internal unconfirmedStudentsByIndex;
 
     mapping (address => Student) internal studentAddressToContract;
     mapping (address => Student) internal unconfirmedStudentAddressToContract;
-    
+
     modifier isValidContractUnconfirmedStudent(Student _student) {
         if (unconfirmedStudents[_student] == 0) revert();
         _;
@@ -29,7 +29,7 @@ contract UniversityStudent is UniversityTeacher {
     function getStudentNumber() public view returns(uint) {
         return countStudentsByIndex - 1;
     }
-    
+
     //Return the student at the index
     function getStudentContractAddressAt(uint _index) public view returns(Student) {
         return studentsByIndex[_index + 1];
@@ -87,13 +87,14 @@ contract UniversityStudent is UniversityTeacher {
         //remove from unconfirmed
         removeUnconfirmedStudent(askingAccount, _student);
     }
-    
+
     function denyStudent(Student _student) public onlyAdmin isValidContractUnconfirmedStudent(_student) {
         address askingAccount = _student.getPublicAddress();
         //clean the address from registred
         delete registered[askingAccount];
         //remove from unconfirmed
         removeUnconfirmedStudent(askingAccount, _student);
+        deleteSubscription(_student);
     }
 
     function removeStudent(Student _student) public onlyAdmin isValidContractStudent(_student) {
@@ -112,6 +113,7 @@ contract UniversityStudent is UniversityTeacher {
         deleteSubscription(_student);
     }
 
+    // WITHOUT remove the subscription to exams
     function removeUnconfirmedStudent(address _askingAccount, Student _student) private {
         //remove from unconfirmed
         uint currentIndex = unconfirmedStudents[_student];
@@ -121,7 +123,6 @@ contract UniversityStudent is UniversityTeacher {
 
         //correct the map public address => contract address
         delete unconfirmedStudentAddressToContract[_askingAccount];
-        deleteSubscription(_student);
     }
 
     function deleteSubscription(Student _student) private {
