@@ -6,7 +6,7 @@ contract UniversityAdmin is University {
     uint private countAdministratorsByIndex = 1;
     mapping (address => uint) internal administrators;
     mapping (uint => address) internal administratorsByIndex;
-    
+
     modifier validAdminAddress(address _address) {
         if (administrators[_address] == 0) revert();
         _;
@@ -18,7 +18,7 @@ contract UniversityAdmin is University {
     }
 
     //add an admin
-    function newAdmin(address _adminAddress) public onlyFounder
+    function addNewAdmin(address _adminAddress) public onlyFounder
     registrableAddress(_adminAddress)
     {
         registered[_adminAddress] = true;
