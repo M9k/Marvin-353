@@ -13,7 +13,7 @@ contract Student is User {
     Course private course;
 
     modifier correctValuation(uint8 value) {
-        if (value < 0 || value > 33) revert();
+        if (value < 0 || value > 32) revert();
         _;
     }
 
