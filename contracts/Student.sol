@@ -17,7 +17,7 @@ contract Student is User {
         _;
     }
 
-    modifier confirmedStudent() {
+    modifier confirmedStudent {
         if (university.getRoleByAddress(publicAddress) != 4) revert();
         _;
     }
