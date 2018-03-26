@@ -6,7 +6,7 @@ const Course = artifacts.require('./contracts/Course.sol');
 const Exam = artifacts.require('./contracts/Exam.sol');
 const { assert } = require('chai');
 
-contract('Student', (accounts) => {
+contract('Teacher', (accounts) => {
   let university;
   let teacher;
   let student;
@@ -57,70 +57,33 @@ contract('Student', (accounts) => {
     student = Student.at(await university.getStudentContractFromPublicAddress.call(accounts[3]));
   });
 
-  it('Should get the correct number of exams', async () => {
-    assert.equal(await student.getExamNumber.call(), 2);
+  it('The teacher should register a valuation', async () => {
+    assert.equal(await teacher.getExamContractAt.call(0), exam1.address);
+    assert.equal(await exam1.getEnrolledNumber.call(), 1);
+    assert.equal(await exam1.getEnrolledContractAt.call(0), student.address);
+    await teacher.registerNewVoteStudentExam(0, 0, 19, { from: accounts[2] });
+    assert.equal(await student.getExamValuationAt.call(0), 19);
   });
-
-  it('Should get course contract address', async () => {
-    assert.equal(await student.getCourseContract.call(), course.address);
-  });
-
-  it('Should get exams contract addresses', async () => {
-    assert.equal(await student.getExamContractAt.call(0), exam1.address);
-    assert.equal(await student.getExamContractAt.call(1), exam2.address);
-  });
-
-  it('Should get the correct default subscription', async () => {
-    assert.equal(await student.getExamSubscriptionAt.call(0), true);
-    assert.equal(await student.getExamSubscriptionAt.call(1), false);
-    assert.equal(await student.getExamValuationAt.call(0), 0);
-    assert.equal(await student.getExamValuationAt.call(1), 0);
-  });
-
-  it('The student can enroll to an optional exam', async () => {
-    assert.equal(await student.getExamSubscriptionAt.call(1), false);
-    student.enrollToOptionalExam(1, { from: accounts[3] });
-    assert.equal(await student.getExamSubscriptionAt.call(1), true);
-  });
-
-  it('The student can\'t enroll to an exam not optional', async () => {
+  it('Shouldn\'t register incorrect valuation (negative)', async () => {
     try {
-      assert.equal(await student.enrollToOptionalExam(0), { from: accounts[3] });
+      await teacher.registerNewVoteStudentExam(0, 0, -1, { from: accounts[2] });
     } catch (e) {
       return true;
     }
     throw new Error('Test failed!');
   });
 
-  it('The student can\'t enroll two times at the same exam', async () => {
-    await student.enrollToOptionalExam(1, { from: accounts[3] });
+  it('Shouldn\'t register incorrect valuation (too high)', async () => {
     try {
-      assert.equal(await student.enrollToOptionalExam(1), { from: accounts[3] });
+      await teacher.registerNewVoteStudentExam(0, 0, 33, { from: accounts[2] });
     } catch (e) {
       return true;
     }
     throw new Error('Test failed!');
   });
 
-  it('Only the student can enroll to an optional exam', async () => {
-    try {
-      await student.enrollToOptionalExam(1, { from: accounts[2] });
-    } catch (e) {
-      return true;
-    }
-    throw new Error('Test failed!');
-  });
-
-  it('Should return the index of the exam', async () => {
-    assert.equal(await student.getIndexOfExam.call(exam1.address), 0);
-  });
-
-  it('Should revert if the exam doesn\'t exist', async () => {
-    try {
-      assert.equal(await student.getIndexOfExam.call(accounts[0]), 0);
-    } catch (e) {
-      return true;
-    }
-    throw new Error('Test failed!');
-  });
+  // TODO:
+  // register to a unconfirmed student
+  // register by the incorrect professor
+  // register only if the student is enrolled
 });
