@@ -1,4 +1,4 @@
-pragma solidity ^0.4.19;
+pragma solidity 0.4.19;
 import "./User.sol";
 import "./Exam.sol";
 import "./Course.sol";
@@ -11,11 +11,6 @@ contract Student is User {
     mapping (uint => bool) private subscription; // 0 = false
     mapping (uint => uint8) private valuation; // tutto scalato di uno, 32 = 30L, 19 => 18, 0 => non assegnato
     Course private course;
-
-    modifier correctValuation(uint8 value) {
-        if (value < 0 || value > 32) revert();
-        _;
-    }
 
     modifier confirmedStudent {
         if (university.getRoleByAddress(publicAddress) != 4) revert();
@@ -75,7 +70,7 @@ contract Student is User {
     }
 
     function registerValuation(uint _index, uint8 _valuation) public
-        correctValuation(_valuation) byCorrectProfessor(_index) confirmedStudent enrolled(_index) {
+        byCorrectProfessor(_index) confirmedStudent enrolled(_index) {
         valuation[_index] = _valuation;
     }
 

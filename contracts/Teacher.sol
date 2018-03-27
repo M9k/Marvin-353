@@ -1,4 +1,4 @@
-pragma solidity ^0.4.19;
+pragma solidity 0.4.19;
 import "./User.sol";
 import "./Exam.sol";
 import "./Student.sol";
@@ -25,6 +25,11 @@ contract Teacher is User {
     modifier validExamIndex(uint _index) {
         if (_index < 1 || _index + 1 > countAssignedExam)
             revert();
+        _;
+    }
+
+    modifier correctValuation(uint8 value) {
+        if (value < 0 || value > 32) revert();
         _;
     }
 
@@ -56,7 +61,7 @@ contract Teacher is User {
 
     //the index are static, and the teacher cannot exploit it, because if the index is wrong it doesn't work
     function registerNewVoteStudentExam(uint _examindex, uint _student, uint8 _valuation)
-    public onlySubject {
+    public onlySubject correctValuation(_valuation) {
         Exam exam = getExamContractAt(_examindex);
         Student student = exam.getEnrolledContractAt(_student);
         student.registerValuation(student.getIndexOfExam(exam), _valuation);

@@ -1,4 +1,4 @@
-pragma solidity ^0.4.19;
+pragma solidity 0.4.19;
 import "./University.sol";
 
 
@@ -42,14 +42,6 @@ contract UniversityAdmin is University {
         return administratorsByIndex[_index + 1];
     }
 
-    //remove the admin with address _address
-    function removeAdmin(address _address) public onlyFounder validAdminAddress(_address) {
-        registered[_address] = false;
-        administratorsByIndex[administrators[_address]] = administratorsByIndex[countAdministratorsByIndex];
-        administrators[_address] = 0;
-        countAdministratorsByIndex -= 1;
-    }
-
     function getRoleByAddress(address _address) public view returns (uint8) {
         uint8 typeUser = super.getRoleByAddress(_address);
 
@@ -57,5 +49,13 @@ contract UniversityAdmin is University {
             typeUser = 2; //Admin
 
         return typeUser;
+    }
+
+    //remove the admin with address _address
+    function removeAdmin(address _address) public onlyFounder validAdminAddress(_address) {
+        registered[_address] = false;
+        administratorsByIndex[administrators[_address]] = administratorsByIndex[countAdministratorsByIndex];
+        administrators[_address] = 0;
+        countAdministratorsByIndex -= 1;
     }
 }

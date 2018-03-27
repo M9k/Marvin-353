@@ -1,4 +1,4 @@
-pragma solidity ^0.4.19;
+pragma solidity 0.4.19;
 import "./University.sol";
 import "./UniversityAdmin.sol";
 import "./Course.sol";
