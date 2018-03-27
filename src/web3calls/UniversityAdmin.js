@@ -1,5 +1,5 @@
 const contract = require('truffle-contract');
-const contractUniversityJson = require('../../build/contracts/UniversityAdmin.json');
+const contractUniversityJson = require('../../build/contracts/UniversityExam.json');
 
 function UniversityAdmin() {
   const contractUniversity = contract(contractUniversityJson);

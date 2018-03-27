@@ -1,10 +1,9 @@
 pragma solidity ^0.4.19;
-import "./UniversityBase.sol";
+import "./University.sol";
 
 
-contract UniversityAdmin is UniversityBase {
-    // zero = not found
-    uint private countAdministrators = 1;
+contract UniversityAdmin is University {
+    uint private countAdministratorsByIndex = 1;
     mapping (address => uint) internal administrators;
     mapping (uint => address) internal administratorsByIndex;
 
@@ -19,13 +18,13 @@ contract UniversityAdmin is UniversityBase {
     }
 
     //add an admin
-    function newAdmin(address _adminAddress) public onlyFounder
+    function addNewAdmin(address _adminAddress) public onlyFounder
     registrableAddress(_adminAddress)
     {
         registered[_adminAddress] = true;
-        administrators[_adminAddress] = countAdministrators;
-        administratorsByIndex[countAdministrators] = _adminAddress;
-        countAdministrators += 1;
+        administrators[_adminAddress] = countAdministratorsByIndex;
+        administratorsByIndex[countAdministratorsByIndex] = _adminAddress;
+        countAdministratorsByIndex += 1;
     }
 
     //Check if a _adminAddress is an admin
@@ -34,8 +33,8 @@ contract UniversityAdmin is UniversityBase {
     }
 
     //Return the number of admins
-    function getAdminsNumber() public view returns(uint) {
-        return countAdministrators - 1;
+    function getAdminNumber() public view returns(uint) {
+        return countAdministratorsByIndex - 1;
     }
 
     //return the admin ad index _index
@@ -46,15 +45,15 @@ contract UniversityAdmin is UniversityBase {
     //remove the admin with address _address
     function removeAdmin(address _address) public onlyFounder validAdminAddress(_address) {
         registered[_address] = false;
-        administratorsByIndex[administrators[_address]] = administratorsByIndex[countAdministrators];
+        administratorsByIndex[administrators[_address]] = administratorsByIndex[countAdministratorsByIndex];
         administrators[_address] = 0;
-        countAdministrators -= 1;
+        countAdministratorsByIndex -= 1;
     }
 
-    function login() public view returns (uint8) {
-        uint8 typeUser = super.login();
+    function getRoleByAddress(address _address) public view returns (uint8) {
+        uint8 typeUser = super.getRoleByAddress(_address);
 
-        if (isAdmin(msg.sender))
+        if (isAdmin(_address))
             typeUser = 2; //Admin
 
         return typeUser;
