@@ -40,7 +40,7 @@ contract Student is User {
             listExam[i] = course.getExamContractAt(i);
             subscription[i] = listExam[i].getObbligatoriety();
             if (subscription[i])
-                listExam[i].addSubscribers();
+                listExam[i].addMeAsSubscriber();
         }
     }
 
@@ -66,7 +66,7 @@ contract Student is User {
 
     function enrollToOptionalExam(uint _index) public onlySubject notEnrolled(_index) {
         subscription[_index] = true;
-        listExam[_index].addSubscribers();
+        listExam[_index].addMeAsSubscriber();
     }
 
     function registerValuation(uint _index, uint8 _valuation) public
