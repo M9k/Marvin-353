@@ -55,7 +55,7 @@ contract('Student', (accounts) => {
   // TODO: solo se studente
   it('Should enroll to the exam', async () => {
     assert.equal(await exam1.getEnrolledNumber.call(), 0);
-    await exam1.addSubscribers({ from: accounts[3] });
+    await exam1.addMeAsSubscriber({ from: accounts[3] });
     assert.equal(await exam1.getEnrolledNumber.call(), 1);
   });
 
