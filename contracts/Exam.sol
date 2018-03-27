@@ -58,7 +58,7 @@ contract Exam {
     }
 
     //TODO: restringere a solo gli studenti dell'università, registrati e in attesa
-    function addSubscribers() public {
+    function addMeAsSubscriber() public {
         listSubscriber[msg.sender] = countListSubscriberByIndex;
         listSubscriberByIndex[countListSubscriberByIndex] = Student(msg.sender);
         countListSubscriberByIndex += 1;
