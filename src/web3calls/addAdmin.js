@@ -5,7 +5,11 @@ function addAdmin(addressToAdd) {
   const contractUniversityAdmin = UniversityAdmin();
   return contractUniversityAdmin.then(instance =>
     // Call the university addAdmin function
-    instance.newAdmin(addressToAdd, { from: web3.eth.accounts[0] }));
+    instance.newAdmin(addressToAdd, { from: web3.eth.accounts[0] })).then(() => {
+    console.log('inserimento avvenuto correttamente');
+  }).catch(() => {
+    console.log('inserimento non avvenuto');
+  });
 }
 
 export default addAdmin;
