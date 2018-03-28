@@ -1,5 +1,6 @@
 pragma solidity 0.4.19;
 import "./Exam.sol";
+import "./UniversityStudent.sol";
 
 
 contract Course {
@@ -9,17 +10,17 @@ contract Course {
     bytes32 private name;
     uint16 private creditsToGraduation;
     Year private year;
-    UniversityAdmin private university;
+    UniversityStudent private university;
 
     modifier onlyAdmin {
         if (!university.isAdmin(msg.sender)) revert();
         _;
     }
 
-    function Course(bytes32 _name, uint16 _creditsForGraduation, University _university) public {
+    function Course(bytes32 _name, uint16 _creditsForGraduation, UniversityStudent _university) public {
         name = _name;
         creditsToGraduation = _creditsForGraduation;
-        university = UniversityAdmin(_university);
+        university = _university;
         year = Year(msg.sender);
     }
 
@@ -30,7 +31,7 @@ contract Course {
     function getExamContractAt(uint _index) public view returns(Exam) {
         return listExamsByIndex[_index + 1];
     }
-    
+
     function getName() public view returns(bytes32) {
         return name;
     }

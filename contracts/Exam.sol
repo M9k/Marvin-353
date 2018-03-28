@@ -1,6 +1,7 @@
 pragma solidity 0.4.19;
 import "./Student.sol";
 import "./Year.sol";
+import "./UniversityStudent.sol";
 
 
 contract Exam {
@@ -9,21 +10,26 @@ contract Exam {
     mapping (uint => Student) private listSubscriberByIndex;
     bytes32 private name;
     uint8 private credits;
-    bool private obbligatoriety;
+    bool private obligatoriness;
     Teacher private teacher;
     Course private course;
     Year private year;
-    University private university;
+    UniversityStudent private university;
 
     modifier onlyFromUniversityContract {
         if (University(msg.sender) != university) revert();
         _;
     }
 
-    function Exam(bytes32 _name, uint8 _credits, bool _obbligatoriety, Year _year, University _university) public {
+    modifier onlyNotSubscribe {
+        if (listSubscriber[msg.sender] != 0) revert();
+        _;
+    }
+
+    function Exam(bytes32 _name, uint8 _credits, bool _obligatoriness, Year _year, UniversityStudent _university) public {
         name = _name;
         credits = _credits;
-        obbligatoriety = _obbligatoriety;
+        obligatoriness = _obligatoriness;
         course = Course(msg.sender);
         year = _year;
         university = _university;
@@ -49,22 +55,22 @@ contract Exam {
         return teacher;
     }
 
-    function getObbligatoriety() public view returns(bool) {
-        return obbligatoriety;
+    function getObligatoriness() public view returns(bool) {
+        return obligatoriness;
     }
 
     function getCredits() public view returns(uint8) {
         return credits;
     }
 
-    //TODO: restringere a solo gli studenti dell'università, registrati e in attesa
-    function addMeAsSubscriber() public {
+    function addMeAsSubscriber() public onlyNotSubscribe {
         listSubscriber[msg.sender] = countListSubscriberByIndex;
         listSubscriberByIndex[countListSubscriberByIndex] = Student(msg.sender);
         countListSubscriberByIndex += 1;
     }
 
-    function removeSubscriber(address _address) public onlyFromUniversityContract {
+    function removeSubscriber(address _address) public
+    onlyFromUniversityContract {
         uint index = listSubscriber[_address];
         if (index != 0) {
             listSubscriberByIndex[index] = listSubscriberByIndex[countListSubscriberByIndex];

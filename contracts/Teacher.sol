@@ -29,7 +29,7 @@ contract Teacher is User {
     }
 
     modifier correctValuation(uint8 value) {
-        if (value < 0 || value > 32) revert();
+        if (value < 1 || value > 32) revert();
         _;
     }
 

@@ -65,9 +65,9 @@ contract('Teacher', (accounts) => {
     assert.equal(await student.getExamValuationAt.call(0), 19);
   });
 
-  it('Shouldn\'t register incorrect valuation (negative)', async () => {
+  it('Shouldn\'t register incorrect valuation (zero)', async () => {
     try {
-      await teacher.registerNewVoteStudentExam(0, 0, -1, { from: accounts[2] });
+      await teacher.registerNewVoteStudentExam(0, 0, 0, { from: accounts[2] });
     } catch (e) {
       return true;
     }

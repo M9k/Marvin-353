@@ -32,13 +32,18 @@ contract Student is User {
         _;
     }
 
+    modifier withoutValuation(uint _index) {
+        if (valuation[_index] != 0) revert();
+        _;
+    }
+
     function Student(bytes32 _name, bytes32 _surname, address _publicAddress, Course _course)
     public User(_name, _surname, _publicAddress) {
         course = _course;
         countListExam = course.getExamNumber();
         for (uint i = 0; i < countListExam; i++) {
             listExam[i] = course.getExamContractAt(i);
-            subscription[i] = listExam[i].getObbligatoriety();
+            subscription[i] = listExam[i].getObligatoriness();
             if (subscription[i])
                 listExam[i].addMeAsSubscriber();
         }
@@ -69,7 +74,7 @@ contract Student is User {
         listExam[_index].addMeAsSubscriber();
     }
 
-    function registerValuation(uint _index, uint8 _valuation) public
+    function registerValuation(uint _index, uint8 _valuation) public withoutValuation(_index)
         byCorrectProfessor(_index) confirmedStudent enrolled(_index) {
         valuation[_index] = _valuation;
     }

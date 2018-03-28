@@ -4,7 +4,7 @@ const Course = artifacts.require('./contracts/Course.sol');
 const Exam = artifacts.require('./contracts/Exam.sol');
 const { assert } = require('chai');
 
-contract('Student', (accounts) => {
+contract('Exam', (accounts) => {
   let university;
   let year;
   let course;
@@ -43,8 +43,8 @@ contract('Student', (accounts) => {
     assert.equal(await exam1.getEnrolledNumber.call(), 0);
     assert.equal(await exam1.getCourse.call(), course.address);
     assert.equal(await exam1.getTeacherContract.call(), 0);
-    assert.equal(await exam1.getObbligatoriety.call(), true);
-    assert.equal(await exam2.getObbligatoriety.call(), false);
+    assert.equal(await exam1.getObligatoriness.call(), true);
+    assert.equal(await exam2.getObligatoriness.call(), false);
     assert.equal(await exam1.getCredits.call(), 12);
     assert.equal(
       await exam1.getName.call(),
@@ -52,11 +52,10 @@ contract('Student', (accounts) => {
     );
   });
 
-  // TODO: solo se studente
-  it('Should enroll to the exam', async () => {
-    assert.equal(await exam1.getEnrolledNumber.call(), 0);
-    await exam1.addMeAsSubscriber({ from: accounts[3] });
-    assert.equal(await exam1.getEnrolledNumber.call(), 1);
+  it('A student should enroll to the exam', async () => {
+    assert.equal(await exam2.getEnrolledNumber.call(), 0);
+    await exam2.addMeAsSubscriber({ from: accounts[3] });
+    assert.equal(await exam2.getEnrolledNumber.call(), 1);
   });
 
   it('Only the admin can add an exam', async () => {
