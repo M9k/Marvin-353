@@ -1,4 +1,4 @@
-import { Route, IndexRoute } from 'react-router';
+import { IndexRoute, Route } from 'react-router';
 import React from 'react';
 
 import App from './components/App';
@@ -10,15 +10,52 @@ import NotFound from './components/NotFound';
 import License from './components/License';
 import ManageAdmin from './components/ManageAdmin';
 
+const routes = [
+  {
+    path: 'logout',
+    label: 'Log-out',
+    component: Logout,
+  },
+  {
+    path: 'manageadmin',
+    label: 'Admins',
+    component: ManageAdmin,
+    onMenu: true,
+  },
+  {
+    path: 'license',
+    label: 'License?',
+    component: License,
+  },
+  {
+    path: 'help',
+    label: 'Help me',
+    component: Help,
+    onMenu: true,
+  },
+  {
+    path: 'price',
+    label: 'Price $',
+    component: Price,
+    onMenu: true,
+  },
+  {
+    path: '*',
+    component: NotFound,
+  },
+];
+
 const routesAdmin = (
   <Route path="/" component={App}>
     <IndexRoute component={Home} />
-    <Route path="logout" component={Logout} />
-    <Route path="manageadmin" component={ManageAdmin} />
-    <Route path="license" component={License} />
-    <Route path="help" component={Help} />
-    <Route path="price" component={Price} />
-    <Route path="*" component={NotFound} />
+    {routes.map((route, index) => (
+      <Route
+// eslint-disable-next-line react/no-array-index-key
+        key={index}
+        path={route.path}
+        component={route.component}
+      />
+    ))}
   </Route>
 );
 export default routesAdmin;
