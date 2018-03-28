@@ -3,14 +3,12 @@ import React from 'react';
 
 import App from './components/App';
 import Home from './components/Home';
-import Login from './components/Login';
 import Logout from './components/Logout';
 import Help from './components/Help';
 import Price from './components/Price';
 import NotFound from './components/NotFound';
 import License from './components/License';
 import ManageAdmin from './components/ManageAdmin';
-
 
 const routesAdmin = (
   <Route path="/" component={App}>
