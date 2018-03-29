@@ -5,7 +5,7 @@ function addAdmin(addressToAdd) {
   const contractUniversityAdmin = UniversityAdmin();
   return contractUniversityAdmin.then(instance =>
     // Call the university addAdmin function
-    instance.newAdmin(addressToAdd, { from: web3.eth.accounts[0] }));
+    instance.addNewAdmin(addressToAdd, { from: web3.eth.accounts[0] }));
 }
 
 export default addAdmin;
