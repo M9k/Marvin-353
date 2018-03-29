@@ -2,6 +2,7 @@ pragma solidity 0.4.19;
 import "./Exam.sol";
 import "./UniversityStudent.sol";
 
+
 /**
 @title Creates a university course
 @author 353
@@ -19,10 +20,12 @@ contract Course {
     @notice Modifier that allows admins only to do particular actions
     @dev If the current user is not an admin, the action is reverted
     */
+
     modifier onlyAdmin {
         if (!university.isAdmin(msg.sender)) revert();
         _;
     }
+
     /**
     @notice Creates a new course
     @param _name Name of the course
@@ -35,6 +38,7 @@ contract Course {
         university = _university;
         year = Year(msg.sender);
     }
+
     /**
     @notice Returns the number of exams
     @return The number of exams
@@ -42,6 +46,7 @@ contract Course {
     function getExamNumber() public view returns(uint) {
         return countListExamsByIndex - 1;
     }
+
     /**
     @notice Returns the exam contract at the selected position in the list
     @param _index Position of the contract wanted
@@ -50,6 +55,7 @@ contract Course {
     function getExamContractAt(uint _index) public view returns(Exam) {
         return listExamsByIndex[_index + 1];
     }
+
     /**
     @notice Returns the name of the course
     @return The name of the course
@@ -57,6 +63,7 @@ contract Course {
     function getName() public view returns(bytes32) {
         return name;
     }
+
     /**
     @notice Returns the number of credits that still remains to graduate
     @return The number of credits remaining
@@ -64,6 +71,7 @@ contract Course {
     function getCreditsToGraduate() public view returns(uint16) {
         return creditsToGraduation;
     }
+
     /**
     @notice Returns the solar year of the selected course
     @return The solar year of the selected course
@@ -71,6 +79,7 @@ contract Course {
     function getSolarYear() public view returns(uint16) {
         return year.getSolarYear();
     }
+    
     /**
     @notice Add a new exam in the selected course
     @dev This can be done only by an admin
