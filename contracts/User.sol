@@ -1,14 +1,34 @@
-pragma solidity ^0.4.19;
+pragma solidity 0.4.19;
+import "./University.sol";
 
 
 contract User {
-    address public publicAddress;
-    bytes32 public name;
-    bytes32 public surname;
+    address internal publicAddress;
+    bytes32 internal name;
+    bytes32 internal surname;
+    University internal university;
 
-    function User(bytes32 _name, bytes32 _surname) public {
-        publicAddress = msg.sender;
+    modifier onlySubject {
+        if (msg.sender != publicAddress) revert();
+        _;
+    }
+
+    function User(bytes32 _name, bytes32 _surname, address _publicAddress) public {
         name = _name;
         surname = _surname;
+        publicAddress = _publicAddress;
+        university = University(msg.sender);
+    }
+
+    function getPublicAddress() public view returns(address) {
+        return publicAddress;
+    }
+
+    function getName() public view returns(bytes32) {
+        return name;
+    }
+
+    function getSurname() public view returns(bytes32) {
+        return surname;
     }
 }
