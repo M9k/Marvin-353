@@ -1,29 +1,22 @@
-const contract = require('truffle-contract');
-const contractUniversityJson = require('../../build/contracts/UniversityExam.json');
-
-function getUniversity() {
-  const contractUniversity = contract(contractUniversityJson);
-  contractUniversity.setProvider(web3.currentProvider);
-  return contractUniversity.deployed();
-}
+import getUniversityInstance from './UniversityContractSupplier';
 
 function isUniversityFounder(address) {
   console.log('isUniversityFounder');
-  const contractUniversityAdmin = getUniversity();
+  const contractUniversityAdmin = getUniversityInstance();
   return contractUniversityAdmin.then(instance =>
     instance.isUniversityFounder(address));
 }
 
 function getRoleByAddress(address) {
-  console.log('isUniversityFounder');
-  const contractUniversityAdmin = getUniversity();
+  console.log('getRoleByAddress');
+  const contractUniversityAdmin = getUniversityInstance();
   return contractUniversityAdmin.then(instance =>
     instance.getRoleByAddress(address));
 }
 
 function login() {
-  console.log('isUniversityFounder');
-  const contractUniversityAdmin = getUniversity();
+  console.log('login');
+  const contractUniversityAdmin = getUniversityInstance();
   return contractUniversityAdmin.then(instance =>
     instance.login({ from: web3.eth.accounts[0] }));
 }
