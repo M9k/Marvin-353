@@ -1,4 +1,4 @@
-pragma solidity 0.4.19;
+pragma solidity 0.4.21;
 import "./Student.sol";
 import "./Year.sol";
 import "./UniversityStudent.sol";
