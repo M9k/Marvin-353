@@ -1,6 +1,6 @@
 import React from 'react';
 import AdminEmployerContainer, { AdminEmployerComponent } from '../../src/containers/AdminEmployerContainer';
-import * as universityAction from '../../src/sagas/universitySaga';
+import * as universityAction from '../../src/sagas/adminEmployerSaga';
 import FormAddAdmin from '../../src/components/form/FormAddAdmin';
 import { shallowWithStore, createMockStore } from '../helpers/component-with-store';
 import { expect } from '../helpers/chai-enzyme';

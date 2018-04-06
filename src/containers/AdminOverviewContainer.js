@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
-import * as universitySagaAction from '../sagas/universitySaga';
+import * as universitySagaAction from '../sagas/adminEmployerSaga';
 import RemoveList from '../components/lists/RemoveList';
 
 export class AdminOverviewComponent extends React.Component {
@@ -14,7 +14,6 @@ export class AdminOverviewComponent extends React.Component {
     if (this.props.adminAccount.length === 0) this.refreshData();
   }
   refreshData() {
-    this.props.getAdminNumber();
     this.props.getAllAdmin();
   }
   render() {
@@ -45,12 +44,11 @@ AdminOverviewComponent.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  adminNumber: state.university.adminNumber,
+  adminNumber: state.university.adminAccount.length,
   adminAccount: state.university.adminAccount,
 });
 function mapDispatchToProps(dispatch) {
   return {
-    getAdminNumber: () => dispatch(universitySagaAction.getAdminNumberAction()),
     removeAdmin: address => dispatch(universitySagaAction.removeAdminAction(address)),
     getAllAdmin: () => dispatch(universitySagaAction.getAllAdminsAction()),
   };

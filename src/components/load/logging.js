@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { userAction } from '../../actions/actions';
 import RedirectToHome from './RedirectToHome';
+import {isLogged as userIsLogged} from '../../ducks/Session';
+import { loginAction } from '../../sagas/SessionSaga';
 
 class Logging extends React.Component {
   constructor(props) {
@@ -67,17 +69,15 @@ Logging.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  isGoing: state.user.trylogin,
-  isLogged: state.user.logged,
-  metamask: state.user.metamask,
-  account: state.user.account,
+  isGoing: false,
+  isLogged: userIsLogged(state),
+  metamask: state.metamask.present,
+  account: state.metamask.account,
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    tryLogin: () => dispatch({
-      type: userAction.USER_TRY_LOGIN,
-    }),
+    tryLogin: () => dispatch(loginAction()),
   };
 }
 

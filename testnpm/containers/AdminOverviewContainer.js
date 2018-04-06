@@ -4,8 +4,8 @@ import { expect } from '../helpers/chai-enzyme';
 import { shallowWithStore, createMockStore } from '../helpers/component-with-store';
 import AdminOverviewContainer, { AdminOverviewComponent } from '../../src/containers/AdminOverviewContainer';
 import RemoveList from '../../src/components/lists/RemoveList';
-import * as uSagaAction from '../../src/sagas/universitySaga';
-import * as universityAction from '../../src/modules/universityAdmin';
+import * as uSagaAction from '../../src/sagas/adminEmployerSaga';
+import * as universityAction from '../../src/ducks/AdminEmployer';
 
 const defaultStore = {
   university: {
