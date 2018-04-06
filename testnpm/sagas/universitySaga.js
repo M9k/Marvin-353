@@ -1,6 +1,6 @@
 import { put, call } from 'redux-saga/effects';
 import { expect } from 'chai';
-import { getAllAdmins } from '../../src/sagas/adminEmployerSaga';
+import { getAllAdmins } from '../../src/sagas/AdminEmployerSaga';
 import numAdmin from '../../src/web3calls/numAdmin';
 import * as universityAction from '../../src/ducks/AdminEmployer';
 

@@ -30,7 +30,8 @@ export default function reducer(state = initialState, action){
       return {
         ...state,
         role: action.role,
-        errored: action.errored
+        errored: action.errored,
+        loading: false
       };
     case(SET_DATA):
       return {

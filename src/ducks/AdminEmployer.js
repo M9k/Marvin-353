@@ -17,7 +17,7 @@ export const actions = {
 const initialState = {
   loading: false,
   errored: false,
-  adminAccount: null,
+  adminAccount: [],
 };
 export default function reducer(state = initialState, action) {
   switch (action.type) {

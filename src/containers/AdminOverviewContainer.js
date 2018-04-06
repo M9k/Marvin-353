@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
-import * as universitySagaAction from '../sagas/adminEmployerSaga';
+import * as universitySagaAction from '../sagas/AdminEmployerSaga';
 import RemoveList from '../components/lists/RemoveList';
 
 export class AdminOverviewComponent extends React.Component {
