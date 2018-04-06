@@ -1,6 +1,6 @@
 import { call, put, takeLatest, fork, spawn } from 'redux-saga/effects';
 import * as sessionAction from '../ducks/Session';
-import login from '../web3calls/login';
+import { login } from '../web3calls/University';
 
 const actionType = action => (`marvin/SessionSaga/${action}`);
 

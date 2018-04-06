@@ -1,9 +1,6 @@
 import { call, put, all, fork, takeLatest, takeEvery } from 'redux-saga/effects';
 import * as actionCreators from '../ducks/AdminEmployer';
-import numAdmin from '../web3calls/numAdmin';
-import addAdminWeb3 from '../web3calls/addAdmin';
-import removeAdminWeb3 from '../web3calls/removeAdmin';
-import getAdminWeb3 from '../web3calls/getAdmin';
+import { getAdminAt, getAdminNumber, addNewAdmin, removeAdmin as web3Remove } from '../web3calls/UniversityAdmin';
 
 export const REMOVE_ADMIN = 'marvin/universitySaga/REMOVE_ADMIN';
 export const ADD_NEW_ADMIN = 'marvin/universitySaga/ADD_NEW_ADMIN';
@@ -12,7 +9,7 @@ export const GET_ALL_ADMINS = 'marvin/universitySaga/GET_ALL_ADMINS';
 export function* addAdmin(action) {
   yield put(actionCreators.listIsLoading());
   try {
-    yield call(addAdminWeb3, action.address);
+    yield call(addNewAdmin, action.address);
     yield put(actionCreators.pushAdmin(action.address));
   } catch (e) {
     console.log('Failed!');
@@ -22,7 +19,7 @@ export function* addAdmin(action) {
 export function* removeAdmin(action) {
   yield put(actionCreators.listIsLoading());
   try {
-    yield call(removeAdminWeb3, action.address);
+    yield call(web3Remove, action.address);
     yield put(actionCreators.popAdmin(action.address));
   } catch (e) {
     console.log('Failed!');
@@ -32,9 +29,9 @@ export function* removeAdmin(action) {
 export function* getAllAdmins() {
   yield put(actionCreators.listIsLoading());
   try {
-    let num = yield call(numAdmin);
+    let num = yield call(getAdminNumber);
     num = Number(num);
-    const apiCalls = Array(num).fill().map((_, i) => call(getAdminWeb3, i));
+    const apiCalls = Array(num).fill().map((_, i) => call(getAdminAt, i));
     const admins = yield all(apiCalls);
     yield put(actionCreators.setAdminsList(admins));
   } catch (e) {

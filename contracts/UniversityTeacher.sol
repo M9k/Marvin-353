@@ -1,115 +1,126 @@
-pragma solidity ^0.4.19;
+pragma solidity 0.4.21;
 import "./UniversityAdmin.sol";
 import "./Teacher.sol";
 
 
 contract UniversityTeacher is UniversityAdmin {
-    // zero = not found
-    uint private countTeachers = 1;
-    mapping (address => uint) private teachers;
-    mapping (uint => address) private teachersByIndex;
-    uint private countUnconfirmedTeachers = 1;
-    mapping (address => uint) private unconfirmedTeachers;
-    mapping (uint => address) private unconfirmedTeachersByIndex;
+    uint private countTeachersByIndex = 1;
+    mapping (address => uint) internal teachers;
+    mapping (uint => Teacher) internal teachersByIndex;
 
-    mapping (address => address) private teacherContract;
+    uint private countUnconfirmedTeachersByIndex = 1;
+    mapping (address => uint) internal unconfirmedTeachers;
+    mapping (uint => Teacher) internal unconfirmedTeachersByIndex;
 
-    modifier isTeacherAddress(address _address) {
-        if (teachers[_address] == 0) revert();
+    mapping (address => Teacher) internal teacherAddressToContract;
+    mapping (address => Teacher) internal unconfirmedTeacherAddressToContract;
+
+    modifier isValidContractUnconfirmedTeacher(Teacher _teacher) {
+        if (unconfirmedTeachers[_teacher] == 0) revert();
         _;
     }
 
-    modifier isUnconfirmedTeacherAddress(address _address) {
-        if (unconfirmedTeachers[_address] == 0) revert();
+    modifier isValidContractTeacher(Teacher _teacher) {
+        if (teachers[_teacher] == 0) revert();
         _;
     }
 
-    //ask for teacher account
-    function askForTeacherAccount(bytes32 _name, bytes32 _surname) public registrableAddress(msg.sender) {
-        registered[msg.sender] = true;
-        address _teacher = new Teacher(_name, _surname);
-        unconfirmedTeachersByIndex[countUnconfirmedTeachers] = msg.sender;
-        unconfirmedTeachers[msg.sender] = countUnconfirmedTeachers;
-        teacherContract[msg.sender] = _teacher;
-        countUnconfirmedTeachers++;
+    //Return the number of teachers
+    function getTeacherNumber() public view returns(uint) {
+        return countTeachersByIndex - 1;
     }
 
-    function isTeacher (address _address) public view returns (bool) {
-        return teachers[_address] != 0;
+    //Return the teacher at the index
+    function getTeacherContractAddressAt(uint _index) public view returns(Teacher) {
+        return teachersByIndex[_index + 1];
     }
 
-    function isUnconfirmedTeacher (address _address) public view returns (bool) {
-        return unconfirmedTeachers[_address] != 0;
+    //Return the number of non approved teachers
+    function getNonApprovedTeacherNumber() public view returns(uint) {
+        return countUnconfirmedTeachersByIndex - 1;
     }
 
-    function getTeachersNumber() public view returns (uint) {
-        return countTeachers - 1;
+    //Return the non approved teacher at the index
+    function getNotApprovedTeacherContractAddressAt(uint _index) public view returns(Teacher) {
+        return unconfirmedTeachersByIndex[_index + 1];
     }
 
-    function getUnconfirmedTeachersNumber() public view returns (uint) {
-        return countUnconfirmedTeachers - 1;
+    function getTeacherContractFromPublicAddress(address _address) public view returns(Teacher) {
+        return teacherAddressToContract[_address];
     }
 
-    function getTeacherAtIndex(uint _index) public view returns(address) {
-        return teachersByIndex[_index+1];
+    function isTeacher(address _address) public view returns(bool) {
+        return address(teacherAddressToContract[_address]) != 0;
     }
 
-    function getUnconfirmedTeacherAtIndex(uint _index) public view returns(address) {
-        return unconfirmedTeachersByIndex[_index+1];
+    function isNotConfirmedTeacher(address _address) public view returns(bool) {
+        return address(unconfirmedTeacherAddressToContract[_address]) != 0;
     }
 
-    function confirmTeacher(address _address) public
-    onlyAdmin
-    isUnconfirmedTeacherAddress(_address)
-    {
-        removeUnconfirmedTeacher(_address);
-        addTeacher(_address);
-    }
-
-    function dontConfirmTeacher(address _address) public
-    onlyAdmin
-    isUnconfirmedTeacherAddress(_address)
-    {
-        teacherContract[_address] = 0;
-        removeUnconfirmedTeacher(_address);
-    }
-
-    function removeTeacher(address _address) public isTeacherAddress(_address) {
-        registered[_address] = false;
-        teacherContract[msg.sender] = 0;
-        teachersByIndex[teachers[_address]] = teachersByIndex[countTeachers];
-        teachers[_address] = 0;
-        countTeachers -= 1;
-    }
-
-    // return the current user type
-    function login() public view returns (uint8) {
-        uint8 typeUser = super.login();
-
-        if (isTeacher(msg.sender))
+    function getRoleByAddress(address _address) public view returns (uint8) {
+        uint8 typeUser = super.getRoleByAddress(_address);
+        if (isTeacher(_address))
             typeUser = 3; //Teacher
-
-        if (isUnconfirmedTeacher(msg.sender))
-            typeUser = 103; /* TODO: da implementare nella GUI e nel reducer */
-
+        if (isNotConfirmedTeacher(_address))
+            typeUser = 13; //Unconfirmed teacher
         return typeUser;
     }
 
-    function getTeacherContractAddress(address _teacher) public view returns(address) {
-        return teacherContract[_teacher];
+    function requestTeacherAccount(bytes32 _name, bytes32 _surname) public registrableAddress(msg.sender) {
+        Teacher newTeacher = new Teacher(_name, _surname, msg.sender);
+        registered[msg.sender] = true;
+
+        unconfirmedTeachers[newTeacher] = countUnconfirmedTeachersByIndex;
+        unconfirmedTeachersByIndex[countUnconfirmedTeachersByIndex] = newTeacher;
+        countUnconfirmedTeachersByIndex += 1;
+
+        unconfirmedTeacherAddressToContract[msg.sender] = newTeacher;
     }
 
-    function removeUnconfirmedTeacher(address _address) private {
-        registered[_address] = false;
-        unconfirmedTeachersByIndex[unconfirmedTeachers[_address]] = unconfirmedTeachersByIndex[countUnconfirmedTeachers];
-        unconfirmedTeachers[_address] = 0;
-        countUnconfirmedTeachers -= 1;
+    function confirmTeacher(Teacher _teacher) public onlyAdmin isValidContractUnconfirmedTeacher(_teacher) {
+        address askingAccount = _teacher.getPublicAddress();
+        //add to confirmed
+        teachers[_teacher] = countTeachersByIndex;
+        teachersByIndex[countTeachersByIndex] = _teacher;
+        countTeachersByIndex += 1;
+
+        teacherAddressToContract[askingAccount] = _teacher;
+        //remove from unconfirmed
+        removeUnconfirmedTeacher(askingAccount, _teacher);
     }
 
-    function addTeacher(address _address) private {
-        registered[_address] = true;
-        teachers[_address] = countTeachers;
-        teachersByIndex[countTeachers] = _address;
-        countTeachers += 1;
+    function denyTeacher(Teacher _teacher) public onlyAdmin isValidContractUnconfirmedTeacher(_teacher) {
+        address askingAccount = _teacher.getPublicAddress();
+        //clean the address from registred
+        delete registered[askingAccount];
+        //remove from unconfirmed
+        removeUnconfirmedTeacher(askingAccount, _teacher);
+    }
+
+    function removeTeacher(Teacher _teacher) public onlyAdmin isValidContractTeacher(_teacher) {
+        address account = _teacher.getPublicAddress();
+        //clean the address from registred
+        delete registered[account];
+
+        //remove from teacher
+        uint currentIndex = teachers[_teacher];
+        teachersByIndex[currentIndex] = teachersByIndex[countTeachersByIndex];
+        delete teachers[_teacher];
+        countTeachersByIndex -= 1;
+
+        //correct the map public address => contract address
+        delete teacherAddressToContract[account];
+        //TODO: togliere sottoscrizioni esami
+    }
+
+    function removeUnconfirmedTeacher(address _askingAccount, Teacher _teacher) private {
+        //remove from unconfirmed
+        uint currentIndex = unconfirmedTeachers[_teacher];
+        unconfirmedTeachersByIndex[currentIndex] = unconfirmedTeachersByIndex[countUnconfirmedTeachersByIndex];
+        delete unconfirmedTeachers[_teacher];
+        countUnconfirmedTeachersByIndex -= 1;
+
+        //correct the map public address => contract address
+        delete unconfirmedTeacherAddressToContract[_askingAccount];
     }
 }
