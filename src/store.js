@@ -4,8 +4,8 @@ import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
 import { persistStore } from 'redux-persist';
 import freeze from 'redux-freeze';
-import reducers from './reducers/index';
-import { sagas } from './sagas/index';
+import reducers from './reducers';
+import sagas from './sagas';
 
 // add the middlewares
 const middlewares = [];

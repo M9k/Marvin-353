@@ -2,7 +2,7 @@ import React from 'react';
 import { ButtonToolbar } from 'react-bootstrap';
 import { shallow, configure } from 'enzyme';
 import assert from 'assert';
-import Adapter from 'enzyme-adapter-react-15';
+import Adapter from 'enzyme-adapter-react-16';
 import configureStore from 'redux-mock-store';
 import ButtonFactory from '../../../src/components/buttons/ButtonFactory';
 import AccountTypes from '../../../src/components/AccountEnum';

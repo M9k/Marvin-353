@@ -14,11 +14,12 @@ describe('Home component', () => {
         store={mockStore({
           user:
             {
-              metamask: true,
-              account: true,
-              isLogged: true,
-              accountType: true,
+              role: null,
             },
+          metamask: {
+            present: true,
+            account: '',
+          },
         })}
       />);
       assert.equal(wrapper.length, 1);

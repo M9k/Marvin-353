@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import HomeFactory from './home/HomeFactory';
 import Header from './global/Header';
 import AccountTypes from './AccountEnum';
-
+import { isLogged as userIsLogged } from '../ducks/Session';
 // Home page component
 const Home = props => (
   <div id="home">
@@ -36,9 +36,9 @@ Home.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  metamask: state.user.metamask,
-  account: state.user.account,
-  isLogged: state.user.logged,
+  metamask: state.metamask.present,
+  account: state.metamask.account,
+  isLogged: userIsLogged(state),
   accountType: state.user.role,
 });
 
