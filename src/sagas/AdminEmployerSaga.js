@@ -37,8 +37,7 @@ export function* getAllAdmins() {
     const apiCalls = Array(num).fill().map((_, i) => call(getAdminWeb3, i));
     const admins = yield all(apiCalls);
     yield put(actionCreators.setAdminsList(admins));
-  }
-  catch (e){
+  } catch (e) {
     console.log('Failed!');
     yield put(actionCreators.listHasErrored());
   }
@@ -54,10 +53,10 @@ export const getAllAdminsAction = () => (
   { type: GET_ALL_ADMINS }
 );
 
-export default function* handler (){
+export default function* handler() {
   yield [
     fork(takeEvery, ADD_NEW_ADMIN, addAdmin),
     fork(takeEvery, REMOVE_ADMIN, removeAdmin),
     fork(takeLatest, GET_ALL_ADMINS, getAllAdmins),
-  ]
+  ];
 }

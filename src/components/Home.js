@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import HomeFactory from './home/HomeFactory';
 import Header from './global/Header';
 import AccountTypes from './AccountEnum';
-import {isLogged as userIsLogged} from '../ducks/Session';
+import { isLogged as userIsLogged } from '../ducks/Session';
 // Home page component
 const Home = props => (
   <div id="home">

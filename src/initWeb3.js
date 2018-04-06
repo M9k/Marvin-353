@@ -2,6 +2,7 @@ import getWeb3 from './util/web3/getWeb3';
 import { store } from './store';
 import * as metamaskAction from './ducks/Metamask';
 import { cleanData as sessionLogout } from './ducks/Session';
+
 const initWeb3 = () => {
   let account = null;
 

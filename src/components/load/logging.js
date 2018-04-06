@@ -36,9 +36,9 @@ class Logging extends React.Component {
       return (
         <div>
           No user found with this address!
-          <RedirectToHome time={2000}/>
+          <RedirectToHome time={2000} />
         </div>
-      )
+      );
     }
     return (
       <RedirectToHome time={2000} />
@@ -51,7 +51,7 @@ Logging.propTypes = {
   loginFailed: PropTypes.bool,
   metamask: PropTypes.bool,
   account: PropTypes.string,
-  performLogin: PropTypes.func
+  performLogin: PropTypes.func,
 };
 
 Logging.defaultProps = {

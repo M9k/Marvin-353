@@ -11,7 +11,7 @@ import Metamask from './ducks/Metamask';
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['routing', 'form']
+  blacklist: ['routing', 'form'],
 };
 
 

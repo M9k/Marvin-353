@@ -31,14 +31,12 @@ export class AdminOverviewComponent extends React.Component {
 AdminOverviewComponent.propTypes = {
   adminNumber: PropTypes.number,
   adminAccount: PropTypes.arrayOf(String),
-  getAdminNumber: PropTypes.func,
   removeAdmin: PropTypes.func,
   getAllAdmin: PropTypes.func,
 };
 AdminOverviewComponent.defaultProps = {
   adminNumber: 0,
   adminAccount: [],
-  getAdminNumber: () => {},
   removeAdmin: () => {},
   getAllAdmin: () => {},
 };

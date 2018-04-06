@@ -30,14 +30,11 @@ describe('<AdminOverviewContainer/>', () => {
   it('should fire the correct actions', () => {
     const store = createMockStore(defaultStore);
     const wrapper = shallowWithStore(<AdminOverviewContainer />, store);
-    wrapper.props().getAdminNumber();
     wrapper.props().getAllAdmin(1);
     wrapper.props().removeAdmin('pippo');
-    expect(store.isActionTypeDispatched(uSagaAction.GET_ADMIN_NUMBER)).to.be.true;
     expect(store.isActionDispatched(uSagaAction.getAllAdminsAction())).to.be.true;
     expect(store.isActionDispatched(uSagaAction.removeAdminAction('pippo'))).to.be.true;
     expect(store.isActionTypeDispatched(uSagaAction.ADD_NEW_ADMIN)).to.be.false;
-    expect(store.isActionTypeDispatched(universityAction.setAdminNumber(1).type)).to.be.false;
     expect(store.isActionTypeDispatched(universityAction.setAdminsList([]).type)).to.be.false;
   });
 });
