@@ -5,7 +5,6 @@ import { shallowWithStore, createMockStore } from '../helpers/component-with-sto
 import AdminOverviewContainer, { AdminOverviewComponent } from '../../src/containers/AdminOverviewContainer';
 import RemoveList from '../../src/components/lists/RemoveList';
 import * as uSagaAction from '../../src/sagas/AdminEmployerSaga';
-import * as universityAction from '../../src/ducks/AdminEmployer';
 
 const defaultStore = {
   university: {
@@ -35,6 +34,5 @@ describe('<AdminOverviewContainer/>', () => {
     expect(store.isActionDispatched(uSagaAction.getAllAdminsAction())).to.be.true;
     expect(store.isActionDispatched(uSagaAction.removeAdminAction('pippo'))).to.be.true;
     expect(store.isActionTypeDispatched(uSagaAction.ADD_NEW_ADMIN)).to.be.false;
-    expect(store.isActionTypeDispatched(universityAction.setAdminsList([]).type)).to.be.false;
   });
 });

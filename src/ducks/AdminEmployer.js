@@ -1,6 +1,8 @@
-import Duck from 'extensible-duck'
-const duck = new Duck({
-  namespace: "marvin", store: "AdminEmployer",
+import Duck from 'extensible-duck';
+
+const AdminEmployerDuck = new Duck({
+  namespace: 'marvin',
+  store: 'AdminEmployer',
   types: ['SET_ADMINS_LIST', 'POP_ADMIN', 'PUSH_ADMIN', 'LIST_ERRORED', 'LIST_LOADING'],
   initialState: {
     loading: false,
@@ -54,7 +56,7 @@ const duck = new Duck({
         return state;
     }
   },
-  creators: (duck) => ({
+  creators: duck => ({
     setAdminsList: account => (
       { type: duck.types.SET_ADMINS_LIST, account }
     ),
@@ -70,8 +72,8 @@ const duck = new Duck({
     listHasErrored: () => (
       { type: duck.types.LIST_ERRORED }
     ),
-  })
+  }),
 });
-const { reducer } = duck;
-export const { creators , selectors } = duck;
+const { reducer } = AdminEmployerDuck;
+export const { creators, selectors } = AdminEmployerDuck;
 export default reducer;
