@@ -1,5 +1,5 @@
 import { call, put, all, fork, takeLatest, takeEvery } from 'redux-saga/effects';
-import * as actionCreators from '../ducks/AdminEmployer';
+import { creators as actionCreators } from '../ducks/AdminEmployer';
 import { getAdminAt, getAdminNumber, addNewAdmin, removeAdmin as web3Remove } from '../web3calls/UniversityAdmin';
 
 export const REMOVE_ADMIN = 'marvin/universitySaga/REMOVE_ADMIN';
