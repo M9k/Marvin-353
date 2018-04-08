@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import * as universitySagaAction from '../sagas/AdminEmployerSaga';
-import RemoveList from '../components/lists/RemoveList';
+
 
 export class AdminOverviewComponent extends React.Component {
   constructor(props) {
@@ -22,7 +22,6 @@ export class AdminOverviewComponent extends React.Component {
         <h2>AdminList</h2>
         <Button onClick={this.refreshData}>Refresh</Button><br />
         <p>Number of admins: {this.props.adminNumber}</p>
-        <RemoveList elements={this.props.adminAccount} removeFnc={this.props.removeAdmin} />
       </div>
     );
   }
@@ -31,13 +30,11 @@ export class AdminOverviewComponent extends React.Component {
 AdminOverviewComponent.propTypes = {
   adminNumber: PropTypes.number,
   adminAccount: PropTypes.arrayOf(String),
-  removeAdmin: PropTypes.func,
   getAllAdmin: PropTypes.func,
 };
 AdminOverviewComponent.defaultProps = {
   adminNumber: 0,
   adminAccount: [],
-  removeAdmin: () => {},
   getAllAdmin: () => {},
 };
 

@@ -1,11 +1,9 @@
 import React from 'react';
-import Header from './global/Header';
 
 const Logout = () => {
   document.title = 'Logout - Marvin';
   return (
     <div className="page-logout">
-      <Header />
       <h1 className="title">Logout</h1>
       <p>To logout from Marvin, you have to logout from MetaMask:
         <ul>

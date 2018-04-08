@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import Router from './router';
 import { persistor } from './store';
-import Footer from './components/global/Footer';
 
 const Page = props => (
   <div id="page">
@@ -13,7 +12,6 @@ const Page = props => (
         <Router />
       </PersistGate>
     </Provider>
-    <Footer />
   </div>
 );
 

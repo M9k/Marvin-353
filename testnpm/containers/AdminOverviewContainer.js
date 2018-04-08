@@ -3,7 +3,6 @@ import { Button } from 'react-bootstrap';
 import { expect } from '../helpers/chai-enzyme';
 import { shallowWithStore, createMockStore } from '../helpers/component-with-store';
 import AdminOverviewContainer, { AdminOverviewComponent } from '../../src/containers/AdminOverviewContainer';
-import RemoveList from '../../src/components/lists/RemoveList';
 import * as uSagaAction from '../../src/sagas/AdminEmployerSaga';
 
 const defaultStore = {
@@ -18,7 +17,6 @@ describe('<AdminOverviewContainer/>', () => {
     expect(wrapper).to.have.exactly(1).descendants('h2');
     expect(wrapper).to.have.exactly(1).descendants(Button);
     expect(wrapper).to.have.exactly(1).descendants('p');
-    expect(wrapper).to.have.exactly(1).descendants(RemoveList);
     expect(wrapper.find('div').first()).to.have.id('admin-overview');
   });
   it('should connect right to the props', () => {

@@ -1,7 +1,6 @@
 import React from 'react';
 import AdminEmployerContainer, { AdminEmployerComponent } from '../../src/containers/AdminEmployerContainer';
 import * as universityAction from '../../src/sagas/AdminEmployerSaga';
-import FormAddAdmin from '../../src/components/form/FormAddAdmin';
 import { shallowWithStore, createMockStore } from '../helpers/component-with-store';
 import { expect } from '../helpers/chai-enzyme';
 
@@ -9,7 +8,6 @@ describe('<AdminEmplyoerCointainer/>', () => {
   it('should render correctly', () => {
     const wrapper = shallowWithStore(<AdminEmployerComponent />, {});
     expect(wrapper).to.have.exactly(1).descendants('h2');
-    expect(wrapper).to.have.exactly(1).descendants(FormAddAdmin);
     expect(wrapper.find('div').first()).to.have.id('admin-employer');
   });
   it('should dispatch the correct actions', () => {
