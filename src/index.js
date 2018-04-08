@@ -1,28 +1,15 @@
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
 import initWeb3 from './initWeb3';
-import { store, persistor } from './store';
-import Router from './router';
-import Footer from './components/global/Footer';
+import { store } from './store';
 import './stylesheets/main.scss';
+import Page from './page';
 
 initWeb3();
 
-// init contracts
-// TODO - Singleton?
-
 // render the main component
 ReactDOM.render(
-  <div id="page">
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <Router />
-      </PersistGate>
-    </Provider>
-    <Footer />
-  </div>,
+  <Page store={store} />,
   document.getElementById('app'),
 );
