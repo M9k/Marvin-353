@@ -18,7 +18,7 @@ const Page = props => (
 );
 
 Page.propTypes = {
-  store: PropTypes.object.isRequired,
+  store: PropTypes.object.isRequired, // eslint-disable-line
 };
 
 export default Page;
