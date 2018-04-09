@@ -101,4 +101,12 @@ contract('UniversityStudent', (accounts) => {
     }
     throw new Error('Test failed!');
   });
+  it('Should not remove invalid student', async () => {
+    try {
+      await university.denyStudent(0, { from: accounts[1] });
+    } catch (e) {
+      return true;
+    }
+    throw new Error('Test failed!');
+  });
 });
