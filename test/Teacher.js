@@ -74,6 +74,16 @@ contract('Teacher', (accounts) => {
     throw new Error('Test failed!');
   });
 
+  it('Shouldn\'t register two valuation', async () => {
+    await teacher.registerNewVoteStudentExam(0, 0, 17, { from: accounts[2] });
+    try {
+      await teacher.registerNewVoteStudentExam(0, 0, 17, { from: accounts[2] });
+    } catch (e) {
+      return true;
+    }
+    throw new Error('Test failed!');
+  });
+
   it('Shouldn\'t register incorrect valuation (too high)', async () => {
     try {
       await teacher.registerNewVoteStudentExam(0, 0, 33, { from: accounts[2] });
