@@ -43,6 +43,24 @@ contract('UniversityExam', (accounts) => {
     );
     assert.equal(await exam.getTeacherContract.call(), teacher.address);
   });
+  it('The exam has to be removed is reassigned to another', async () => {
+    // add a teacher2
+    await university.requestTeacherAccount(123, 456, { from: accounts[4] });
+    await university.confirmTeacher(
+      await university.getNotApprovedTeacherContractAddressAt.call(0),
+      { from: accounts[1] },
+    );
+    const teacher2 =
+      Teacher.at(await university.getTeacherContractFromPublicAddress.call(accounts[4]));
+    await university.associateTeacherToExam(
+      teacher2.address,
+      exam.address,
+      { from: accounts[1] },
+    );
+    assert.equal(await exam.getTeacherContract.call(), teacher2.address);
+    assert.equal(await teacher2.getExamNumber.call(), 1);
+    assert.equal(await teacher.getExamNumber.call(), 0);
+  });
   it('Only an admin can associate a teacher to an exam', async () => {
     try {
       await university.associateTeacherToExam(

@@ -83,6 +83,15 @@ contract('Teacher', (accounts) => {
     throw new Error('Test failed!');
   });
 
+  it('Shouldn\'t add exam if not from university contract', async () => {
+    try {
+      await teacher.addExam(0, { from: accounts[5] });
+    } catch (e) {
+      return true;
+    }
+    throw new Error('Test failed!');
+  });
+
   it('Shouldn\'t register a student not enrolled', async () => {
     try {
       await teacher.registerNewVoteStudentExam(1, 0, 22, { from: accounts[2] });
