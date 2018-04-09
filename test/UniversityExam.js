@@ -26,7 +26,7 @@ contract('UniversityExam', (accounts) => {
     );
     teacher = Teacher.at(await university.getTeacherContractFromPublicAddress.call(accounts[2]));
     // add a year
-    await university.addNewAcademicYear(2018, { from: accounts[0] }, { from: accounts[0] });
+    await university.addNewAcademicYear(2018, { from: accounts[0] });
     year = Year.at(await university.getAcademicYearContractByYear.call(2018));
     // add a course
     await year.addNewCourse(123, 180, { from: accounts[1] });
