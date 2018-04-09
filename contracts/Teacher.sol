@@ -22,12 +22,13 @@ contract Teacher is User {
         _;
     }
 
+  /*
     modifier validExamIndex(uint _index) {
         if (_index < 1 || _index + 1 > countAssignedExam)
             revert();
         _;
     }
-
+  */
     modifier correctValuation(uint8 value) {
         if (value < 1 || value > 32) revert();
         _;
@@ -67,7 +68,7 @@ contract Teacher is User {
         student.registerValuation(student.getIndexOfExam(exam), _valuation);
     }
 
-    function removeExamByIndex(uint _examIndex) private validExamIndex(_examIndex) {
+    function removeExamByIndex(uint _examIndex) private { // validExamIndex(_examIndex)
         assignedExam[_examIndex + 1] = assignedExam[countAssignedExam];
         countAssignedExam -= 1;
     }
