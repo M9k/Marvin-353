@@ -36,7 +36,7 @@ contract UniversityStudent is UniversityTeacher {
     }
 
     //Return the number of non approved students
-    function getNonApprovedStudentNumber() public view returns(uint) {
+    function getNotApprovedStudentNumber() public view returns(uint) {
         return countUnconfirmedStudentsByIndex - 1;
     }
 
