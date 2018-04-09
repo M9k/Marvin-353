@@ -85,5 +85,14 @@ contract('UniversityAdmin', (accounts) => {
     }
     throw new Error('Test failed!');
   });
+  it('Should not remove an invalid admin', async () => {
+    await contract.addNewAdmin(accounts[1], { from: accounts[0] });
+    try {
+      await contract.removeAdmin(0, { from: accounts[0] });
+    } catch (e) {
+      return true;
+    }
+    throw new Error('Test failed!');
+  });
 });
 
