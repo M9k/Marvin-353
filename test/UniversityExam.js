@@ -44,6 +44,12 @@ contract('UniversityExam', (accounts) => {
     assert.equal(await exam.getTeacherContract.call(), teacher.address);
   });
   it('The exam has to be removed is reassigned to another', async () => {
+    await university.associateTeacherToExam(
+      teacher.address,
+      exam.address,
+      { from: accounts[1] },
+    );
+    assert.equal(await teacher.getExamNumber.call(), 1);
     // add a teacher2
     await university.requestTeacherAccount(123, 456, { from: accounts[4] });
     await university.confirmTeacher(
