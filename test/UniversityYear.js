@@ -11,7 +11,9 @@ contract('UniversityYear', (accounts) => {
     university = await UniversityYear.new({ from: accounts[0] });
   });
   it('Should add new academic year', async () => {
+    assert.equal(await university.getAcademicYearNumber.call(), 0);
     await university.addNewAcademicYear(2018, { from: accounts[0] });
+    assert.equal(await university.getAcademicYearNumber.call(), 1);
     const year = Year.at(await university.getAcademicYearContractByYear.call(2018));
     assert.equal(await year.getSolarYear.call(), 2018);
   });
@@ -20,6 +22,7 @@ contract('UniversityYear', (accounts) => {
     const yearBefore = Year.at(await university.getAcademicYearContractByYear.call(2018));
     assert.equal(await yearBefore.getSolarYear.call(), 2018);
     await university.removeAcademicYear(2018, { from: accounts[0] });
+    assert.equal(await university.getAcademicYearNumber.call(), 0);
     assert.equal(await university.getAcademicYearContractByYear.call(2018), 0);
   });
   it('Should not add the same year two time', async () => {
