@@ -61,6 +61,26 @@ contract('UniversityStudent', (accounts) => {
       await university.getStudentContractAddressAt.call(0),
     );
   });
+  it('Should ask and confirm a student 2', async () => {
+    // add a new course
+    await year.addNewCourse(123, 180, { from: accounts[1] });
+    const course2 = Course.at(await year.getCourseContractAt.call(0));
+    assert.equal(await university.getStudentNumber.call(), 0);
+    assert.equal(await university.getNotApprovedStudentNumber.call(), 0);
+    await university.requestStudentAccount(1, 2, course2.address, { from: accounts[3] });
+    assert.equal(await university.getStudentNumber.call(), 0);
+    assert.equal(await university.getNotApprovedStudentNumber.call(), 1);
+    await university.confirmStudent(
+      await university.getNotApprovedStudentContractAddressAt.call(0),
+      { from: accounts[1] },
+    );
+    assert.equal(await university.getStudentNumber.call(), 1);
+    assert.equal(await university.getNotApprovedStudentNumber.call(), 0);
+    assert.equal(
+      await university.getStudentContractFromPublicAddress.call(accounts[3]),
+      await university.getStudentContractAddressAt.call(0),
+    );
+  });
   it('Should ask, confirm and delete a student', async () => {
     await university.requestStudentAccount(1, 2, course.address, { from: accounts[3] });
     await university.confirmStudent(
