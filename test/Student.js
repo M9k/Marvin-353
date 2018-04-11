@@ -123,4 +123,13 @@ contract('Student', (accounts) => {
     }
     throw new Error('Test failed!');
   });
+
+  it('Should not register a valuation if not the correct professor', async () => {
+    try {
+      assert.equal(await student.registerValuation(0, 20, { from: accounts[7] }));
+    } catch (e) {
+      return true;
+    }
+    throw new Error('Test failed!');
+  });
 });
