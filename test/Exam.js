@@ -66,5 +66,24 @@ contract('Exam', (accounts) => {
     }
     throw new Error('Test failed!');
   });
+
+  it('Shouldn\'t remove a subscriber if not from University', async () => {
+    try {
+      await exam1.removeSubscriber(21312312, { from: accounts[2] });
+    } catch (e) {
+      return true;
+    }
+    throw new Error('Test failed!');
+  });
+
+  it('Shouldn\'t subscribe two times', async () => {
+    await exam1.addMeAsSubscriber({ from: accounts[7] });
+    try {
+      await exam1.addMeAsSubscriber({ from: accounts[7] });
+    } catch (e) {
+      return true;
+    }
+    throw new Error('Test failed!');
+  });
 });
 
