@@ -11,15 +11,21 @@ class Form extends React.Component {
   }
 
   handleSubmit(event) {
+    console.dir(this.state);
     this.props.submitFunction();
     event.preventDefault();
   }
 
   render() {
     const fields = [];
-
     this.props.fields.map(value => (
-      fields.push(<Field {...value} />)
+      fields.push(<Field
+        {...value}
+        onChangeValue={(e) => {
+        this.setState({ [value.name]: { value: e } });
+        // valid: value.validateFunction(e)
+      }}
+      />)
     ));
 
     return (

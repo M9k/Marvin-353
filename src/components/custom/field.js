@@ -16,7 +16,6 @@ class Field extends React.Component {
   }
 
   static getValidationStateString(value) {
-    console.log('VALUE:', value);
     let stringValidState;
     switch (value) {
       case 2:
@@ -44,12 +43,13 @@ class Field extends React.Component {
   }
 
   getValidationState() {
-    console.log('VALUE:', this.state.value);
     return Field.getValidationStateString(this.props.validateFunction(this.state.value));
   }
 
   handleChange(e) {
-    this.setState({ value: e.target.value });
+    const setTo = e.target.value;
+    this.setState({ value: setTo });
+    this.props.onChangeValue(setTo);
   }
 
   render() {
@@ -102,6 +102,7 @@ Field.propTypes = {
   type: PropTypes.oneOf(Object.values(FieldTypes)),
   validateFunction: PropTypes.func,
   values: PropTypes.arrayOf(String),
+  onChangeValue: PropTypes.func.isRequired,
 };
 
 Field.defaultProps = {

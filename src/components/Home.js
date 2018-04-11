@@ -1,22 +1,11 @@
 import React from 'react';
 import FieldTypes from './custom/fieldtypes';
-import Field from './custom/field';
 import Form from './custom/form';
 // Home page component
 const Home = () => (
   <div id="home">
     HOME
     {FieldTypes.TEXT}
-    <Field />
-    <hr />
-    <Field name="name" label="Name:" help="insert your name" placeholder="my name is" type={FieldTypes.TEXT} validateFunction={e => (e.length >= 10)} />
-    <hr />
-    <Field name="role" label="What's your role?" type={FieldTypes.RADIO} values={['student', 'teacher']} />
-    <hr />
-    <Field name="newsletter" label="Which newsletters do you want?" type={FieldTypes.CHECKBOX} values={['Exams', 'Events', 'Holidays']} />
-    <hr />
-    <Field name="role" label="What's your role?" type={FieldTypes.SELECT} values={['student', 'teacher']} validateFunction={e => (e !== '')} />
-    <hr />
     <Form />
     <Form description="FAKE Add new admin address form" />
     <Form
