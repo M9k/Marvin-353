@@ -61,6 +61,6 @@ dist/
 *pyc
 css/
 
+redux-generators/
 public/contracts/
 \.node-xmlhttprequest-sync-*
-

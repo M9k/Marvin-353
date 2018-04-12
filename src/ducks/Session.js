@@ -16,11 +16,11 @@ const SessionDuck = new Duck({
     loading: false,
     role: null,
     data: initialDataState,
-  }
+  },
   reducer: (state, action, duck) => {
     const { types } = duck;
     const { initialState } = duck;
-    switch(action.type){
+    switch (action.type) {
       case (types.SET_ROLE):
         return {
           ...state,
@@ -53,7 +53,7 @@ const SessionDuck = new Duck({
   selectors: {
     isLogged: state => (state.user.role !== null),
   },
-  creators: duck => {(
+  creators: duck => ({
     setRole: (role, errored = false) => (
       { type: duck.type.SET_ROLE, role, errored }
     ),
@@ -65,11 +65,11 @@ const SessionDuck = new Duck({
     ),
     roleLoading: () => (
       { type: duck.type.ROLE_LOADING }
-    )
+    ),
     dataLoading: () => (
       { type: duck.type.DATA_LOADING }
     ),
-  )}
+  }),
 });
 export const { creators, selectors } = SessionDuck;
 export default SessionDuck.reducer;
