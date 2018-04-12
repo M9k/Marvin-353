@@ -1,6 +1,14 @@
 import React from 'react';
 import FieldTypes from './custom/fieldtypes';
 import Form from './custom/form';
+
+
+function existValue(e) {
+  if (e.length === 0) { return 2; }
+  return 1;
+}
+
+
 // Home page component
 const Home = () => (
   <div id="home">
@@ -16,12 +24,14 @@ const Home = () => (
         help: 'insert his name',
         placeholder: 'luigi',
         type: FieldTypes.TEXT,
+        validateFunction: existValue,
       }, {
         name: 'surname',
         label: 'Surname:',
         help: 'insert his surname',
         placeholder: 'rossi',
         type: FieldTypes.TEXT,
+        validateFunction: existValue,
       }, {
       name: 'addressAdmin',
       label: 'Address:',
@@ -42,6 +52,5 @@ const Home = () => (
 
   </div>
 );
-
 
 export default (Home);

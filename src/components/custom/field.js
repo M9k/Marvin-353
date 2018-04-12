@@ -120,14 +120,14 @@ class Field extends React.Component {
 }
 
 Field.propTypes = {
+  validateFunction: PropTypes.func.isRequired,
+  onChangeValue: PropTypes.func.isRequired,
   name: PropTypes.string,
   label: PropTypes.string,
   placeholder: PropTypes.string,
   help: PropTypes.string,
   type: PropTypes.oneOf(Object.values(FieldTypes)),
-  validateFunction: PropTypes.func,
   values: PropTypes.arrayOf(String),
-  onChangeValue: PropTypes.func.isRequired,
   reset: PropTypes.bool,
 };
 
@@ -137,7 +137,6 @@ Field.defaultProps = {
   placeholder: '',
   help: '',
   type: FieldTypes.TEXT,
-  validateFunction: () => -1, // TODO handle validate function with e param
   values: [],
   reset: false,
 };

@@ -13,26 +13,41 @@ class Form extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = { reset: false };
+    this.allValidFields = this.allValidFields.bind(this);
+    this.state = { reset: false, fields: {} };
+
+    // eslint-disable-next-line no-return-assign
+    this.props.fields.map(field => (
+      this.state = {
+        fields: { ...this.state.fields, [field.name]: { value: '', valid: -1 } },
+        reset: false,
+      }));
+
+    console.dir(this.state);
+  }
+
+  // function that check that each key valid is equals to 1 == Success before submit
+  allValidFields() {
+    return Object.keys(this.state.fields).every(field => this.state.fields[field].valid === 1);
   }
 
   handleSubmit(event) {
-    console.dir(this.state);
-    // TODO function that check that each key valid is equals to 1 == Success before submit
-
-    // if submit == TRUE == Success reset the form
-    if (this.props.submitFunction() === 1) { this.setState({ reset: !this.state.reset }); }
     event.preventDefault();
+    if (this.allValidFields()) {
+    // if submit == TRUE == Success reset the form
+      if (this.props.submitFunction() === 1) { this.setState({ reset: !this.state.reset }); }
+    }
   }
 
   render() {
     const fields = [];
-    this.props.fields.map((value, i) => (
+    this.props.fields.map((field, i) => (
       fields.push(<Field
-        {...value}
+        {...field}
         onChangeValue={(e) => {
-        this.setState({ [value.name]: { value: e, valid: value.validateFunction(e) } });
-        // valid: value.validateFunction(e)
+        this.setState({
+ fields: { ...this.state.fields, [field.name]: { value: e, valid: field.validateFunction(e) } },
+        });
       }}
         reset={this.state.reset}
         key={Form.getKey('', i)}
@@ -44,7 +59,7 @@ class Form extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <legend>{this.props.description}</legend>
           {fields}
-          <Button bsStyle="primary" type="submit">Submit</Button>
+          <Button bsStyle="primary" type="submit" disabled={!this.allValidFields()}>Submit</Button>
         </form>
       </Panel>
     );
