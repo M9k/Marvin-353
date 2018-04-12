@@ -5,7 +5,7 @@ import PageContainer from './PageContainer';
 const Home = () => (
   <div id="home">
     <PageContainer>
-      HOME
+      <h1>Marvin</h1>
     </PageContainer>
   </div>
 );
