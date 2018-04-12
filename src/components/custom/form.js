@@ -32,6 +32,8 @@ class Form extends React.Component {
   }
 
   handleSubmit(event) {
+    console.log('SUBMIT');
+    console.dir(this.state);
     event.preventDefault();
     if (this.allValidFields()) {
     // if submit == TRUE == Success reset the form

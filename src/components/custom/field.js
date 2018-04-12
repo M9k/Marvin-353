@@ -40,7 +40,12 @@ class Field extends React.Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.updateCurrentState = this.updateCurrentState.bind(this);
+    this.reset = this.reset.bind(this);
     this.state = { value: '' };
+  }
+
+  componentDidMount() {
+    this.reset();
   }
 
   // when a new props is received or state we check if the reset has been changed
@@ -66,7 +71,11 @@ class Field extends React.Component {
 
   // after a change on the field by user input we update the value in the store and notify the parent
   handleChange(e) {
-    this.updateCurrentState(e.target.value);
+    if (this.props.type === FieldTypes.CHECKBOX) {
+      this.updateCurrentState(e.target.checked.toString());
+    } else {
+      this.updateCurrentState(e.target.value);
+    }
   }
 
 
