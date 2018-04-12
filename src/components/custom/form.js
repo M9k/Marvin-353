@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/lib/Button';
-import Field from './field';
+import Panel from 'react-bootstrap/lib/Panel';
 
+import Field from './field';
 
 class Form extends React.Component {
   static getKey(name, index) {
@@ -39,11 +40,13 @@ class Form extends React.Component {
     ));
 
     return (
-      <form onSubmit={this.handleSubmit}>
-        <legend>{this.props.description}</legend>
-        {fields}
-        <Button type="submit">Submit</Button>
-      </form>
+      <Panel style={{ padding: '2%' }} >
+        <form onSubmit={this.handleSubmit}>
+          <legend>{this.props.description}</legend>
+          {fields}
+          <Button bsStyle="primary" type="submit">Submit</Button>
+        </form>
+      </Panel>
     );
   }
 }
