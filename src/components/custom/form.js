@@ -5,31 +5,41 @@ import Field from './field';
 
 
 class Form extends React.Component {
+  static getKey(name, index) {
+    return index.toString();
+  }
+
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = { reset: false };
   }
 
   handleSubmit(event) {
     console.dir(this.state);
-    this.props.submitFunction();
+    // TODO function that check that each key valid is equals to 1 == Success before submit
+
+    // if submit == TRUE == Success reset the form
+    if (this.props.submitFunction() === 1) { this.setState({ reset: !this.state.reset }); }
     event.preventDefault();
   }
 
   render() {
     const fields = [];
-    this.props.fields.map(value => (
+    this.props.fields.map((value, i) => (
       fields.push(<Field
         {...value}
         onChangeValue={(e) => {
-        this.setState({ [value.name]: { value: e } });
+        this.setState({ [value.name]: { value: e, valid: value.validateFunction(e) } });
         // valid: value.validateFunction(e)
       }}
+        reset={this.state.reset}
+        key={Form.getKey('', i)}
       />)
     ));
 
     return (
-      <form onSubmit={this.handleSubmit}>THIS IS A DOPE form!!!
+      <form onSubmit={this.handleSubmit}>
         <legend>{this.props.description}</legend>
         {fields}
         <Button type="submit">Submit</Button>
@@ -47,7 +57,7 @@ Form.propTypes = {
 Form.defaultProps = {
   submitFunction: () => -1,
   fields: [],
-  description: PropTypes.string,
+  description: '',
 };
 
 export default (Form);

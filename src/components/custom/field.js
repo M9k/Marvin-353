@@ -12,7 +12,7 @@ import FieldTypes from './fieldtypes';
 
 class Field extends React.Component {
   static getKey(name, index) {
-    return index.toString();
+    return name + index.toString();
   }
 
   static getValidationStateString(value) {
@@ -39,17 +39,41 @@ class Field extends React.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
+    this.updateCurrentState = this.updateCurrentState.bind(this);
     this.state = { value: '' };
   }
 
+  // when a new props is received or state we check if the reset has been changed
+  componentDidUpdate(prevProps) {
+    if (this.props.reset !== prevProps.reset) {
+      this.reset();
+    }
+    // Return null to indicate no change to state.
+    return null;
+  }
+
+  // call the static function that with an integer input will return the according validation state
   getValidationState() {
     return Field.getValidationStateString(this.props.validateFunction(this.state.value));
   }
 
-  handleChange(e) {
-    const setTo = e.target.value;
+  // when I want to update the state of this field you need to change
+  // the state and notifiy parent "form" component
+  updateCurrentState(setTo) {
     this.setState({ value: setTo });
     this.props.onChangeValue(setTo);
+  }
+
+  // after a change on the field by user input we update the value in the store and notify the parent
+  handleChange(e) {
+    this.updateCurrentState(e.target.value);
+  }
+
+
+  // when reset props changes we reset the state value -> textbox or selected value
+  reset() {
+    this.setState({ value: '' });
+    this.updateCurrentState('');
   }
 
   render() {
@@ -80,6 +104,7 @@ class Field extends React.Component {
           type={this.props.type}
           placeholder={this.props.placeholder}
           onChange={this.handleChange}
+          value={this.state.value}
         />);
         break;
     }// switch FieldTypes
@@ -103,6 +128,7 @@ Field.propTypes = {
   validateFunction: PropTypes.func,
   values: PropTypes.arrayOf(String),
   onChangeValue: PropTypes.func.isRequired,
+  reset: PropTypes.bool,
 };
 
 Field.defaultProps = {
@@ -111,8 +137,9 @@ Field.defaultProps = {
   placeholder: '',
   help: '',
   type: FieldTypes.TEXT,
-  validateFunction: () => -1,
+  validateFunction: () => -1, // TODO handle validate function with e param
   values: [],
+  reset: false,
 };
 
 export default (Field);
