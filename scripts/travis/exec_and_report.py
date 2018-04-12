@@ -6,7 +6,7 @@ import sys
 
 stages = {
 "lint": ["npm run eslint", "npm run solhint"],
-"test": ["npm run test", "npm run soltest"]
+"test": ["npm run test"]
 }
 try:
     stage = sys.argv[1]
