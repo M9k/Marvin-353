@@ -15,13 +15,16 @@ async function userData(addr) {
     surname: bytes32ToString(surname),
   };
 }
+
+//Da testare probabilment non funziona
 const getStudentData = (role) => {
   if (role === RoleMap.UNCONFIRMED_STUDENT) return {};
   return getStudentContractFromPublicAddress().then((addr) => {
-    const courseName = getCourseContract(addr).then((courseContract) => {
-      getCourseName(courseContract).then(name => bytes32ToString(name));
+    getCourseContract(addr).then((courseContract) => {
+      getCourseName(courseContract).then(name => {
+        return Object.assign({}, userData(addr), { course: bytes32ToString(name) });
+      });
     });
-    return Object.assign({}, userData(addr), { course: courseName });
   });
 };
 const getTeacherData = (role) => {
