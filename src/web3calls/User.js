@@ -1,3 +1,5 @@
+import { toText } from '../util/web3/textConverter';
+
 const contract = require('truffle-contract');
 const contractUserJson = require('../../build/contracts/User.json');
 
@@ -17,15 +19,15 @@ function getPublicAddress(address) {
 function getName(address) {
   console.log('User getName');
   const contractInstance = getUserContract(address);
-  return contractInstance.then(instance =>
-    instance.getName.call());
+  return toText(contractInstance.then(instance =>
+    instance.getName.call()));
 }
 
 function getSurname(address) {
   console.log('User getSurname');
   const contractInstance = getUserContract(address);
-  return contractInstance.then(instance =>
-    instance.getSurname.call());
+  return toText(contractInstance.then(instance =>
+    instance.getSurname.call()));
 }
 
 export { getPublicAddress, getName, getSurname };
