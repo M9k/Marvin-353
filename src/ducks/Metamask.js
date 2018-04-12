@@ -1,6 +1,6 @@
 import Duck from 'extensible-duck';
 
-const Metamask = new Duck({
+const MetamaskDuck = new Duck({
   namespace: 'marvin',
   store: 'metamask',
   types: ['LOGIN', 'LOGOUT', 'SET_ADDRESS', 'NOT_FOUND'],
@@ -59,5 +59,5 @@ const Metamask = new Duck({
     ),
   }),
 });
-export const { creators, selectors } = Metamask;
-export default Metamask.reducer;
+export const { creators, selectors } = MetamaskDuck;
+export default MetamaskDuck.reducer;
