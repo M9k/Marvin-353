@@ -1,6 +1,6 @@
 import { call, put, takeLatest, fork, spawn } from 'redux-saga/effects';
-import * as sessionAction from '../ducks/Session';
-import { login } from '../web3calls/University';
+import { creators as sessionAction } from '../ducks/Session';
+import { getRole, getData } from '../web3calls/Session';
 
 const actionType = action => (`marvin/SessionSaga/${action}`);
 
@@ -8,14 +8,20 @@ const LOGIN = actionType('LOGIN');
 const UPDATE = actionType('UPDATE');
 
 function* retrieveData(role) {
-  console.log(role);
-  yield true;
+  yield put(sessionAction.dataLoading());
+  try {
+    const userData = yield call(getData, role);
+    yield put(sessionAction.setData(userData));
+  } catch (e) {
+    console.log('Failed!');
+    yield put(sessionAction.setData(null, true));
+  }
 }
 
 function* performLogin() {
   yield put(sessionAction.roleLoading());
   try {
-    const userType = yield call(login);
+    const userType = yield call(getRole);
     const role = Number(userType);
     yield put(sessionAction.setRole(role));
     yield spawn(retrieveData, role);

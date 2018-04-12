@@ -7,7 +7,7 @@ import { history } from './store';
 
 import routes from './routes';
 import routesStudent from './routesAdmin';
-import { isLogged } from './ducks/Session';
+import { selectors } from './ducks/Session';
 
 // build the router
 const router = (props) => {
@@ -34,7 +34,7 @@ router.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  isLogged: isLogged(state),
+  isLogged: selectors.isLogged(state),
 });
 
 export default connect(mapStateToProps)(router);

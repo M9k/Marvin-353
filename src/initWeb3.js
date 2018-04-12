@@ -1,7 +1,7 @@
 import getWeb3 from './util/web3/getWeb3';
 import { store } from './store';
 import { creators } from './ducks/Metamask';
-import { sessionCreators } from './ducks/Session';
+import { creators as sessionCreators } from './ducks/Session';
 
 const initWeb3 = () => {
   let account = null;

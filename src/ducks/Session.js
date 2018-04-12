@@ -55,19 +55,20 @@ const SessionDuck = new Duck({
   },
   creators: duck => ({
     setRole: (role, errored = false) => (
-      { type: duck.type.SET_ROLE, role, errored }
+      { type: duck.types.SET_ROLE, role, errored }
     ),
-    setData: data => (
-      { type: duck.type.SET_DATA, data }
-    ),
+    setData: (data, errored = false) => ({
+      type: duck.types.SET_DATA,
+      data: Object.assign({}, data, { loading: false, errored }),
+    }),
     cleanData: () => (
-      { type: duck.type.CLEAN_DATA }
+      { type: duck.types.CLEAN_DATA }
     ),
     roleLoading: () => (
-      { type: duck.type.ROLE_LOADING }
+      { type: duck.types.ROLE_LOADING }
     ),
     dataLoading: () => (
-      { type: duck.type.DATA_LOADING }
+      { type: duck.types.DATA_LOADING }
     ),
   }),
 });
