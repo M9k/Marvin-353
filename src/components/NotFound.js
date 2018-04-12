@@ -1,12 +1,13 @@
 import React from 'react';
+import PageContainer from './PageContainer';
 
 // Not found page component
 const NotFound = () => {
   document.title = 'Not Found! - Marvin';
   return (
-    <div className="page-not-found">
+    <PageContainer>
       <h1>Page not found!</h1>
-    </div>
+    </PageContainer>
   );
 };
 

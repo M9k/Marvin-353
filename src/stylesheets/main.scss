@@ -4,70 +4,10 @@ $red-marvin: #dc686e;
 $gray-marvin: #595968;
 
 /* components */
-body {
+.footer {
   background-color: white;
-  padding-bottom: 2rem;
-
-  .page-content {
-    margin: 6rem auto;
-    text-align: center;
-    top: 50%;
-    //width: 24rem;
-
-    a {
-      background-color: initial;
-      margin: 1rem 0;
-      border-radius: 0;
-      border: 0.25rem solid $gray-marvin;
-    }
-
-    a:hover {
-      background-color: $red-marvin;
-      border-color: white;
-      color: white;
-    }
-  }
-}
-
-h1 {
-  text-transform: uppercase;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: $gray-marvin;
-}
-
-a {
-  color: $red-marvin;
-}
-
-a:hover {
-  color: $red-marvin;
-  text-decoration: underline;
-  text-decoration-color: $red-marvin;
-}
-
-/* id */
-
-#header {
-  overflow: hidden;
-  min-height: 4rem;
-  padding: 1%;
-}
-
-#headerLinks {
-  float: right;
-}
-
-#footer {
-  background-color: $gray-marvin;
   bottom: 0;
-  color: white;
+  color: black;
   position: fixed;
   text-align: center;
   width: 100%;
@@ -75,45 +15,4 @@ a:hover {
   p {
     margin: 0.5rem 0;
   }
-}
-
-/* class */
-.btn-default,
-.btn-default-select {
-  background: none;
-  border: none;
-  box-shadow: none;
-  color: $gray-marvin;
-  font-size: 2rem;
-  text-transform: uppercase;
-  vertical-align: middle;
-}
-
-.btn-default-select {
-  cursor: initial;
-  color: $red-marvin;
-}
-
-.btn-default:hover,
-.btn-default-select:hover,
-.btn-default:focus,
-.btn-default-select:focus,
-.btn-default:active,
-.btn-default-select:active {
-  color: $red-marvin;
-  background-color: unset;
-  border: unset;
-  box-shadow: unset;
-}
-
-.form-control {
-  max-width: 36rem;
-}
-
-.list-group {
-  max-width: fit-content;
-}
-
-.title {
-  text-align: center;
 }
