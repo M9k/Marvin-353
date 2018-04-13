@@ -8,13 +8,10 @@ import Checkbox from 'react-bootstrap/lib/Checkbox';
 import HelpBlock from 'react-bootstrap/lib/HelpBlock';
 import Radio from 'react-bootstrap/lib/Radio';
 import FieldTypes from './fieldtypes';
+import Utils from './utils';
 
 
 class Field extends React.Component {
-  static getKey(name, index) {
-    return name + index.toString();
-  }
-
   static getValidationStateString(value) {
     let stringValidState;
     switch (value) {
@@ -91,20 +88,20 @@ class Field extends React.Component {
     const { name } = this.props;
     switch (this.props.type) {
       case FieldTypes.RADIO:
-        this.props.values.map((value, i) => (
-          field.push(<Radio key={Field.getKey(name, i)} onClick={this.handleChange} name={name}>{value}</Radio>)
+        this.props.values.map(value => (
+          field.push(<Radio key={Utils.generateKey(name + value)} onClick={this.handleChange} name={name}>{value}</Radio>)
         ));
         break;
       case FieldTypes.CHECKBOX:
-        this.props.values.map((value, i) => (
-          field.push(<Checkbox key={Field.getKey(name, i)} onClick={this.handleChange} name={name}>{value}</Checkbox>)
+        this.props.values.map(value => (
+          field.push(<Checkbox key={Utils.generateKey(name + value)} onClick={this.handleChange} name={name}>{value}</Checkbox>)
         ));
         break;
       case FieldTypes.SELECT:
-        this.props.values.map((value, i) => (
-          options.push(<option key={Field.getKey(name, i)} value={value}>{value}</option>)
+        this.props.values.map(value => (
+          options.push(<option key={Utils.generateKey(value)} value={value}>{value}</option>)
         ));
-        field.push(<FormControl componentClass="select" onClick={this.handleChange}>{options}</FormControl>);
+        field.push(<FormControl key={Utils.generateKey(name)} componentClass="select" onClick={this.handleChange}>{options}</FormControl>);
         break;
       case FieldTypes.TEXT:
       default:
@@ -114,6 +111,7 @@ class Field extends React.Component {
           placeholder={this.props.placeholder}
           onChange={this.handleChange}
           value={this.state.value}
+          key={Utils.generateKey(`field${name}`)}
         />);
         break;
     }// switch FieldTypes

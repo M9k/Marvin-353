@@ -4,12 +4,9 @@ import Button from 'react-bootstrap/lib/Button';
 import Panel from 'react-bootstrap/lib/Panel';
 
 import Field from './field';
+import Utils from './utils';
 
 class Form extends React.Component {
-  static getKey(name, index) {
-    return index.toString();
-  }
-
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -43,7 +40,7 @@ class Form extends React.Component {
 
   render() {
     const fields = [];
-    this.props.fields.map((field, i) => (
+    this.props.fields.map(field => (
       fields.push(<Field
         {...field}
         onChangeValue={(e) => {
@@ -52,7 +49,7 @@ class Form extends React.Component {
         });
       }}
         reset={this.state.reset}
-        key={Form.getKey('', i)}
+        key={Utils.generateKey(field.name)}
       />)
     ));
 

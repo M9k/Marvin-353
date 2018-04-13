@@ -4,6 +4,7 @@ import Table from 'react-bootstrap';
 import Button from 'react-bootstrap/lib/Button';
 import Form from '../custom/form';
 import DeleteButton from '../custom/deleteButton';
+import Utils from '../custom/utils';
 
 
 class PageTableForm extends React.Component {
@@ -40,12 +41,14 @@ class PageTableForm extends React.Component {
   }
 
   render() {
+    const tableRows = this.props.tableData.map(item =>
+      <tr key={Utils.generateKey(item)}><td>{item}</td> {this.getButtons()}</tr>);
     return (
       <div>
         {this.isFormRequired()}
         <Table striped bordered condensed hover>
           <tbody>
-            {this.props.tableData.map(item => <tr><td>{item}</td> {this.getButtons()}</tr>)}
+            {tableRows}
           </tbody>
         </Table>
       </div>
