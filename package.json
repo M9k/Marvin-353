@@ -47,7 +47,8 @@
     "eslint-fix": "./node_modules/.bin/eslint src testnpm test --fix",
     "solhint": "./node_modules/.bin/solhint contracts/**/*.sol",
     "check-build": "yarn run eslint && yarn run solhint && yarn run test && yarn run soltest",
-    "scaffold": "./node_modules/.bin/babel-node scripts/scaffold/generate.js"
+    "scaffold": "./node_modules/.bin/babel-node scripts/scaffold/generate.js",
+    "dscaffold": "./node_modules/.bin/babel-node scripts/scaffold/delete.js"
   },
   "nyc": {
     "include": [

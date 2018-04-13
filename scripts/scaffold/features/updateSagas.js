@@ -12,7 +12,6 @@ export default function updateSagas(name){
   let forked = aggr.match(/\[([^\]]+)\]/mg)[0];
   forked = forked.substr(1, forked.length-2);
   aggr = aggr.replace(forked, `${forked}  fork(${name}),\n  `);
-  console.log(aggr);
   fs.writeFileSync(aggregator_path, aggr, { flag: 'w+' });
   return aggregator_path;
 }

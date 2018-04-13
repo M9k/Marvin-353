@@ -1,9 +1,6 @@
 import fs from 'fs';
 import updateSagas from './features/updateSagas';
-
-const errorString = str => `\x1b[31m${str}\x1b[0m`;
-const successString = str => `\x1b[32m${str}\x1b[0m`;
-const infoString = str => `\x1b[33m${str}\x1b[0m`;
+import { infoString, errorString, successString } from './helpers/colors';
 
 const make = (name, tpl, path) => {
   let input = fs.readFileSync(tpl, { encoding: 'utf8' });
