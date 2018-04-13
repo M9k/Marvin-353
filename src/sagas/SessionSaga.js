@@ -31,12 +31,14 @@ function* performLogin() {
   }
 }
 
-export const loginAction = () => (
-  { type: LOGIN }
-);
-export const updateData = () => (
-  { type: UPDATE }
-);
+export const creators = {
+  loginAction: () => (
+    { type: LOGIN }
+  ),
+  updateData: () => (
+    { type: UPDATE }
+  ),
+};
 
 export default function* handler() {
   return yield [

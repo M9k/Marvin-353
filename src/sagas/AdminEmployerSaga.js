@@ -2,9 +2,11 @@ import { call, put, all, fork, takeLatest, takeEvery } from 'redux-saga/effects'
 import { creators as actionCreators } from '../ducks/AdminEmployer';
 import { getAdminAt, getAdminNumber, addNewAdmin, removeAdmin as web3Remove } from '../web3calls/UniversityAdmin';
 
-export const REMOVE_ADMIN = 'marvin/universitySaga/REMOVE_ADMIN';
-export const ADD_NEW_ADMIN = 'marvin/universitySaga/ADD_NEW_ADMIN';
-export const GET_ALL_ADMINS = 'marvin/universitySaga/GET_ALL_ADMINS';
+const action = type => `marvin/AdminEmployerSaga/${type}`;
+
+export const REMOVE_ADMIN = action('REMOVE_ADMIN');
+export const ADD_NEW_ADMIN = action('ADD_NEW_ADMIN');
+export const GET_ALL_ADMINS = action('GET_ALL_ADMINS');
 
 export function* addAdmin(action) {
   yield put(actionCreators.listIsLoading());
@@ -40,15 +42,17 @@ export function* getAllAdmins() {
   }
 }
 
-export const addNewAdminAction = address => (
-  { type: ADD_NEW_ADMIN, address }
-);
-export const removeAdminAction = address => (
-  { type: REMOVE_ADMIN, address }
-);
-export const getAllAdminsAction = () => (
-  { type: GET_ALL_ADMINS }
-);
+export const creators = {
+  addNewAdminAction: address => (
+    { type: ADD_NEW_ADMIN, address }
+  ),
+  removeAdminAction: address => (
+    { type: REMOVE_ADMIN, address }
+  ),
+  getAllAdminsAction: () => (
+    { type: GET_ALL_ADMINS }
+  ),
+}
 
 export default function* handler() {
   yield [
