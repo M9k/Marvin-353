@@ -10,15 +10,19 @@ class MessageBox extends React.Component {
   }
   render() {
     let title = null;
+    let icon = null;
     switch (this.props.type) {
       case 'success':
         title = 'Success';
+        icon = 'glyphicon glyphicon-ok';
         break;
       case 'error':
         title = 'Error';
+        icon = 'glyphicon glyphicon-remove';
         break;
       default:
-        title = 'Message';
+        title = 'Info';
+        icon = 'glyphicon glyphicon-info-sign';
     }
     return (
       <div className="modal-container" style={{ height: 200 }}>
@@ -29,6 +33,7 @@ class MessageBox extends React.Component {
         >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title">
+              <span className={icon} />
               {title}
             </Modal.Title>
           </Modal.Header>
@@ -36,7 +41,7 @@ class MessageBox extends React.Component {
             {this.message}
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={this.props.onHide}>Close</Button>
+            <Button onClick={this.onHide}>Close</Button>
           </Modal.Footer>
         </Modal>
       </div>
