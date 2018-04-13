@@ -3,6 +3,11 @@ import PropType from 'prop-types';
 import { Button, Modal } from 'react-bootstrap';
 
 class MessageBox extends React.Component {
+  constructor(props) {
+    super(props);
+    this.message = this.props.message;
+    this.onHide = this.props.onHide;
+  }
   render() {
     let title = null;
     switch (this.props.type) {
@@ -28,7 +33,7 @@ class MessageBox extends React.Component {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            {this.props.message}
+            {this.message}
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.props.onHide}>Close</Button>
