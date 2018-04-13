@@ -3,10 +3,16 @@ import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 
 
-export default class deleteButton extends React.Component {
-  handleClick(event) {
-    // Todo
+class deleteButton extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
   }
+
+  handleClick() {
+    this.props.deleteFunction();
+  }
+
   render() {
     return (
       <Button bsStyle="danger" onClick={this.handleClick()}>Delete</Button>
@@ -14,10 +20,12 @@ export default class deleteButton extends React.Component {
   }
 }
 
-deleteButton.propType = {
-  deleteTableData: PropTypes.func,
+deleteButton.propTypes = {
+  deleteFunction: PropTypes.func,
 };
 
 deleteButton.defaultProps = {
-  deleteTableData: () => -1,
+  deleteFunction: () => -1,
 };
+
+export default deleteButton;

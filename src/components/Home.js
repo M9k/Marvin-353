@@ -1,7 +1,6 @@
 import React from 'react';
 import FieldTypes from './custom/fieldtypes';
 import Form from './custom/form';
-import Table from './template/testPageTable';
 
 
 function existValue(e) {
@@ -13,7 +12,6 @@ function existValue(e) {
 // Home page component
 const Home = () => (
   <div id="home">
-    <Table />
     HOME
     {FieldTypes.TEXT}
     <Form />
