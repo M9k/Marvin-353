@@ -1,40 +1,35 @@
 import React from 'react';
 import { Router } from 'react-router';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-
-import { history } from './store';
-
-import routes from './routes';
-import routesStudent from './routesAdmin';
-import { isLogged } from './ducks/Session';
+import CreateRoutes from './Factory';
+import { history } from '../store';
+import PublicRoutes from './routes/PublicRoutes';
 
 // build the router
 const router = (props) => {
-  if (props.isLogged === true) {
+  console.log(props.userType);
+  if (props.isLogged) {
     return (
       <Router onUpdate={() => window.scrollTo(0, 0)} history={history}>
-        {routesStudent}
+        {CreateRoutes(props.userType)};
       </Router>
     );
   }
   return (
     <Router onUpdate={() => window.scrollTo(0, 0)} history={history}>
-      {routes}
+      {PublicRoutes}
     </Router>
   );
 };
 
 router.propTypes = {
   isLogged: PropTypes.bool,
+  userType: PropTypes.number,
 };
 
 router.defaultProps = {
   isLogged: false,
+  userType: 0,
 };
 
-const mapStateToProps = state => ({
-  isLogged: isLogged(state),
-});
-
-export default connect(mapStateToProps)(router);
+export default router;

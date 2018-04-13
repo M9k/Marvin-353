@@ -2,12 +2,10 @@ import React from 'react';
 import FieldTypes from './custom/fieldtypes';
 import Form from './custom/form';
 
-
 function existValue(e) {
   if (e.length === 0) { return 2; }
   return 1;
 }
-
 
 // Home page component
 const Home = () => (
