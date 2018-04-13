@@ -19,11 +19,8 @@ import Footer from './Footer';
 class PageContainer extends React.Component {
   constructor(props) {
     super(props);
-    // eslint-disable-next-line
     this.children = props.children;
-    // eslint-disable-next-line
     this.links = props.links;
-    // eslint-disable-next-line
     this.loggedIn = props.loggedIn;
   }
   render() {
@@ -39,10 +36,10 @@ class PageContainer extends React.Component {
   }
 }
 
-PageContainer.propType = {
+PageContainer.propTypes = {
   children: PropTypes.node.isRequired,
   // eslint-disable-next-line
   links: PropTypes.array,
-  loggedIn: PropTypes.bool,
+  loggedIn: PropTypes.bool.isRequired,
 };
 export default (PageContainer);

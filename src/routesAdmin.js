@@ -2,9 +2,9 @@ import { IndexRoute, Route } from 'react-router';
 import React from 'react';
 
 import App from './components/App';
-import Home from './components/Home';
-import Logout from './components/Logout';
-import NotFound from './components/NotFound';
+import Home from './public/Home';
+import Logout from './public/Logout';
+import NotFound from './public/NotFound';
 
 const routes = [
   {
