@@ -2,11 +2,11 @@ import { call, put, all, fork, takeLatest, takeEvery } from 'redux-saga/effects'
 import { creators as actionCreators } from '../ducks/AdminEmployer';
 import { getAdminAt, getAdminNumber, addNewAdmin, removeAdmin as web3Remove } from '../web3calls/UniversityAdmin';
 
-const action = type => `marvin/AdminEmployerSaga/${type}`;
+const actionType = type => `marvin/AdminEmployerSaga/${type}`;
 
-export const REMOVE_ADMIN = action('REMOVE_ADMIN');
-export const ADD_NEW_ADMIN = action('ADD_NEW_ADMIN');
-export const GET_ALL_ADMINS = action('GET_ALL_ADMINS');
+export const REMOVE_ADMIN = actionType('REMOVE_ADMIN');
+export const ADD_NEW_ADMIN = actionType('ADD_NEW_ADMIN');
+export const GET_ALL_ADMINS = actionType('GET_ALL_ADMINS');
 
 export function* addAdmin(action) {
   yield put(actionCreators.listIsLoading());
@@ -52,7 +52,7 @@ export const creators = {
   getAllAdminsAction: () => (
     { type: GET_ALL_ADMINS }
   ),
-}
+};
 
 export default function* handler() {
   yield [
