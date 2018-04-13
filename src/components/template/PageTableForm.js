@@ -26,7 +26,7 @@ class PageTableForm extends React.Component {
     if (this.props.editTableData() !== -1) {
       return (<td><Button onClick={this.props.editTableData}>Edit button</Button></td>);
     }
-    return '';
+    return null;
   }
 
   refreshData() {
@@ -37,12 +37,12 @@ class PageTableForm extends React.Component {
     if (this.props.addTableData() !== -1) {
       return <Form submitFunction={this.props.getTableData} />;
     }
-    return '';
+    return null;
   }
 
   render() {
     const tableRows = this.props.tableData.map(item =>
-      <tr key={Utils.generateKey(item)}><td>{item}</td> {this.getButtons()}</tr>);
+      <tr key={Utils.generateKey(item)}><td>{item}</td>{this.getButtons()}</tr>);
     return (
       <div>
         {this.isFormRequired()}
