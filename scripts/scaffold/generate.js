@@ -21,6 +21,12 @@ const makeSaga = name => {
   make(name, tpl, path);
   return path;
 };
+const makeIntegrationTest = name => {
+  const tpl = 'scripts/scaffold/templates/integration.tpl';
+  const path = `testnpm/integration/redux/${name}.js`;
+  make(name, tpl, path);
+  return path;
+}
 const updateReducers = name => {
 
 
@@ -55,6 +61,7 @@ const name = `${args[1].charAt(0).toUpperCase()}${args[1].slice(1)}`;
 try{
   switch(type){
     case('saga'):
+      console.log(`Integration test generated at ${infoString(makeIntegrationTest(name))}`)
       console.log(`Saga generated at ${infoString(makeSaga(name))}`);
     case('duck'):
       console.log(`Duck generated at ${infoString(makeDuck(name))}`);
