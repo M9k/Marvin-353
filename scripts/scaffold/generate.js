@@ -1,4 +1,5 @@
 import fs from 'fs';
+import updateSagas from './features/updateSagas';
 
 const errorString = str => `\x1b[31m${str}\x1b[0m`;
 const successString = str => `\x1b[32m${str}\x1b[0m`;
@@ -31,9 +32,6 @@ const updateReducers = name => {
 
 
 }
-const updateSagas = name => {
-
-}
 const printHelp = () =>{
 console.log(`
 babel-node generate.js TYPE NAME [options] \n
@@ -63,6 +61,7 @@ try{
     case('saga'):
       console.log(`Integration test generated at ${infoString(makeIntegrationTest(name))}`)
       console.log(`Saga generated at ${infoString(makeSaga(name))}`);
+      console.log(`Sagas aggretator updated: ${infoString(updateSagas(name))}`)
     case('duck'):
       console.log(`Duck generated at ${infoString(makeDuck(name))}`);
       break;
