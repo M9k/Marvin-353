@@ -1,6 +1,6 @@
-import AccountEnum from './AccountEnum';
 import React from 'react';
-import {Route} from 'react-router';
+import { Route } from 'react-router';
+import AccountEnum from './AccountEnum';
 import UniversityRoutes from './routes/UniversityRoutes';
 import PublicRoutes from './routes/PublicRoutes';
 import Home from './Home';
