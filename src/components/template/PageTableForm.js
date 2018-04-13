@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Table from 'react-bootstrap';
+import Table from 'react-bootstrap/lib/Table';
 import Button from 'react-bootstrap/lib/Button';
 import Form from '../custom/form';
 import DeleteButton from '../custom/deleteButton';
