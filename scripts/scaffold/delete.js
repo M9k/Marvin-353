@@ -1,4 +1,5 @@
 import fs from 'fs';
+import readline from 'readline';
 import { infoString, errorString, successString } from './helpers/colors';
 
 const deleteDuck = name => {
@@ -24,9 +25,24 @@ const updateSagas = name => {
   fs.writeFileSync(aggregator_path, aggr, { flag: 'w' });
   return aggregator_path;
 };
+const confirmDelete = () => {
+  console.log(`deleted: ${errorString(deleteDuck(name))}`);
+  console.log(`deleted: ${errorString(deleteSaga(name))}`);
+  console.log(`deleted: ${errorString(deleteIntegration(name))}`);
+  console.log(`updated: ${infoString(updateSagas(name))}`);
+}
+
 let name = process.argv[2];
 name = `${name.charAt(0).toUpperCase()}${name.slice(1)}`;
-console.log(`deleted: ${errorString(deleteDuck(name))}`);
-console.log(`deleted: ${errorString(deleteSaga(name))}`);
-console.log(`deleted: ${errorString(deleteIntegration(name))}`);
-console.log(`updated: ${infoString(updateSagas(name))}`);
+
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+rl.question('Do you really want to delete modules (type yes)? ', (answer) => {
+  if(answer === 'yes') confirmDelete();
+  else console.log("ABORTED");
+  rl.close()
+});
