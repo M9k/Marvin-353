@@ -59,7 +59,7 @@ const SessionDuck = new Duck({
     ),
     setData: (data, errored = false) => ({
       type: duck.types.SET_DATA,
-      data: Object.assign({}, data, { loading: false, errored }),
+      data: Object.assign({}, initialDataState, data, { loading: false, errored }),
     }),
     cleanData: () => (
       { type: duck.types.CLEAN_DATA }
@@ -72,5 +72,5 @@ const SessionDuck = new Duck({
     ),
   }),
 });
-export const { creators, selectors } = SessionDuck;
+export const { creators, selectors, initialState } = SessionDuck;
 export default SessionDuck.reducer;

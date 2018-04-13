@@ -7,7 +7,7 @@ const actionType = action => (`marvin/SessionSaga/${action}`);
 const LOGIN = actionType('LOGIN');
 const UPDATE = actionType('UPDATE');
 
-function* retrieveData(role) {
+export function* retrieveData(role) {
   yield put(sessionAction.dataLoading());
   try {
     const userData = yield call(getData, role);
@@ -18,7 +18,7 @@ function* retrieveData(role) {
   }
 }
 
-function* performLogin() {
+export function* performLogin() {
   yield put(sessionAction.roleLoading());
   try {
     const userType = yield call(getRole);
