@@ -60,19 +60,18 @@ describe('AdminEmployer feature', () => {
       .run());
   });
   describe('get admin list', () => {
-    it("should get the list", () => expectSaga(sagas.getAllAdmins)
+    it('should get the list', () => expectSaga(sagas.getAllAdmins)
       .withReducer(reducer, failedState)
       .provide({
-        call(){
+        call() {
           return true;
         },
-        all(){
+        all() {
           return filledState.adminAccount;
-        }
+        },
       })
       .hasFinalState(filledState)
-      .run()
-    );
+      .run());
   });
   GentlyFail(features, reducer, failedState);
 });

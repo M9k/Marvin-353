@@ -1,8 +1,9 @@
-/*import React from 'react';
+/* import React from 'react';
 import { Button } from 'react-bootstrap';
 import { expect } from '../helpers/chai-enzyme';
 import { shallowWithStore, createMockStore } from '../helpers/component-with-store';
-import AdminOverviewContainer, { AdminOverviewComponent } from '../../src/containers/AdminOverviewContainer';
+import AdminOverviewContainer, { AdminOverviewComponent } from
+'../../src/containers/AdminOverviewContainer';
 import * as uSagaAction from '../../src/sagas/AdminEmployerSaga';
 
 const defaultStore = {
