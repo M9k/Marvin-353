@@ -2,19 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 
-/* this.links EXAMPLE
-  const links = [
-    {
-      path: 'courses',
-      label: 'Manage courses',
-    },
-    {
-      path: 'confirmteacher',
-      label: 'Confirm Teachers',
-    },
-  ];
- */
-
 class NavbarCustom extends React.Component {
   constructor(props) {
     super(props);
