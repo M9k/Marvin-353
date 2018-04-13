@@ -36,10 +36,14 @@ class PageContainer extends React.Component {
   }
 }
 
+PageContainer.defaultProps = {
+  loggedIn: false,
+};
+
 PageContainer.propTypes = {
   children: PropTypes.node.isRequired,
   // eslint-disable-next-line
   links: PropTypes.array,
-  loggedIn: PropTypes.bool.isRequired,
+  loggedIn: PropTypes.bool,
 };
 export default (PageContainer);
