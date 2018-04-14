@@ -15,19 +15,6 @@ contract Teacher is User {
         _;
     }
 
-    modifier notAssigned(Exam _exam) {
-        for (uint i = 0; i < countAssignedExam - 1; i += 1)
-            if (_exam == assignedExam[i])
-                revert();
-        _;
-    }
-
-    modifier validExamIndex(uint _index) {
-        if (_index < 1 || _index + 1 > countAssignedExam)
-            revert();
-        _;
-    }
-
     modifier correctValuation(uint8 value) {
         if (value < 1 || value > 32) revert();
         _;
@@ -46,7 +33,7 @@ contract Teacher is User {
         return assignedExam[_index + 1];
     }
 
-    function addExam(Exam _exam) public onlyUniversity notAssigned(_exam) {
+    function addExam(Exam _exam) public onlyUniversity {
         assignedExam[countAssignedExam] = _exam;
         countAssignedExam += 1;
     }
@@ -67,7 +54,7 @@ contract Teacher is User {
         student.registerValuation(student.getIndexOfExam(exam), _valuation);
     }
 
-    function removeExamByIndex(uint _examIndex) private validExamIndex(_examIndex) {
+    function removeExamByIndex(uint _examIndex) private { // validExamIndex(_examIndex)
         assignedExam[_examIndex + 1] = assignedExam[countAssignedExam];
         countAssignedExam -= 1;
     }

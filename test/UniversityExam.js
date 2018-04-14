@@ -26,7 +26,7 @@ contract('UniversityExam', (accounts) => {
     );
     teacher = Teacher.at(await university.getTeacherContractFromPublicAddress.call(accounts[2]));
     // add a year
-    await university.addNewAcademicYear(2018, { from: accounts[0] }, { from: accounts[0] });
+    await university.addNewAcademicYear(2018, { from: accounts[0] });
     year = Year.at(await university.getAcademicYearContractByYear.call(2018));
     // add a course
     await year.addNewCourse(123, 180, { from: accounts[1] });
@@ -42,6 +42,30 @@ contract('UniversityExam', (accounts) => {
       { from: accounts[1] },
     );
     assert.equal(await exam.getTeacherContract.call(), teacher.address);
+  });
+  it('The exam has to be removed is reassigned to another', async () => {
+    await university.associateTeacherToExam(
+      teacher.address,
+      exam.address,
+      { from: accounts[1] },
+    );
+    assert.equal(await teacher.getExamNumber.call(), 1);
+    // add a teacher2
+    await university.requestTeacherAccount(123, 456, { from: accounts[4] });
+    await university.confirmTeacher(
+      await university.getNotApprovedTeacherContractAddressAt.call(0),
+      { from: accounts[1] },
+    );
+    const teacher2 =
+      Teacher.at(await university.getTeacherContractFromPublicAddress.call(accounts[4]));
+    await university.associateTeacherToExam(
+      teacher2.address,
+      exam.address,
+      { from: accounts[1] },
+    );
+    assert.equal(await exam.getTeacherContract.call(), teacher2.address);
+    assert.equal(await teacher2.getExamNumber.call(), 1);
+    assert.equal(await teacher.getExamNumber.call(), 0);
   });
   it('Only an admin can associate a teacher to an exam', async () => {
     try {
