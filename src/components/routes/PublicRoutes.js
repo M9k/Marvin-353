@@ -7,22 +7,38 @@ const PublicRoutes = [
   {
     path: '/',
     label: '/',
+    position: 'none',
     component: Index,
   },
   {
-    path: 'test',
-    label: 'PageTableForm test',
+    path: 'login',
+    label: 'Login',
+    position: 'left',
     component: testPageTable,
   },
   {
-    path: 'forms',
-    label: 'Form test',
+    path: 'request',
+    label: 'Register',
+    position: 'left',
     component: testForm,
   },
   {
     path: 'help',
     label: 'Help',
+    position: 'right',
     component: Help,
+  },
+  {
+    path: 'price',
+    label: 'Price',
+    position: 'right',
+    component: testForm,
+  },
+  {
+    path: 'license',
+    label: 'License',
+    position: 'none',
+    component: testForm,
   },
 ];
 

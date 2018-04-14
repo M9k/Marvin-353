@@ -10,19 +10,30 @@ class NavbarCustom extends React.Component {
   }
 
   render() {
-    const links = [];
+    const linksLeft = [];
     for (let i = 0; i < this.links.length; i += 1) {
-      const path = this.links[i].path.toString();
-      if (path !== '/' && path !== 'help' && path !== 'price') {
-        links.push( // eslint-disable-line
-          <NavItem key={this.links[i].path} href={this.links[i].path}>
+      if (this.links[i].position === 'left') {
+        linksLeft.push( // eslint-disable-line
+          <NavItem
+            key={this.links[i].path}
+            href={this.links[i].path}
+          >
             {this.links[i].label}
           </NavItem>);
       }
     }
-    let logout = null;
-    if (this.loggedIn) {
-      logout = <NavItem href="price">Price</NavItem>;
+
+    const linksRight = [];
+    for (let i = 0; i < this.links.length; i += 1) {
+      if (this.links[i].position === 'right') {
+        linksRight.push( // eslint-disable-line
+          <NavItem
+            key={this.links[i].path}
+            href={this.links[i].path}
+          >
+            {this.links[i].label}
+          </NavItem>);
+      }
     }
 
     return (
@@ -35,12 +46,10 @@ class NavbarCustom extends React.Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav>
-            {links}
+            {linksLeft}
           </Nav>
           <Nav pullRight>
-            <NavItem href="price">Price</NavItem>
-            <NavItem href="help">Help</NavItem>
-            {logout}
+            {linksRight}
           </Nav>
         </Navbar.Collapse>
       </Navbar>
