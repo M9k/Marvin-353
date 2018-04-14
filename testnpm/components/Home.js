@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import assert from 'assert';
 import configureStore from 'redux-mock-store';
-import Home from '../../src/components/Home';
+import Home from '../../src/public/Home';
 
 // unit tests for the Home component
 describe('Home component', () => {
