@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import PageContainer from '../components/PageContainer';
-import MessageBox from '../components/Message';
-import CardWithIcon from '../components/CardWithIcon';
+import MessageBox from '../components/custom/Message';
+import CardWithIcon from '../components/custom/CardWithIcon';
 
 // Home page component
 class Home extends React.Component {
