@@ -1,14 +1,23 @@
-import { Route, IndexRoute } from 'react-router';
-import React from 'react';
+import Index from '../public/Index';
+import testPageTable from '../template/testPageTable';
+import testForm from '../template/testForm';
 
-import App from '../public/App';
-import Home from '../public/Home';
+const PublicRoutes = [
+  {
+    path: '/',
+    label: '/',
+    component: Index,
+  },
+  {
+    path: 'test',
+    label: 'PageTableForm test',
+    component: testPageTable,
+  },
+  {
+    path: 'forms',
+    label: 'Form test',
+    component: testForm,
+  },
+];
 
-console.log('Sono in public');
-const PublicRoutes = (
-  <Route path="/" component={App}>
-    <IndexRoute component={Home} />
-    <Route path="*" component={Home} />
-  </Route>
-);
 export default PublicRoutes;

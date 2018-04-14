@@ -1,19 +1,15 @@
-import React from 'react';
-import { Route } from 'react-router';
 import AccountEnum from './AccountEnum';
 import UniversityRoutes from './routes/UniversityRoutes';
 import PublicRoutes from './routes/PublicRoutes';
-import Home from './Home';
 
 function CreateRoutes(userType) {
   console.log(userType);
   switch (userType) {
-    case AccountEnum.NOTLOGGED:
-      return (<PublicRoutes />);
     case AccountEnum.UNIVERSITY:
-      return (<UniversityRoutes />);
+      return (UniversityRoutes);
+    case AccountEnum.NOTLOGGED:
     default:
-      return (<Route path="*" components={Home} />);
+      return (PublicRoutes);
   }
 }
 export default CreateRoutes;

@@ -10,13 +10,9 @@ class NavbarCustom extends React.Component {
   }
 
   render() {
-    let logout = null;
     const links = [];
-    if (this.loggedIn) {
-      logout = <NavItem>Logout</NavItem>;
-      for (let i = 0; i < this.links.length; i += 1) {
-        links.push(<NavItem href={this.links[i].path}>{this.links[i].label}</NavItem>);
-      }
+    for (let i = 0; i < this.links.length; i += 1) {
+      links.push(<NavItem href={this.links[i].path}>{this.links[i].label}</NavItem>);
     }
 
     return (
@@ -32,13 +28,7 @@ class NavbarCustom extends React.Component {
             {links}
           </Nav>
           <Nav pullRight>
-            <NavItem href="price">
-              Price
-            </NavItem>
-            <NavItem href="help">
-              Help
-            </NavItem>
-            {logout}
+            {links}
           </Nav>
         </Navbar.Collapse>
       </Navbar>

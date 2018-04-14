@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import router from '../components/router';
+import router from '../components/Router';
 import { isLogged } from '../ducks/Session';
 
 const mapStateToProps = state => ({

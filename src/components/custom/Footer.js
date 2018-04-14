@@ -12,12 +12,6 @@ const Footer = () => (
           <h5 className="text-uppercase">Links</h5>
           <ul className="list-unstyled">
             <li>
-              <a href="/price">Price</a>
-            </li>
-            <li>
-              <a href="/help">Help</a>
-            </li>
-            <li>
               <a href="/license">MIT License</a>
             </li>
           </ul>
