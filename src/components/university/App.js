@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 // app component
 const App = props => (
-  <div className="container">
+  <div>
     {props.children}
   </div>
 );
