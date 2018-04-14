@@ -1,0 +1,73 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import Table from 'react-bootstrap/lib/Table';
+import Button from 'react-bootstrap/lib/Button';
+import Form from '../custom/form';
+import DeleteButton from '../custom/deleteButton';
+import Utils from '../custom/utils';
+
+
+class PageTableForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.refreshData = this.refreshData.bind(this);
+    this.getButtons = this.getButtons.bind(this);
+    this.isFormRequired = this.isFormRequired.bind(this);
+  }
+
+  componentWillMount() {
+    this.refreshData();
+  }
+
+  getButtons() {
+    if (this.props.deleteTableData() !== -1) {
+      return (<td><DeleteButton deleteFunction={this.props.deleteTableData} /></td>);
+    }
+    if (this.props.editTableData() !== -1) {
+      return (<td><Button onClick={this.props.editTableData}>Edit button</Button></td>);
+    }
+    return null;
+  }
+
+  refreshData() {
+    this.props.getTableData(); // ask redux the table data array
+  }
+
+  isFormRequired() {
+    if (this.props.addTableData() !== -1) {
+      return <Form submitFunction={this.props.getTableData} />;
+    }
+    return null;
+  }
+
+  render() {
+    const tableRows = this.props.tableData.map(item =>
+      <tr key={Utils.generateKey(item)}><td>{item}</td>{this.getButtons()}</tr>);
+    return (
+      <div>
+        {this.isFormRequired()}
+        <Table striped bordered condensed hover>
+          <tbody>
+            {tableRows}
+          </tbody>
+        </Table>
+      </div>
+    );
+  }
+}
+
+PageTableForm.propTypes = {
+  getTableData: PropTypes.func.isRequired,
+  editTableData: PropTypes.func,
+  deleteTableData: PropTypes.func,
+  addTableData: PropTypes.func,
+  tableData: PropTypes.arrayOf(String).isRequired,
+};
+
+PageTableForm.defaultProps = {
+  editTableData: () => -1,
+  deleteTableData: () => -1,
+  addTableData: () => -1,
+};
+
+export default PageTableForm;
