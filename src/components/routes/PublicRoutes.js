@@ -1,4 +1,5 @@
 import Index from '../public/Index';
+import Help from '../public/Help';
 import testPageTable from '../template/testPageTable';
 import testForm from '../template/testForm';
 
@@ -17,6 +18,11 @@ const PublicRoutes = [
     path: 'forms',
     label: 'Form test',
     component: testForm,
+  },
+  {
+    path: 'help',
+    label: 'Help',
+    component: Help,
   },
 ];
 

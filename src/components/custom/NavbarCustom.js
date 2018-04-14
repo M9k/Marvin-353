@@ -13,7 +13,7 @@ class NavbarCustom extends React.Component {
     const links = [];
     for (let i = 0; i < this.links.length; i += 1) {
       const path = this.links[i].path.toString();
-      if (path !== '/') {
+      if (path !== '/' && path !== 'help' && path !== 'price') {
         links.push(<NavItem href={this.links[i].path}>{this.links[i].label}</NavItem>);
       }
     }
