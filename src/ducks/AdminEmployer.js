@@ -28,7 +28,6 @@ const AdminEmployerDuck = new Duck({
         return {
           ...state,
           adminAccount: accounts,
-          adminNumber: accounts.length,
           loading: false,
         };
       case (types.PUSH_ADMIN):
@@ -37,7 +36,6 @@ const AdminEmployerDuck = new Duck({
         return {
           ...state,
           adminAccount: accounts,
-          adminNumber: accounts.length,
           loading: false,
         };
       case (types.LIST_LOADING):
@@ -74,6 +72,5 @@ const AdminEmployerDuck = new Duck({
     ),
   }),
 });
-const { reducer } = AdminEmployerDuck;
 export const { creators, selectors } = AdminEmployerDuck;
-export default reducer;
+export default AdminEmployerDuck.reducer;

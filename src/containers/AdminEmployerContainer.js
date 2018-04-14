@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as AdminEmployerAction from '../sagas/AdminEmployerSaga';
+import { creators as AdminEmployerAction } from '../sagas/AdminEmployerSaga';
 
 export const AdminEmployerComponent = () => (
   <div id="admin-employer">
