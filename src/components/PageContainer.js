@@ -1,27 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import NavbarCustom from './NavbarCustom';
-import Footer from './Footer';
-
-/* this.links EXAMPLE
-  const links = [
-    {
-      path: 'courses',
-      label: 'Manage courses',
-    },
-    {
-      path: 'confirmteacher',
-      label: 'Confirm Teachers',
-    },
-  ];
- */
+import NavbarCustom from './custom/NavbarCustom';
+import Footer from './custom/Footer';
 
 class PageContainer extends React.Component {
   constructor(props) {
     super(props);
     this.children = props.children;
-    this.links = props.links;
-    this.loggedIn = props.loggedIn;
+    this.links = props.route.links;
+    this.loggedIn = props.route.loggedIn;
   }
   render() {
     return (
@@ -36,14 +23,8 @@ class PageContainer extends React.Component {
   }
 }
 
-PageContainer.defaultProps = {
-  loggedIn: false,
-};
-
 PageContainer.propTypes = {
   children: PropTypes.node.isRequired,
-  // eslint-disable-next-line
-  links: PropTypes.array,
-  loggedIn: PropTypes.bool,
+  route: PropTypes.object.isRequired, // eslint-disable-line
 };
 export default (PageContainer);

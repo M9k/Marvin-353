@@ -1,5 +1,4 @@
 import getUniversityInstance from './UniversityContractSupplier';
-import { toBytes32 } from '../util/web3/textConverter';
 
 function getStudentNumber() {
   console.log('get student number');
@@ -55,8 +54,8 @@ function requestStudentAccount(_name, _surname, _course) {
   const contractUniversityAdmin = getUniversityInstance();
   return contractUniversityAdmin.then(instance =>
     instance.requestStudentAccount(
-      toBytes32(_name),
-      toBytes32(_surname),
+      _name,
+      _surname,
       _course,
       { from: web3.eth.accounts[0] },
     ));

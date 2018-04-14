@@ -1,5 +1,3 @@
-import { toBytes32 } from '../util/web3/textConverter';
-
 const contract = require('truffle-contract');
 const contractYearJson = require('../../build/contracts/Year.json');
 
@@ -36,7 +34,7 @@ function addNewCourse(address, _name, _creditsForGraduation) {
   const contractInstance = getYearContract(address);
   return contractInstance.then(instance =>
     instance.addNewCourse(
-      toBytes32(_name),
+      _name,
       _creditsForGraduation,
       { from: web3.eth.accounts[0] },
     ));

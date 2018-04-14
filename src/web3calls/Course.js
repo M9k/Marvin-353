@@ -1,5 +1,3 @@
-import { toBytes32, toText } from '../util/web3/textConverter';
-
 const contract = require('truffle-contract');
 const contractCourseJson = require('../../build/contracts/Course.json');
 
@@ -26,8 +24,8 @@ function getExamContractAt(address, _index) {
 function getName(address) {
   console.log('Course getName');
   const contractInstance = getCourseContract(address);
-  return toText(contractInstance.then(instance =>
-    instance.getName.call()));
+  return contractInstance.then(instance =>
+    instance.getName.call());
 }
 
 function getCreditsToGraduate(address) {
@@ -49,7 +47,7 @@ function addNewExam(address, _name, _credits, _obbligatoriety) {
   const contractInstance = getCourseContract(address);
   return contractInstance.then(instance =>
     instance.addNewExam(
-      toBytes32(_name),
+      _name,
       _credits,
       _obbligatoriety,
       { from: web3.eth.accounts[0] },
