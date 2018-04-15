@@ -6,7 +6,7 @@ class Utils {
   }
 
   static existValue(e) {
-    if (e.length === 0) { return 2; }
+    if (typeof e === 'undefined' || e.length === 0) { return 2; }
     return 1;
   }
 
@@ -18,8 +18,10 @@ class Utils {
     if (ind.length === 0) {
       return 2;
     }
-    if (!/^(0x)[0-9a-f]{40}$/i.test(ind) || !web3.isAddress(ind)) {
-      return 0;
+    if (!/^(0x)[0-9a-f]{40}$/i.test(ind) && typeof web3 !== 'undefined') {
+      if (!web3.isAddress(ind)) {
+        return 0;
+      }
     }
     return 1;
   }
