@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/lib/Button';
 import Panel from 'react-bootstrap/lib/Panel';
 
-import Field from './field';
+import Field from './Field';
 import Utils from './utils';
 
 class Form extends React.Component {
