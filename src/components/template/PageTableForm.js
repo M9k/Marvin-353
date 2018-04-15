@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Table from 'react-bootstrap/lib/Table';
 import Button from 'react-bootstrap/lib/Button';
-import Form from '../custom/form';
+import Form from '../custom/Form';
 import DeleteButton from '../custom/deleteButton';
 import Utils from '../custom/utils';
 

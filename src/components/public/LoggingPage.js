@@ -8,7 +8,7 @@ class Logging extends React.Component {
   }
 
   render() {
-    console.log(this.props.metamask, this.props.account, this.props.loginLoading)
+    console.log(this.props.metamask, this.props.account, this.props.loginLoading);
     if (!this.props.metamask) {
       return (
         <div>
