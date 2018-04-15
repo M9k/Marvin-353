@@ -15,7 +15,7 @@ const UniversityAdmin = props => (
         name: 'addressAdmin',
         label: 'Address:',
         help: 'insert the address of the admin',
-        placeholder: '0xwxwxw0w40443xwxxwff',
+        placeholder: '0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf',
         type: FieldTypes.TEXT,
         validateFunction: Utils.validEthAddress,
       }]}
