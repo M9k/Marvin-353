@@ -1,6 +1,5 @@
 import Index from '../public/Index';
 import Register from '../public/Register';
-import testPageTable from '../template/testPageTable';
 import LoginPage from '../public/LoginPage';
 
 const PublicRoutes = [
