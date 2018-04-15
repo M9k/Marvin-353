@@ -1,14 +1,46 @@
-import { Route, IndexRoute } from 'react-router';
-import React from 'react';
+import Index from '../public/Index';
+import Help from '../public/Help';
+import License from '../public/License';
+import testForm from '../template/testForm';
+import login from '../../containers/Login';
 
-import App from '../public/App';
-import Home from '../public/Home';
+const PublicRoutes = [
+  {
+    path: '/',
+    label: '/',
+    position: 'none',
+    component: Index,
+  },
+  {
+    path: 'login',
+    label: 'Login',
+    position: 'left',
+    component: login,
+  },
+  {
+    path: 'request',
+    label: 'Register',
+    position: 'left',
+    component: testForm,
+  },
+  {
+    path: 'help',
+    label: 'Help',
+    position: 'right',
+    component: Help,
+  },
+  {
+    path: 'price',
+    label: 'Price',
+    position: 'right',
+    component: testForm,
+  },
+  {
+    path: 'license',
+    label: 'License',
+    position: 'none',
+    component: License,
+  },
+];
 
-console.log('Sono in public');
-const PublicRoutes = (
-  <Route path="/" component={App}>
-    <IndexRoute component={Home} />
-    <Route path="*" component={Home} />
-  </Route>
-);
 export default PublicRoutes;

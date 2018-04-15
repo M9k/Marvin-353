@@ -1,6 +1,6 @@
 import React from 'react';
-import FieldTypes from './custom/fieldtypes';
-import Form from './custom/form';
+import FieldTypes from '../custom/fieldtypes';
+import Form from '../custom/form';
 
 function existValue(e) {
   if (e.length === 0) { return 2; }
@@ -8,9 +8,9 @@ function existValue(e) {
 }
 
 // Home page component
-const Home = () => (
+const testForm = () => (
   <div id="home">
-    HOME
+    FORMS
     {FieldTypes.TEXT}
     <Form />
     <Form description="FAKE Add new admin address form" />
@@ -129,4 +129,4 @@ const Home = () => (
   </div>
 );
 
-export default (Home);
+export default testForm;

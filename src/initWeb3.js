@@ -1,7 +1,7 @@
 import getWeb3 from './util/web3/getWeb3';
 import { store } from './store';
-import * as metamaskAction from './ducks/Metamask';
-import { cleanData as sessionLogout } from './ducks/Session';
+import { creators } from './ducks/Metamask';
+import { creators as sessionCreators } from './ducks/Session';
 
 const initWeb3 = () => {
   let account = null;
@@ -10,18 +10,18 @@ const initWeb3 = () => {
   let web3 = getWeb3.then((results) => {
     web3 = results;
     [account] = [web3.eth.accounts[0]];
-    store.dispatch(metamaskAction.setAddress(web3.eth.accounts[0]));
+    store.dispatch(creators.setAddress(web3.eth.accounts[0]));
   }).catch(() => {
-    store.dispatch(metamaskAction.notFound());
+    store.dispatch(creators.notFound());
   });
 
 
   setInterval(() => {
     if (account !== null && web3.eth.accounts[0] !== account) {
       [account] = [web3.eth.accounts[0]];
-      store.dispatch(metamaskAction.logout());
-      store.dispatch(metamaskAction.setAddress(web3.eth.accounts[0]));
-      store.dispatch(sessionLogout());
+      store.dispatch(creators.logout());
+      store.dispatch(creators.setAddress(web3.eth.accounts[0]));
+      store.dispatch(sessionCreators.cleanData());
 
       // redirect with blacklist
       if (

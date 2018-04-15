@@ -19,8 +19,6 @@ class Form extends React.Component {
         fields: { ...this.state.fields, [field.name]: { value: '', valid: -1 } },
         reset: false,
       }));
-
-    console.dir(this.state);
   }
 
   // function that check that each key valid is equals to 1 == Success before submit
@@ -29,8 +27,6 @@ class Form extends React.Component {
   }
 
   handleSubmit(event) {
-    console.log('SUBMIT');
-    console.dir(this.state);
     event.preventDefault();
     if (this.allValidFields()) {
     // if submit == TRUE == Success reset the form
