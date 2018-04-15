@@ -1,7 +1,4 @@
 import Index from '../public/Index';
-import Help from '../public/Help';
-import License from '../public/License';
-import testForm from '../template/testForm';
 import login from '../../containers/Login';
 import Register from '../public/Register';
 
@@ -23,24 +20,6 @@ const PublicRoutes = [
     label: 'Register',
     position: 'left',
     component: Register,
-  },
-  {
-    path: 'help',
-    label: 'Help',
-    position: 'right',
-    component: Help,
-  },
-  {
-    path: 'price',
-    label: 'Price',
-    position: 'right',
-    component: testForm,
-  },
-  {
-    path: 'license',
-    label: 'License',
-    position: 'none',
-    component: License,
   },
 ];
 
