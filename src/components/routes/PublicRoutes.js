@@ -1,5 +1,6 @@
 import Index from '../public/Index';
 import Help from '../public/Help';
+import License from '../public/License';
 import testPageTable from '../template/testPageTable';
 import testForm from '../template/testForm';
 
@@ -38,7 +39,7 @@ const PublicRoutes = [
     path: 'license',
     label: 'License',
     position: 'none',
-    component: testForm,
+    component: License,
   },
 ];
 
