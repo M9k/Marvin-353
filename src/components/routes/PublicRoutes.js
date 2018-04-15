@@ -3,6 +3,7 @@ import Help from '../public/Help';
 import License from '../public/License';
 import testForm from '../template/testForm';
 import login from '../../containers/Login';
+import Register from '../public/Register';
 
 const PublicRoutes = [
   {
@@ -21,7 +22,7 @@ const PublicRoutes = [
     path: 'request',
     label: 'Register',
     position: 'left',
-    component: testForm,
+    component: Register,
   },
   {
     path: 'help',

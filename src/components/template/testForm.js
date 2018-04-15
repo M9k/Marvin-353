@@ -1,11 +1,7 @@
 import React from 'react';
 import FieldTypes from '../custom/fieldtypes';
-import Form from '../custom/form';
-
-function existValue(e) {
-  if (e.length === 0) { return 2; }
-  return 1;
-}
+import Form from '../custom/Form';
+import Utils from "../custom/utils";
 
 // Home page component
 const testForm = () => (
@@ -22,15 +18,7 @@ const testForm = () => (
       help: 'insert the address of the admin',
       placeholder: '0xwxwxw0w40443xwxxwff',
       type: FieldTypes.TEXT,
-      validateFunction: (ind) => {
-        if (ind.length === 0) {
-        return 2;
-      }
-        if (!/^(0x)[0-9a-f]{40}$/i.test(ind) || !web3.isAddress(ind)) {
-        return 0;
-      }
-        return 1;
-      },
+      validateFunction: Utils.validEthAddress,
       }]}
     />
     <Form
@@ -41,21 +29,21 @@ const testForm = () => (
         help: 'insert your name',
         placeholder: 'luigi',
         type: FieldTypes.TEXT,
-        validateFunction: existValue,
+        validateFunction: Utils.existValue,
       }, {
         name: 'surname',
         label: 'Surname:',
         help: 'insert your surname',
         placeholder: 'rossi',
         type: FieldTypes.TEXT,
-        validateFunction: existValue,
+        validateFunction: Utils.existValue,
       }, {
         name: 'userType',
         label: 'Role:',
         help: 'insert your desired role',
         type: FieldTypes.SELECT,
         values: ['student', 'teacher'],
-        validateFunction: (e) => { if (e !== '') return 1; return 2; },
+        validateFunction: Utils.notNullValue,
       }]}
     />
 
@@ -68,7 +56,7 @@ const testForm = () => (
         help: 'insert the new university year',
         placeholder: '20xx',
         type: FieldTypes.TEXT,
-        validateFunction: (e) => { if (e !== '') { if (e >= (new Date()).getFullYear()) return 1; return 0; } return 2; },
+        validateFunction: Utils.moreThanCurrentYear,
       }]}
     />
 
@@ -80,7 +68,7 @@ const testForm = () => (
         help: 'insert the student grade',
         placeholder: '25',
         type: FieldTypes.TEXT,
-        validateFunction: (e) => { if (e !== '') { if (e >= 0 && e <= 31) return 1; return 0; } return 2; },
+        validateFunction: Utils.validGrade,
       }]}
     />
 
@@ -92,7 +80,7 @@ const testForm = () => (
         help: 'course name',
         placeholder: 'P1',
         type: FieldTypes.TEXT,
-        validateFunction: existValue,
+        validateFunction: Utils.existValue,
       },
         {
         name: 'yearExam',
@@ -100,7 +88,7 @@ const testForm = () => (
         help: 'insert the associated year',
         type: FieldTypes.SELECT,
         values: ['2017', '2018', '2019'],
-        validateFunction: (e) => { if (e !== '') return 1; return 2; },
+        validateFunction: Utils.notNullValue,
       },
         {
           name: 'optionalExam',
@@ -108,7 +96,7 @@ const testForm = () => (
           help: 'is the exam optional',
           type: FieldTypes.CHECKBOX,
           values: ['yes'],
-          validateFunction: e => (1 || e),
+          validateFunction: Utils.alwaysTrue,
         },
       ]}
     />
@@ -122,7 +110,7 @@ const testForm = () => (
         placeholder: 'easy exam',
         type: FieldTypes.SELECT,
         values: ['P1', 'P2', 'P3', 'SWE', 'RO', 'TECWEB'],
-        validateFunction: (e) => { if (e !== '') return 1; return 2; },
+        validateFunction: Utils.notNullValue,
       }]}
     />
 
