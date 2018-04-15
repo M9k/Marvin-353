@@ -4,6 +4,7 @@ import Utils from '../custom/utils';
 import FieldTypes from '../custom/fieldtypes';
 
 
+// eslint-disable-next-line react/prefer-stateless-function
 class Register extends React.Component {
   render() {
     return (

@@ -1,6 +1,6 @@
-import {connect} from 'react-redux';
-import {creators} from '../sagas/SessionSaga';
-import  LoggingPage from '../components/public/LoggingPage';
+import { connect } from 'react-redux';
+import { creators } from '../sagas/SessionSaga';
+import LoggingPage from '../components/public/LoggingPage';
 
 const mapStateToProps = state => ({
   loginLoading: state.user.loading,

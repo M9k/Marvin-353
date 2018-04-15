@@ -1,7 +1,7 @@
 import React from 'react';
 import FieldTypes from '../custom/fieldtypes';
 import Form from '../custom/Form';
-import Utils from "../custom/utils";
+import Utils from '../custom/utils';
 
 // Home page component
 const testForm = () => (
