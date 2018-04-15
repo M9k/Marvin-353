@@ -1,8 +1,8 @@
 import Index from '../public/Index';
 import Help from '../public/Help';
 import License from '../public/License';
-import testPageTable from '../template/testPageTable';
 import testForm from '../template/testForm';
+import login from '../../containers/Login';
 
 const PublicRoutes = [
   {
@@ -15,7 +15,7 @@ const PublicRoutes = [
     path: 'login',
     label: 'Login',
     position: 'left',
-    component: testPageTable,
+    component: login,
   },
   {
     path: 'request',
