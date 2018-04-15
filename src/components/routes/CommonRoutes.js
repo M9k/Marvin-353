@@ -1,6 +1,7 @@
 import testForm from '../template/testForm';
 import Help from '../public/Help';
 import License from '../public/License';
+import NotFound from '../public/NotFound';
 
 const CommonRoutes = [
   {
@@ -20,6 +21,12 @@ const CommonRoutes = [
     label: 'License',
     position: 'none',
     component: License,
+  },
+  {
+    path: '*',
+    label: '404',
+    position: 'none',
+    component: NotFound,
   },
 ];
 
