@@ -11,17 +11,6 @@ const testForm = () => (
     <Form />
     <Form description="FAKE Add new admin address form" />
     <Form
-      description="REAL Add new admin address form"
-      fields={[{
-      name: 'addressAdmin',
-      label: 'Address:',
-      help: 'insert the address of the admin',
-      placeholder: '0xwxwxw0w40443xwxxwff',
-      type: FieldTypes.TEXT,
-      validateFunction: Utils.validEthAddress,
-      }]}
-    />
-    <Form
       description="Do you want to be part of Marvin University?"
       fields={[{
         name: 'name',
@@ -44,19 +33,6 @@ const testForm = () => (
         type: FieldTypes.SELECT,
         values: ['student', 'teacher'],
         validateFunction: Utils.notNullValue,
-      }]}
-    />
-
-
-    <Form
-      description="Do you want to add a new year?"
-      fields={[{
-        name: 'year',
-        label: 'Year:',
-        help: 'insert the new university year',
-        placeholder: '20xx',
-        type: FieldTypes.TEXT,
-        validateFunction: Utils.moreThanCurrentYear,
       }]}
     />
 
