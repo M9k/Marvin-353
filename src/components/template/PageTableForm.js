@@ -11,26 +11,33 @@ class PageTableForm extends React.Component {
   constructor(props) {
     super(props);
     this.refreshData = this.refreshData.bind(this);
-    this.getButtons = this.getButtons.bind(this);
+    this.getDeleteButtons = this.getDeleteButtons.bind(this);
     this.isFormRequired = this.isFormRequired.bind(this);
+    this.getRows = this.getRows.bind(this);
   }
 
   componentWillMount() {
     this.refreshData();
   }
 
-  getButtons() {
-    if (this.props.deleteTableData() !== -1) {
-      return (<td><DeleteButton deleteFunction={this.props.deleteTableData} /></td>);
-    }
+  getDeleteButtons(item) {
+    return (
+      <td><DeleteButton deleteFunction={this.props.deleteTableData} objectToRemove={item} /></td>
+    );
+    /*
     if (this.props.editTableData() !== -1) {
       return (<td><Button onClick={this.props.editTableData}>Edit button</Button></td>);
     }
-    return null;
+    */
   }
 
-  refreshData() {
-    this.props.getTableData(); // ask redux the table data array
+  getRows() {
+    if (this.props.tableType === 1) {
+      const tableRows = this.props.tableData.map(item =>
+        <tr key={Utils.generateKey(item)}><td>{item}</td>{this.getDeleteButtons(item)}</tr>);
+      return tableRows;
+    }
+    return (<tr></tr>);
   }
 
   isFormRequired() {
@@ -40,15 +47,24 @@ class PageTableForm extends React.Component {
     return null;
   }
 
+  refreshData() {
+    this.props.getTableData(); // ask redux the table data array
+  }
+
   render() {
-    const tableRows = this.props.tableData.map(item =>
-      <tr key={Utils.generateKey(item)}><td>{item}</td>{this.getButtons()}</tr>);
+    const tableHead = this.props.headerInfo.map(item =>
+      <th key={Utils.generateKey(item)}>{item}</th>);
     return (
       <div>
         {this.isFormRequired()}
         <Table striped bordered condensed hover>
+          <thead>
+            <tr>
+              {tableHead}
+            </tr>
+          </thead>
           <tbody>
-            {tableRows}
+            {this.getRows()}
           </tbody>
         </Table>
       </div>
@@ -62,6 +78,8 @@ PageTableForm.propTypes = {
   deleteTableData: PropTypes.func,
   addTableData: PropTypes.func,
   tableData: PropTypes.arrayOf(String).isRequired,
+  headerInfo: PropTypes.arrayOf(String).isRequired,
+  tableType: PropTypes.number.isRequired,
 };
 
 PageTableForm.defaultProps = {

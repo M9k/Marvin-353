@@ -3,6 +3,8 @@ import CardWithIcon from '../custom/CardWithIcon';
 
 const Index = () => (
   <div>
+    <h3 className="text-center">Welcome University Founder</h3>
+    <img alt="" className="img-responsive imageIndexTop" src="/media/cards/adminIndex.png" />
     <CardWithIcon
       title="Admin"
       text="Manage all the admin of Marvin, add, modify or delete them"

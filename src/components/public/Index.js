@@ -3,6 +3,8 @@ import CardWithIcon from '../custom/CardWithIcon';
 
 const Index = () => (
   <div>
+    <h3 className="text-center">Welcome to Marvin!</h3>
+    <img alt="" className="img-responsive imageIndexTop" src="/media/cards/publicIndex.png" />
     <CardWithIcon
       title="Login"
       text="Enter in the website using a confirmed account, for students, teachers and administrators"
