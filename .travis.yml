@@ -39,6 +39,7 @@ jobs:
       before_script:
         - export STAGE_NAME=coverage
         - npm run rpcov
+        - npm run compile
       script:
        - python scripts/coverage/js-coverage.py
        - python scripts/coverage/solidity-coverage.py
