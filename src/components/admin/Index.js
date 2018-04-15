@@ -4,6 +4,7 @@ import CardWithIcon from '../custom/CardWithIcon';
 const Index = () => (
   <div>
     <h3 className="text-center">Welcome Admin</h3>
+    <img alt="" className="img-responsive imageIndexTop" src="/media/cards/adminIndex.png" />
     <CardWithIcon
       title="Confirm teacher accounts"
       text="Confirm pending unconfirmed users for teacher role."
