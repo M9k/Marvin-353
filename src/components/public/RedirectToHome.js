@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { history } from '../../store';
+// import { history } from '../../store';
 
 class RedirectToHome extends React.Component {
   componentDidMount() {
-    setTimeout(() => { history.push('/'); }, this.props.time);
+    setTimeout(() => {
+      // history.push('/');
+      document.location.href = '/';
+    }, this.props.time);
   }
   render() {
     return (

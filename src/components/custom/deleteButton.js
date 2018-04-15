@@ -10,7 +10,7 @@ class deleteButton extends React.Component {
   }
 
   handleClick() {
-    this.props.deleteFunction();
+    this.props.deleteFunction(this.props.objectToRemove);
   }
 
   render() {

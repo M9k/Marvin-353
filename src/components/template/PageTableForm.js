@@ -11,7 +11,8 @@ class PageTableForm extends React.Component {
   constructor(props) {
     super(props);
     this.refreshData = this.refreshData.bind(this);
-    this.getDeleteButtons = this.getDeleteButtons.bind(this);
+    this.getEditButton = this.getEditButton.bind(this);
+    this.getDeleteButton = this.getDeleteButton.bind(this);
     this.isFormRequired = this.isFormRequired.bind(this);
     this.getRows = this.getRows.bind(this);
   }
@@ -20,24 +21,35 @@ class PageTableForm extends React.Component {
     this.refreshData();
   }
 
-  getDeleteButtons(item) {
-    return (
-      <td><DeleteButton deleteFunction={this.props.deleteTableData} objectToRemove={item} /></td>
-    );
-    /*
+  getEditButton() {
     if (this.props.editTableData() !== -1) {
-      return (<td><Button onClick={this.props.editTableData}>Edit button</Button></td>);
+      return (
+        <Button onClick={this.props.editTableData}>Edit button</Button>
+      );
     }
-    */
+    return null;
+  }
+
+  getDeleteButton(item) {
+    if (this.props.deleteTableData() !== -1) {
+      return (
+        <DeleteButton deleteFunction={this.props.deleteTableData} objectToRemove={item} />
+      );
+    }
+    return null;
   }
 
   getRows() {
-    if (this.props.tableType === 1) {
-      const tableRows = this.props.tableData.map(item =>
-        <tr key={Utils.generateKey(item)}><td>{item}</td>{this.getDeleteButtons(item)}</tr>);
-      return tableRows;
-    }
-    return (<tr></tr>);
+    return this.props.tableData.map(item =>
+      (
+        <tr key={Utils.generateKey(item)}>
+          <td>{item}</td>
+          <td>
+            {this.getEditButton()}
+            {this.getDeleteButton(item)}
+          </td>
+        </tr>
+      ));
   }
 
   isFormRequired() {
@@ -61,6 +73,7 @@ class PageTableForm extends React.Component {
           <thead>
             <tr>
               {tableHead}
+              <th />
             </tr>
           </thead>
           <tbody>
@@ -79,7 +92,6 @@ PageTableForm.propTypes = {
   addTableData: PropTypes.func,
   tableData: PropTypes.arrayOf(String).isRequired,
   headerInfo: PropTypes.arrayOf(String).isRequired,
-  tableType: PropTypes.number.isRequired,
 };
 
 PageTableForm.defaultProps = {
