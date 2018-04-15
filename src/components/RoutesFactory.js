@@ -2,6 +2,7 @@ import AccountEnum from '../util/logic/AccountEnum';
 import UniversityRoutes from './routes/UniversityRoutes';
 import PublicRoutes from './routes/PublicRoutes';
 import CommonRoutes from './routes/CommonRoutes';
+import Logout from './public/Logout';
 
 /**
  * @return {array} of Objects links/routes
@@ -19,7 +20,19 @@ function RoutesFactory(userType) {
       routes = routes.concat(PublicRoutes);
       break;
   }
-  return routes.concat(CommonRoutes);
+  routes = routes.concat(CommonRoutes);
+  if (userType !== null && userType !== AccountEnum.NOTLOGGED) {
+    console.log('LOGOUT');
+    const logout = [
+      {
+        path: 'logout',
+        label: 'Logout',
+        position: 'right',
+        component: Logout,
+      },
+    ];
+    routes = routes.concat(logout);
+  }
+  return routes;
 }
 export default RoutesFactory;
-
