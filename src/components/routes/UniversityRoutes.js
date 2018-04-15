@@ -10,13 +10,13 @@ const UniversityRoutes = [
   },
   {
     path: 'academicyears',
-    label: 'years',
+    label: 'Years',
     position: 'left',
     component: UniversityAcademicYears,
   },
   {
     path: 'admin',
-    label: 'admin',
+    label: 'Admin',
     position: 'left',
     component: UniversityAdmin,
   },

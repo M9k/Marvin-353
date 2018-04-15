@@ -22,12 +22,6 @@ const PublicRoutes = [
     position: 'left',
     component: Register,
   },
-  {
-    path: 'testTable',
-    label: 'testTable',
-    position: 'right',
-    component: testPageTable,
-  },
 ];
 
 export default PublicRoutes;
