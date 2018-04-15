@@ -65,7 +65,11 @@ nav.navbar.navbar-default {
   color: white;
 }
 
-.navbar-brand:hover, .navbar-default .navbar-nav>li>a:hover {
+.navbar-default .navbar-brand:hover{
+  color: #f3f3f3;
+}
+
+ .navbar-default .navbar-nav>li>a:hover {
   color: #f3f3f3;
 }
 

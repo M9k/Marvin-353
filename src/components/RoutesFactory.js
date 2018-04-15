@@ -7,6 +7,7 @@ import TeacherRoutes from './routes/TeacherRoutes';
 import AdminRoutes from './routes/AdminRoutes';
 import Logout from './public/Logout';
 
+
 /**
  * @return {array} of Objects links/routes
  */
@@ -31,7 +32,6 @@ function RoutesFactory(userType) {
       routes = routes.concat(PublicRoutes);
       break;
   }
-  routes = routes.concat(CommonRoutes);
   if (userType !== null && userType !== AccountEnum.NOTLOGGED) {
     console.log('LOGOUT');
     const logout = [
@@ -44,6 +44,6 @@ function RoutesFactory(userType) {
     ];
     routes = routes.concat(logout);
   }
-  return routes;
+  return routes.concat(CommonRoutes);
 }
 export default RoutesFactory;
