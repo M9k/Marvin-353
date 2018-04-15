@@ -1,6 +1,7 @@
 import Index from '../public/Index';
 import login from '../../containers/Login';
 import Register from '../public/Register';
+import testPageTable from '../template/testPageTable';
 
 const PublicRoutes = [
   {
@@ -20,6 +21,12 @@ const PublicRoutes = [
     label: 'Register',
     position: 'left',
     component: Register,
+  },
+  {
+    path: 'testTable',
+    label: 'testTable',
+    position: 'right',
+    component: testPageTable,
   },
 ];
 

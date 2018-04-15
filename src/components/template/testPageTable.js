@@ -20,8 +20,7 @@ export default class testPageTable extends React.Component {
           '0x2B5AD5c4795c026514f8317c7a215E218DcCD6cF',
           '0x6813Eb9362372EEF6200f3b1dbC3f819671cBA69',
         ]}
-          headerInfo={['Header1', 'Header2']}
-          tableType={1}
+          headerInfo={['Admin Address']}
         />
       </div>
     );
