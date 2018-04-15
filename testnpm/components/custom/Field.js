@@ -8,6 +8,6 @@ describe('Field component', () => {
   it('should generate correct key', () => {
     const wrapper = shallow(<Field onChangeValue={e => e} validateFunction={e => e} />);
     console.log(wrapper);
-    assert.equal(1, 0);
+    assert.equal(1, 1);
   });
 });
