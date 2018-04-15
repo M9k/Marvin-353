@@ -11,7 +11,7 @@ const Index = () => (
     <CardWithIcon
       title="Academic Year"
       text="Manage all the academic years of Marvin, add or delete them"
-      links={[{ path: 'years', label: 'Click here to manage years' }]}
+      links={[{ path: 'academicyears', label: 'Click here to manage years' }]}
     />
   </div>
 );
