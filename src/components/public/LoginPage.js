@@ -1,8 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import RedirectToHome from './RedirectToHome';
+import { creators } from '../../sagas/SessionSaga';
 
-class Logging extends React.Component {
+class LoginPage extends React.Component {
   componentDidMount() {
     this.props.performLogin();
   }
@@ -45,7 +47,7 @@ class Logging extends React.Component {
   }
 }
 
-Logging.propTypes = {
+LoginPage.propTypes = {
   loginLoading: PropTypes.bool,
   loginFailed: PropTypes.bool,
   metamask: PropTypes.bool,
@@ -53,7 +55,7 @@ Logging.propTypes = {
   performLogin: PropTypes.func,
 };
 
-Logging.defaultProps = {
+LoginPage.defaultProps = {
   loginLoading: false,
   loginFailed: false,
   metamask: false,
@@ -61,4 +63,19 @@ Logging.defaultProps = {
   performLogin: () => {},
 };
 
-export default Logging;
+
+const mapStateToProps = state => ({
+  loginLoading: state.user.loading,
+  loginFailed: state.user.errored,
+  metamask: state.metamask.present,
+  account: state.metamask.account,
+});
+
+function mapDispatchToProps(dispatch) {
+  return {
+    performLogin: () => dispatch(creators.loginAction()),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
+

@@ -56,3 +56,17 @@ $gray-marvin: #595968;
 div#page {
   margin-bottom: 50px;
 }
+
+nav.navbar.navbar-default {
+  background: #2196f3;
+}
+
+.navbar-default .navbar-brand, .navbar-default .navbar-nav>li>a {
+  color: white;
+}
+
+.navbar-brand:hover, .navbar-default .navbar-nav>li>a:hover {
+  color: #f3f3f3;
+}
+
+

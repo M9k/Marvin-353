@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { IndexRoute, Router } from 'react-router';
 import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -9,7 +10,7 @@ import Utils from './custom/utils';
 import AccountEnum from '../util/logic/AccountEnum';
 
 // build the router
-const router = (props) => {
+const RouterMarvin = (props) => {
   const routesAll = RoutesFactory(props.userType);
 
   const indexComp = routesAll.filter(route => route.path === '/')[0];
@@ -38,12 +39,17 @@ const router = (props) => {
   );
 };
 
-router.propTypes = {
+RouterMarvin.propTypes = {
   userType: PropTypes.number,
 };
 
-router.defaultProps = {
+RouterMarvin.defaultProps = {
   userType: AccountEnum.NOTLOGGED,
 };
 
-export default router;
+const mapStateToProps = state => ({
+  userType: state.user.role,
+});
+
+export default connect(mapStateToProps)(RouterMarvin);
+
