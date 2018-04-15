@@ -5,8 +5,7 @@ const NotFound = () => {
 
   return (
     <div>
-      <h3 className="text-center">404 Not Found!</h3>
-      <img alt="" className="img-responsive imageIndexTop" src="/media/cards/404.png" />
+      <img alt="page not found" className="img-responsive imageIndexTop" src="/media/cards/404.png" />
     </div>
   );
 };
