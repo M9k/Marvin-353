@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount, shallow, render } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import assert from 'assert';
 import { expect } from 'chai';
 import PageTableForm from '../../../src/components/template/PageTableForm';
