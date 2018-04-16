@@ -7,14 +7,12 @@ import DeleteButton from '../../../src/components/custom/deleteButton';
 
 describe('PageTableForm component test', () => {
   it('Should render the component', () => {
-    // eslint-disable-next-line
-    const wrapper = shallow(<PageTableForm getTableData={e => e} deleteTableData={e => e} editTableData={e => e} addTableData={e=>e} tableData={['0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf']} headerInfo={['Admin Address']} />);
+    const wrapper = shallow(<PageTableForm getTableData={e => e} deleteTableData={e => e} editTableData={e => e} addTableData={e => e} tableData={['0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf']} headerInfo={['Admin Address']} />);
     assert.equal(wrapper.length, 1);
   });
 
   it('should save correct props and correct value', () => {
-    // eslint-disable-next-line
-    const wrapper = mount(<PageTableForm getTableData={e => e} deleteTableData={e => e} editTableData={e => e} addTableData={e=>e} tableData={['0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf']} headerInfo={['Admin Address']} />);
+    const wrapper = mount(<PageTableForm getTableData={e => e} deleteTableData={e => e} editTableData={e => e} addTableData={e => e} tableData={['0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf']} headerInfo={['Admin Address']} />);
     expect(wrapper.props().tableData).to.deep.include('0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf');
     expect(wrapper.props().headerInfo).to.deep.include('Admin Address');
     expect(wrapper.props().getTableData(2)).to.equal(2);
@@ -26,8 +24,7 @@ describe('PageTableForm component test', () => {
   });
 
   it('Should render the DeleteButton', () => {
-    // eslint-disable-next-line
-    const wrapper = shallow(<PageTableForm getTableData={e => e} deleteTableData={e => e} editTableData={e => e} addTableData={e=>e} tableData={['0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf']} headerInfo={['Admin Address']} />);
+    const wrapper = shallow(<PageTableForm getTableData={e => e} deleteTableData={e => e} editTableData={e => e} addTableData={e => e} tableData={['0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf']} headerInfo={['Admin Address']} />);
     expect(wrapper.find(DeleteButton)).to.have.length(1);
   });
 });
