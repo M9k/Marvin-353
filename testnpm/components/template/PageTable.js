@@ -6,7 +6,6 @@ import PageTableForm from '../../../src/components/template/PageTableForm';
 import DeleteButton from '../../../src/components/custom/deleteButton';
 
 describe('PageTableForm component test', () => {
-
   it('Should render the component', () => {
     // eslint-disable-next-line
     const wrapper = shallow(<PageTableForm getTableData={e => e} deleteTableData={e => e} editTableData={e => e} addTableData={e=>e} tableData={['0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf']} headerInfo={['Admin Address']} />);
