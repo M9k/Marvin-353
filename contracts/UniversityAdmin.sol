@@ -55,7 +55,6 @@ contract UniversityAdmin is University {
     function removeAdmin(address _address) public onlyFounder validAdminAddress(_address) {
         registered[_address] = false;
         administratorsByIndex[administrators[_address]] = administratorsByIndex[countAdministratorsByIndex];
-        administrators[_address] = 0;
         countAdministratorsByIndex -= 1;
     }
 }
