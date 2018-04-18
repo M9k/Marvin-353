@@ -34,6 +34,7 @@ jobs:
     - stage: code-coverage
       if: branch = master
       install:
+        - sudo pip install --upgrade pip
         - sudo pip install unirest
         - sudo pip install bs4
       before_script:
