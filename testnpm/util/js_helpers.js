@@ -50,8 +50,10 @@ describe('copyNPop function', () => {
   it('should throw an exception if the target does not have the necessary methods', () => {
     const fn = () => true;
     expect(() => Helpers.copyNPop({}, fn)).to.throw(TypeError, 'Provided target doesn\'t have splice and findIndex function');
-    expect(() => Helpers.copyNPop({ splice: undefined, findIndex: () => -1 }, fn)).to.throw(TypeError);
-    expect(() => Helpers.copyNPop({ findIndex: undefined, splice: () => -1 }, fn)).to.throw(TypeError);
+    expect(() => Helpers.copyNPop({ splice: undefined, findIndex: () => -1 }, fn))
+      .to.throw(TypeError);
+    expect(() => Helpers.copyNPop({ findIndex: undefined, splice: () => -1 }, fn))
+      .to.throw(TypeError);
     expect(() => Helpers.copyNPop([], fn)).to.not.throw();
   });
 });

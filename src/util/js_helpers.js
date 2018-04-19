@@ -3,7 +3,7 @@ const range = (from = 0, to = from) => {
   const target = [];
   for (let i = from; i <= to; (i += 1)) target.push(i);
   return target;
-}
+};
 const copyNPush = (target, el) => {
   const assigned = Object.assign([], target);
   if (!(target.push instanceof Function)) throw new TypeError('Provided target does not have a push function');
@@ -20,5 +20,5 @@ const copyNPop = (target, fn) => {
   const idx = assigned.findIndex(fn);
   if (idx !== -1) assigned.splice(idx, 1);
   return assigned;
-}
+};
 export { range, copyNPop, copyNPush };

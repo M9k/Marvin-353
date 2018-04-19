@@ -10,21 +10,23 @@ const REMOVE = actionType('REMOVE');
 
 export function* addYear(solarYear) {
   yield put(actionCreators.listIsLoading());
-  try{
+  try {
+    console.log(solarYear);
     throw Error();
-  } catch(e) {
+  } catch (e) {
     yield put(actionCreators.listHasErrored());
   }
 }
 export function* removeEmptyYear(solarYear) {
   yield put(actionCreators.listIsLoading());
   try {
+    console.log(solarYear);
     throw Error();
   } catch (e) {
     yield put(actionCreators.listHasErrored());
   }
 }
-export function* getAllYears()  {
+export function* getAllYears() {
   yield put(actionCreators.listIsLoading());
   try {
     let yearNumber = yield call(UniversityYear.getAcademicYearNumber);
@@ -51,7 +53,7 @@ export const creators = {
   ),
   getAllYears: () => (
     { type: GET }
-  )
+  ),
 };
 
 export default function* handler() {
@@ -60,4 +62,4 @@ export default function* handler() {
     fork(takeEvery, ADD, addYear),
     fork(takeEvery, REMOVE, removeEmptyYear),
   ];
-};
+}

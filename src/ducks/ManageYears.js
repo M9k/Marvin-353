@@ -9,7 +9,7 @@ const ManageYearsDuck = new Duck({
     'POP_EMPTY_YEAR',
     'PUSH_ACCADEMIC_YEAR',
     'LIST_ERRORED',
-    'LIST_LOADING'
+    'LIST_LOADING',
   ],
   initialState: {
     loading: false,
@@ -32,25 +32,25 @@ const ManageYearsDuck = new Duck({
           loading: false,
           errored: false,
           accademicYears: copyNPush(state.accademicYears, action.year),
-        }
+        };
       case (types.POP_EMPTY_YEAR):
         return {
           ...state,
           loading: false,
           errored: false,
-          accademicYears: copyNPop(state.accademicYears, el => el === action.year)
-        }
+          accademicYears: copyNPop(state.accademicYears, el => el === action.year),
+        };
       case (types.LIST_ERRORED):
         return {
           ...state,
           errored: true,
-          loading: false
+          loading: false,
         };
       case (types.LIST_LOADING):
         return {
           ...state,
-          loading: true
-        }
+          loading: true,
+        };
       default:
         return state;
     }
@@ -70,8 +70,8 @@ const ManageYearsDuck = new Duck({
     ),
     listHasErrored: () => (
       { type: duck.types.LIST_ERRORED }
-    )
-  })
+    ),
+  }),
 });
 export const { creators, selectors } = ManageYearsDuck;
 export default ManageYearsDuck.reducer;
