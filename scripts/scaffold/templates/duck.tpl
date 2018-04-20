@@ -18,5 +18,5 @@ const --Name--Duck = new Duck({
 
   })
 });
-export const { creators, selectors } = --Name--Duck;
+export const { creators, selectors, initialState } = --Name--Duck;
 export default --Name--Duck.reducer;
