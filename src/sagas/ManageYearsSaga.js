@@ -8,20 +8,23 @@ const GET = actionType('GET');
 const ADD = actionType('ADD');
 const REMOVE = actionType('REMOVE');
 
-export function* addYear(solarYear) {
+export function* addYear(action) {
+  const solarYear = Number(action.year);
   yield put(actionCreators.listIsLoading());
   try {
-    console.log(solarYear);
-    throw Error();
+    yield call(UniversityYear.addNewAcademicYear, solarYear);
+    yield put(actionCreators.pushAccademicYear(solarYear));
   } catch (e) {
+    console.log(e);
     yield put(actionCreators.listHasErrored());
   }
 }
-export function* removeEmptyYear(solarYear) {
+export function* removeEmptyYear(action) {
+  const solarYear = action.year;
   yield put(actionCreators.listIsLoading());
   try {
-    console.log(solarYear);
-    throw Error();
+    yield call(UniversityYear.removeAcademicYear, solarYear);
+    yield put(actionCreators.popEmptyYear(solarYear));
   } catch (e) {
     yield put(actionCreators.listHasErrored());
   }
@@ -37,7 +40,7 @@ export function* getAllYears() {
     const contracts = yield all(getYearsAddressCalls);
     const getYearAddress = contracts.map(addr => call(Year.getSolarYear, addr));
     const solarYears = yield all(getYearAddress);
-    yield put(actionCreators.setAccademicYearList(solarYears));
+    yield put(actionCreators.setAccademicYearList(solarYears.map(year => Number(year))));
   } catch (e) {
     console.log('Fail to get years');
     yield put(actionCreators.listHasErrored());
