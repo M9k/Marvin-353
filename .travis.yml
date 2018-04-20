@@ -39,6 +39,7 @@ jobs:
         - sudo pip install bs4
       before_script:
         - export STAGE_NAME=coverage
+        - (while sleep 592; do echo "STA BONO TRAVIS"; done;) &
         - npm run rpcov
         - npm run compile
       script:
