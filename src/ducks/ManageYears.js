@@ -73,5 +73,5 @@ const ManageYearsDuck = new Duck({
     ),
   }),
 });
-export const { creators, selectors } = ManageYearsDuck;
+export const { creators, selectors, initialState } = ManageYearsDuck;
 export default ManageYearsDuck.reducer;

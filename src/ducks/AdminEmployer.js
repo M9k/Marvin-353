@@ -66,5 +66,5 @@ const AdminEmployerDuck = new Duck({
     ),
   }),
 });
-export const { creators, selectors } = AdminEmployerDuck;
+export const { creators, selectors, initialState } = AdminEmployerDuck;
 export default AdminEmployerDuck.reducer;
