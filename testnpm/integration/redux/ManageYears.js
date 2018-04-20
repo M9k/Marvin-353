@@ -47,7 +47,7 @@ describe('ManageYears feature', () => {
       })
       .put(creators.listIsLoading())
       .run());
-    it('should add a given year', () => expectSaga(sagas.addYear, 2011)
+    it('should add a given year', () => expectSaga(sagas.addYear, { year: 2011 })
       .withReducer(reducer)
       .provide([
         [matchers.call.fn(UniversityYear.addNewAcademicYear, 2011), true],
@@ -59,7 +59,7 @@ describe('ManageYears feature', () => {
       })
       .put(creators.listIsLoading())
       .run());
-    it('should remove an empty year', () => expectSaga(sagas.removeEmptyYear, 2011)
+    it('should remove an empty year', () => expectSaga(sagas.removeEmptyYear, { year: 2011 })
       .withReducer(reducer, { loading: false, errored: false, accademicYears: [2011] })
       .provide([
         [matchers.call.fn(UniversityYear.removeAcademicYear, 2011), true],
