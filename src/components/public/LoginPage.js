@@ -32,6 +32,14 @@ class LoginPage extends React.Component {
         </div>
       );
     }
+    if (this.props.loginFailed) {
+      return (
+        <div>
+          Login failed! Please check your internet connection!
+          <RedirectToHome time={5000} />
+        </div>
+      );
+    }
     if (this.props.role === 0) {
       return (
         <div>
