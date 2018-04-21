@@ -10,7 +10,6 @@ contract('UniversityYear', (accounts) => {
   beforeEach('Deploy University contract on blockchain', async () => {
     university = await UniversityYear.new({ from: accounts[0] });
   });
-  /*
   it('Should add new academic year', async () => {
     assert.equal(await university.getAcademicYearNumber.call(), 0);
     await university.addNewAcademicYear(2018, { from: accounts[0] });
@@ -64,7 +63,6 @@ contract('UniversityYear', (accounts) => {
       await university.getAcademicYearContractAt.call(0),
     );
   });
-  */
   it('Should add some academic years, delete some and recover the others', async () => {
     assert.equal(await university.getAcademicYearNumber.call(), 0);
     await university.addNewAcademicYear(2018, { from: accounts[0] });
