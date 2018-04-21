@@ -12,7 +12,7 @@ class RedirectToHome extends React.Component {
   render() {
     return (
       <div>
-        Logged! If you are not redirect to the homepage in&nbsp;
+        If you are not redirect to the homepage in&nbsp;
         {Math.round(this.props.time / 1000) + 3} seconds&nbsp;
         <a href="/">click here</a>
       </div>
