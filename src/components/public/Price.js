@@ -151,7 +151,7 @@ class Price extends React.Component {
                 gasCost={3400000}
                 ethToEur={this.state.eth.EUR}
                 gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
-                gasCostAverage={this.state.ethGas.average}
+                gasCostAverage={Price.toGasPrice(this.state.ethGas.average)}
                 gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
                 gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
@@ -160,7 +160,7 @@ class Price extends React.Component {
                 gasCost={750000}
                 ethToEur={this.state.eth.EUR}
                 gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
-                gasCostAverage={this.state.ethGas.average}
+                gasCostAverage={Price.toGasPrice(this.state.ethGas.average)}
                 gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
                 gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
@@ -169,7 +169,7 @@ class Price extends React.Component {
                 gasCost={590000}
                 ethToEur={this.state.eth.EUR}
                 gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
-                gasCostAverage={this.state.ethGas.average}
+                gasCostAverage={Price.toGasPrice(this.state.ethGas.average)}
                 gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
                 gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
@@ -178,7 +178,7 @@ class Price extends React.Component {
                 gasCost={420000}
                 ethToEur={this.state.eth.EUR}
                 gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
-                gasCostAverage={this.state.ethGas.average}
+                gasCostAverage={Price.toGasPrice(this.state.ethGas.average)}
                 gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
                 gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
@@ -187,7 +187,7 @@ class Price extends React.Component {
                 gasCost={90000}
                 ethToEur={this.state.eth.EUR}
                 gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
-                gasCostAverage={this.state.ethGas.average}
+                gasCostAverage={Price.toGasPrice(this.state.ethGas.average)}
                 gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
                 gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
@@ -196,7 +196,7 @@ class Price extends React.Component {
                 gasCost={700000}
                 ethToEur={this.state.eth.EUR}
                 gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
-                gasCostAverage={this.state.ethGas.average}
+                gasCostAverage={Price.toGasPrice(this.state.ethGas.average)}
                 gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
                 gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
@@ -205,7 +205,7 @@ class Price extends React.Component {
                 gasCost={490000}
                 ethToEur={this.state.eth.EUR}
                 gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
-                gasCostAverage={this.state.ethGas.average}
+                gasCostAverage={Price.toGasPrice(this.state.ethGas.average)}
                 gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
                 gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
@@ -214,7 +214,7 @@ class Price extends React.Component {
                 gasCost={70000}
                 ethToEur={this.state.eth.EUR}
                 gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
-                gasCostAverage={this.state.ethGas.average}
+                gasCostAverage={Price.toGasPrice(this.state.ethGas.average)}
                 gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
                 gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
@@ -223,7 +223,7 @@ class Price extends React.Component {
                 gasCost={70000}
                 ethToEur={this.state.eth.EUR}
                 gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
-                gasCostAverage={this.state.ethGas.average}
+                gasCostAverage={Price.toGasPrice(this.state.ethGas.average)}
                 gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
                 gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
@@ -232,7 +232,7 @@ class Price extends React.Component {
                 gasCost={40000}
                 ethToEur={this.state.eth.EUR}
                 gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
-                gasCostAverage={this.state.ethGas.average}
+                gasCostAverage={Price.toGasPrice(this.state.ethGas.average)}
                 gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
                 gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
@@ -241,7 +241,7 @@ class Price extends React.Component {
                 gasCost={40000}
                 ethToEur={this.state.eth.EUR}
                 gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
-                gasCostAverage={this.state.ethGas.average}
+                gasCostAverage={Price.toGasPrice(this.state.ethGas.average)}
                 gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
                 gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
@@ -250,7 +250,7 @@ class Price extends React.Component {
                 gasCost={33000}
                 ethToEur={this.state.eth.EUR}
                 gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
-                gasCostAverage={this.state.ethGas.average}
+                gasCostAverage={Price.toGasPrice(this.state.ethGas.average)}
                 gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
                 gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
@@ -259,7 +259,7 @@ class Price extends React.Component {
                 gasCost={24000}
                 ethToEur={this.state.eth.EUR}
                 gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
-                gasCostAverage={this.state.ethGas.average}
+                gasCostAverage={Price.toGasPrice(this.state.ethGas.average)}
                 gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
                 gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
@@ -268,7 +268,7 @@ class Price extends React.Component {
                 gasCost={40000}
                 ethToEur={this.state.eth.EUR}
                 gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
-                gasCostAverage={this.state.ethGas.average}
+                gasCostAverage={Price.toGasPrice(this.state.ethGas.average)}
                 gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
                 gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
@@ -277,7 +277,7 @@ class Price extends React.Component {
                 gasCost={29000}
                 ethToEur={this.state.eth.EUR}
                 gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
-                gasCostAverage={this.state.ethGas.average}
+                gasCostAverage={Price.toGasPrice(this.state.ethGas.average)}
                 gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
                 gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
@@ -286,7 +286,7 @@ class Price extends React.Component {
                 gasCost={80000}
                 ethToEur={this.state.eth.EUR}
                 gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
-                gasCostAverage={this.state.ethGas.average}
+                gasCostAverage={Price.toGasPrice(this.state.ethGas.average)}
                 gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
                 gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
@@ -295,7 +295,7 @@ class Price extends React.Component {
                 gasCost={60000}
                 ethToEur={this.state.eth.EUR}
                 gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
-                gasCostAverage={this.state.ethGas.average}
+                gasCostAverage={Price.toGasPrice(this.state.ethGas.average)}
                 gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
                 gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
@@ -304,7 +304,7 @@ class Price extends React.Component {
                 gasCost={92000}
                 ethToEur={this.state.eth.EUR}
                 gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
-                gasCostAverage={this.state.ethGas.average}
+                gasCostAverage={Price.toGasPrice(this.state.ethGas.average)}
                 gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
                 gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
