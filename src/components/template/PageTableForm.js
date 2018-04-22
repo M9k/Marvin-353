@@ -22,7 +22,7 @@ class PageTableForm extends React.Component {
   }
 
   getEditButton() {
-    if (this.props.editTableData() !== -1) {
+    if (this.props.editTableData !== undefined) {
       return (
         <Button onClick={this.props.editTableData}>Edit button</Button>
       );
@@ -31,7 +31,7 @@ class PageTableForm extends React.Component {
   }
 
   getDeleteButton(item) {
-    if (this.props.deleteTableData() !== -1) {
+    if (this.props.deleteTableData !== undefined) {
       return (
         <DeleteButton deleteFunction={this.props.deleteTableData} objectToRemove={item} />
       );
@@ -53,7 +53,7 @@ class PageTableForm extends React.Component {
   }
 
   isFormRequired() {
-    if (this.props.addTableData() !== -1) {
+    if (this.props.addTableData !== undefined) {
       return <Form submitFunction={this.props.getTableData} />;
     }
     return null;
@@ -95,9 +95,9 @@ PageTableForm.propTypes = {
 };
 
 PageTableForm.defaultProps = {
-  editTableData: () => -1,
-  deleteTableData: () => -1,
-  addTableData: () => -1,
+  editTableData: undefined,
+  deleteTableData: undefined,
+  addTableData: undefined,
 };
 
 export default PageTableForm;
