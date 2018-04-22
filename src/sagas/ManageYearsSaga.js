@@ -15,7 +15,6 @@ export function* addYear(action) {
     yield call(UniversityYear.addNewAcademicYear, solarYear);
     yield put(actionCreators.pushAccademicYear(solarYear));
   } catch (e) {
-    console.log(e);
     yield put(actionCreators.listHasErrored());
   }
 }

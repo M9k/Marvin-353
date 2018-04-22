@@ -5,6 +5,11 @@ export default function GentlyFail(features, reducer, failedState) {
     features.forEach((feature) => {
       it(`${String(feature).split(' ')[1]} should fail gently`, () => expectSaga(feature, {})
         .withReducer(reducer)
+        .provide({
+          call: () => {
+            throw new Error('Gently fail!');
+          },
+        })
         .hasFinalState(failedState)
         .run());
     });
