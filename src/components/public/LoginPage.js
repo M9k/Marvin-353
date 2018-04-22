@@ -12,7 +12,7 @@ class LoginPage extends React.Component {
   render() {
     if (this.props.loginLoading) {
       return (
-        <div>Loggging...</div>
+        <div>Logging...</div>
       );
     }
     if (this.props.loginFailed) {
