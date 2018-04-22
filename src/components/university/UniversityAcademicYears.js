@@ -49,7 +49,7 @@ function mapDispatchToProps(dispatch) {
       dispatch(universitySagaAction.addYear(objArr.year.value))
     ),
     getYears: () => dispatch(universitySagaAction.getAllYears()),
-    deleteYears: year => dispatch(universitySagaAction.removeEmptyYear([year])),
+    deleteYears: year => dispatch(universitySagaAction.removeEmptyYear(year)),
   };
 }
 
