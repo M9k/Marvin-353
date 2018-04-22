@@ -150,163 +150,163 @@ class Price extends React.Component {
                 operation="Deploy university contract"
                 gasCost={3400000}
                 ethToEur={this.state.eth.EUR}
-                gasCostSafe={this.state.ethGas.safeLow}
+                gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
                 gasCostAverage={this.state.ethGas.average}
-                gasCostFast={this.state.ethGas.fast}
-                gasCostFastest={this.state.ethGas.fastest}
+                gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
+                gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
               <PriceOperationLine
                 operation="Add a new academic year"
                 gasCost={750000}
                 ethToEur={this.state.eth.EUR}
-                gasCostSafe={this.state.ethGas.safeLow}
+                gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
                 gasCostAverage={this.state.ethGas.average}
-                gasCostFast={this.state.ethGas.fast}
-                gasCostFastest={this.state.ethGas.fastest}
+                gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
+                gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
               <PriceOperationLine
                 operation="Add a new course"
                 gasCost={590000}
                 ethToEur={this.state.eth.EUR}
-                gasCostSafe={this.state.ethGas.safeLow}
+                gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
                 gasCostAverage={this.state.ethGas.average}
-                gasCostFast={this.state.ethGas.fast}
-                gasCostFastest={this.state.ethGas.fastest}
+                gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
+                gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
               <PriceOperationLine
                 operation="Add a new exam"
                 gasCost={420000}
                 ethToEur={this.state.eth.EUR}
-                gasCostSafe={this.state.ethGas.safeLow}
+                gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
                 gasCostAverage={this.state.ethGas.average}
-                gasCostFast={this.state.ethGas.fast}
-                gasCostFastest={this.state.ethGas.fastest}
+                gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
+                gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
               <PriceOperationLine
                 operation="Add a new admin"
                 gasCost={90000}
                 ethToEur={this.state.eth.EUR}
-                gasCostSafe={this.state.ethGas.safeLow}
+                gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
                 gasCostAverage={this.state.ethGas.average}
-                gasCostFast={this.state.ethGas.fast}
-                gasCostFastest={this.state.ethGas.fastest}
+                gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
+                gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
               <PriceOperationLine
                 operation="Request a student account"
                 gasCost={700000}
                 ethToEur={this.state.eth.EUR}
-                gasCostSafe={this.state.ethGas.safeLow}
+                gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
                 gasCostAverage={this.state.ethGas.average}
-                gasCostFast={this.state.ethGas.fast}
-                gasCostFastest={this.state.ethGas.fastest}
+                gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
+                gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
               <PriceOperationLine
                 operation="Request a teacher account"
                 gasCost={490000}
                 ethToEur={this.state.eth.EUR}
-                gasCostSafe={this.state.ethGas.safeLow}
+                gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
                 gasCostAverage={this.state.ethGas.average}
-                gasCostFast={this.state.ethGas.fast}
-                gasCostFastest={this.state.ethGas.fastest}
+                gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
+                gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
               <PriceOperationLine
                 operation="Confirm a student"
                 gasCost={70000}
                 ethToEur={this.state.eth.EUR}
-                gasCostSafe={this.state.ethGas.safeLow}
+                gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
                 gasCostAverage={this.state.ethGas.average}
-                gasCostFast={this.state.ethGas.fast}
-                gasCostFastest={this.state.ethGas.fastest}
+                gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
+                gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
               <PriceOperationLine
                 operation="Confirm a teacher"
                 gasCost={70000}
                 ethToEur={this.state.eth.EUR}
-                gasCostSafe={this.state.ethGas.safeLow}
+                gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
                 gasCostAverage={this.state.ethGas.average}
-                gasCostFast={this.state.ethGas.fast}
-                gasCostFastest={this.state.ethGas.fastest}
+                gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
+                gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
               <PriceOperationLine
                 operation="Deny a student"
                 gasCost={40000}
                 ethToEur={this.state.eth.EUR}
-                gasCostSafe={this.state.ethGas.safeLow}
+                gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
                 gasCostAverage={this.state.ethGas.average}
-                gasCostFast={this.state.ethGas.fast}
-                gasCostFastest={this.state.ethGas.fastest}
+                gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
+                gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
               <PriceOperationLine
                 operation="Deny a teacher"
                 gasCost={40000}
                 ethToEur={this.state.eth.EUR}
-                gasCostSafe={this.state.ethGas.safeLow}
+                gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
                 gasCostAverage={this.state.ethGas.average}
-                gasCostFast={this.state.ethGas.fast}
-                gasCostFastest={this.state.ethGas.fastest}
+                gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
+                gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
               <PriceOperationLine
                 operation="Remove an academic year"
                 gasCost={33000}
                 ethToEur={this.state.eth.EUR}
-                gasCostSafe={this.state.ethGas.safeLow}
+                gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
                 gasCostAverage={this.state.ethGas.average}
-                gasCostFast={this.state.ethGas.fast}
-                gasCostFastest={this.state.ethGas.fastest}
+                gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
+                gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
               <PriceOperationLine
                 operation="Remove an admin"
                 gasCost={24000}
                 ethToEur={this.state.eth.EUR}
-                gasCostSafe={this.state.ethGas.safeLow}
+                gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
                 gasCostAverage={this.state.ethGas.average}
-                gasCostFast={this.state.ethGas.fast}
-                gasCostFastest={this.state.ethGas.fastest}
+                gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
+                gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
               <PriceOperationLine
                 operation="Remove a student"
                 gasCost={40000}
                 ethToEur={this.state.eth.EUR}
-                gasCostSafe={this.state.ethGas.safeLow}
+                gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
                 gasCostAverage={this.state.ethGas.average}
-                gasCostFast={this.state.ethGas.fast}
-                gasCostFastest={this.state.ethGas.fastest}
+                gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
+                gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
               <PriceOperationLine
                 operation="Remove a teacher"
                 gasCost={29000}
                 ethToEur={this.state.eth.EUR}
-                gasCostSafe={this.state.ethGas.safeLow}
+                gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
                 gasCostAverage={this.state.ethGas.average}
-                gasCostFast={this.state.ethGas.fast}
-                gasCostFastest={this.state.ethGas.fastest}
+                gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
+                gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
               <PriceOperationLine
                 operation="Associate a teacher to an exam"
                 gasCost={80000}
                 ethToEur={this.state.eth.EUR}
-                gasCostSafe={this.state.ethGas.safeLow}
+                gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
                 gasCostAverage={this.state.ethGas.average}
-                gasCostFast={this.state.ethGas.fast}
-                gasCostFastest={this.state.ethGas.fastest}
+                gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
+                gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
               <PriceOperationLine
                 operation="Register a valuation "
                 gasCost={60000}
                 ethToEur={this.state.eth.EUR}
-                gasCostSafe={this.state.ethGas.safeLow}
+                gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
                 gasCostAverage={this.state.ethGas.average}
-                gasCostFast={this.state.ethGas.fast}
-                gasCostFastest={this.state.ethGas.fastest}
+                gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
+                gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
               <PriceOperationLine
                 operation="Enroll to optional exam"
                 gasCost={92000}
                 ethToEur={this.state.eth.EUR}
-                gasCostSafe={this.state.ethGas.safeLow}
+                gasCostSafe={Price.toGasPrice(this.state.ethGas.safeLow)}
                 gasCostAverage={this.state.ethGas.average}
-                gasCostFast={this.state.ethGas.fast}
-                gasCostFastest={this.state.ethGas.fastest}
+                gasCostFast={Price.toGasPrice(this.state.ethGas.fast)}
+                gasCostFastest={Price.toGasPrice(this.state.ethGas.fastest)}
               />
             </tbody>
           </table>
