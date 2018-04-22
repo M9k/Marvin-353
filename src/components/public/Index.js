@@ -14,11 +14,17 @@ class Index extends React.Component {
   render() {
     let errorMetamask;
     let errorLocked;
+
     if (!this.metamask) {
-      errorMetamask = <AlertDismissable type="danger" message="MetaMask not found! Install the extension for the browser." />;
+      errorMetamask = (
+        <AlertDismissable type="danger" message="MetaMask not found! Install the extension for the browser." />
+      );
     }
-    if (this.account === '' || this.account === null) {
-      errorLocked = <AlertDismissable type="danger" message="MetaMask locked or no address! Please unlock it or create an account." />;
+
+    if (this.props.account === '' || this.props.account === null) {
+      errorLocked = (
+        <AlertDismissable type="danger" message="MetaMask locked or no address! Please unlock it or create an account." />
+      );
     }
     return (
       <div>
