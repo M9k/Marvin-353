@@ -30,7 +30,7 @@ class Form extends React.Component {
     event.preventDefault();
     if (this.allValidFields()) {
     // if submit == TRUE == Success reset the form
-      if (this.props.submitFunction !== undefined ) {
+      if (this.props.submitFunction !== undefined) {
         this.props.submitFunction(this.state.fields);
         this.setState({ reset: !this.state.reset });
       }
