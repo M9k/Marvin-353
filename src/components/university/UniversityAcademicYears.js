@@ -27,6 +27,7 @@ const UniversityAcademic = props => (
       getTableData={props.getYears}
       tableData={props.academicYears}
       headerInfo={['Year']}
+      deleteTableData={props.deleteYears}
     />
   </div>
 );
@@ -34,6 +35,7 @@ const UniversityAcademic = props => (
 UniversityAcademic.propTypes = {
   addYear: PropTypes.func.isRequired,
   getYears: PropTypes.func.isRequired,
+  deleteYears: PropTypes.func.isRequired,
   academicYears: PropTypes.arrayOf(String).isRequired,
 };
 
@@ -46,8 +48,8 @@ function mapDispatchToProps(dispatch) {
     addYear: objArr => (
       dispatch(universitySagaAction.addYear(objArr.year.value))
     ),
-    getYears: () => dispatch(universitySagaAction.getAllYears())
-    ,
+    getYears: () => dispatch(universitySagaAction.getAllYears()),
+    deleteYears: year => dispatch(universitySagaAction.removeEmptyYear([year])),
   };
 }
 
