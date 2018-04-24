@@ -5,6 +5,7 @@ import NavbarCustom from './custom/NavbarCustom';
 import Footer from './custom/Footer';
 import ErrorTaker from './custom/ErrorTaker';
 import AlertDismissable from './custom/Alert';
+import LoadingSpinner from './custom/LoadingSpinner';
 
 class PageContainer extends React.Component {
   constructor(props) {
@@ -30,9 +31,11 @@ class PageContainer extends React.Component {
         <NavbarCustom links={this.links} loggedIn={this.loggedIn} />
         <div className="container">
           {alertUrl}
-          <ErrorTaker>
-            {this.children}
-          </ErrorTaker>
+          <LoadingSpinner isLoading={false}>
+            <ErrorTaker>
+              {this.children}
+            </ErrorTaker>
+          </LoadingSpinner>
         </div>
         <Footer />
       </div>

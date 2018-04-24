@@ -3,7 +3,7 @@ import { mount, shallow } from 'enzyme';
 import assert from 'assert';
 import { expect } from 'chai';
 import PageTableForm from '../../../src/components/template/PageTableForm';
-import DeleteButton from '../../../src/components/custom/deleteButton';
+import DeleteButton from '../../../src/components/custom/DeleteButton';
 
 describe('PageTableForm component test', () => {
   it('Should render the component', () => {

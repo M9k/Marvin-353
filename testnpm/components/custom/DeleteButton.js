@@ -3,7 +3,7 @@ import { mount, shallow, render } from 'enzyme';
 import assert from 'assert';
 import { expect } from 'chai';
 import { Button } from 'react-bootstrap';
-import DeleteButton from '../../../src/components/custom/deleteButton';
+import DeleteButton from '../../../src/components/custom/DeleteButton';
 
 
 describe('DeleteButton component', () => {

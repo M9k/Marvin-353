@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Table from 'react-bootstrap/lib/Table';
 import Button from 'react-bootstrap/lib/Button';
 import Form from '../custom/Form';
-import DeleteButton from '../custom/deleteButton';
+import DeleteButton from '../custom/DeleteButton';
 import Utils from '../custom/utils';
 
 
