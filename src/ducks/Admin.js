@@ -91,8 +91,9 @@ const AdminDuck = new Duck({
           errored: true,
         };
       default:
-        return state;
+        break;
     }
+    return state;
   },
 
   creators: duck => ({
