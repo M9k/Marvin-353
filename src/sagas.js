@@ -6,6 +6,8 @@ import ManageYears from './sagas/ManageYearsSaga';
 
 import Booking from './sagas/BookingSaga';
 
+import Evaluator from './sagas/EvaluatorSaga';
+
 
 export default function* sagas() {
   yield [
@@ -14,5 +16,6 @@ export default function* sagas() {
     fork(Session),
     fork(ManageYears),
     fork(Booking),
+    fork(Evaluator),
   ];
 }
