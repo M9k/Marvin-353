@@ -1,10 +1,14 @@
-import { call, put, fork, all } from 'redux-saga/effects';
+import { call, put, fork, all, takeLatest, takeEvery } from 'redux-saga/effects';
 import { creators as actionCreators } from '../ducks/Evaluator';
 import * as User from '../web3calls/User';
 import * as Student from '../web3calls/Student';
 import * as Exam from '../web3calls/Exam';
+import * as UniversityTeacher from '../web3calls/UniversityTeacher';
+import * as Teacher from '../web3calls/Teacher';
 
 const actionType = type => `marvin/EvaluatorSaga/${type}`;
+const GET_LIST = actionType('GET_LIST');
+const ASSIGN_VOTE = actionType('ASSIGN_VOTE');
 
 export function* getStudentData(examAddress, studentIndex) {
   const studentAddress = yield call(Exam.getEnrolledContractAt, studentIndex);
@@ -12,7 +16,7 @@ export function* getStudentData(examAddress, studentIndex) {
   const [studentName, studentSurname, examIndex] = yield all([
     call(User.getName, studentAddress),
     call(User.getSurname, studentAddress),
-    call(Student.getIndexOfExam, studentAddress, examAddress)
+    call(Student.getIndexOfExam, studentAddress, examAddress),
   ]);
   const vote = yield call(Student.getExamValuationAt, studentAddress, examIndex);
   yield put(actionCreators.pushStudent({
@@ -36,12 +40,23 @@ export function* getList(examAddress) {
     yield put(actionCreators.listHasErrored());
   }
 }
-export function* assignVote(teacherAddress, examIndex, studentIndex, vote) {
-
+export function* assignVote(userAddress, examIndex, studentIndex, vote) {
+  yield put(actionCreators.voteIsLoading());
+  try {
+    const teacherAddress =
+      yield call(UniversityTeacher.getTeacherContractFromPublicAddress, userAddress);
+    yield call(Teacher.registerNewVoteStudentExam, teacherAddress, examIndex, studentIndex, vote);
+    yield put(actionCreators.setVote(studentIndex, vote));
+  } catch (e) {
+    yield put(actionCreators.voteHasErrored());
+  }
 }
 
 export const creators = {};
 
 export default function* handler() {
-  yield [];
+  yield [
+    fork(takeLatest, GET_LIST, getList),
+    fork(takeEvery, ASSIGN_VOTE, assignVote),
+  ];
 }

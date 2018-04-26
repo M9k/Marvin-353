@@ -7,6 +7,8 @@ import * as sagas from '../../../src/sagas/EvaluatorSaga';
 import * as User from '../../../src/web3calls/User';
 import * as Student from '../../../src/web3calls/Student';
 import * as Exam from '../../../src/web3calls/Exam';
+import * as UniversityTeacher from '../../../src/web3calls/UniversityTeacher';
+import * as Teacher from '../../../src/web3calls/Teacher';
 
 describe('Evaluator feature', () => {
   describe('Getting student data', () => {
@@ -70,27 +72,92 @@ describe('Evaluator feature', () => {
           },
         },
       ))
-      .run())
+      .run());
     it('should correctly retrive an empty list', () => expectSaga(sagas.getList, '0x0')
       .withReducer(reducer)
       .provide([
         [matchers.call.fn(Exam.getEnrolledNumber, '0x0'), 0],
       ])
       .hasFinalState(initialState)
-      .run())
+      .run());
     it('should correctly retrive a list', () => expectSaga(sagas.getList, '0x0')
       .provide({
         call: (effect, next) => {
-          const students = ['primo', 'secondo'];
           if (effect.fn === Exam.getEnrolledNumber) return 2;
           if (effect.fn === sagas.getStudentData) {
             return 0;
           }
           return next();
-        }
+        },
       })
       .put(creators.listIsLoading())
       .put(creators.listHasFinished())
-      .run())
+      .run());
+  });
+  describe('assign a vote', () => {
+    it('should gently fail if some params are not correct', () => expectSaga(sagas.assignVote, '0', 0, 0, 0)
+      .withReducer(reducer)
+      .provide([
+        [
+          matchers.call.fn(UniversityTeacher.getTeacherContractFromPublicAddress, '0'),
+          throwError(new Error()),
+        ],
+      ])
+      .hasFinalState(Object.assign({}, initialState, { errored: true }))
+      .run());
+    it('should update the list correctly and assign the vote', () => expectSaga(sagas.assignVote, '0', 1, 0, 28)
+      .withReducer(reducer, Object.assign(
+        {},
+        initialState,
+        {
+          studentList: {
+            errored: false,
+            loading: false,
+            list: [{
+              name: 'Mario',
+              surname: 'Rossi',
+              studentAddress: '0x0',
+              studentIndex: 0,
+              vote: null,
+            },
+            {
+              name: 'Mario',
+              surname: 'Bianchi',
+              studentAddress: '0x1',
+              studentIndex: 4,
+              vote: 28,
+            }],
+          },
+        },
+      ))
+      .provide([
+        [matchers.call.fn(UniversityTeacher.getTeacherContractFromPublicAddress, '0'), '0x0'],
+        [matchers.call.fn(Teacher.registerNewVoteStudentExam, '0x0', 1, 0, 28), true],
+      ])
+      .hasFinalState(Object.assign(
+        {},
+        initialState,
+        {
+          studentList: {
+            errored: false,
+            loading: false,
+            list: [{
+              name: 'Mario',
+              surname: 'Rossi',
+              studentAddress: '0x0',
+              studentIndex: 0,
+              vote: 28,
+            },
+            {
+              name: 'Mario',
+              surname: 'Bianchi',
+              studentAddress: '0x1',
+              studentIndex: 4,
+              vote: 28,
+            }],
+          },
+        },
+      ))
+      .run());
   });
 });
