@@ -1,7 +1,7 @@
 import RoleMap from '../util/logic/AccountEnum';
 import { login } from './University';
-import { getStudentContractFromPublicAddress } from './UniversityStudent';
-import { getTeacherContractFromPublicAddress } from './UniversityTeacher';
+import { getStudentContractFromPublicAddress, requestStudentAccount } from './UniversityStudent';
+import { getTeacherContractFromPublicAddress, requestTeacherAccount } from './UniversityTeacher';
 import { getName, getSurname } from './User';
 import { getCourseContract } from './Student';
 import { getName as getCourseName } from './Course';
@@ -46,4 +46,9 @@ const getData = (role) => {
   }
 };
 
-export { getRole, getData };
+const signUp = (name, surname, course) => {
+  if (course === null || course === undefined || course === '') return requestTeacherAccount(name, surname);
+  return requestStudentAccount(name, surname, course);
+};
+
+export { getRole, getData, signUp };
