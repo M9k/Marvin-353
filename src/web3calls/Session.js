@@ -19,7 +19,7 @@ async function userData(addr) {
 // Da testare probabilment non funziona
 const getStudentData = (role) => {
   if (role === RoleMap.UNCONFIRMED_STUDENT) return {};
-  return getStudentContractFromPublicAddress().then((addr) => {
+  return getStudentContractFromPublicAddress(web3.eth.accounts[0]).then((addr) => {
     getCourseContract(addr).then((courseContract) => {
       getCourseName(courseContract).then(name =>
         Object.assign({}, userData(addr), { course: toText(name) }));
@@ -28,7 +28,7 @@ const getStudentData = (role) => {
 };
 const getTeacherData = (role) => {
   if (role === RoleMap.UNCONFIRMED_TEACHER) return {};
-  return getTeacherContractFromPublicAddress().then(addr => userData(addr));
+  return getTeacherContractFromPublicAddress(web3.eth.accounts[0]).then(addr => userData(addr));
 };
 
 const getRole = () => login().then(role => role);
