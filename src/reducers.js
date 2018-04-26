@@ -7,7 +7,7 @@ import AdminEmployer from './ducks/AdminEmployer';
 import Session from './ducks/Session';
 import Metamask from './ducks/Metamask';
 import ManageYears from './ducks/ManageYears';
-
+import Booking from './ducks/Booking';
 
 const persistConfig = {
   key: 'root',
@@ -24,6 +24,7 @@ const reducers = combineReducers({
   user: Session,
   university: AdminEmployer,
   manageYears: ManageYears,
+  signup: Booking,
 });
 
 const persistentReducer = persistReducer(persistConfig, reducers);

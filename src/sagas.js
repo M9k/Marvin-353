@@ -4,6 +4,8 @@ import AdminEmployer from './sagas/AdminEmployerSaga';
 import Session from './sagas/SessionSaga';
 import ManageYears from './sagas/ManageYearsSaga';
 
+import Booking from './sagas/BookingSaga';
+
 
 export default function* sagas() {
   yield [
@@ -11,5 +13,6 @@ export default function* sagas() {
     fork(AdminEmployer),
     fork(Session),
     fork(ManageYears),
+    fork(Booking),
   ];
 }
