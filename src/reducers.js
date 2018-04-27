@@ -9,6 +9,7 @@ import Metamask from './ducks/Metamask';
 import ManageYears from './ducks/ManageYears';
 import Booking from './ducks/Booking';
 import Evaluator from './ducks/Evaluator';
+import TeacherExam from './ducks/TeacherExam';
 
 const persistConfig = {
   key: 'root',
@@ -27,6 +28,7 @@ const reducers = combineReducers({
   manageYears: ManageYears,
   signup: Booking,
   selectedExam: Evaluator,
+  teacherData: TeacherExam,
 });
 
 const persistentReducer = persistReducer(persistConfig, reducers);

@@ -21,4 +21,8 @@ const copyNPop = (target, fn) => {
   if (idx !== -1) assigned.splice(idx, 1);
   return assigned;
 };
-export { range, copyNPop, copyNPush };
+const ORDERING = {
+  ASC: 1,
+  DESC: -1,
+};
+export { range, copyNPop, copyNPush, ORDERING };
