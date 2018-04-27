@@ -4,7 +4,11 @@ const TeacherExamDuck = new Duck({
   namespace: 'marvin',
   store: 'TeacherExam',
   types: ['PUSH_EXAM', 'LIST_LOADING', 'LIST_ERRORED', 'LIST_FINISHED'],
-  initialState: {},
+  initialState: {
+    loading: false,
+    errored: false,
+    list: [],
+  },
   reducer: (state, action, duck) => {
     const { types } = duck;
     const { initialState } = duck;
