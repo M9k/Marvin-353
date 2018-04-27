@@ -37,7 +37,11 @@ describe('TeacherExam feature', () => {
     });
   });
   it('should retrive the correct single exam data', () => expectSaga(sagas.getExamData, 'prof', 0)
-    .withReducer(reducer)
+    .withReducer(reducer, {
+      loading: true,
+      errored: false,
+      list: [],
+    })
     .provide([
       [matchers.call.fn(Teacher.getExamContractAt, 'prof', 0), 'examAddress'],
       [matchers.call.fn(Exam.getName, 'examAddress'), 'ABC'],
@@ -58,9 +62,8 @@ describe('TeacherExam feature', () => {
   it('should gently fail when a single exam fail to retrive the data', () => expectSaga(sagas.getList, { userAddres: 'prof' })
     .withReducer(reducer)
     .provide([
-      [matchers.call.fn(Teacher.getExamNumber, 'prof'), 2],
-      [matchers.call.fn(sagas.getExamData, 'prof', 0), true],
-      [matchers.call.fn(sagas.getExamData, 'prof', 1), throwError(new Error())],
+      [matchers.call.fn(Teacher.getExamNumber, 'prof'), 1],
+      [matchers.call.fn(sagas.getExamData, 'prof', 0), throwError(new Error())],
     ])
     .hasFinalState({
       loading: false,
