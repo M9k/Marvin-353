@@ -19,7 +19,7 @@ const EvaluatorDuck = new Duck({
     'VOTE_LOADING',
     'VOTE_ERRORED',
     'SET_VOTE',
-    'SET_EXAM'
+    'SET_EXAM',
   ],
   initialState: {
     loading: false,
