@@ -41,11 +41,11 @@ class PageTableForm extends React.Component {
   }
   // eslint-disable-next-line
   getRow(item) {
-    if (typeof item === 'string' || item instanceof String) {
-      return <td>{item}</td>;
+    if (item instanceof Object) {
+      return Object.keys(item).map(key =>
+        <td>{item[key]}</td>);
     }
-    return Object.keys(item).map(key =>
-      <td>{item[key]}</td>);
+    return <td>{item}</td>;
   }
   getRows() {
     return this.props.tableData.map(item =>
