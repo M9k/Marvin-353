@@ -29,6 +29,12 @@ const Index = () => (
       image="manageAdmin.png"
       links={[{ path: '/', label: 'Click here to manage' }]}
     />
+    <CardWithIcon
+      title="Manage courses"
+      text="Manage all course present in the University"
+      image="manageAdmin.png"
+      links={[{ path: 'courses', label: 'Click here to manage' }]}
+    />
   </div>
 );
 export default Index;

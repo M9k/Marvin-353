@@ -1,6 +1,6 @@
 import Index from '../teacher/Index';
 
-const PublicRoutes = [
+const TeacherRoutes = [
   {
     path: '/',
     label: '/',
@@ -9,4 +9,4 @@ const PublicRoutes = [
   },
 ];
 
-export default PublicRoutes;
+export default TeacherRoutes;
