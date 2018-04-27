@@ -27,6 +27,11 @@ const state = {
           surname: 'Y',
           vote: '30',
         },
+        {
+          name: 'D',
+          surname: 'ZA',
+          vote: null,
+        },
       ],
     },
   },
@@ -53,6 +58,11 @@ describe('Evaluator ducks', () => {
           surname: 'X',
           vote: null,
         },
+        {
+          name: 'D',
+          surname: 'ZA',
+          vote: null,
+        },
       ]);
     });
   });
@@ -77,6 +87,11 @@ describe('Evaluator ducks', () => {
           surname: 'Z',
           vote: '5',
         },
+        {
+          name: 'D',
+          surname: 'ZA',
+          vote: null,
+        },
       ]);
     });
   });
@@ -89,6 +104,11 @@ describe('Evaluator ducks', () => {
         {
           name: 'C',
           surname: 'X',
+          vote: null,
+        },
+        {
+          name: 'D',
+          surname: 'ZA',
           vote: null,
         },
       ]);

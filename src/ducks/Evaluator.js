@@ -112,7 +112,7 @@ const EvaluatorDuck = new Duck({
         .studentList
         .list
         .filter(el => el.vote !== null)
-        .sort((el, next) => el.surname > next.surname)
+        .sort((el, next) => el.vote > next.vote)
     ),
     studentWithoutVote: state => (
       state
