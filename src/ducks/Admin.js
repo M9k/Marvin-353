@@ -1,10 +1,20 @@
 import Duck from 'extensible-duck';
 import { copyNPush, copyNPop } from '../util/js_helpers';
+import ROLES from '../util/logic/AccountEnum';
 
 const AdminDuck = new Duck({
   namespace: 'marvin',
   store: 'Admin',
-  types: ['SET_STUDENTS_LIST', 'SET_TEACHERS_LIST', 'SET_PENDING_STUDENTS_LIST', 'SET_PENDING_TEACHERS_LIST', 'APPROVE_USER', 'REMOVE_USER', 'LIST_ERRORED', 'LIST_LOADING'],
+  types: [
+    'SET_STUDENTS_LIST',
+    'SET_TEACHERS_LIST',
+    'SET_PENDING_STUDENTS_LIST',
+    'SET_PENDING_TEACHERS_LIST',
+    'APPROVE_USER',
+    'REMOVE_USER',
+    'LIST_ERRORED',
+    'LIST_LOADING',
+  ],
   initialState: {
     loading: false,
     errored: false,
@@ -45,7 +55,7 @@ const AdminDuck = new Duck({
           errored: false,
         };
       case (types.APPROVE_USER):
-        if (action.role === 14.0) { // is a non-approved student
+        if (action.role === ROLES.UNCONFIRMED_STUDENT) { // is a non-approved student
           return {
             ...state,
             studentsList: copyNPush(state.studentsList, action.address),
@@ -53,7 +63,7 @@ const AdminDuck = new Duck({
             loading: false,
             errored: false,
           };
-        } else if (action.role === 13) { // is a non-approved teacher
+        } else if (action.role === ROLES.UNCONFIRMED_TEACHER) { // is a non-approved teacher
           return {
             ...state,
             teachersList: copyNPush(state.teachersList, action.address),
@@ -63,14 +73,14 @@ const AdminDuck = new Duck({
           };
         } break;
       case (types.REMOVE_USER):
-        if (action.role === 14.0) { // is a non-approved student
+        if (action.role === ROLES.UNCONFIRMED_STUDENT) { // is a non-approved student
           return {
             ...state,
             pendingStudentsList: copyNPop(state.pendingStudentsList, el => el === action.address),
             loading: false,
             errored: false,
           };
-        } else if (action.role === 13) { // is a non-approved teacher
+        } else if (action.role === ROLES.UNCONFIRMED_TEACHER) { // is a non-approved teacher
           return {
             ...state,
             pendingTeachersList: copyNPop(state.pendingTeachersList, el => el === action.address),

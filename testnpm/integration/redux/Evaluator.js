@@ -55,7 +55,7 @@ describe('Evaluator feature', () => {
       .run());
   });
   describe('getting student list', () => {
-    it('should gently if getting one student fail', () => expectSaga(sagas.getList, '0x0')
+    it('should gently if getting one student fail', () => expectSaga(sagas.getList, { examAddress: '0x0' })
       .withReducer(reducer)
       .provide([
         [matchers.call.fn(Exam.getEnrolledNumber, '0x0'), 1],
@@ -73,7 +73,7 @@ describe('Evaluator feature', () => {
         },
       ))
       .run());
-    it('should correctly retrive an empty list', () => expectSaga(sagas.getList, '0x0')
+    it('should correctly retrive an empty list', () => expectSaga(sagas.getList, { examAddress: '0x0' })
       .withReducer(reducer)
       .provide([
         [matchers.call.fn(Exam.getEnrolledNumber, '0x0'), 0],
@@ -95,7 +95,12 @@ describe('Evaluator feature', () => {
       .run());
   });
   describe('assign a vote', () => {
-    it('should gently fail if some params are not correct', () => expectSaga(sagas.assignVote, '0', 0, 0, 0)
+    it('should gently fail if some params are not correct', () => expectSaga(sagas.assignVote, {
+      userAddress: '0',
+      examIndex: 0,
+      studentIndex: 0,
+      vote: 0,
+    })
       .withReducer(reducer)
       .provide([
         [
@@ -105,7 +110,12 @@ describe('Evaluator feature', () => {
       ])
       .hasFinalState(Object.assign({}, initialState, { errored: true }))
       .run());
-    it('should update the list correctly and assign the vote', () => expectSaga(sagas.assignVote, '0', 1, 0, 28)
+    it('should update the list correctly and assign the vote', () => expectSaga(sagas.assignVote, {
+      userAddress: '0',
+      examIndex: 1,
+      studentIndex: 0,
+      vote: 28,
+    })
       .withReducer(reducer, Object.assign(
         {},
         initialState,

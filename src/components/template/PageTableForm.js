@@ -15,6 +15,7 @@ class PageTableForm extends React.Component {
     this.getDeleteButton = this.getDeleteButton.bind(this);
     this.isFormRequired = this.isFormRequired.bind(this);
     this.getRows = this.getRows.bind(this);
+    this.getRow = this.getRow.bind(this);
   }
 
   componentWillMount() {
@@ -38,12 +39,19 @@ class PageTableForm extends React.Component {
     }
     return null;
   }
-
+  // eslint-disable-next-line
+  getRow(item) {
+    if (item instanceof Object) {
+      return Object.keys(item).map(key =>
+        <td>{item[key]}</td>);
+    }
+    return <td>{item}</td>;
+  }
   getRows() {
     return this.props.tableData.map(item =>
       (
         <tr key={Utils.generateKey(item)}>
-          <td>{item}</td>
+          {this.getRow(item)}
           <td>
             {this.getEditButton()}
             {this.getDeleteButton({ item })}
@@ -90,7 +98,7 @@ PageTableForm.propTypes = {
   editTableData: PropTypes.func,
   deleteTableData: PropTypes.func,
   addTableData: PropTypes.func,
-  tableData: PropTypes.arrayOf(String).isRequired,
+  tableData: PropTypes.arrayOf(Object).isRequired,
   headerInfo: PropTypes.arrayOf(String).isRequired,
 };
 
