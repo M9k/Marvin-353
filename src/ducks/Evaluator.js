@@ -17,7 +17,7 @@ const EvaluatorDuck = new Duck({
     'LIST_ERRORED',
     'LIST_FINISHED',
     'VOTE_LOADING',
-    'VODE_ERRORED',
+    'VOTE_ERRORED',
     'SET_VOTE',
   ],
   initialState: {
@@ -100,7 +100,21 @@ const EvaluatorDuck = new Duck({
     }
   },
   selectors: {
-
+    studentByName: state => (
+      state.selectedExam.studentList.list.sort((el, next) => el.name > next.name)
+    ),
+    studentBySurname: state => (
+      state.selectedExam.studentList.list.sort((el, next) => el.surname > next.surname)
+    ),
+    studentByVotePresence: state => (
+      state
+        .selectedExam
+        .studentList
+        .list.sort((el, next) => el.vote != null && el.vote > next.vote)
+    ),
+    studentByVote: state => (
+      state.selectedExam.studentList.list.sort((el, next) => el.vote < next.vote)
+    ),
   },
   creators: ({ types }) => ({
     pushStudent: student => (
