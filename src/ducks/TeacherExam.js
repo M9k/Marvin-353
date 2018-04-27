@@ -1,5 +1,5 @@
 import Duck from 'extensible-duck';
-import { copyNPush } from '../util/js_helpers';
+import { copyNPush, ORDERING } from '../util/js_helpers';
 
 const TeacherExamDuck = new Duck({
   namespace: 'marvin',
@@ -40,8 +40,12 @@ const TeacherExamDuck = new Duck({
     }
   },
   selectors: {
-    // examByCode: state => ({}),
-    // examByCourse: state => ({}),
+    examsByCode: (state, order = ORDERING.ASC) => (
+      state.teacherData.list.sort((el, next) => (el.code > next.code ? 1 : -1) * order)
+    ),
+    examsByCourse: (state, order = ORDERING.ASC) => (
+      state.teacherData.list.sort((el, next) => (el.couseName > next.courseName ? 1 : -1) * order)
+    ),
   },
   creators: ({ types }) => ({
     pushExam: exam => (
