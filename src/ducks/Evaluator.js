@@ -19,6 +19,7 @@ const EvaluatorDuck = new Duck({
     'VOTE_LOADING',
     'VOTE_ERRORED',
     'SET_VOTE',
+    'SET_EXAM'
   ],
   initialState: {
     loading: false,
@@ -95,6 +96,14 @@ const EvaluatorDuck = new Duck({
             list: setVote(state.studentList.list, action.studentIndex, action.vote),
           },
         };
+      case (types.SET_EXAM):
+        return {
+          ...state,
+          address: action.address,
+          index: action.index,
+          code: action.code,
+          course: action.course,
+        };
       default:
         return state;
     }
@@ -144,6 +153,15 @@ const EvaluatorDuck = new Duck({
     ),
     setVote: (studentIndex, vote) => (
       { type: types.SET_VOTE, studentIndex, vote }
+    ),
+    setExam: (address, index, code, course) => (
+      {
+        type: types.SET_EXAM,
+        address,
+        index,
+        code,
+        course,
+      }
     ),
   }),
 });

@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { selectors } from '../../src/ducks/Evaluator';
+import reducer, { selectors, creators } from '../../src/ducks/Evaluator';
 
 const emptyList = {
   selectedExam: {
@@ -131,6 +131,45 @@ describe('Evaluator ducks', () => {
           vote: '5',
         },
       ]);
+    });
+  });
+  describe('set exam feature', () => {
+    it('should compose the correct action', () => {
+      expect(creators.setExam('0x0', 1, 'ABC', 'IT')).to.deep.equal({
+        type: 'marvin/Evaluator/SET_EXAM',
+        address: '0x0',
+        index: 1,
+        code: 'ABC',
+        course: 'IT',
+      });
+    });
+    it('should update the state correctly', () => {
+      const cstate = {
+        loading: false,
+        errored: false,
+        address: 'altro',
+        index: 5,
+        code: 'EFG',
+        course: 'HI',
+        studentList: {
+          errored: false,
+          loading: false,
+          list: [],
+        },
+      };
+      expect(reducer(cstate, creators.setExam('0x0', 1, 'ABC', 'IT'))).to.deep.equal({
+        loading: false,
+        errored: false,
+        address: '0x0',
+        index: 1,
+        code: 'ABC',
+        course: 'IT',
+        studentList: {
+          errored: false,
+          loading: false,
+          list: [],
+        },
+      });
     });
   });
 });
