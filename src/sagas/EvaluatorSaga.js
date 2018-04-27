@@ -27,7 +27,8 @@ export function* getStudentData(examAddress, studentIndex) {
     vote,
   }));
 }
-export function* getList(examAddress) {
+
+export function* getList({ examAddress }) {
   yield put(actionCreators.listIsLoading());
   try {
     const studentNumber = yield call(Exam.getEnrolledNumber, examAddress);
@@ -40,7 +41,10 @@ export function* getList(examAddress) {
     yield put(actionCreators.listHasErrored());
   }
 }
-export function* assignVote(userAddress, examIndex, studentIndex, vote) {
+
+export function* assignVote({
+  userAddress, examIndex, studentIndex, vote,
+}) {
   yield put(actionCreators.voteIsLoading());
   try {
     const teacherAddress =
@@ -52,7 +56,20 @@ export function* assignVote(userAddress, examIndex, studentIndex, vote) {
   }
 }
 
-export const creators = {};
+export const creators = {
+  getListAction: examAddress => (
+    { type: GET_LIST, examAddress }
+  ),
+  assignVoteAction: (userAddress, examIndex, studentIndex, vote) => (
+    {
+      type: ASSIGN_VOTE,
+      userAddress,
+      examIndex,
+      studentIndex,
+      vote,
+    }
+  ),
+};
 
 export default function* handler() {
   yield [
