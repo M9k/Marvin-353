@@ -14,7 +14,7 @@ const AdminCourses = () => {
   ];
   const links = [];
   for (let i = 0; i < courses.length; i += 1) {
-    links.push(<li><Link to={`/courses/${courses[i].index}`}>Go to {courses[i].name}</Link></li>);
+    links.push(<li><Link href={`/courses/${courses[i].index}`}>Go to {courses[i].name}</Link></li>);
   }
   return (
     <div>
