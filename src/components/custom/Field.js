@@ -36,7 +36,9 @@ class Field extends React.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
+    this.reset = this.reset.bind(this);
     this.updateCurrentState = this.updateCurrentState.bind(this);
+    this.getValidationState = this.getValidationState.bind(this);
     this.reset = this.reset.bind(this);
     this.state = { value: '' };
   }

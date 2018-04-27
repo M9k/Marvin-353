@@ -71,7 +71,7 @@ class AdminCourses extends React.Component {
               help: 'insert the associated year',
               type: FieldTypes.SELECT,
               values: this.solarYears,
-              validateFunction: Utils.notNullValue,
+              validateFunction: Utils.moreThanCurrentYear,
             },
           ]}
           submitFunction={null}
