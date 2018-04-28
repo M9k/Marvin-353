@@ -16,6 +16,9 @@ class Register extends React.Component {
     this.addRole = this.addRole.bind(this);
     this.addStudent = this.addStudent.bind(this);
     this.state = { viewModalCourse: false };
+  }
+
+  componentDidMount() {
     this.props.getCourses();
   }
 
@@ -65,7 +68,7 @@ class Register extends React.Component {
           submitFunction={this.addRole}
         />
 
-        <ModalForm title="Select your course" show={this.state.viewModalCourse}>
+        <ModalForm title="Select your course" show={this.state.viewModalCourse} >
           <Form
             description="choose the course/degree:"
             fields={[{
