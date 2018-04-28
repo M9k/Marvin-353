@@ -5,10 +5,34 @@ import Modal from 'react-bootstrap/lib/Modal';
 
 
 class ModalForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handle = this.handle.bind(this);
+    this.close = this.close.bind(this);
+    this.state = { showing: this.props.show };
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.setState({ showing: newProps.show });
+  }
+
+  handle() {
+    this.props.yesFunction(this.props.keyForModal);
+    this.setState({
+      showing: false,
+    });
+  }
+
+  close() {
+    this.setState({
+      showing: false,
+    });
+  }
+
   render() {
     return (
       <div>
-        <Modal show={this.props.show}>
+        <Modal show={this.state.showing}>
           <Modal.Header>
             <b>{this.props.title}</b>
           </Modal.Header>
@@ -16,8 +40,8 @@ class ModalForm extends React.Component {
             {this.props.children}
           </Modal.Body>
           <Modal.Footer>
-            <Button bsStyle="danger" onClick={this.handle}>Yes</Button>
-            <Button bsStyle="info" onClick={this.close}>No</Button>
+            {this.props.yesFunction !== undefined && <Button bsStyle="danger" onClick={this.handle}>Yes</Button>}
+            <Button bsStyle="info" onClick={this.close}>Close</Button>
           </Modal.Footer>
         </Modal>
       </div>
@@ -27,12 +51,18 @@ class ModalForm extends React.Component {
 
 ModalForm.propTypes = {
   title: PropTypes.string.isRequired,
-  show: PropTypes.bool.isRequired,
+  show: PropTypes.bool,
   children: PropTypes.node,
+  yesFunction: PropTypes.func,
+  keyForModal: PropTypes.number,
+
 };
 
 ModalForm.defaultProps = {
+  show: false,
   children: null,
+  yesFunction: undefined,
+  keyForModal: -1,
 };
 
 export default ModalForm;

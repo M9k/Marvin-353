@@ -10,7 +10,7 @@ describe('DeleteButton component', () => {
   it('Should render the component', () => {
     const wrapper = shallow(<DeleteButton deleteFunction={e => e} objectToRemove="test" />);
     assert.equal(wrapper.length, 1);
-    expect(wrapper.find(Button)).to.have.length(3);
+    expect(wrapper.find(Button)).to.have.length(1);
   });
 
   it('renders the right text in the button', () => {
