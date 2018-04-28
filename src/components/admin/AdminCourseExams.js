@@ -79,6 +79,10 @@ class AdminCourseExams extends React.Component {
 
 AdminCourseExams.propTypes = {
   params: PropTypes.string.isRequired,
+  // getExams: PropTypes.func.isRequired,
+  // addExam: PropTypes.func.isRequired,
+  // validExam: PropTypes.func.isRequired,
+  // setTeacher: PropTypes.func.isRequired,
 };
 
 export default AdminCourseExams;

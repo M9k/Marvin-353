@@ -112,6 +112,7 @@ AdminCourses.propTypes = {
   // addCourse: PropTypes.func.isRequired,
   // getCourses: PropTypes.func.isRequired,
   // degreeCoursesList: PropTypes.arrayOf(Object).isRequired,
+  // validCourse: PropTypes.func.isRequired,
 };
 
 export default AdminCourses;
