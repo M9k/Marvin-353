@@ -26,7 +26,7 @@ const UniversityAcademic = props => (
     <PageTableForm
       getTableData={props.getYears}
       tableData={props.academicYears}
-      headerInfo={['Year']}
+      headerInfo={['Year', 'Delete']}
       deleteTableData={props.deleteYears}
     />
   </div>

@@ -26,7 +26,7 @@ const UniversityAdmin = props => (
       getTableData={props.getAdmins}
       deleteTableData={props.deleteAdmin}
       tableData={props.adminAccounts}
-      headerInfo={['Admin Address']}
+      headerInfo={['Admin Address', 'Delete']}
     />
   </div>
 );

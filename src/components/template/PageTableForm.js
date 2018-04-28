@@ -12,6 +12,7 @@ class PageTableForm extends React.Component {
     super(props);
     this.refreshData = this.refreshData.bind(this);
     this.getEditButton = this.getEditButton.bind(this);
+    this.getUnconfirmButton = this.getUnconfirmButton.bind(this);
     this.getDeleteButton = this.getDeleteButton.bind(this);
     this.getDetailsButton = this.getDetailsButton.bind(this);
     this.isFormRequired = this.isFormRequired.bind(this);
@@ -26,7 +27,7 @@ class PageTableForm extends React.Component {
   getEditButton() {
     if (this.props.editTableData !== undefined) {
       return (
-        <Button onClick={this.props.editTableData}>Edit button</Button>
+        <td><Button onClick={this.props.editTableData}>Edit button</Button></td>
       );
     }
     return null;
@@ -36,7 +37,6 @@ class PageTableForm extends React.Component {
     console.log(item);
     let path = document.location.pathname;
     path = path.concat(`/${item.code}_${item.solarYear}`);
-    console.log(path);
     if (this.props.linkTableData) {
       return (
         <Button href={path}>Details</Button>
@@ -48,7 +48,15 @@ class PageTableForm extends React.Component {
   getDeleteButton(item) {
     if (this.props.deleteTableData !== undefined) {
       return (
-        <DeleteButton deleteFunction={this.props.deleteTableData} objectToRemove={item} />
+        <td><DeleteButton deleteFunction={this.props.deleteTableData} objectToRemove={item} text="Delete" /></td>
+      );
+    }
+    return null;
+  }
+  getUnconfirmButton(item) {
+    if (this.props.unconfirmUser !== undefined) {
+      return (
+        <td><DeleteButton deleteFunction={this.props.unconfirmUser} objectToRemove={item} text="Unconfirm" /></td>
       );
     }
     return null;
@@ -69,6 +77,7 @@ class PageTableForm extends React.Component {
           {this.getDetailsButton(item)}
           {this.getEditButton()}
           {this.getDeleteButton({ item })}
+          {this.getUnconfirmButton({ item })}
         </tr>
       ));
   }
@@ -94,7 +103,6 @@ class PageTableForm extends React.Component {
           <thead>
             <tr>
               {tableHead}
-              <th />
             </tr>
           </thead>
           <tbody>
@@ -111,6 +119,7 @@ PageTableForm.propTypes = {
   editTableData: PropTypes.func,
   deleteTableData: PropTypes.func,
   addTableData: PropTypes.func,
+  unconfirmUser: PropTypes.func,
   tableData: PropTypes.arrayOf(Object).isRequired,
   headerInfo: PropTypes.arrayOf(String).isRequired,
   linkTableData: PropTypes.bool,
@@ -118,6 +127,7 @@ PageTableForm.propTypes = {
 
 PageTableForm.defaultProps = {
   editTableData: undefined,
+  unconfirmUser: undefined,
   deleteTableData: undefined,
   addTableData: undefined,
   linkTableData: false,
