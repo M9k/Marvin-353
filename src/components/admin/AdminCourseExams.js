@@ -3,11 +3,30 @@ import PropTypes from 'prop-types';
 import FieldTypes from '../custom/fieldtypes';
 import Utils from '../custom/utils';
 import Form from '../custom/Form';
+import PageTableForm from '../template/PageTableForm';
 
 class AdminCourseExams extends React.Component {
   constructor(props) {
     super(props);
     this.params = this.props.params;
+    this.getCourses = () => {};
+    this.exams = [
+      {
+        name: 'Programming',
+        credits: '10',
+        teacher: 'Gilberto Filè',
+      },
+      {
+        name: 'Computer architecture',
+        credits: '8',
+        teacher: 'Alessandro Sperduti',
+      },
+      {
+        name: 'Logic',
+        credits: '6',
+        teacher: 'Maria Emilia Maietti',
+      },
+    ];
   }
 
   componentDidMount() {
@@ -47,6 +66,11 @@ class AdminCourseExams extends React.Component {
             },
           ]}
           submitFunction={null}
+        />
+        <PageTableForm
+          getTableData={this.getCourses}
+          tableData={this.exams}
+          headerInfo={['Name', 'Credits', 'Teacher']}
         />
       </div>
     );
