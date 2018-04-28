@@ -15,6 +15,7 @@ class PageTableForm extends React.Component {
     this.getUnconfirmButton = this.getUnconfirmButton.bind(this);
     this.getDeleteButton = this.getDeleteButton.bind(this);
     this.getDetailsButton = this.getDetailsButton.bind(this);
+    this.getAddTeacherButton = this.getAddTeacherButton.bind(this);
     this.isFormRequired = this.isFormRequired.bind(this);
     this.getRows = this.getRows.bind(this);
     this.getRow = this.getRow.bind(this);
@@ -32,9 +33,16 @@ class PageTableForm extends React.Component {
     }
     return null;
   }
+  getAddTeacherButton(item) {
+    if (this.props.addTeacher !== undefined && item.teacher === '') {
+      return (
+        <Button onClick={this.props.addTeacher}>Assign teacher</Button>
+      );
+    }
+    return null;
+  }
 
   getDetailsButton(item) {
-    console.log(item);
     let path = document.location.pathname;
     path = path.concat(`/${item.code}_${item.solarYear}`);
     if (this.props.linkTableData) {
@@ -74,6 +82,7 @@ class PageTableForm extends React.Component {
       (
         <tr key={Utils.generateKey(item)}>
           {this.getRow(item)}
+          {this.getAddTeacherButton(item)}
           {this.getDetailsButton(item)}
           {this.getEditButton()}
           {this.getDeleteButton({ item })}
@@ -120,6 +129,7 @@ PageTableForm.propTypes = {
   deleteTableData: PropTypes.func,
   addTableData: PropTypes.func,
   unconfirmUser: PropTypes.func,
+  addTeacher: PropTypes.func,
   tableData: PropTypes.arrayOf(Object).isRequired,
   headerInfo: PropTypes.arrayOf(String).isRequired,
   linkTableData: PropTypes.bool,
@@ -131,6 +141,7 @@ PageTableForm.defaultProps = {
   deleteTableData: undefined,
   addTableData: undefined,
   linkTableData: false,
+  addTeacher: undefined,
 };
 
 export default PageTableForm;

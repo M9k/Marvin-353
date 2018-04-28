@@ -36,7 +36,6 @@ class AdminCourses extends React.Component {
     for (let i = 0; i < this.degreeCoursesList.length; i += 1) {
       this.links.push(`/courses/${this.degreeCoursesList[i].code}_${this.degreeCoursesList[i].solarYear}`);
     }
-    console.log(this.links);
     this.list = this.degreeCoursesList;
     this.state = { year: 'ALL' };
     this.onChangeYear = this.onChangeYear.bind(this);
@@ -53,15 +52,8 @@ class AdminCourses extends React.Component {
       this.list = this.degreeCoursesList.filter(course => course.solarYear === this.inputEl.value);
     }
   }
+
   render() {
-    /*
-    for (let i = 0; i < degreeCoursesList.length; i += 1) {
-      degreeCoursesList[i].code =
-        <Link href={`/courses/${degreeCoursesList[i].code}_${degreeCoursesList[i].solarYear}`}>
-          {degreeCoursesList[i].name}
-        </Link>;
-    }
-    */
     const options = [];
     options.push(<option value="ALL">ALL</option>);
     for (let i = 0; i < this.solarYears.length; i += 1) {
