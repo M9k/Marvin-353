@@ -9,13 +9,13 @@ const Index = () => (
       title="Confirm teacher accounts"
       text="Confirm pending unconfirmed users for teacher role."
       image="confirm.png"
-      links={[{ path: '/', label: 'Click here to confirm' }]}
+      links={[{ path: '/confirmTeachers', label: 'Click here to confirm' }]}
     />
     <CardWithIcon
       title="Confirm student accounts"
       text="Confirm pending unconfirmed users for student role."
       image="confirm.png"
-      links={[{ path: '/', label: 'Click here to confirm' }]}
+      links={[{ path: '/confirmStudents', label: 'Click here to confirm' }]}
     />
     <CardWithIcon
       title="Manage teacher accounts"

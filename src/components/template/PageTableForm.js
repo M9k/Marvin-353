@@ -12,6 +12,7 @@ class PageTableForm extends React.Component {
     super(props);
     this.refreshData = this.refreshData.bind(this);
     this.getEditButton = this.getEditButton.bind(this);
+    this.getUnconfirmButton = this.getUnconfirmButton.bind(this);
     this.getDeleteButton = this.getDeleteButton.bind(this);
     this.isFormRequired = this.isFormRequired.bind(this);
     this.getRows = this.getRows.bind(this);
@@ -25,7 +26,7 @@ class PageTableForm extends React.Component {
   getEditButton() {
     if (this.props.editTableData !== undefined) {
       return (
-        <Button onClick={this.props.editTableData}>Edit button</Button>
+        <td><Button onClick={this.props.editTableData}>Edit button</Button></td>
       );
     }
     return null;
@@ -34,7 +35,15 @@ class PageTableForm extends React.Component {
   getDeleteButton(item) {
     if (this.props.deleteTableData !== undefined) {
       return (
-        <DeleteButton deleteFunction={this.props.deleteTableData} objectToRemove={item} />
+        <td><DeleteButton deleteFunction={this.props.deleteTableData} objectToRemove={item} text="Delete" /></td>
+      );
+    }
+    return null;
+  }
+  getUnconfirmButton(item) {
+    if (this.props.unconfirmUser !== undefined) {
+      return (
+        <td><DeleteButton deleteFunction={this.props.unconfirmUser} objectToRemove={item} text="Unconfirm" /></td>
       );
     }
     return null;
@@ -52,10 +61,9 @@ class PageTableForm extends React.Component {
       (
         <tr key={Utils.generateKey(item)}>
           {this.getRow(item)}
-          <td>
-            {this.getEditButton()}
-            {this.getDeleteButton({ item })}
-          </td>
+          {this.getEditButton()}
+          {this.getDeleteButton({ item })}
+          {this.getUnconfirmButton({ item })}
         </tr>
       ));
   }
@@ -81,7 +89,6 @@ class PageTableForm extends React.Component {
           <thead>
             <tr>
               {tableHead}
-              <th />
             </tr>
           </thead>
           <tbody>
@@ -98,12 +105,14 @@ PageTableForm.propTypes = {
   editTableData: PropTypes.func,
   deleteTableData: PropTypes.func,
   addTableData: PropTypes.func,
+  unconfirmUser: PropTypes.func,
   tableData: PropTypes.arrayOf(Object).isRequired,
   headerInfo: PropTypes.arrayOf(String).isRequired,
 };
 
 PageTableForm.defaultProps = {
   editTableData: undefined,
+  unconfirmUser: undefined,
   deleteTableData: undefined,
   addTableData: undefined,
 };
