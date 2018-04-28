@@ -42,6 +42,15 @@ class Utils {
     return 2;
   }
 
+  static positiveNumber(number) {
+    if (number !== '') {
+      const num = parseInt(number, 10);
+      if (num > 0) { return 1; }
+      return 0;
+    }
+    return 2;
+  }
+
   static alwaysTrue(e) {
     return (1 || e);
   }
