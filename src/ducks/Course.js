@@ -1,5 +1,6 @@
 import Duck from 'extensible-duck';
-import {copyNPush, copyNPop, ORDERING} from '../util/js_helpers';
+import { copyNPush } from '../util/js_helpers';
+// , copyNPop, ORDERING
 
 const CourseDuck = new Duck({
   namespace: 'marvin',
@@ -13,8 +14,8 @@ const CourseDuck = new Duck({
 
   reducer: (state, action, duck) => {
     const { types } = duck;
-    const { initialState } = duck;
-    switch(action.type) {
+    // const { initialState } = duck;
+    switch (action.type) {
       case (types.PUSH_NEW_COURSE):
         return {
           ...state,
@@ -50,7 +51,7 @@ const CourseDuck = new Duck({
       { type: duck.types.SET_COURSES_LIST, account }
     ),
     pushNewCourse: address => (
-      { type: duck.types.PUSH_NEW_COURSE, address}
+      { type: duck.types.PUSH_NEW_COURSE, address }
     ),
     listIsLoading: () => (
       { type: duck.types.LIST_LOADING }
