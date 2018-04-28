@@ -32,6 +32,11 @@ class AdminCourses extends React.Component {
         solarYear: '2015',
       },
     ];
+    this.links = [];
+    for (let i = 0; i < this.degreeCoursesList.length; i += 1) {
+      this.links.push(`/courses/${this.degreeCoursesList[i].code}_${this.degreeCoursesList[i].solarYear}`);
+    }
+    console.log(this.links);
     this.list = this.degreeCoursesList;
     this.state = { year: 'ALL' };
     this.onChangeYear = this.onChangeYear.bind(this);
@@ -101,7 +106,9 @@ class AdminCourses extends React.Component {
         <PageTableForm
           getTableData={this.getCourses}
           tableData={this.list}
-          headerInfo={['Course code', 'Academic Year']}
+          headerInfo={['Course code', 'Academic Year', 'Details']}
+          linkTableData="true"
+          linkData={this.links}
         />
       </div>
     );

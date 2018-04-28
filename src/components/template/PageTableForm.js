@@ -13,6 +13,7 @@ class PageTableForm extends React.Component {
     this.refreshData = this.refreshData.bind(this);
     this.getEditButton = this.getEditButton.bind(this);
     this.getDeleteButton = this.getDeleteButton.bind(this);
+    this.getDetailsButton = this.getDetailsButton.bind(this);
     this.isFormRequired = this.isFormRequired.bind(this);
     this.getRows = this.getRows.bind(this);
     this.getRow = this.getRow.bind(this);
@@ -26,6 +27,19 @@ class PageTableForm extends React.Component {
     if (this.props.editTableData !== undefined) {
       return (
         <Button onClick={this.props.editTableData}>Edit button</Button>
+      );
+    }
+    return null;
+  }
+
+  getDetailsButton(item) {
+    console.log(item);
+    let path = document.location.pathname;
+    path = path.concat(`/${item.code}_${item.solarYear}`);
+    console.log(path);
+    if (this.props.linkTableData) {
+      return (
+        <Button href={path}>Details</Button>
       );
     }
     return null;
@@ -52,10 +66,9 @@ class PageTableForm extends React.Component {
       (
         <tr key={Utils.generateKey(item)}>
           {this.getRow(item)}
-          <td>
-            {this.getEditButton()}
-            {this.getDeleteButton({ item })}
-          </td>
+          {this.getDetailsButton(item)}
+          {this.getEditButton()}
+          {this.getDeleteButton({ item })}
         </tr>
       ));
   }
@@ -100,12 +113,14 @@ PageTableForm.propTypes = {
   addTableData: PropTypes.func,
   tableData: PropTypes.arrayOf(Object).isRequired,
   headerInfo: PropTypes.arrayOf(String).isRequired,
+  linkTableData: PropTypes.bool,
 };
 
 PageTableForm.defaultProps = {
   editTableData: undefined,
   deleteTableData: undefined,
   addTableData: undefined,
+  linkTableData: false,
 };
 
 export default PageTableForm;
