@@ -10,7 +10,7 @@ const AdminDuck = new Duck({
     'SET_TEACHERS_LIST',
     'SET_PENDING_STUDENTS_LIST',
     'SET_PENDING_TEACHERS_LIST',
-    'APPROVE_USER',
+    'CONFIRM_USER',
     'REMOVE_USER',
     'LIST_ERRORED',
     'LIST_LOADING',
@@ -54,7 +54,7 @@ const AdminDuck = new Duck({
           loading: false,
           errored: false,
         };
-      case (types.APPROVE_USER):
+      case (types.CONFIRM_USER):
         if (action.role === ROLES.UNCONFIRMED_STUDENT) { // is a non-approved student
           return {
             ...state,
@@ -119,11 +119,11 @@ const AdminDuck = new Duck({
     setPendingTeachersList: account => (
       { type: duck.types.SET_PENDING_TEACHERS_LIST, account }
     ),
-    approveUser: address => (
-      { type: duck.types.APPROVE_USER, address }
+    confirmUser: (role, address) => (
+      { type: duck.types.CONFIRM_USER, role, address }
     ),
-    removeUser: address => (
-      { type: duck.types.REMOVE_USER, address }
+    removeUser: (role, address) => (
+      { type: duck.types.REMOVE_USER, role, address }
     ),
     listIsLoading: () => (
       { type: duck.types.LIST_LOADING }

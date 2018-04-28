@@ -12,6 +12,8 @@ import {
   confirmTeacher, removeTeacher,
 } from '../web3calls/UniversityTeacher';
 
+import ROLES from '../util/logic/AccountEnum';
+
 
 const actionType = type => `marvin/AdminSaga/${type}`;
 
@@ -82,12 +84,12 @@ export function* getPendingTeachers() {
 export function* approveUser(action) {
   yield put(actionCreators.listIsLoading());
   try {
-    if (action.role === 14.0) {
+    if (action.role === ROLES.UNCONFIRMED_STUDENT) {
       yield call(confirmStudent, action.address);
-    } else if (action.role === 13) {
+    } else if (action.role === ROLES.UNCONFIRMED_TEACHER) {
       yield call(confirmTeacher, action.address);
     }
-    yield put(actionCreators.approveUser(action.address));
+    yield put(actionCreators.confirmUser(action));
   } catch (e) {
     console.log('Failed!');
     yield put(actionCreators.listHasErrored());
@@ -97,12 +99,12 @@ export function* approveUser(action) {
 export function* deleteUser(action) {
   yield put(actionCreators.listIsLoading());
   try {
-    if (action.role === 14.0) {
+    if (action.role === ROLES.UNCONFIRMED_STUDENT) {
       yield call(removeStudent, action.address);
-    } else if (action.role === 13) {
+    } else if (action.role === ROLES.UNCONFIRMED_TEACHER) {
       yield call(removeTeacher, action.address);
     }
-    yield put(actionCreators.removeUser(action.address));
+    yield put(actionCreators.removeUser(action));
   } catch (e) {
     console.log('Failed!');
     yield put(actionCreators.listHasErrored());
