@@ -8,7 +8,7 @@ import DeleteButton from '../../../src/components/custom/DeleteButton';
 
 describe('DeleteButton component', () => {
   it('Should render the component', () => {
-    const wrapper = shallow(<DeleteButton deleteFunction={e => e} objectToRemove="test" />);
+    const wrapper = shallow(<DeleteButton deleteFunction={e => e} objectToRemove="test" text="Text" />);
     assert.equal(wrapper.length, 1);
     expect(wrapper.find(Button)).to.have.length(1);
   });
@@ -22,8 +22,10 @@ describe('DeleteButton component', () => {
     const wrapper = mount(<DeleteButton
       deleteFunction={e => e}
       objectToRemove="test"
+      text="Text"
     />);
     expect(wrapper.props().objectToRemove).to.equal('test');
+    expect(wrapper.props().text).to.equal('Text');
     expect(wrapper.props().deleteFunction('returnTestF')).to.equal('returnTestF');
   });
 });
