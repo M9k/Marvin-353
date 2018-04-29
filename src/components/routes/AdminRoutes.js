@@ -3,6 +3,7 @@ import AdminCourseExams from '../admin/AdminCourseExams';
 import AdminCourses from '../admin/AdminCourses';
 import ConfirmStudents from '../admin/ConfirmStudentUser';
 import ConfirmTeachers from '../admin/ConfirmTeacherUser';
+import AdminExams from '../admin/AdminExams';
 
 const AdminRoutes = [
   {
@@ -34,6 +35,12 @@ const AdminRoutes = [
     label: 'Courses',
     position: 'left',
     component: AdminCourses,
+  },
+  {
+    path: '/exams',
+    label: 'Exams',
+    position: 'left',
+    component: AdminExams,
   },
 ];
 

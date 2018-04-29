@@ -33,7 +33,13 @@ const Index = () => (
       title="Manage courses"
       text="Manage all course present in the University"
       image="manageAdmin.png"
-      links={[{ path: 'courses', label: 'Click here to manage' }]}
+      links={[{ path: '/courses', label: 'Click here to manage' }]}
+    />
+    <CardWithIcon
+      title="Exams"
+      text="View all exams present in the University"
+      image="manageAdmin.png"
+      links={[{ path: '/exams', label: 'Click here to view' }]}
     />
   </div>
 );

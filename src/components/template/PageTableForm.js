@@ -4,6 +4,7 @@ import Table from 'react-bootstrap/lib/Table';
 import Button from 'react-bootstrap/lib/Button';
 import Form from '../custom/Form';
 import DeleteButton from '../custom/DeleteButton';
+import DetailsButton from '../custom/DetailsButton'
 import Utils from '../custom/utils';
 
 
@@ -15,7 +16,6 @@ class PageTableForm extends React.Component {
     this.getUnconfirmButton = this.getUnconfirmButton.bind(this);
     this.getDeleteButton = this.getDeleteButton.bind(this);
     this.getDetailsButton = this.getDetailsButton.bind(this);
-    this.getAddTeacherButton = this.getAddTeacherButton.bind(this);
     this.isFormRequired = this.isFormRequired.bind(this);
     this.getRows = this.getRows.bind(this);
     this.getRow = this.getRow.bind(this);
@@ -33,21 +33,18 @@ class PageTableForm extends React.Component {
     }
     return null;
   }
-  getAddTeacherButton(item) {
-    if (this.props.addTeacher !== undefined && item.teacher === '') {
-      return (
-        <Button onClick={this.props.addTeacher}>Assign teacher</Button>
-      );
-    }
-    return null;
-  }
 
   getDetailsButton(item) {
-    let path = document.location.pathname;
-    path = path.concat(`/${item.code}_${item.solarYear}`);
     if (this.props.linkTableData) {
+      let path = document.location.pathname;
+      path = path.concat(`/${item.code}_${item.solarYear}`);
       return (
         <Button href={path}>Details</Button>
+      );
+    }
+    if (this.props.detailTableData) {
+      return (
+        <DetailsButton object={item} text="Details" />
       );
     }
     return null;
@@ -82,7 +79,6 @@ class PageTableForm extends React.Component {
       (
         <tr key={Utils.generateKey(item)}>
           {this.getRow(item)}
-          {this.getAddTeacherButton(item)}
           {this.getDetailsButton(item)}
           {this.getEditButton()}
           {this.getDeleteButton({ item })}
@@ -129,10 +125,10 @@ PageTableForm.propTypes = {
   deleteTableData: PropTypes.func,
   addTableData: PropTypes.func,
   unconfirmUser: PropTypes.func,
-  addTeacher: PropTypes.func,
   tableData: PropTypes.arrayOf(Object).isRequired,
   headerInfo: PropTypes.arrayOf(String).isRequired,
   linkTableData: PropTypes.bool,
+  detailTableData: PropTypes.bool,
 };
 
 PageTableForm.defaultProps = {
@@ -141,7 +137,7 @@ PageTableForm.defaultProps = {
   deleteTableData: undefined,
   addTableData: undefined,
   linkTableData: false,
-  addTeacher: undefined,
+  detailTableData: false,
 };
 
 export default PageTableForm;

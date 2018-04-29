@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 import FieldTypes from '../custom/fieldtypes';
 import Utils from '../custom/utils';
 import Form from '../custom/Form';
 import PageTableForm from '../template/PageTableForm';
-import ModalForm from '../custom/ModalForm';
 
 class AdminCourseExams extends React.Component {
   constructor(props) {
@@ -16,47 +14,31 @@ class AdminCourseExams extends React.Component {
       {
         name: 'Programming',
         credits: '10',
-        teacher: 'Gilberto Filè',
+        teacher_surname: 'Filè',
+        teacher_name: 'Gilberto',
       },
       {
         name: 'Computer architecture',
         credits: '8',
-        teacher: 'Alessandro Sperduti',
+        teacher_surname: 'Sperduti',
+        teacher_name: 'Alessandro',
       },
       {
         name: 'Logic',
         credits: '6',
-        teacher: 'Maria Emilia Maietti',
+        teacher_surname: 'Maietti',
+        teacher_name: 'Maria Emilia',
       },
       {
         name: 'Database',
         credits: '9',
-        teacher: '',
+        teacher_surname: '',
+        teacher_name: '',
       },
     ];
-    this.teachers = [
-      'Teacher 1',
-      'Teacher 2',
-      'Teacher 3',
-    ];
-    this.state = { assignTeacher: false };
-    this.showAssignTeacher = this.showAssignTeacher.bind(this);
-  }
-
-  componentDidMount() {
-    console.log(this.params.examid);
-  }
-
-  showAssignTeacher() {
-    console.log('ADD TEACHER');
-    this.setState({ assignTeacher: true });
   }
 
   render() {
-    const options = [];
-    for (let i = 0; i < this.teachers.length; i += 1) {
-      options.push(<option value={this.teachers[i]}>{this.teachers[i]}</option>);
-    }
     return (
       <div>
         <h3 className="text-center">Course {this.params.examid}</h3>
@@ -93,26 +75,9 @@ class AdminCourseExams extends React.Component {
         <PageTableForm
           getTableData={this.getCourses}
           tableData={this.exams}
-          headerInfo={['Name', 'Credits', 'Teacher', 'Assign']}
-          addTeacher={this.showAssignTeacher}
+          headerInfo={['Name', 'Credits', 'Teacher surname', 'Teacher name', 'Details']}
+          detailTableData={true} // eslint-disable-line
         />
-        <ModalForm
-          title="Assign teacher"
-          show={this.state.assignTeacher}
-          yesFunction={e => e}
-        >
-          <FormGroup controlId="selectTeacher">
-            <ControlLabel>Assign a teacher to the exam</ControlLabel>
-            <FormControl
-              onChange={e => e}
-              inputRef={el => this.inputEl = el} // eslint-disable-line no-return-assign
-              componentClass="select"
-              placeholder="select"
-            >
-              {options}
-            </FormControl>
-          </FormGroup>
-        </ModalForm>
       </div>
     );
   }
