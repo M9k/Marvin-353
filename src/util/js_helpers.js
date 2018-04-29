@@ -25,4 +25,14 @@ const ORDERING = {
   ASC: 1,
   DESC: -1,
 };
-export { range, copyNPop, copyNPush, ORDERING };
+const updateObjInArr = (target, fn, obj) => {
+  if (!(fn instanceof Function)) throw new TypeError('Provided function is not a function');
+  if (!(target.findIndex instanceof Function)) {
+    throw new TypeError('Provided target doesn\'t have splice and findIndex function');
+  }
+  const assigned = Object.assign([], target);
+  const idx = assigned.findIndex(fn);
+  assigned[idx] = Object.assign({}, assigned[idx], obj);
+  return assigned;
+};
+export { range, copyNPop, copyNPush, ORDERING, updateObjInArr };
