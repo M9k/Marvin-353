@@ -32,7 +32,7 @@ const updateObjInArr = (target, fn, obj) => {
   }
   const assigned = Object.assign([], target);
   const idx = assigned.findIndex(fn);
-  assigned[idx] = Object.assign({}, assigned[idx], obj);
+  if (idx !== -1) assigned[idx] = Object.assign({}, assigned[idx], obj);
   return assigned;
 };
 export { range, copyNPop, copyNPush, ORDERING, updateObjInArr };
