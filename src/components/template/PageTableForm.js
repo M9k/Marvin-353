@@ -4,7 +4,7 @@ import Table from 'react-bootstrap/lib/Table';
 import Button from 'react-bootstrap/lib/Button';
 import Form from '../custom/Form';
 import DeleteButton from '../custom/DeleteButton';
-import DetailsButton from '../custom/DetailsButton'
+import DetailsButton from '../custom/DetailsButton';
 import Utils from '../custom/utils';
 
 
