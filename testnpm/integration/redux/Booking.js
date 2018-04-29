@@ -34,8 +34,8 @@ describe('Booking feature', () => {
         const courseName = ['Computer Science', 'History', 'Biology'];
         if (effect.fn === UniversityYear.getAcademicYearContractByYear) return '0x0';
         if (effect.fn === Year.getCourseNumber) return 3;
-        if (effect.fn === Year.getCourseContractAt) return Number(courseContracts[effect.args[1]]);
-        if (effect.fn === Course.getName) return courseName[effect.args[0]];
+        if (effect.fn === Year.getCourseContractAt) return courseContracts[effect.args[1]];
+        if (effect.fn === Course.getName) return courseName[Number(effect.args[0])];
         return next();
       },
     })
@@ -45,7 +45,20 @@ describe('Booking feature', () => {
       availableCourses: {
         loading: false,
         errored: false,
-        list: ['Computer Science', 'History', 'Biology'],
+        list: [
+          {
+            address: '0',
+            name: 'Computer Science',
+          },
+          {
+            address: '1',
+            name: 'History',
+          },
+          {
+            address: '2',
+            name: 'Biology',
+          },
+        ],
       },
     })
     .put(creators.listIsLoading())

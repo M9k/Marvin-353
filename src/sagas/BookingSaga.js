@@ -23,7 +23,10 @@ export function* loadCourses({ year }) {
       call(Course.getName, addr)
     ));
     const coursesNames = yield all(coursesNameFetch);
-    yield put(actionCreators.setCourses(coursesNames));
+    const coursesPack = coursesNames.map((name, index) => (
+      { address: courseAddresses[index], name }
+    ));
+    yield put(actionCreators.setCourses(coursesPack));
   } catch (e) {
     yield put(actionCreators.listHasErrored());
   }
