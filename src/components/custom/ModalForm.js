@@ -54,7 +54,7 @@ ModalForm.propTypes = {
   show: PropTypes.bool,
   children: PropTypes.node,
   yesFunction: PropTypes.func,
-  keyForModal: PropTypes.number,
+  keyForModal: PropTypes.string,
 
 };
 
@@ -62,7 +62,7 @@ ModalForm.defaultProps = {
   show: false,
   children: null,
   yesFunction: undefined,
-  keyForModal: -1,
+  keyForModal: '',
 };
 
 export default ModalForm;
