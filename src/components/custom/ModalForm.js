@@ -40,8 +40,8 @@ class ModalForm extends React.Component {
             {this.props.children}
           </Modal.Body>
           <Modal.Footer>
-            {this.props.yesFunction !== undefined && <Button bsStyle="warning" onClick={this.handle}>Yes</Button>}
-            <Button bsStyle="Info" onClick={this.close}>Close</Button>
+            {this.props.yesFunction !== undefined && <Button bsStyle="primary" onClick={this.handle}>Yes</Button>}
+            <Button onClick={this.close}>Close</Button>
           </Modal.Footer>
         </Modal>
       </div>

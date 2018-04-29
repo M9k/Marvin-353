@@ -21,8 +21,8 @@ class deleteButton extends React.Component {
     return (
       <div>
         <Button bsStyle="danger" onClick={this.handleClick}>{this.props.text}</Button>
-        <ModalForm title="Delete confirmation" yesFunction={this.props.deleteFunction} keyForModal={this.props.objectToRemove.item} show={this.state.showing}>
-          Are you sure you want to delete {this.props.objectToRemove.item}?
+        <ModalForm title="Delete confirmation" yesFunction={this.props.deleteFunction} keyForModal={this.props.objectToRemove} show={this.state.showing}>
+          Are you sure you want to {this.props.text.toLowerCase()} {this.props.objectToRemove}?
         </ModalForm>
       </div>
     );
@@ -32,7 +32,7 @@ class deleteButton extends React.Component {
 deleteButton.propTypes = {
   deleteFunction: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
-  objectToRemove: PropTypes.object.isRequired,
+  objectToRemove: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
 };
 

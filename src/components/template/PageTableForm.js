@@ -60,6 +60,7 @@ class PageTableForm extends React.Component {
   }
   getUnconfirmButton(item) {
     if (this.props.unconfirmUser !== undefined) {
+      console.log('Stampa del item', item);
       return (
         <td><DeleteButton deleteFunction={this.props.unconfirmUser} objectToRemove={item} text="Unconfirm" /></td>
       );
@@ -81,8 +82,8 @@ class PageTableForm extends React.Component {
           {this.getRow(item)}
           {this.getDetailsButton(item)}
           {this.getEditButton()}
-          {this.getDeleteButton({ item })}
-          {this.getUnconfirmButton({ item })}
+          {this.getDeleteButton(item)}
+          {this.getUnconfirmButton(item.Address)}
         </tr>
       ));
   }
