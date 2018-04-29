@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount, shallow, render } from 'enzyme';
+import { mount, shallow/* ,render */ } from 'enzyme';
 import assert from 'assert';
 import { expect } from 'chai';
 import { Button } from 'react-bootstrap';
@@ -13,10 +13,10 @@ describe('DeleteButton component', () => {
     expect(wrapper.find(Button)).to.have.length(1);
   });
 
-  /*it('renders the right text in the button', () => {
+  /* it('renders the right text in the button', () => {
     const wrapper = render(<DeleteButton deleteFunction={e => e} objectToRemove="test" />);
     expect(wrapper.text()).to.equal('Delete');
-  });*/
+  }); */
 
   it('should save correct props', () => {
     const wrapper = mount(<DeleteButton
