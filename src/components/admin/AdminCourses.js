@@ -9,6 +9,12 @@ import FieldTypes from '../custom/fieldtypes';
 class AdminCourses extends React.Component {
   constructor(props) {
     super(props);
+    this.totalCredits = [
+      '120',
+      '180',
+      '300',
+      '360',
+    ];
     this.solarYearList = [
       '2017',
       '2016',
@@ -20,21 +26,25 @@ class AdminCourses extends React.Component {
         name: 'L-31',
         solarYear: '2017',
         courseAddress: '0xfae394561e33e242c551d15d4625309ea4c0b97f',
+        totalCredits: 180,
       },
       {
         name: 'L-35',
         solarYear: '2016',
         courseAddress: '0xfae394561e33e242c551d15d4625309ea4c0b97f',
+        totalCredits: 120,
       },
       {
         name: 'L-35',
         solarYear: '2017',
         courseAddress: '0xfae394561e33e242c551d15d4625309ea4c0b97f',
+        totalCredits: 300,
       },
       {
         name: 'L-30',
         solarYear: '2015',
         courseAddress: '0xfae394561e33e242c551d15d4625309ea4c0b97f',
+        totalCredits: 360,
       },
     ];
     this.list = this.courseList;
@@ -80,7 +90,15 @@ class AdminCourses extends React.Component {
               help: 'insert the associated year',
               type: FieldTypes.SELECT,
               values: this.solarYearList,
-              validateFunction: Utils.moreThanCurrentYear,
+              validateFunction: Utils.alwaysTrue,
+            },
+            {
+              name: 'courseTotalCredits',
+              label: 'Total credits:',
+              help: 'insert the total credits',
+              type: FieldTypes.SELECT,
+              values: this.totalCredits,
+              validateFunction: Utils.alwaysTrue,
             },
           ]}
           submitFunction={null}

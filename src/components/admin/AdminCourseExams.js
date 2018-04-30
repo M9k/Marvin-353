@@ -10,6 +10,12 @@ class AdminCourseExams extends React.Component {
     super(props);
     this.params = this.props.params;
     this.getCourses = () => {};
+    this.course = {
+      name: 'L-31',
+      solarYear: '2017',
+      courseAddress: '0xfae394561e33e242c551d15d4625309ea4c0b97f',
+      totalCredits: 180,
+    }
     this.examList = [
       {
         name: 'Programming',
@@ -50,6 +56,16 @@ class AdminCourseExams extends React.Component {
     return (
       <div>
         <h3 className="text-center">Course {this.params.examid}</h3>
+        <dl>
+          <dt>Name</dt>
+          <dd>{this.course.name}</dd>
+          <dt>Solar year</dt>
+          <dd>{this.course.solarYear}</dd>
+          <dt>Total credits</dt>
+          <dd>{this.course.totalCredits}</dd>
+          <dt>Address</dt>
+          <dd>{this.course.courseAddress}</dd>
+        </dl>
         <Form
           description="Add a new exam"
           fields={[
