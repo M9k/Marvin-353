@@ -12,11 +12,11 @@ describe('PageTableForm component test', () => {
   });
 
   it('should save correct props and correct value', () => {
-    const wrapper = mount(<PageTableForm getTableData={e => e} deleteTableData={e => e} editTableData={e => e} addTableData={e => e} tableData={['0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf']} headerInfo={['Admin Address']} />);
+    const wrapper = mount(<PageTableForm getTableData={e => e} deleteSingleColumnRow={e => e} editTableData={e => e} addTableData={e => e} tableData={['0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf']} headerInfo={['Admin Address']} />);
     expect(wrapper.props().tableData).to.deep.include('0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf');
     expect(wrapper.props().headerInfo).to.deep.include('Admin Address');
     expect(wrapper.props().getTableData(2)).to.equal(2);
-    expect(wrapper.props().deleteTableData(2)).to.equal(2);
+    expect(wrapper.props().deleteSingleColumnRow(2)).to.equal(2);
     expect(wrapper.props().editTableData(2)).to.equal(2);
     expect(wrapper.props().addTableData(2)).to.equal(2);
     expect(wrapper.props().tableData.length).to.equal(1);
@@ -24,7 +24,7 @@ describe('PageTableForm component test', () => {
   });
 
   it('Should render the DeleteButton', () => {
-    const wrapper = shallow(<PageTableForm getTableData={e => e} deleteTableData={e => e} editTableData={e => e} addTableData={e => e} tableData={['0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf']} headerInfo={['Admin Address']} />);
+    const wrapper = shallow(<PageTableForm getTableData={e => e} deleteSingleColumnRow={e => e} editTableData={e => e} addTableData={e => e} tableData={['0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf']} headerInfo={['Admin Address']} />);
     expect(wrapper.find(DeleteButton)).to.have.length(1);
   });
 });

@@ -18,17 +18,12 @@ const Index = () => (
       links={[{ path: '/confirmStudents', label: 'Click here to confirm' }]}
     />
     <CardWithIcon
-      title="Manage teacher accounts"
+      title="Manage Users"
       text="Manage all teacher accounts present in the University"
       image="manageAdmin.png"
-      links={[{ path: '/', label: 'Click here to manage' }]}
+      links={[{ path: '/systemUsers', label: 'Click here to manage' }]}
     />
-    <CardWithIcon
-      title="Manage student accounts"
-      text="Manage all student accounts present in the University"
-      image="manageAdmin.png"
-      links={[{ path: '/', label: 'Click here to manage' }]}
-    />
+
     <CardWithIcon
       title="Manage courses"
       text="Manage all course present in the University"
