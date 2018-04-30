@@ -13,7 +13,7 @@ class PageTableForm extends React.Component {
     super(props);
     this.refreshData = this.refreshData.bind(this);
     this.getEditButton = this.getEditButton.bind(this);
-    this.getUnconfirmButton = this.getUnconfirmButton.bind(this);
+    this.getMultiColumnDeleteButton = this.getMultiColumnDeleteButton.bind(this);
     this.getDeleteButton = this.getDeleteButton.bind(this);
     this.getDetailsButton = this.getDetailsButton.bind(this);
     this.isFormRequired = this.isFormRequired.bind(this);
@@ -51,18 +51,24 @@ class PageTableForm extends React.Component {
   }
 
   getDeleteButton(item) {
-    if (this.props.deleteTableData !== undefined) {
+    if (this.props.deleteSingleColumnRow !== undefined) {
       return (
-        <td><DeleteButton deleteFunction={this.props.deleteTableData} objectToRemove={item} text="Delete" /></td>
+        <td><DeleteButton deleteFunction={this.props.deleteSingleColumnRow} objectToRemove={item} text="Delete" /></td>
       );
     }
     return null;
   }
-  getUnconfirmButton(item) {
-    if (this.props.unconfirmUser !== undefined) {
+  getMultiColumnDeleteButton(item) {
+    if (this.props.deleteMultiColumnRow !== undefined) {
       console.log('Stampa del item', item);
       return (
-        <td><DeleteButton deleteFunction={this.props.unconfirmUser} objectToRemove={item} text="Unconfirm" /></td>
+        <td>
+          <DeleteButton
+            deleteFunction={this.props.deleteMultiColumnRow}
+            objectToRemove={item}
+            text={this.props.headerInfo[this.props.headerInfo.length - 1]}
+          />
+        </td>
       );
     }
     return null;
@@ -87,7 +93,7 @@ class PageTableForm extends React.Component {
           {this.getDetailsButton(item)}
           {this.getEditButton()}
           {this.getDeleteButton(item)}
-          {this.getUnconfirmButton(item.Address)}
+          {this.getMultiColumnDeleteButton(item.Address)}
         </tr>
       ));
   }
@@ -127,9 +133,9 @@ class PageTableForm extends React.Component {
 PageTableForm.propTypes = {
   getTableData: PropTypes.func.isRequired,
   editTableData: PropTypes.func,
-  deleteTableData: PropTypes.func,
+  deleteSingleColumnRow: PropTypes.func,
   addTableData: PropTypes.func,
-  unconfirmUser: PropTypes.func,
+  deleteMultiColumnRow: PropTypes.func,
   tableData: PropTypes.arrayOf(Object).isRequired,
   headerInfo: PropTypes.arrayOf(String).isRequired,
   linkTableData: PropTypes.bool,
@@ -139,8 +145,8 @@ PageTableForm.propTypes = {
 
 PageTableForm.defaultProps = {
   editTableData: undefined,
-  unconfirmUser: undefined,
-  deleteTableData: undefined,
+  deleteMultiColumnRow: undefined,
+  deleteSingleColumnRow: undefined,
   addTableData: undefined,
   linkTableData: false,
   detailTableData: false,

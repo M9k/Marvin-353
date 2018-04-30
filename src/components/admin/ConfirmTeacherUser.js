@@ -39,7 +39,7 @@ const ConfirmTeacher = () => (
     <PageTableForm
       getTableData={e => e}
       tableData={unconfirmedTeachers}
-      unconfirmUser={e => e}
+      deleteMultiColumnRow={e => e}
       headerInfo={['Address', 'Name', 'Surname', 'Deny']}
     />
   </div>
