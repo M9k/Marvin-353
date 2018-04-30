@@ -1,11 +1,11 @@
-import { expectSaga } from 'redux-saga-test-plan';
-import * as matchers from 'redux-saga-test-plan/matchers';
-import { throwError } from 'redux-saga-test-plan/providers';
+import { expectSaga } from 'redux-saga-test-plan'; // eslint-disable-line import/no-extraneous-dependencies
+import * as matchers from 'redux-saga-test-plan/matchers'; // eslint-disable-line import/no-extraneous-dependencies
+import { throwError } from 'redux-saga-test-plan/providers'; // eslint-disable-line import/no-extraneous-dependencies
 import reducer, { creators } from '../../../src/ducks/Admin';
 import * as sagas from '../../../src/sagas/AdminSaga';
 import GentlyFail from './GentlyFail';
 import * as Students from '../../../src/web3calls/UniversityStudent';
-import * as Admin from '../../../src/web3calls/UniversityAdmin';
+// import * as Admin from '../../../src/web3calls/UniversityAdmin';
 import * as Teachers from '../../../src/web3calls/UniversityTeacher';
 import ROLES from '../../../src/util/logic/AccountEnum';
 
