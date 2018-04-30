@@ -68,6 +68,7 @@ class DetailsButton extends React.Component {
           {this.teacherList[i].surname} {this.teacherList[i].name} {this.teacherList[i].address}
         </option>);
     }
+    const mandatory = (this.object.mandatory) ? 'Yes' : 'No';
     return (
       <div>
         <Button onClick={this.handleClick}>{this.props.text}</Button>
@@ -83,7 +84,7 @@ class DetailsButton extends React.Component {
             <dt>Credits</dt>
             <dd>{this.object.credits}</dd>
             <dt>Mandatory</dt>
-            <dd>{this.object.mandatory}</dd>
+            <dd>{mandatory}</dd>
             <dt>Solar year</dt>
             <dd>{this.object.year}</dd>
             <dt>Course Address</dt>
