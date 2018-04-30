@@ -8,6 +8,7 @@ import * as UniversityExam from '../web3calls/UniversityExam';
 import * as UniversityYear from '../web3calls/UniversityYear';
 import * as Year from '../web3calls/Year';
 import * as Course from '../web3calls/Course';
+import * as UniversityTeacher from '../web3calls/UniversityTeacher';
 
 const actionType = type => `marvin/ManageExamsSaga/${type}`;
 const ADD_NEW_EXAM = actionType('ADD_NEW_EXAM');
@@ -122,7 +123,19 @@ export function* getExamsByCourse({ courseAddress }) {
   }
 }
 export function* getTeachers() {
-
+  try {
+    yield put(TeacherCreators.listIsLoading());
+    const teacherCount = yield call(UniversityTeacher.getTeacherNumber);
+    const teacherAddressFetch = Array(Number(teacherCount)).fill().map((_, id) => (
+      call(UniversityTeacher.getTeacherContractAddressAt, id)
+    ));
+    const teacherAddresses = yield all(teacherAddressFetch);
+    const teacherDataFetch = teacherAddresses.map(address => call(getTeacherData, address));
+    const teachersData = yield all(teacherDataFetch);
+    yield put(TeacherCreators.setList(teachersData));
+  } catch (e) {
+    yield put(TeacherCreators.listHasErrored());
+  }
 }
 export function* associateProfessorToExam() {
 
@@ -159,7 +172,7 @@ export const creators = {
 
 export default function* handler() {
   yield [
-    fork(takeEvery, ADD_NEW_EXAM, addNewExams),
+    fork(takeEvery, ADD_NEW_EXAM, addNewExam),
     fork(takeLatest, GET_ALL_EXAMS, getAllExams),
     fork(takeLatest, GET_EXAMS_BY_COURSE, getExamsByCourse),
     fork(takeLatest, GET_TEACHERS, getTeachers),

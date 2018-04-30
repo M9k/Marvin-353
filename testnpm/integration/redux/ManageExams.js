@@ -8,6 +8,7 @@ import ExamsReducer, { creators as ExamsCreators } from '../../../src/ducks/Exam
 import * as sagas from '../../../src/sagas/ManageExamsSaga';
 import * as UniversityYear from '../../../src/web3calls/UniversityYear'
 import * as Year from '../../../src/web3calls/Year';
+import * as UniversityTeacher from '../../../src/web3calls/UniversityTeacher';
 
 const { creators } = sagas;
 const courseDetail = {
@@ -111,9 +112,52 @@ describe('ManageExams feature', () => {
     })
     .put(CourseCreators.listIsLoading())
     .run());
-  it('should retrieve the list of all the active teachers', () => {
-    expect(false).to.be.true;
-  });
+  it('should retrieve the list of all the active teachers', () => expectSaga(sagas.getTeachers, creators.getTeachers())
+    .withReducer(TeacherReducer)
+    .provide({
+      call: (effect, next) => {
+        if (effect.fn === UniversityTeacher.getTeacherNumber) return 2;
+        if (effect.fn === UniversityTeacher.getTeacherContractAddressAt) {
+          if (effect.args[0] === 0) return 'gibbo';
+          if (effect.args[0] === 1) return 'ranzi';
+        }
+        if (effect.fn === sagas.getTeacherData) {
+          if (effect.args[0] === 'gibbo') {
+            return {
+              address: 'gibbo',
+              name: 'Gilberto',
+              surname: 'File',
+            };
+          }
+          if (effect.args[0] === 'ranzi') {
+            return {
+              address: 'ranzi',
+              name: 'Francesco',
+              surname: 'Ranzato',
+            };
+          }
+        }
+        return next();
+      },
+    })
+    .hasFinalState({
+      errored: false,
+      loading: false,
+      list: [
+        {
+          address: 'gibbo',
+          name: 'Gilberto',
+          surname: 'File',
+        },
+        {
+          address: 'ranzi',
+          name: 'Francesco',
+          surname: 'Ranzato',
+        },
+      ],
+    })
+    .put(TeacherCreators.listIsLoading())
+    .run());
   it('should create a new exams and push it in the course list', () => {
     expect(false).to.be.true;
   });
