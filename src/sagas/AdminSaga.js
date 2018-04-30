@@ -42,6 +42,7 @@ export function* getAllStudents() {
     yield put(actionCreators.listHasErrored());
   }
 }
+// TODO ottenere anche nomi, cognomi, indirizzi e corsi(guardare getPendingTeachers)
 export function* getPendingStudents() {
   yield put(actionCreators.listIsLoading());
   try {
@@ -57,6 +58,7 @@ export function* getPendingStudents() {
   }
 }
 
+// TODO ottenere anche nomi, cognomi ed indirizzi (guardare getPendingTeachers)
 export function* getAllTeachers() {
   yield put(actionCreators.listIsLoading());
   try {
