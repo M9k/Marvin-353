@@ -90,6 +90,39 @@ describe('ManageExamsSaga', () => {
     it('should retrive a list with more than one element', () => expectSaga(sagaStub, sagas.getCourseExamsList, 'course')
       .provide({
         call: (effect, next) => {
+          if (effect.fn === Course.getExamNumber) return 1;
+          if (effect.fn === Course.getExamContractAt) {
+            if (effect.args[1] === 0) return 'c1';
+          }
+          if (effect.fn === sagas.getExamData) {
+            if (effect.args[0] === 'c1') {
+              return {
+                address: 'c1',
+                name: 'P1',
+                credits: 10,
+                mandatory: true,
+                teacherAddress: 'gibbo',
+                teacherName: 'Gilberto',
+                teacherSurname: 'Filé',
+              };
+            }
+          }
+          return next();
+        },
+      })
+      .put([{
+        address: 'c1',
+        name: 'P1',
+        credits: 10,
+        mandatory: true,
+        teacherAddress: 'gibbo',
+        teacherName: 'Gilberto',
+        teacherSurname: 'Filé',
+      }])
+      .run());
+    it('should retrive a list with more than one element', () => expectSaga(sagaStub, sagas.getCourseExamsList, 'course')
+      .provide({
+        call: (effect, next) => {
           if (effect.fn === Course.getExamNumber) return 2;
           if (effect.fn === Course.getExamContractAt) {
             if (effect.args[1] === 0) return 'c1';
@@ -146,6 +179,25 @@ describe('ManageExamsSaga', () => {
     it('should not catch the error when something goes wrong', () => expectSaga(sagaStub, sagas.getCourseExamsList, 'course')
       .provide([
         [matchers.call.fn(Course.getExamNumber, 'course'), throwError(new Error())],
+      ])
+      .put('error')
+      .run());
+  });
+  describe('getCourseData', () => {
+    it('should retrieve the correct data', () => expectSaga(sagaStub, sagas.getCourseData, 'course')
+      .provide([
+        [matchers.call.fn(Course.getName, 'course'), 'Scienze Informatiche'],
+        [matchers.call.fn(Course.getSolarYear, 'course'), '2017'],
+      ])
+      .put({
+        courseAddress: 'course',
+        courseName: 'Scienze Informatiche',
+        solarYear: 2017,
+      })
+      .run());
+    it('should not catch the error when something goes wrong', () => expectSaga(sagaStub, sagas.getCourseData, 'course')
+      .provide([
+        [matchers.call.fn(Course.getName, 'course'), throwError(new Error())],
       ])
       .put('error')
       .run());
