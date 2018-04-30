@@ -15,7 +15,7 @@ class AdminCourseExams extends React.Component {
       solarYear: '2017',
       courseAddress: '0xfae394561e33e242c551d15d4625309ea4c0b97f',
       totalCredits: 180,
-    }
+    };
     this.examList = [
       {
         name: 'Programming',
