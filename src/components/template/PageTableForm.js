@@ -37,7 +37,7 @@ class PageTableForm extends React.Component {
   getDetailsButton(item) {
     if (this.props.linkTableData) {
       let path = document.location.pathname;
-      path = path.concat(`/${item.code}_${item.solarYear}`);
+      path = path.concat(`/${item.name}_${item.solarYear}`);
       return (
         <Button href={path}>Details</Button>
       );

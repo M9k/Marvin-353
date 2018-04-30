@@ -1,10 +1,11 @@
 import React from 'react';
+// import PropTypes from 'prop-types';
 import PageTableForm from '../template/PageTableForm';
 
 class StudentExam extends React.Component {
   constructor(props) {
     super(props);
-    this.subscribedExamList = [
+    this.examList = [
       {
         name: 'Programming',
         credits: '10',
@@ -36,12 +37,16 @@ class StudentExam extends React.Component {
       <div>
         <PageTableForm
           getTableData={e => e}
-          tableData={this.subscribedExamList}
+          tableData={this.examList}
           headerInfo={['Name', 'Credits', 'Mandatory', 'Vote']}
         />
       </div>
     );
   }
 }
+StudentExam.propTypes = {
+  // getExams: PropTypes.func.isRequired,
+  // examList: PropTypes.arrayOf(Object).isRequired,
+};
 
 export default StudentExam;

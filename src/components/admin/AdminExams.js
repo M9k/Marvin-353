@@ -1,11 +1,12 @@
 import React from 'react';
 import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+// import PropTypes from 'prop-types';
 import PageTableForm from '../template/PageTableForm';
 
 class AdminExams extends React.Component {
   constructor(props) {
     super(props);
-    this.solarYears = [
+    this.solarYearList = [
       '2017',
       '2016',
       '2015',
@@ -60,8 +61,8 @@ class AdminExams extends React.Component {
         professorAddress: '0x79196b90d1e952c5a43d4847caa08d50b967c34a',
       },
     ];
-    this.list = this.examList.filter(exam => exam.year === this.solarYears[0]);
-    this.state = { year: this.solarYears[0] };
+    this.list = this.examList.filter(exam => exam.year === this.solarYearList[0]);
+    this.state = { year: this.solarYearList[0] };
     this.onChangeYear = this.onChangeYear.bind(this);
   }
   onChangeYear() {
@@ -75,8 +76,8 @@ class AdminExams extends React.Component {
   }
   render() {
     const options = [];
-    for (let i = 0; i < this.solarYears.length; i += 1) {
-      options.push(<option value={this.solarYears[i]}>{this.solarYears[i]}</option>);
+    for (let i = 0; i < this.solarYearList.length; i += 1) {
+      options.push(<option value={this.solarYearList[i]}>{this.solarYearList[i]}</option>);
     }
     return (
       <div>
@@ -95,12 +96,17 @@ class AdminExams extends React.Component {
           getTableData={e => e}
           tableData={this.list}
           headerInfo={['name', 'credits', 'courseName', 'year', 'professorSurname', 'professorName', 'details']}
-          detailTableData={true} // eslint-disable-line
-          columFilter={true} // eslint-disable-line
+          detailTableData
+          columFilter
         />
       </div>
     );
   }
 }
-
+AdminExams.propTypes = {
+  // getExams: PropTypes.func.isRequired,
+  // setTeacher: PropTypes.func.isRequired,
+  // examList: PropTypes.arrayOf(Object).isRequired,
+  // solarYearList: PropTypes.arrayOf(String).isRequired,
+};
 export default AdminExams;

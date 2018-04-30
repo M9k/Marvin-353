@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+// import PropTypes from 'prop-types';
 import PageTableForm from '../template/PageTableForm';
 import Form from '../custom/Form';
 import Utils from '../custom/utils';
@@ -8,31 +9,35 @@ import FieldTypes from '../custom/fieldtypes';
 class AdminCourses extends React.Component {
   constructor(props) {
     super(props);
-    this.solarYears = [
+    this.solarYearList = [
       '2017',
       '2016',
       '2015',
     ];
     this.getCourses = () => {};
-    this.degreeCoursesList = [
+    this.courseList = [
       {
-        code: 'L-31',
+        name: 'L-31',
         solarYear: '2017',
+        courseAddress: '0xfae394561e33e242c551d15d4625309ea4c0b97f',
       },
       {
-        code: 'L-35',
+        name: 'L-35',
         solarYear: '2016',
+        courseAddress: '0xfae394561e33e242c551d15d4625309ea4c0b97f',
       },
       {
-        code: 'L-35',
+        name: 'L-35',
         solarYear: '2017',
+        courseAddress: '0xfae394561e33e242c551d15d4625309ea4c0b97f',
       },
       {
-        code: 'L-30',
+        name: 'L-30',
         solarYear: '2015',
+        courseAddress: '0xfae394561e33e242c551d15d4625309ea4c0b97f',
       },
     ];
-    this.list = this.degreeCoursesList;
+    this.list = this.courseList;
     this.state = { year: 'ALL' };
     this.onChangeYear = this.onChangeYear.bind(this);
   }
@@ -43,17 +48,17 @@ class AdminCourses extends React.Component {
     }
   }
   changeTable() {
-    this.list = this.degreeCoursesList;
+    this.list = this.courseList;
     if (this.inputEl.value !== 'ALL') {
-      this.list = this.degreeCoursesList.filter(course => course.solarYear === this.inputEl.value);
+      this.list = this.courseList.filter(course => course.solarYear === this.inputEl.value);
     }
   }
 
   render() {
     const options = [];
     options.push(<option value="ALL">ALL</option>);
-    for (let i = 0; i < this.solarYears.length; i += 1) {
-      options.push(<option value={this.solarYears[i]}>{this.solarYears[i]}</option>);
+    for (let i = 0; i < this.solarYearList.length; i += 1) {
+      options.push(<option value={this.solarYearList[i]}>{this.solarYearList[i]}</option>);
     }
 
     return (
@@ -74,7 +79,7 @@ class AdminCourses extends React.Component {
               label: 'Academic Year:',
               help: 'insert the associated year',
               type: FieldTypes.SELECT,
-              values: this.solarYears,
+              values: this.solarYearList,
               validateFunction: Utils.moreThanCurrentYear,
             },
           ]}
@@ -94,8 +99,9 @@ class AdminCourses extends React.Component {
         <PageTableForm
           getTableData={this.getCourses}
           tableData={this.list}
-          headerInfo={['Course code', 'Academic Year', 'Details']}
-          linkTableData="true"
+          headerInfo={['name', 'solarYear', 'Details']}
+          linkTableData
+          columFilter
         />
       </div>
     );
@@ -105,8 +111,9 @@ class AdminCourses extends React.Component {
 AdminCourses.propTypes = {
   // addCourse: PropTypes.func.isRequired,
   // getCourses: PropTypes.func.isRequired,
-  // degreeCoursesList: PropTypes.arrayOf(Object).isRequired,
   // validCourse: PropTypes.func.isRequired,
+  // courseList: PropTypes.arrayOf(Object).isRequired,
+  // solarYearList: PropTypes.arrayOf(String).isRequired,
 };
 
 export default AdminCourses;

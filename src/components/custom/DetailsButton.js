@@ -31,8 +31,7 @@ class DetailsButton extends React.Component {
       assignTeacher: false,
     };
     this.object = this.props.object;
-    console.log(this.props.object);
-    this.student = '70';
+    this.studentNumber = '70';
   }
 
   handleClick() {
@@ -94,7 +93,7 @@ class DetailsButton extends React.Component {
             <dt>Teacher</dt>
             {this.teacher()}
             <dt>Student number</dt>
-            <dd>{this.student}</dd>
+            <dd>{this.studentNumber}</dd>
           </dl>
         </ModalForm>
         <ModalForm
@@ -123,7 +122,9 @@ DetailsButton.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   object: PropTypes.object.isRequired,
   text: PropTypes.string.isRequired,
-  // student: PropTypes.number,
+  // studentNumber: PropTypes.number.isRequired,
+  // teacherList: PropTypes.arrayOf(Object).isRequired,
+  // setTeacher: PropTypes.func.isRequired,
 };
 
 export default DetailsButton;

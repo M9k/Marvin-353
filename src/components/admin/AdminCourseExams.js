@@ -10,7 +10,7 @@ class AdminCourseExams extends React.Component {
     super(props);
     this.params = this.props.params;
     this.getCourses = () => {};
-    this.exams = [
+    this.examList = [
       {
         name: 'Programming',
         credits: '10',
@@ -82,10 +82,10 @@ class AdminCourseExams extends React.Component {
         />
         <PageTableForm
           getTableData={this.getCourses}
-          tableData={this.exams}
+          tableData={this.examList}
           headerInfo={['name', 'credits', 'mandatory', 'professorName', 'professorSurname', 'details']}
-          detailTableData={true} // eslint-disable-line
-          columFilter={true} // eslint-disable-line
+          detailTableData
+          columFilter
         />
       </div>
     );
@@ -97,7 +97,7 @@ AdminCourseExams.propTypes = {
   // getExams: PropTypes.func.isRequired,
   // addExam: PropTypes.func.isRequired,
   // validExam: PropTypes.func.isRequired,
-  // setTeacher: PropTypes.func.isRequired,
+  // examList: PropTypes.arrayOf(Object).isRequired,
 };
 
 export default AdminCourseExams;
