@@ -2,6 +2,7 @@ import { call, put, fork, all, takeLatest, takeEvery } from 'redux-saga/effects'
 import * as User from '../web3calls/User';
 import * as Exam from '../web3calls/Exam';
 import * as UniversityExam from '../web3calls/UniversityExam';
+import * as Course from '../web3calls/Course';
 
 const actionType = type => `marvin/ManageExamsSaga/${type}`;
 const ADD_NEW_EXAM = actionType('ADD_NEW_EXAM');
@@ -45,6 +46,18 @@ export function* getExamData(examAddress) {
 }
 export function* associateProfessor(examAddress, teacherAddress) {
   yield call(UniversityExam.associateTeacherToExam, teacherAddress, examAddress);
+}
+export function* getCourseExamsList(courseAddress) {
+  const courseNumber = yield call(Course.getExamNumber, courseAddress);
+  const examsAddressFetch = Array(Number(courseNumber)).fill().map((_, id) => (
+    call(Course.getExamContractAt, courseAddress, id)
+  ));
+  const examsAddresses = yield all(examsAddressFetch);
+  const examDataFetch = examsAddresses.map(addr => (
+    call(getExamData, addr)
+  ));
+  const examsData = yield all(examDataFetch);
+  return examsData;
 }
 export function* addNewExam({ courseAddress, name, credits, mandatory }){
 

@@ -6,6 +6,7 @@ import * as sagas from '../../src/sagas/ManageExamsSaga';
 import * as Exam from '../../src/web3calls/Exam';
 import * as User from '../../src/web3calls/User';
 import * as UniversityExam from '../../src/web3calls/UniversityExam';
+import * as Course from '../../src/web3calls/Course';
 
 describe('ManageExamsSaga', () => {
   function* sagaStub(saga, address) {
@@ -13,6 +14,7 @@ describe('ManageExamsSaga', () => {
       const data = yield call(saga, address);
       yield put((data === undefined ? 'ok' : data));
     } catch (e) {
+      console.log(e);
       yield put('error');
     }
   }
@@ -74,6 +76,76 @@ describe('ManageExamsSaga', () => {
     it('should not catch the error if something goes wrong', () => expectSaga(sagaStub, sagas.associateProfessor, '1', '2')
       .provide([
         [matchers.call.fn(UniversityExam.associateTeacherToExam, '1', '2'), throwError(new Error())],
+      ])
+      .put('error')
+      .run());
+  });
+  describe('getCourseExamsList', () => {
+    it('should retrive an empty list', () => expectSaga(sagaStub, sagas.getCourseExamsList, 'course')
+      .provide([
+        [matchers.call.fn(Course.getExamNumber, 'course'), 0],
+      ])
+      .put([])
+      .run());
+    it('should retrive a list with more than one element', () => expectSaga(sagaStub, sagas.getCourseExamsList, 'course')
+      .provide({
+        call: (effect, next) => {
+          if (effect.fn === Course.getExamNumber) return 2;
+          if (effect.fn === Course.getExamContractAt) {
+            if (effect.args[1] === 0) return 'c1';
+            if (effect.args[1] === 1) return 'c2';
+          }
+          if (effect.fn === sagas.getExamData) {
+            if (effect.args[0] === 'c1') {
+              return {
+                address: 'c1',
+                name: 'P1',
+                credits: 10,
+                mandatory: true,
+                teacherAddress: 'gibbo',
+                teacherName: 'Gilberto',
+                teacherSurname: 'Filé',
+              };
+            }
+            if (effect.args[0] === 'c2') {
+              return {
+                address: 'c2',
+                name: 'P2',
+                credits: 10,
+                mandatory: true,
+                teacherAddress: 'ranzi',
+                teacherName: 'Francesco',
+                teacherSurname: 'Ranzato',
+              };
+            }
+          }
+          return next();
+        },
+      })
+      .put([
+        {
+          address: 'c1',
+          name: 'P1',
+          credits: 10,
+          mandatory: true,
+          teacherAddress: 'gibbo',
+          teacherName: 'Gilberto',
+          teacherSurname: 'Filé',
+        },
+        {
+          address: 'c2',
+          name: 'P2',
+          credits: 10,
+          mandatory: true,
+          teacherAddress: 'ranzi',
+          teacherName: 'Francesco',
+          teacherSurname: 'Ranzato',
+        },
+      ])
+      .run());
+    it('should not catch the error when something goes wrong', () => expectSaga(sagaStub, sagas.getCourseExamsList, 'course')
+      .provide([
+        [matchers.call.fn(Course.getExamNumber, 'course'), throwError(new Error())],
       ])
       .put('error')
       .run());
