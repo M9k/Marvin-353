@@ -48,7 +48,8 @@ class DetailsButton extends React.Component {
   teacher() {
     if (this.object.teacher_name !== '' && this.object.teacher_surname !== '') {
       return (
-        <dd>{this.object.teacher_surname} {this.object.teacher_name}</dd>
+        // eslint-disable-next-line
+        <dd>{this.object.professorSurname} {this.object.professorName} {this.object.professorAddress}</dd>
       );
     }
     return (
@@ -75,14 +76,24 @@ class DetailsButton extends React.Component {
           show={this.state.show}
         >
           <dl>
-            <dt>Name</dt>
+            <dt>Exam Address</dt>
+            <dd>{this.object.examAddress}</dd>
+            <dt>Exam Name</dt>
             <dd>{this.object.name}</dd>
             <dt>Credits</dt>
             <dd>{this.object.credits}</dd>
-            <dt>Student number</dt>
-            <dd>{this.student}</dd>
+            <dt>Mandatory</dt>
+            <dd>{this.object.mandatory}</dd>
+            <dt>Solar year</dt>
+            <dd>{this.object.year}</dd>
+            <dt>Course Address</dt>
+            <dd>{this.object.courseAddress}</dd>
+            <dt>Course Name</dt>
+            <dd>{this.object.courseName}</dd>
             <dt>Teacher</dt>
             {this.teacher()}
+            <dt>Student number</dt>
+            <dd>{this.student}</dd>
           </dl>
         </ModalForm>
         <ModalForm
