@@ -12,13 +12,15 @@ const ConfirmTeacher = props => (
       getTableData={props.getPendingTeachers}
       tableData={
         props.pendingTeachers
-        // Non ne ho idea
-        // ATTENZIONE!
-        // le azioni si effettuano su teacherAccounts, ma va visualizzato teacherAddress!
+        // TODO
+        // nascondere il contratto
+        // applicare le azioni sul campo corretto
+        // controllare che il messaggio nel pop-up abbia senso
+        // controllare non ci siano errori nella console web
       }
       deleteSingleColumnRow={props.denyTeacher}
       confirmationFunction={props.confirmTeacher}
-      headerInfo={['Address', 'Name', 'Surname', 'Confirm', 'Deny']}
+      headerInfo={['CONTRATTO DA NON MOSTRARE', 'Address', 'Name', 'Surname', 'Confirm', 'Deny']}
     />
   </div>
 );
@@ -31,7 +33,7 @@ ConfirmTeacher.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  pendingTeachers: state.accounts.pendingTeachers,
+  pendingTeachers: state.accounts.pendingTeachersList,
 });
 
 function mapDispatchToProps(dispatch) {
