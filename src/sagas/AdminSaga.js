@@ -89,7 +89,7 @@ export function* approveUser(action) {
     } else if (action.role === ROLES.UNCONFIRMED_TEACHER) {
       yield call(confirmTeacher, action.address);
     }
-    yield put(actionCreators.confirmUser(action));
+    yield put(actionCreators.confirmUser(action.role, action.address));
   } catch (e) {
     console.log('Failed!');
     yield put(actionCreators.listHasErrored());
@@ -104,7 +104,7 @@ export function* deleteUser(action) {
     } else if (action.role === ROLES.UNCONFIRMED_TEACHER) {
       yield call(removeTeacher, action.address);
     }
-    yield put(actionCreators.removeUser(action));
+    yield put(actionCreators.removeUser(action.role, action.address));
   } catch (e) {
     console.log('Failed!');
     yield put(actionCreators.listHasErrored());
