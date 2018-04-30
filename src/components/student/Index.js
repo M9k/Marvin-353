@@ -3,13 +3,13 @@ import CardWithIcon from '../custom/CardWithIcon';
 
 const Index = () => (
   <div>
-    <h3 className="text-center">Welcome Admin</h3>
+    <h3 className="text-center">Welcome Student</h3>
     <img alt="" className="img-responsive imageIndexTop" src="/media/cards/studentIndex.png" />
     <CardWithIcon
       title="Exams list"
       text="Show all my exams list"
       image="default.png"
-      links={[{ path: '/', label: 'Click here to see your exams' }]}
+      links={[{ path: '/exams', label: 'Click here to see your exams' }]}
     />
     <CardWithIcon
       title="Optional exams"

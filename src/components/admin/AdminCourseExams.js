@@ -83,7 +83,7 @@ class AdminCourseExams extends React.Component {
         <PageTableForm
           getTableData={this.getCourses}
           tableData={this.exams}
-          headerInfo={['name', 'credits', 'professorName', 'professorSurname', 'details']}
+          headerInfo={['name', 'credits', 'mandatory', 'professorName', 'professorSurname', 'details']}
           detailTableData={true} // eslint-disable-line
           columFilter={true} // eslint-disable-line
         />

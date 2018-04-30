@@ -1,4 +1,5 @@
 import Index from '../student/Index';
+import StudentExam from '../student/StudentExam';
 
 const StudentRoutes = [
   {
@@ -6,6 +7,12 @@ const StudentRoutes = [
     label: '/',
     position: 'none',
     component: Index,
+  },
+  {
+    path: '/exams',
+    label: 'Exams',
+    position: 'left',
+    component: StudentExam,
   },
 ];
 

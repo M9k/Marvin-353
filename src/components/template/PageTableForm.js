@@ -72,12 +72,12 @@ class PageTableForm extends React.Component {
     if (item instanceof Object) {
       if (this.props.columFilter) {
         return Object.keys(item).filter(key => this.props.headerInfo.includes(key)).map(key =>
-          <td>{item[key]}</td>);
+          <td>{this.checkBooleanValue(item[key])}</td>);
       }
       return Object.keys(item).map(key =>
-        <td>{item[key]}</td>);
+        <td>{this.checkBooleanValue(item[key])}</td>);
     }
-    return <td>{item}</td>;
+    return <td>{this.checkBooleanValue(item)}</td>;
   }
   getRows() {
     return this.props.tableData.map(item =>
@@ -91,7 +91,12 @@ class PageTableForm extends React.Component {
         </tr>
       ));
   }
-
+  checkBooleanValue(item) { // eslint-disable-line class-methods-use-this
+    if (item === true || item === false) {
+      return item ? 'Yes' : 'No';
+    }
+    return item;
+  }
   isFormRequired() {
     if (this.props.addTableData !== undefined) {
       return <Form submitFunction={this.props.getTableData} />;
