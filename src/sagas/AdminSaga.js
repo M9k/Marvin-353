@@ -170,6 +170,7 @@ export const creators = {
 export default function* handler() {
   yield [
     fork(takeEvery, DELETE_USER, deleteUser),
+    fork(takeEvery, DENY_USER, denyUser),
     fork(takeEvery, APPROVE_USER, approveUser),
     fork(takeLatest, GET_STUDENTS_LIST, getAllStudents),
     fork(takeLatest, GET_TEACHERS_LIST, getAllTeachers),
