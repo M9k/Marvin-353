@@ -8,8 +8,6 @@ import FieldTypes from '../custom/fieldtypes';
 import ModalForm from '../custom/ModalForm';
 import { creators } from '../../sagas/BookingSaga';
 
-
-// eslint-disable-next-line react/prefer-stateless-function
 class Register extends React.Component {
   constructor(props) {
     super(props);
@@ -100,7 +98,7 @@ const mapStateToProps = state => ({
 
 function mapDispatchToProps(dispatch) {
   return {
-    signUp: (n, s, c) => { console.log('Subscribed', n, s, c); dispatch(creators.performSignUp(n, s, c)); },
+    signUp: (n, s, c) => dispatch(creators.performSignUp(n, s, c)),
     getCourses: () => dispatch(creators.performLoad((new Date()).getFullYear())),
   };
 }
