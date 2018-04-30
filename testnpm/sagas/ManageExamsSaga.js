@@ -5,12 +5,13 @@ import * as matchers from 'redux-saga-test-plan/matchers';
 import * as sagas from '../../src/sagas/ManageExamsSaga';
 import * as Exam from '../../src/web3calls/Exam';
 import * as User from '../../src/web3calls/User';
+import * as UniversityExam from '../../src/web3calls/UniversityExam';
 
 describe('ManageExamsSaga', () => {
   function* sagaStub(saga, address) {
     try {
       const data = yield call(saga, address);
-      yield put(data);
+      yield put((data === undefined ? 'ok' : data));
     } catch (e) {
       yield put('error');
     }
@@ -59,6 +60,20 @@ describe('ManageExamsSaga', () => {
     it('should not catch the error if something goes wrong', () => expectSaga(sagaStub, sagas.getTeacherData, 'sart')
       .provide([
         [matchers.call.fn(User.getName, 'sart'), throwError(new Error())],
+      ])
+      .put('error')
+      .run());
+  });
+  describe('associateProfessor', () => {
+    it('should not crash when everything goes right', () => expectSaga(sagaStub, sagas.associateProfessor, '1', '2')
+      .provide([
+        [matchers.call.fn(UniversityExam.associateTeacherToExam, '1', '2'), true],
+      ])
+      .put('ok')
+      .run());
+    it('should not catch the error if something goes wrong', () => expectSaga(sagaStub, sagas.associateProfessor, '1', '2')
+      .provide([
+        [matchers.call.fn(UniversityExam.associateTeacherToExam, '1', '2'), throwError(new Error())],
       ])
       .put('error')
       .run());
