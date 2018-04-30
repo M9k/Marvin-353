@@ -77,20 +77,24 @@ export function* getPendingTeachers() {
     num = Number(num);
     const apiCalls = Array(num).fill().map((_, i) =>
       call(getNotApprovedTeacherContractAddressAt, i));
-    const pendingTeachers = yield all(apiCalls);
-    const apiNameCalls = Array(num).fill().map(() => call(getName, String(pendingTeachers)));
+    const pendingTeachersContracts = yield all(apiCalls);
+    const apiNameCalls = Array(num).fill().map(() =>
+      call(getName, String(pendingTeachersContracts)));
     const pendingTeachersName = (yield all(apiNameCalls)).map(toText);
-    const apiSurnameCalls = Array(num).fill().map(() => call(getSurname, String(pendingTeachers)));
+    const apiSurnameCalls = Array(num).fill().map(() =>
+      call(getSurname, String(pendingTeachersContracts)));
     const pendingTeachersSurname = (yield all(apiSurnameCalls)).map(toText);
     const apiPublicAddressCalls = Array(num).fill().map(() =>
-      call(getPublicAddress, String(pendingTeachers)));
+      call(getPublicAddress, String(pendingTeachersContracts)));
     const pendingTeachersPublicAddress = (yield all(apiPublicAddressCalls));
-    yield put(actionCreators.setPendingTeachersList({
-      pendingTeachers,
-      pendingTeachersPublicAddress,
-      pendingTeachersName,
-      pendingTeachersSurname,
+    const pendingTeachers = Array(num).fill().map((_, i) => ({
+      contract: pendingTeachersContracts[i],
+      address: pendingTeachersPublicAddress[i],
+      name: pendingTeachersName[i],
+      surname: pendingTeachersSurname[i],
     }));
+    // console.log(pendingTeachers);
+    yield put(actionCreators.setPendingTeachersList(pendingTeachers));
   } catch (e) {
     console.log('Failed!');
     yield put(actionCreators.listHasErrored());

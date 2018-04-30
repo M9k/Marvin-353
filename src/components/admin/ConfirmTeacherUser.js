@@ -10,11 +10,12 @@ const ConfirmTeacher = props => (
   <div>
     <PageTableForm
       getTableData={props.getPendingTeachers}
-      tableData={[
+      tableData={
+        props.pendingTeachers
         // Non ne ho idea
         // ATTENZIONE!
         // le azioni si effettuano su teacherAccounts, ma va visualizzato teacherAddress!
-      ]}
+      }
       deleteSingleColumnRow={props.denyTeacher}
       confirmationFunction={props.confirmTeacher}
       headerInfo={['Address', 'Name', 'Surname', 'Confirm', 'Deny']}
@@ -26,17 +27,11 @@ ConfirmTeacher.propTypes = {
   confirmTeacher: PropTypes.func.isRequired,
   getPendingTeachers: PropTypes.func.isRequired,
   denyTeacher: PropTypes.func.isRequired,
-  teacherAccounts: PropTypes.arrayOf(Object).isRequired,
-  teacherAddress: PropTypes.arrayOf(Object).isRequired,
-  teacherName: PropTypes.arrayOf(Object).isRequired,
-  teacherSurname: PropTypes.arrayOf(Object).isRequired,
+  pendingTeachers: PropTypes.arrayOf(Object).isRequired,
 };
 
 const mapStateToProps = state => ({
-  teacherAccounts: state.accounts.pendingTeachersList,
-  teacherAddress: state.accounts.pendingTeachersPublicAddress,
-  teacherName: state.accounts.pendingTeachersName,
-  teacherSurname: state.accounts.pendingTeachersSurname,
+  pendingTeachers: state.accounts.pendingTeachers,
 });
 
 function mapDispatchToProps(dispatch) {
