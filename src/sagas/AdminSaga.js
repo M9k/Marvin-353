@@ -12,6 +12,10 @@ import {
   confirmTeacher, removeTeacher,
 } from '../web3calls/UniversityTeacher';
 
+import { getName, getSurname, getPublicAddress } from '../web3calls/User';
+
+import { toText } from '../util/web3/textConverter';
+
 import ROLES from '../util/logic/AccountEnum';
 
 
@@ -74,7 +78,19 @@ export function* getPendingTeachers() {
     const apiCalls = Array(num).fill().map((_, i) =>
       call(getNotApprovedTeacherContractAddressAt, i));
     const pendingTeachers = yield all(apiCalls);
-    yield put(actionCreators.setPendingTeachersList(pendingTeachers));
+    const apiNameCalls = Array(num).fill().map(() => call(getName, String(pendingTeachers)));
+    const pendingTeachersName = (yield all(apiNameCalls)).map(toText);
+    const apiSurnameCalls = Array(num).fill().map(() => call(getSurname, String(pendingTeachers)));
+    const pendingTeachersSurname = (yield all(apiSurnameCalls)).map(toText);
+    const apiPublicAddressCalls = Array(num).fill().map(() =>
+      call(getPublicAddress, String(pendingTeachers)));
+    const pendingTeachersPublicAddress = (yield all(apiPublicAddressCalls));
+    yield put(actionCreators.setPendingTeachersList({
+      pendingTeachers,
+      pendingTeachersPublicAddress,
+      pendingTeachersName,
+      pendingTeachersSurname,
+    }));
   } catch (e) {
     console.log('Failed!');
     yield put(actionCreators.listHasErrored());
