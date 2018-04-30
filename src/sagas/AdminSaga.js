@@ -124,11 +124,11 @@ export const creators = {
   getPendingTEachersAction: () => (
     { type: GET_PENDING_TEACHERS_LIST }
   ),
-  approveUserAction: address => (
-    { type: APPROVE_USER, address }
+  approveUserAction: (role, address) => (
+    { type: APPROVE_USER, role, address }
   ),
-  removeUserAction: address => (
-    { type: DELETE_USER, address }
+  removeUserAction: (role, address) => (
+    { type: DELETE_USER, role, address }
   ),
 };
 

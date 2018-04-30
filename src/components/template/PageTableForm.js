@@ -15,6 +15,7 @@ class PageTableForm extends React.Component {
     this.getMultiColumnDeleteButton = this.getMultiColumnDeleteButton.bind(this);
     this.getDeleteButton = this.getDeleteButton.bind(this);
     this.getDetailsButton = this.getDetailsButton.bind(this);
+    this.getConfirmationButton = this.getConfirmationButton.bind(this);
     this.getRows = this.getRows.bind(this);
     this.getRow = this.getRow.bind(this);
   }
@@ -71,6 +72,15 @@ class PageTableForm extends React.Component {
     }
     return null;
   }
+  getConfirmationButton(item) {
+    if (this.props.confirmationFunction !== undefined) {
+      console.log('sono in confirmation', item);
+      return (
+        <td><DeleteButton deleteFunction={this.props.confirmationFunction} objectToRemove={item} text="Confirm" /></td>
+      );
+    }
+    return null;
+  }
   // eslint-disable-next-line
   getRow(item) {
     if (item instanceof Object) {
@@ -89,9 +99,10 @@ class PageTableForm extends React.Component {
         <tr key={Utils.generateKey(item)}>
           {this.getRow(item)}
           {this.getDetailsButton(item)}
+          {this.getConfirmationButton(item)}
           {this.getEditButton(item)}
           {this.getDeleteButton(item)}
-          {this.getMultiColumnDeleteButton(item.address)}
+          {this.getMultiColumnDeleteButton(item)}
         </tr>
       ));
   }
@@ -131,6 +142,7 @@ PageTableForm.propTypes = {
   editTableData: PropTypes.func,
   deleteSingleColumnRow: PropTypes.func,
   deleteMultiColumnRow: PropTypes.func,
+  confirmationFunction: PropTypes.func,
   tableData: PropTypes.arrayOf(Object).isRequired,
   headerInfo: PropTypes.arrayOf(String).isRequired,
   linkTableData: PropTypes.bool,
@@ -142,6 +154,7 @@ PageTableForm.defaultProps = {
   editTableData: undefined,
   deleteMultiColumnRow: undefined,
   deleteSingleColumnRow: undefined,
+  confirmationFunction: undefined,
   linkTableData: false,
   detailTableData: false,
   columFilter: false,
