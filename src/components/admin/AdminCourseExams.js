@@ -14,26 +14,34 @@ class AdminCourseExams extends React.Component {
       {
         name: 'Programming',
         credits: '10',
-        teacher_surname: 'Filè',
-        teacher_name: 'Gilberto',
+        mandatory: 'yes',
+        professorName: 'Filè',
+        professorSurname: 'Gilberto',
+        professorAddress: '0x252dae0a4b9d9b80f504f6418acd2d364c0c59cd',
       },
       {
         name: 'Computer architecture',
         credits: '8',
-        teacher_surname: 'Sperduti',
-        teacher_name: 'Alessandro',
+        mandatory: 'yes',
+        professorName: 'Sperduti',
+        professorSurname: 'Alessandro',
+        professorAddress: '0x252dae0a4b9d9b80f504f6418acd2d364c0c59cd',
       },
       {
         name: 'Logic',
         credits: '6',
-        teacher_surname: 'Maietti',
-        teacher_name: 'Maria Emilia',
+        mandatory: 'no',
+        professorName: 'Maietti',
+        professorSurname: 'Maria Emilia',
+        professorAddress: '0x252dae0a4b9d9b80f504f6418acd2d364c0c59cd',
       },
       {
         name: 'Database',
         credits: '9',
-        teacher_surname: '',
-        teacher_name: '',
+        mandatory: 'yes',
+        professorName: '',
+        professorSurname: '',
+        professorAddress: '0x252dae0a4b9d9b80f504f6418acd2d364c0c59cd',
       },
     ];
   }
@@ -75,7 +83,7 @@ class AdminCourseExams extends React.Component {
         <PageTableForm
           getTableData={this.getCourses}
           tableData={this.exams}
-          headerInfo={['Name', 'Credits', 'Teacher surname', 'Teacher name', 'Details']}
+          headerInfo={['Name', 'Credits', 'Manatory', 'Teacher surname', 'Teacher name', 'Teacher address', 'Details']}
           detailTableData={true} // eslint-disable-line
         />
       </div>
