@@ -70,6 +70,10 @@ class PageTableForm extends React.Component {
   // eslint-disable-next-line
   getRow(item) {
     if (item instanceof Object) {
+      if (this.props.columFilter) {
+        return Object.keys(item).filter(key => this.props.headerInfo.includes(key)).map(key =>
+          <td>{item[key]}</td>);
+      }
       return Object.keys(item).map(key =>
         <td>{item[key]}</td>);
     }
@@ -130,6 +134,7 @@ PageTableForm.propTypes = {
   headerInfo: PropTypes.arrayOf(String).isRequired,
   linkTableData: PropTypes.bool,
   detailTableData: PropTypes.bool,
+  columFilter: PropTypes.bool,
 };
 
 PageTableForm.defaultProps = {
@@ -139,6 +144,7 @@ PageTableForm.defaultProps = {
   addTableData: undefined,
   linkTableData: false,
   detailTableData: false,
+  columFilter: false,
 };
 
 export default PageTableForm;

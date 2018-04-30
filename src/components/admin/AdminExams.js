@@ -94,8 +94,9 @@ class AdminExams extends React.Component {
         <PageTableForm
           getTableData={e => e}
           tableData={this.list}
-          headerInfo={['Name', 'Credits', 'Course', 'Year', 'Teacher surname', 'Teacher name', 'Details']}
+          headerInfo={['name', 'credits', 'courseName', 'year', 'professorSurname', 'professorName', 'details']}
           detailTableData={true} // eslint-disable-line
+          columFilter={true} // eslint-disable-line
         />
       </div>
     );
