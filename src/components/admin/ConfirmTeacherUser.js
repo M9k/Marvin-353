@@ -10,10 +10,14 @@ const ConfirmTeacher = props => (
   <div>
     <PageTableForm
       getTableData={props.getPendingTeachers}
-      tableData={props.teacherAccounts}
+      tableData={[
+        // Non ne ho idea
+        // ATTENZIONE!
+        // le azioni si effettuano su teacherAccounts, ma va visualizzato teacherAddress!
+      ]}
       deleteSingleColumnRow={props.denyTeacher}
       confirmationFunction={props.confirmTeacher}
-      headerInfo={['Address', 'Confirm', 'Deny']}
+      headerInfo={['Address', 'Name', 'Surname', 'Confirm', 'Deny']}
     />
   </div>
 );
@@ -23,15 +27,22 @@ ConfirmTeacher.propTypes = {
   getPendingTeachers: PropTypes.func.isRequired,
   denyTeacher: PropTypes.func.isRequired,
   teacherAccounts: PropTypes.arrayOf(Object).isRequired,
+  teacherAddress: PropTypes.arrayOf(Object).isRequired,
+  teacherName: PropTypes.arrayOf(Object).isRequired,
+  teacherSurname: PropTypes.arrayOf(Object).isRequired,
 };
 
 const mapStateToProps = state => ({
   teacherAccounts: state.accounts.pendingTeachersList,
+  teacherAddress: state.accounts.pendingTeachersPublicAddress,
+  teacherName: state.accounts.pendingTeachersName,
+  teacherSurname: state.accounts.pendingTeachersSurname,
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    confirmTeacher: a => dispatch(creators.approveUserAction(ROLES.UNCONFIRMED_TEACHER, a)),
+    confirmTeacher: address =>
+      dispatch(creators.approveUserAction(ROLES.UNCONFIRMED_TEACHER, address)),
     denyTeacher: address => dispatch(creators.removeUserAction(ROLES.UNCONFIRMED_TEACHER, address)),
     getPendingTeachers: () => dispatch(creators.getPendingTEachersAction()),
   };
