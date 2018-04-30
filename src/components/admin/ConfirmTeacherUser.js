@@ -10,17 +10,11 @@ const ConfirmTeacher = props => (
   <div>
     <PageTableForm
       getTableData={props.getPendingTeachers}
-      tableData={
-        props.pendingTeachers
-        // TODO
-        // nascondere il contratto
-        // applicare le azioni sul campo corretto
-        // controllare che il messaggio nel pop-up abbia senso
-        // controllare non ci siano errori nella console web
-      }
-      deleteSingleColumnRow={props.denyTeacher}
+      tableData={props.pendingTeachers}
+      deleteMultiColumnRow={props.denyTeacher}
       confirmationFunction={props.confirmTeacher}
-      headerInfo={['CONTRATTO DA NON MOSTRARE', 'Address', 'Name', 'Surname', 'Confirm', 'Deny']}
+      headerInfo={['address', 'name', 'surname', 'confirm user', 'unconfirm']}
+      columFilter
     />
   </div>
 );

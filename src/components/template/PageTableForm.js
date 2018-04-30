@@ -113,10 +113,10 @@ class PageTableForm extends React.Component {
         <tr key={Utils.generateKey(item)}>
           {this.getRow(item)}
           {this.getDetailsButton(item)}
-          {this.getConfirmationButton(item)}
+          {this.getConfirmationButton(item.contract)}
           {this.getEditButton(item)}
           {this.getDeleteButton(item)}
-          {this.getMultiColumnDeleteButton(item.Address)}
+          {this.getMultiColumnDeleteButton(item)}
         </tr>
       ));
   }
