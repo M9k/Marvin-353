@@ -8,21 +8,21 @@ function getUserContract(address) {
 }
 
 function getPublicAddress(address) {
-  console.log('User getPublicAddress');
+  console.log(`User getPublicAddress of ${address}`);
   const contractInstance = getUserContract(address);
   return contractInstance.then(instance =>
     instance.getPublicAddress.call());
 }
 
 function getName(address) {
-  console.log('User getName');
+  console.log(`User getName of ${address}`);
   const contractInstance = getUserContract(address);
   return contractInstance.then(instance =>
     instance.getName.call());
 }
 
 function getSurname(address) {
-  console.log('User getSurname');
+  console.log(`User getSurname of ${address}`);
   const contractInstance = getUserContract(address);
   return contractInstance.then(instance =>
     instance.getSurname.call());
