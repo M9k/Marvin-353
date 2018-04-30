@@ -3,13 +3,13 @@ import { creators as actionCreators } from '../ducks/Admin';
 import {
   getStudentContractAddressAt, getStudentNumber, getNotApprovedStudentNumber,
   getNotApprovedStudentContractAddressAt,
-  confirmStudent, removeStudent,
+  confirmStudent, removeStudent, denyStudent,
 } from '../web3calls/UniversityStudent';
 
 import {
   getTeacherContractAddressAt, getTeacherNumber,
   getNotApprovedTeacherNumber, getNotApprovedTeacherContractAddressAt,
-  confirmTeacher, removeTeacher,
+  confirmTeacher, removeTeacher, denyTeacher,
 } from '../web3calls/UniversityTeacher';
 
 import { getName, getSurname, getPublicAddress } from '../web3calls/User';
@@ -27,6 +27,7 @@ export const GET_PENDING_STUDENTS_LIST = actionType('GET_PENDING_STUDENTS_LIST')
 export const GET_PENDING_TEACHERS_LIST = actionType('GET_PENDING_TEACHERS_LIST');
 export const APPROVE_USER = actionType('APPROVE_USER');
 export const DELETE_USER = actionType('DELETE_USER');
+export const DENY_USER = actionType('DENY_USER');
 
 export function* getAllStudents() {
   yield put(actionCreators.listIsLoading());
@@ -119,12 +120,27 @@ export function* approveUser(action) {
 export function* deleteUser(action) {
   yield put(actionCreators.listIsLoading());
   try {
-    if (action.role === ROLES.UNCONFIRMED_STUDENT) {
+    if (action.role === ROLES.STUDENT) {
       yield call(removeStudent, action.address);
-    } else if (action.role === ROLES.UNCONFIRMED_TEACHER) {
+    } else if (action.role === ROLES.TEACHER) {
       yield call(removeTeacher, action.address);
     }
     yield put(actionCreators.removeUser(action.role, action.address));
+  } catch (e) {
+    console.log('Failed!');
+    yield put(actionCreators.listHasErrored());
+  }
+}
+
+export function* denyUser(action) {
+  yield put(actionCreators.listIsLoading());
+  try {
+    if (action.role === ROLES.UNCONFIRMED_STUDENT) {
+      yield call(denyStudent, action.address);
+    } else if (action.role === ROLES.UNCONFIRMED_TEACHER) {
+      yield call(denyTeacher, action.address);
+    }
+    yield put(actionCreators.unconfirmUser(action.role, action.address));
   } catch (e) {
     console.log('Failed!');
     yield put(actionCreators.listHasErrored());
@@ -150,11 +166,15 @@ export const creators = {
   removeUserAction: (role, address) => (
     { type: DELETE_USER, role, address }
   ),
+  denyUserAction: (role, address) => (
+    { type: DENY_USER, role, address }
+  ),
 };
 
 export default function* handler() {
   yield [
     fork(takeEvery, DELETE_USER, deleteUser),
+    fork(takeEvery, DENY_USER, denyUser),
     fork(takeEvery, APPROVE_USER, approveUser),
     fork(takeLatest, GET_STUDENTS_LIST, getAllStudents),
     fork(takeLatest, GET_TEACHERS_LIST, getAllTeachers),
