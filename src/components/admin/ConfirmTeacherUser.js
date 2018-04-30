@@ -44,7 +44,7 @@ const mapStateToProps = state => ({
 function mapDispatchToProps(dispatch) {
   return {
     confirmTeacher: objArr => (
-      dispatch(creators.approveUserAction(objArr.addressTeacher.value))
+      dispatch(creators.approveUserAction(objArr.teacherAddress.value))
     ),
     denyTeacher: address => dispatch(creators.removeUserAction(address)),
     getPendingTeachers: () => dispatch(creators.getPendingTEachersAction())
