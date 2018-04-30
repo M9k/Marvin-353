@@ -6,7 +6,7 @@ import CourseReducer, { creators as CourseCreators } from '../../../src/ducks/Co
 import TeacherReducer, { creators as TeacherCreators } from '../../../src/ducks/TeachersList';
 import ExamsReducer, { creators as ExamsCreators } from '../../../src/ducks/ExamsList';
 import * as sagas from '../../../src/sagas/ManageExamsSaga';
-import * as UniversityYear from '../../../src/web3calls/UniversityYear'
+import * as UniversityYear from '../../../src/web3calls/UniversityYear';
 import * as Year from '../../../src/web3calls/Year';
 import * as UniversityTeacher from '../../../src/web3calls/UniversityTeacher';
 
@@ -15,7 +15,7 @@ const courseDetail = {
   courseAddress: '001',
   courseName: 'Scienze Informatiche',
   solarYear: 2017,
-}
+};
 const courseExams = [
   {
     address: 'E01',

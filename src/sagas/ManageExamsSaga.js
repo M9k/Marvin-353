@@ -52,6 +52,12 @@ export function* getExamData(examAddress) {
 }
 export function* associateProfessor(examAddress, teacherAddress) {
   yield call(UniversityExam.associateTeacherToExam, teacherAddress, examAddress);
+  const teacherData = yield call(getTeacherData, teacherAddress);
+  return {
+    professorAddress: teacherData.address,
+    professorName: teacherData.name,
+    professorSurname: teacherData.surname,
+  };
 }
 export function* getCourseData(courseAddress) {
   const dataFetch = [

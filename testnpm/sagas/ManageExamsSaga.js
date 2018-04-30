@@ -67,11 +67,20 @@ describe('ManageExamsSaga', () => {
       .run());
   });
   describe('associateProfessor', () => {
-    it('should not crash when everything goes right', () => expectSaga(sagaStub, sagas.associateProfessor, '1', '2')
+    it('should return the teacher data when everything goes right', () => expectSaga(sagaStub, sagas.associateProfessor, '1', '2')
       .provide([
         [matchers.call.fn(UniversityExam.associateTeacherToExam, '1', '2'), true],
+        [matchers.call.fn(sagas.getTeacherData, '1'), {
+          address: '1',
+          name: 'Primo',
+          surname: 'Levi',
+        }],
       ])
-      .put('ok')
+      .put({
+        professorAddress: '1',
+        professorName: 'Primo',
+        professorSurname: 'Levi',
+      })
       .run());
     it('should not catch the error if something goes wrong', () => expectSaga(sagaStub, sagas.associateProfessor, '1', '2')
       .provide([
