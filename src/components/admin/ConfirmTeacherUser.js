@@ -1,28 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Form from '../custom/Form';
 import FieldTypes from '../custom/fieldtypes';
 import Utils from '../custom/utils';
 import PageTableForm from '../template/PageTableForm';
+import { creators } from '../../sagas/AdminSaga';
 
-const unconfirmedTeachers = [
-  {
-    Address: '0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf',
-    Name: 'NTeacher1',
-    Surname: 'CTeacher2',
-  },
-  {
-    Address: '0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf',
-    Name: 'NTeacher2',
-    Surname: 'CTeacher2',
-  },
-  {
-    Address: '0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf',
-    Name: 'NTeacher3',
-    Surname: 'CTeacher3',
-  },
-];
-
-const ConfirmTeacher = () => (
+const ConfirmTeacher = props => (
   <div>
     <Form
       description="Confirm teacher account"
@@ -34,15 +19,38 @@ const ConfirmTeacher = () => (
         type: FieldTypes.TEXT,
         validateFunction: Utils.validEthAddress,
       }]}
-      submitFunction={e => e}
+      submitFunction={props.confirmTeacher}
     />
     <PageTableForm
-      getTableData={e => e}
-      tableData={unconfirmedTeachers}
-      deleteMultiColumnRow={e => e}
-      headerInfo={['Address', 'Name', 'Surname', 'Deny']}
+      getTableData={props.getPendingTeachers}
+      tableData={props.teacherAccounts}
+      deleteMultiColumnRow={props.denyTeacher}
+      headerInfo={['name', 'surname', 'address', 'Deny']}
     />
   </div>
 );
 
-export default ConfirmTeacher;
+ConfirmTeacher.propTypes = {
+  confirmTeacher: PropTypes.func.isRequired,
+  getPendingTeachers: PropTypes.func.isRequired,
+  denyTeacher: PropTypes.func.isRequired,
+  teacherAccounts: PropTypes.arrayOf(Object).isRequired,
+};
+
+const mapStateToProps = state => ({
+  teacherAccounts: state.accounts.pendingTeachersList,
+});
+
+function mapDispatchToProps(dispatch) {
+  return {
+    confirmTeacher: objArr => (
+      dispatch(creators.approveUserAction(objArr.addressTeacher.value))
+    ),
+    denyTeacher: address => dispatch(creators.removeUserAction(address)),
+    getPendingTeachers: () => dispatch(creators.getPendingTEachersAction())
+    ,
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ConfirmTeacher);
+

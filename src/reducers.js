@@ -10,6 +10,7 @@ import ManageYears from './ducks/ManageYears';
 import Booking from './ducks/Booking';
 import Evaluator from './ducks/Evaluator';
 import TeacherExam from './ducks/TeacherExam';
+import AdminDuck from './ducks/Admin';
 
 const persistConfig = {
   key: 'root',
@@ -29,6 +30,7 @@ const reducers = combineReducers({
   signup: Booking,
   selectedExam: Evaluator,
   teacherData: TeacherExam,
+  accounts: AdminDuck,
 });
 
 const persistentReducer = persistReducer(persistConfig, reducers);
