@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Table from 'react-bootstrap/lib/Table';
 import Button from 'react-bootstrap/lib/Button';
-import DeleteButton from '../custom/DeleteButton';
+import TemplateButton from '../custom/TemplateButton';
 import DetailsButton from '../custom/DetailsButton';
 import Utils from '../custom/utils';
 
@@ -52,7 +52,14 @@ class PageTableForm extends React.Component {
   getDeleteButton(item) {
     if (this.props.deleteSingleColumnRow !== undefined) {
       return (
-        <td><DeleteButton deleteFunction={this.props.deleteSingleColumnRow} objectToRemove={item} text="Delete" /></td>
+        <td>
+          <TemplateButton
+            deleteFunction={this.props.deleteSingleColumnRow}
+            objectToRemove={item}
+            text="Delete"
+            type="danger"
+          />
+        </td>
       );
     }
     return null;
@@ -62,10 +69,11 @@ class PageTableForm extends React.Component {
       console.log('Stampa del item', item);
       return (
         <td>
-          <DeleteButton
+          <TemplateButton
             deleteFunction={this.props.deleteMultiColumnRow}
             objectToRemove={item}
             text={this.props.headerInfo[this.props.headerInfo.length - 1]}
+            type="danger"
           />
         </td>
       );
@@ -74,9 +82,15 @@ class PageTableForm extends React.Component {
   }
   getConfirmationButton(item) {
     if (this.props.confirmationFunction !== undefined) {
-      console.log('sono in confirmation', item);
       return (
-        <td><DeleteButton deleteFunction={this.props.confirmationFunction} objectToRemove={item} text="Confirm" /></td>
+        <td>
+          <TemplateButton
+            deleteFunction={this.props.confirmationFunction}
+            objectToRemove={item}
+            text="Confirm"
+            type="primary"
+          />
+        </td>
       );
     }
     return null;
@@ -102,7 +116,7 @@ class PageTableForm extends React.Component {
           {this.getConfirmationButton(item)}
           {this.getEditButton(item)}
           {this.getDeleteButton(item)}
-          {this.getMultiColumnDeleteButton(item)}
+          {this.getMultiColumnDeleteButton(item.Address)}
         </tr>
       ));
   }

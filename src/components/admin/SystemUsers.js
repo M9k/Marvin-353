@@ -1,61 +1,52 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import PageTableForm from '../template/PageTableForm';
+import { creators } from '../../sagas/AdminSaga';
 
-const Students = [
-  {
-    Address: '0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf',
-    Name: 'NStudente1',
-    Surname: 'CStudente1',
-    Course: 'Computer Science',
-  },
-  {
-    Address: '0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf',
-    Name: 'NStudente2',
-    Surname: 'CStudente2',
-    Course: 'Computer Science',
-  },
-  {
-    Address: '0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf',
-    Name: 'NStudente3',
-    Surname: 'CStudente3',
-    Course: 'Computer Science',
-  },
-];
-const teachers = [
-  {
-    Address: '0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf',
-    Name: 'NStudente1',
-    Surname: 'CStudente1',
-  },
-  {
-    Address: '0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf',
-    Name: 'NStudente2',
-    Surname: 'CStudente2',
-  },
-  {
-    Address: '0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf',
-    Name: 'NStudente3',
-    Surname: 'CStudente3',
-  },
-];
-
-const SystemUsers = () => (
+const SystemUsers = props => (
   <div>
     <h4>List of all students:</h4>
     <PageTableForm
-      getTableData={e => e}
-      tableData={Students}
-      deleteMultiColumnRow={e => e}
-      headerInfo={['Address', 'Name', 'Surname', 'Course', 'Remove']}
+      getTableData={props.getStudents}
+      tableData={props.studentAccounts}
+      deleteSingleColumnRow={props.deleteTeacher}
+      headerInfo={['Address', 'Remove']}
     />
     <h4>List of all teachers:</h4>
     <PageTableForm
-      getTableData={e => e}
-      tableData={teachers}
-      deleteMultiColumnRow={e => e}
-      headerInfo={['Address', 'Name', 'Surname', 'Remove']}
+      getTableData={props.getTeachers}
+      tableData={props.teacherAccounts}
+      deleteSingleColumnRow={props.deleteStudent}
+      headerInfo={['Address', 'Remove']}
     />
   </div>
 );
 
-export default SystemUsers;
+
+SystemUsers.propTypes = {
+  getTeachers: PropTypes.func.isRequired,
+  getStudents: PropTypes.func.isRequired,
+  deleteTeacher: PropTypes.func.isRequired,
+  deleteStudent: PropTypes.func.isRequired,
+  teacherAccounts: PropTypes.arrayOf(Object).isRequired,
+  studentAccounts: PropTypes.arrayOf(Object).isRequired,
+};
+
+const mapStateToProps = state => ({
+  teacherAccounts: state.accounts.teachersList,
+  studentAccounts: state.accounts.studentsList,
+});
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getTeachers: () => dispatch(creators.getAllStudentsAction()),
+    getStudents: () => dispatch(creators.getAllTEachersAction()),
+    // Metodi sotto sono da sistemare nella parte di Redux
+    deleteTeacher: add => dispatch(creators.removeUserAction(add)),
+    deleteStudent: add => dispatch(creators.removeUserAction(add)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SystemUsers);
+

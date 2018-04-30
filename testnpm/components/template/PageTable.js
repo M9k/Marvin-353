@@ -3,7 +3,7 @@ import { mount, shallow } from 'enzyme';
 import assert from 'assert';
 import { expect } from 'chai';
 import PageTableForm from '../../../src/components/template/PageTableForm';
-import DeleteButton from '../../../src/components/custom/DeleteButton';
+import TemplateButton from '../../../src/components/custom/TemplateButton';
 
 describe('PageTableForm component test', () => {
   it('Should render the component', () => {
@@ -23,8 +23,8 @@ describe('PageTableForm component test', () => {
     expect(wrapper.props().headerInfo.length).to.equal(1);
   });
 
-  it('Should render the DeleteButton', () => {
+  it('Should render the TemplateButton', () => {
     const wrapper = shallow(<PageTableForm getTableData={e => e} deleteSingleColumnRow={e => e} editTableData={e => e} addTableData={e => e} tableData={['0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf']} headerInfo={['Admin Address']} />);
-    expect(wrapper.find(DeleteButton)).to.have.length(1);
+    expect(wrapper.find(TemplateButton)).to.have.length(1);
   });
 });
