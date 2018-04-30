@@ -12,7 +12,7 @@ const ExamsListDuck = new Duck({
   reducer: (state, action, duck) => {
     const { types } = duck;
     switch (action.type) {
-      case (types.LIST_IS_LOADING):
+      case (types.LIST_LOADING):
         return {
           ...state,
           loading: true,

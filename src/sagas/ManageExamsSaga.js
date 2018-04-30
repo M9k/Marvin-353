@@ -112,8 +112,14 @@ export function* getAllExams({ solarYear }) {
     yield put(ExamsCreators.listHasErrored());
   }
 }
-export function* getExamsByCourse({ courseAddress }){
-
+export function* getExamsByCourse({ courseAddress }) {
+  try {
+    yield put(CourseCreators.listIsLoading());
+    const examsList = yield call(getCourseExamsList, courseAddress);
+    yield put(CourseCreators.setList(examsList));
+  } catch (e) {
+    yield put(CourseCreators.listHasErrored());
+  }
 }
 export function* getTeachers() {
 
