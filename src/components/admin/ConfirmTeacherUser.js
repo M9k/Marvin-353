@@ -45,7 +45,6 @@ class ConfirmTeacher extends React.Component {
           columFilter
         />
 
-
         <ModalForm
           title="Confirmation teacher"
           yesFunction={this.props.confirmTeacher}
