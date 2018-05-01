@@ -2,13 +2,11 @@ import { call, put, fork, all, takeLatest, takeEvery } from 'redux-saga/effects'
 import { creators as CourseCreators } from '../ducks/CourseExams';
 import { creators as TeacherCreators } from '../ducks/TeachersList';
 import { creators as ExamsCreators } from '../ducks/ExamsList';
-import * as User from '../web3calls/User';
-import * as Exam from '../web3calls/Exam';
 import * as UniversityExam from '../web3calls/UniversityExam';
 import * as UniversityYear from '../web3calls/UniversityYear';
 import * as Year from '../web3calls/Year';
-import * as Course from '../web3calls/Course';
 import * as UniversityTeacher from '../web3calls/UniversityTeacher';
+import * as Getters from './helpers/getters';
 
 const actionType = type => `marvin/ManageExamsSaga/${type}`;
 const ADD_NEW_EXAM = actionType('ADD_NEW_EXAM');
@@ -18,70 +16,15 @@ const GET_TEACHERS = actionType('GET_TEACHERS');
 const APTCE = actionType('ASSOCIATE_PROFESSOR_TO_COURSE_EXAM');
 const APTE = actionType('ASSOCIATE_PROFESSOR_TO_EXAM');
 
-export function* getTeacherData(teacherAddress) {
-  const dataFetch = [
-    call(User.getName, teacherAddress),
-    call(User.getSurname, teacherAddress),
-  ];
-  const [name, surname] = yield all(dataFetch);
-  return {
-    address: teacherAddress,
-    name,
-    surname,
-  };
-}
-export function* getExamData(examAddress) {
-  const address = examAddress;
-  const dataFetch = [
-    call(Exam.getName, address),
-    call(Exam.getCredits, address),
-    call(Exam.getObligatoriness, address),
-    call(Exam.getTeacherContract, address),
-  ];
-  const [name, credits, mandatory, teacherAddress] = yield all(dataFetch);
-  const teacherData = yield call(getTeacherData, teacherAddress);
-  return {
-    address,
-    name,
-    credits,
-    mandatory,
-    teacherAddress,
-    teacherName: teacherData.name,
-    teacherSurname: teacherData.surname,
-  };
-}
+
 export function* associateProfessor(examAddress, teacherAddress) {
   yield call(UniversityExam.associateTeacherToExam, teacherAddress, examAddress);
-  const teacherData = yield call(getTeacherData, teacherAddress);
+  const teacherData = yield call(Getters.getTeacherData, teacherAddress);
   return {
     professorAddress: teacherData.address,
     professorName: teacherData.name,
     professorSurname: teacherData.surname,
   };
-}
-export function* getCourseData(courseAddress) {
-  const dataFetch = [
-    call(Course.getName, courseAddress),
-    call(Course.getSolarYear, courseAddress),
-  ];
-  const [courseName, solarYear] = yield all(dataFetch);
-  return {
-    courseName,
-    courseAddress,
-    solarYear: Number(solarYear),
-  };
-}
-export function* getCourseExamsList(courseAddress) {
-  const courseNumber = yield call(Course.getExamNumber, courseAddress);
-  const examsAddressFetch = Array(Number(courseNumber)).fill().map((_, id) => (
-    call(Course.getExamContractAt, courseAddress, id)
-  ));
-  const examsAddresses = yield all(examsAddressFetch);
-  const examDataFetch = examsAddresses.map(addr => (
-    call(getExamData, addr)
-  ));
-  const examsData = yield all(examDataFetch);
-  return examsData;
 }
 export function* addNewExam({ courseAddress, name, credits, mandatory }){
 
@@ -97,10 +40,10 @@ export function* getAllExams({ solarYear }) {
     const exams = [];
     const coursesAddresses = yield all(coursesFetch);
     const examsFetch = coursesAddresses.map(courseAddress => (
-      call(getCourseExamsList, courseAddress)
+      call(Getters.getCourseExamsList, courseAddress)
     ));
     const coursesDataFetch = coursesAddresses.map(courseAddress => (
-      call(getCourseData, courseAddress)
+      call(Getters.getCourseData, courseAddress)
     ));
     const examsByCourse = yield all(examsFetch);
     const coursesData = yield all(coursesDataFetch);
@@ -122,7 +65,7 @@ export function* getAllExams({ solarYear }) {
 export function* getExamsByCourse({ courseAddress }) {
   try {
     yield put(CourseCreators.listIsLoading());
-    const examsList = yield call(getCourseExamsList, courseAddress);
+    const examsList = yield call(Getters.getCourseExamsList, courseAddress);
     yield put(CourseCreators.setList(examsList));
   } catch (e) {
     yield put(CourseCreators.listHasErrored());
@@ -136,7 +79,7 @@ export function* getTeachers() {
       call(UniversityTeacher.getTeacherContractAddressAt, id)
     ));
     const teacherAddresses = yield all(teacherAddressFetch);
-    const teacherDataFetch = teacherAddresses.map(address => call(getTeacherData, address));
+    const teacherDataFetch = teacherAddresses.map(address => call(Getters.getTeacherData, address));
     const teachersData = yield all(teacherDataFetch);
     yield put(TeacherCreators.setList(teachersData));
   } catch (e) {

@@ -6,6 +6,7 @@ import CourseReducer, { creators as CourseCreators } from '../../../src/ducks/Co
 import TeacherReducer, { creators as TeacherCreators } from '../../../src/ducks/TeachersList';
 import ExamsReducer, { creators as ExamsCreators } from '../../../src/ducks/ExamsList';
 import * as sagas from '../../../src/sagas/ManageExamsSaga';
+import * as Getters from '../../../src/sagas/helpers/getters';
 import * as UniversityYear from '../../../src/web3calls/UniversityYear';
 import * as Year from '../../../src/web3calls/Year';
 import * as UniversityTeacher from '../../../src/web3calls/UniversityTeacher';
@@ -65,7 +66,7 @@ describe('ManageExams feature', () => {
             if (effect.args[1] === 0) return '001';
             if (effect.args[1] === 1) return '002';
           }
-          if (effect.fn === sagas.getCourseExamsList) {
+          if (effect.fn === Getters.getCourseExamsList) {
             if (effect.args[0] === '001') return courseExams;
             if (effect.args[0] === '002') {
               return [{
@@ -79,7 +80,7 @@ describe('ManageExams feature', () => {
               }];
             }
           }
-          if (effect.fn === sagas.getCourseData) {
+          if (effect.fn === Getters.getCourseData) {
             if (effect.args[0] === '001') return courseDetail;
             if (effect.args[0] === '002') {
               return {
@@ -103,7 +104,7 @@ describe('ManageExams feature', () => {
   it('should retrieve the list of all exams in a course given the address', () => expectSaga(sagas.getExamsByCourse, creators.getExamsByCourseAction('001'))
     .withReducer(CourseReducer)
     .provide([
-      [matchers.call.fn(sagas.getCourseExamsList, '001'), courseExams],
+      [matchers.call.fn(Getters.getCourseExamsList, '001'), courseExams],
     ])
     .hasFinalState({
       errored: false,
@@ -121,7 +122,7 @@ describe('ManageExams feature', () => {
           if (effect.args[0] === 0) return 'gibbo';
           if (effect.args[0] === 1) return 'ranzi';
         }
-        if (effect.fn === sagas.getTeacherData) {
+        if (effect.fn === Getters.getTeacherData) {
           if (effect.args[0] === 'gibbo') {
             return {
               address: 'gibbo',
