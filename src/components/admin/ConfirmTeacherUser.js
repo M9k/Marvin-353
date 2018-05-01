@@ -88,7 +88,7 @@ function mapDispatchToProps(dispatch) {
     confirmTeacher: objArr =>
       dispatch(creators.approveUserAction(ROLES.UNCONFIRMED_TEACHER, objArr.item.contract)),
     denyTeacher: objArr =>
-      dispatch(creators.removeUserAction(ROLES.UNCONFIRMED_TEACHER, objArr.item.contract)),
+      dispatch(creators.denyUserAction(ROLES.UNCONFIRMED_TEACHER, objArr.item.contract)),
     getPendingTeachers: () =>
       dispatch(creators.getPendingTEachersAction()),
   };
