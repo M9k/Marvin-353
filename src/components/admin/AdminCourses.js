@@ -63,7 +63,11 @@ class AdminCourses extends React.Component {
       this.list = this.courseList.filter(course => course.solarYear === this.inputEl.value);
     }
   }
-
+  showExams(item) {
+    let path = document.location.pathname;
+    path = path.concat(`/${item.name}_${item.solarYear}`);
+    document.location.href = path;
+  }
   render() {
     const options = [];
     options.push(<option value="ALL">ALL</option>);
@@ -118,7 +122,11 @@ class AdminCourses extends React.Component {
           getTableData={this.getCourses}
           tableData={this.list}
           headerInfo={['name', 'solarYear', 'Details']}
-          linkTableData
+          tableButtons={[{
+            buttonFunction: this.showExams,
+            buttonText: 'Details',
+            buttonType: 'default',
+          }]}
           columFilter
         />
       </div>

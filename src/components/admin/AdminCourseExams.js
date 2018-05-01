@@ -4,12 +4,15 @@ import FieldTypes from '../custom/fieldtypes';
 import Utils from '../custom/utils';
 import Form from '../custom/Form';
 import PageTableForm from '../template/PageTableForm';
+import ExamDetails from './ExamDetails';
 
 class AdminCourseExams extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { showDetails: false };
     this.params = this.props.params;
     this.getCourses = () => {};
+    this.viewDetails = this.viewDetails.bind(this);
     this.course = {
       name: 'L-31',
       solarYear: '2017',
@@ -51,8 +54,14 @@ class AdminCourseExams extends React.Component {
       },
     ];
   }
-
+  viewDetails(item) {
+    this.setState({ showDetails: true, item });
+  }
   render() {
+    let details = null;
+    if (this.state.showDetails) {
+      details = <ExamDetails object={this.state.item} show={this.state.showDetails} />;
+    }
     return (
       <div>
         <h3 className="text-center">Course {this.params.examid}</h3>
@@ -100,9 +109,14 @@ class AdminCourseExams extends React.Component {
           getTableData={this.getCourses}
           tableData={this.examList}
           headerInfo={['name', 'credits', 'mandatory', 'professorName', 'professorSurname', 'details']}
-          detailTableData
+          tableButtons={[{
+            buttonFunction: this.viewDetails,
+            buttonText: 'Details',
+            buttonType: 'default',
+          }]}
           columFilter
         />
+        {details}
       </div>
     );
   }
