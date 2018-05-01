@@ -1,5 +1,0 @@
-src/ducks/CourseExams.js
-src/ducks/TeachersList.js
-src/ducks/ExamsList.js
-src/sagas/ManageExamsSaga.js
-testnpm/integration/redux/ManageExams.js
