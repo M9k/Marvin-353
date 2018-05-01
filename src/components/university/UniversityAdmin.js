@@ -5,35 +5,57 @@ import Form from '../custom/Form';
 import FieldTypes from '../custom/fieldtypes';
 import Utils from '../custom/utils';
 import PageTableForm from '../template/PageTableForm';
+import ModalForm from '../custom/ModalForm';
 import { creators as universitySagaAction } from '../../sagas/AdminEmployerSaga';
 
-
-const UniversityAdmin = props => (
-  <div>
-    <Form
-      description="Add new admin"
-      fields={[{
-        name: 'addressAdmin',
-        label: 'Address:',
-        help: 'insert the address of the admin',
-        placeholder: '0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf',
-        type: FieldTypes.TEXT,
-        validateFunction: Utils.validEthAddress,
-      }]}
-      submitFunction={props.addAdmin}
-    />
-    <PageTableForm
-      getTableData={props.getAdmins}
-      tableButtons={[{
-        buttonFunction: props.deleteAdmin,
-        buttonText: 'Delete',
-        buttonType: 'danger',
-      }]}
-      tableData={props.adminAccounts}
-      headerInfo={['Admin Address', 'Delete']}
-    />
-  </div>
-);
+class UniversityAdmin extends React.Component {
+  constructor(props) {
+    super(props);
+    this.viewDelete = this.viewDelete.bind(this);
+    this.state = { delete: false };
+  }
+  viewDelete(item) {
+    this.setState({ delete: true, item });
+  }
+  render() {
+    return (
+      <div>
+        <Form
+          description="Add new admin"
+          fields={[{
+            name: 'addressAdmin',
+            label: 'Address:',
+            help: 'insert the address of the admin',
+            placeholder: '0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf',
+            type: FieldTypes.TEXT,
+            validateFunction: Utils.validEthAddress,
+          }]}
+          submitFunction={this.props.addAdmin}
+        />
+        <PageTableForm
+          getTableData={this.props.getAdmins}
+          tableButtons={[{
+            buttonFunction: this.viewDelete,
+            buttonText: 'Delete',
+            buttonType: 'danger',
+          }]}
+          tableData={this.props.adminAccounts}
+          headerInfo={['Admin Address', 'Delete']}
+        />
+        <ModalForm
+          title="Confirmation teacher"
+          yesFunction={this.props.deleteAdmin}
+          keyForModal={this.state.item}
+          show={this.state.delete}
+        >
+          <p>
+            Are you sure you want to delete this admin?
+          </p>
+        </ModalForm>
+      </div>
+    );
+  }
+}
 
 UniversityAdmin.propTypes = {
   addAdmin: PropTypes.func.isRequired,
