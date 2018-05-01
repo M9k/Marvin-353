@@ -16,21 +16,36 @@ class TeacherExamStudents extends React.Component {
     this.openModal = this.openModal.bind(this);
     this.getStudentsOfThisExam = this.getStudentsOfThisExam.bind(this);
     this.addGradeBuilder = this.addGradeBuilder.bind(this);
-    this.examId = this.props.params.examid;
+    this.examCode = this.props.params.examid;
     this.state = { viewModalAddVote: false };
   }
 
+  /**
+   * get Students of the exam with coude found in the Url examid - examCode
+   */
   getStudentsOfThisExam() {
-    this.props.getStudentsOfExam(this.examId);
+    this.props.getStudentsOfExam(this.examCode);
   }
 
+  /**
+   * open the modal to set the grade of a student
+   * @param student infos taken from the table row, need the index of him
+   * to call the redux function on yesFunction of the Modal
+   */
   openModal(student) {
-    console.log(student);
+    console.dir(student);
     this.setState({
       viewModalAddVote: true, studentIndex: student.index,
     });
   }
 
+  /**
+   * Create the right sequence of values to set a grade to a studet
+   * fetching the info from the current exam in the props plus
+   * 1 value studentIndex in the store set by openModal function
+   * @param objForm contains the value of the grade of the student in
+   * the section as declared in the form
+   */
   addGradeBuilder(objForm) {
     this.props.addGradeToStudent(
       this.props.myWeb3Address,
@@ -43,7 +58,7 @@ class TeacherExamStudents extends React.Component {
   render() {
     return (
       <div>
-        <h1>Exam - {this.examId}</h1>
+        <h1>Exam - {this.examCode}</h1>
 
         <ModalForm title="Setting the student grade" show={this.state.viewModalAddVote} >
           <Form
@@ -63,8 +78,14 @@ class TeacherExamStudents extends React.Component {
         <PageTableForm
           getTableData={this.getStudentsOfThisExam}
           tableData={this.props.studentsOfExam}
-          headerInfo={['name', 'surname', 'grade']}
-          editTableData={this.openModal}
+          headerInfo={['Name', 'Surname', 'Grade']}
+          tableButtons={[
+            {
+              buttonFunction: this.openModal,
+              buttonText: 'Set vote',
+              buttonType: 'primary',
+            },
+          ]}
         />
 
       </div>
