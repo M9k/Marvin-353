@@ -2,7 +2,6 @@ import { call, all } from 'redux-saga/effects';
 import * as User from '../../web3calls/User';
 import * as Exam from '../../web3calls/Exam';
 import * as Course from '../../web3calls/Course';
-// import { toText } from '../../util/web3/textConverter';
 
 export function* getTeacherData(teacherAddress, adapter = obj => obj) {
   const dataFetch = [
