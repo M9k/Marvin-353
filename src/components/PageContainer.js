@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import NavbarCustom from './custom/NavbarCustom';
@@ -46,5 +45,6 @@ class PageContainer extends React.Component {
 PageContainer.propTypes = {
   children: PropTypes.node.isRequired,
   route: PropTypes.object.isRequired, // eslint-disable-line
+  location: PropTypes.object.isRequired, // eslint-disable-line
 };
 export default (PageContainer);

@@ -94,10 +94,10 @@ const mapStateToProps = state => ({
 
 function mapDispatchToProps(dispatch) {
   return {
-    // eslint-disable-next-line
-    confirmStudent: add => dispatch(creators.approveUserAction(ROLES.UNCONFIRMED_STUDENT, add.contract)),
-    // eslint-disable-next-line
-    denyStudent: add => dispatch(creators.removeUserAction(ROLES.UNCONFIRMED_STUDENT, add.contract)),
+    confirmStudent: add =>
+      dispatch(creators.approveUserAction(ROLES.UNCONFIRMED_STUDENT, add.contract)),
+    denyStudent: add =>
+      dispatch(creators.removeUserAction(ROLES.UNCONFIRMED_STUDENT, add.contract)),
     getPendingStudents: () => dispatch(creators.getPendingStudentsAction())
     ,
   };

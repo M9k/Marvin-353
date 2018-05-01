@@ -41,8 +41,11 @@ class ExamDetails extends React.Component {
   teacher() {
     if (this.object.professorSurname !== '' && this.object.professorName !== '') {
       return (
-        // eslint-disable-next-line
-        <dd>{this.object.professorSurname} {this.object.professorName} {this.object.professorAddress}</dd>
+        <dd>
+          {this.object.professorSurname}
+          {this.object.professorName}
+          {this.object.professorAddress}
+        </dd>
       );
     }
     return (

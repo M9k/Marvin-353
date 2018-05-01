@@ -20,26 +20,22 @@ class Price extends React.Component {
     const xhrgas = new XMLHttpRequest();
     xhr.open('GET', 'https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=BTC,USD,EUR', true);
     xhrgas.open('GET', 'https://ethgasstation.info/json/ethgasAPI.json', true);
-    // TODO: Correggere ESlint
-    // eslint-disable-next-line func-names
-    xhr.onload = function () {
+    xhr.onload(() => {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
           const jsonObj = JSON.parse(xhr.responseText);
           this.setState({ eth: jsonObj });
         }
       }
-    }.bind(this);
-    // TODO: Correggere ESlint
-    // eslint-disable-next-line func-names
-    xhrgas.onload = function () {
+    }).bind(this);
+    xhrgas.onload(() => {
       if (xhrgas.readyState === 4) {
         if (xhrgas.status === 200) {
           const jsonObj = JSON.parse(xhrgas.responseText);
           this.setState({ ethGas: jsonObj });
         }
       }
-    }.bind(this);
+    }).bind(this);
     xhr.send(null);
     xhrgas.send(null);
   }
