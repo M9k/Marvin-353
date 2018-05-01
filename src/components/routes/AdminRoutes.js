@@ -4,6 +4,7 @@ import AdminCourses from '../admin/AdminCourses';
 import ConfirmStudents from '../admin/ConfirmStudentUser';
 import ConfirmTeachers from '../admin/ConfirmTeacherUser';
 import AdminExams from '../admin/AdminExams';
+import SystemUsers from '../admin/SystemUsers';
 
 const AdminRoutes = [
   {
@@ -23,6 +24,12 @@ const AdminRoutes = [
     label: 'Confirm Teachers',
     position: 'left',
     component: ConfirmTeachers,
+  },
+  {
+    path: '/systemUsers',
+    label: 'Manage Users',
+    position: 'left',
+    component: SystemUsers,
   },
   {
     path: '/courses/:examid',

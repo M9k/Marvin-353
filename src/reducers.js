@@ -3,6 +3,7 @@ import { routerReducer } from 'react-router-redux';
 import { reducer as formReducer } from 'redux-form';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage/session';
+import Admin from './ducks/Admin';
 import AdminEmployer from './ducks/AdminEmployer';
 import Session from './ducks/Session';
 import Metamask from './ducks/Metamask';
@@ -25,6 +26,7 @@ const persistConfig = {
 const reducers = combineReducers({
   routing: routerReducer,
   form: formReducer,
+  accounts: Admin,
   course: CourseExams,
   exams: ExamsList,
   metamask: Metamask,

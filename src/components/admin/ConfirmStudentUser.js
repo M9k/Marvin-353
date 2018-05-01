@@ -1,51 +1,55 @@
 import React from 'react';
-import Form from '../custom/Form';
-import FieldTypes from '../custom/fieldtypes';
-import Utils from '../custom/utils';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import PageTableForm from '../template/PageTableForm';
+import { creators } from '../../sagas/AdminSaga';
+import ROLES from '../../util/logic/AccountEnum';
 
-const unconfirmedStudent = [
-  {
-    Address: '0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf',
-    Name: 'NStudente1',
-    Surname: 'CStudente1',
-    Course: 'Computer Science',
-  },
-  {
-    Address: '0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf',
-    Name: 'NStudente2',
-    Surname: 'CStudente2',
-    Course: 'Computer Science',
-  },
-  {
-    Address: '0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf',
-    Name: 'NStudente3',
-    Surname: 'CStudente3',
-    Course: 'Computer Science',
-  },
-];
 
-const ConfirmStudent = () => (
+const ConfirmStudent = props => (
   <div>
-    <Form
-      description="Confirm student account"
-      fields={[{
-        name: 'studentAddress',
-        label: 'Address:',
-        help: 'insert the address of the student',
-        placeholder: '0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf',
-        type: FieldTypes.TEXT,
-        validateFunction: Utils.validEthAddress,
-      }]}
-      submitFunction={e => e}
-    />
     <PageTableForm
-      getTableData={e => e}
-      tableData={unconfirmedStudent}
-      unconfirmUser={e => e}
-      headerInfo={['Address', 'Name', 'Surname', 'Course', 'Deny']}
+      getTableData={props.getPendingStudents}
+      tableData={props.studentAccounts}
+      tableButtons={[
+        {
+          buttonFunction: props.confirmStudent,
+          buttonText: 'Confirm',
+          buttonType: 'primary',
+        },
+        {
+          buttonFunction: props.denyStudent,
+          buttonText: 'Deny',
+          buttonType: 'danger',
+        },
+      ]}
+      headerInfo={['Address', 'Confirm', 'Deny']}
     />
   </div>
 );
 
-export default ConfirmStudent;
+
+ConfirmStudent.propTypes = {
+  confirmStudent: PropTypes.func.isRequired,
+  getPendingStudents: PropTypes.func.isRequired,
+  denyStudent: PropTypes.func.isRequired,
+  studentAccounts: PropTypes.arrayOf(Object).isRequired,
+};
+
+const mapStateToProps = state => ({
+  studentAccounts: state.accounts.pendingStudentsList,
+});
+
+function mapDispatchToProps(dispatch) {
+  return {
+    // eslint-disable-next-line
+    confirmStudent: add => dispatch(creators.approveUserAction(ROLES.UNCONFIRMED_STUDENT, add.contract)),
+    // eslint-disable-next-line
+    denyStudent: add => dispatch(creators.removeUserAction(ROLES.UNCONFIRMED_STUDENT, add.contract)),
+    getPendingStudents: () => dispatch(creators.getPendingStudentsAction())
+    ,
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ConfirmStudent);
+

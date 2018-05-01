@@ -31,8 +31,7 @@ class DetailsButton extends React.Component {
       assignTeacher: false,
     };
     this.object = this.props.object;
-    console.log(this.props.object);
-    this.student = '70';
+    this.studentNumber = '70';
   }
 
   handleClick() {
@@ -46,9 +45,10 @@ class DetailsButton extends React.Component {
   }
 
   teacher() {
-    if (this.object.teacher_name !== '' && this.object.teacher_surname !== '') {
+    if (this.object.professorSurname !== '' && this.object.professorName !== '') {
       return (
-        <dd>{this.object.teacher_surname} {this.object.teacher_name}</dd>
+        // eslint-disable-next-line
+        <dd>{this.object.professorSurname} {this.object.professorName} {this.object.professorAddress}</dd>
       );
     }
     return (
@@ -67,6 +67,7 @@ class DetailsButton extends React.Component {
           {this.teacherList[i].surname} {this.teacherList[i].name} {this.teacherList[i].address}
         </option>);
     }
+    const mandatory = (this.object.mandatory) ? 'Yes' : 'No';
     return (
       <div>
         <Button onClick={this.handleClick}>{this.props.text}</Button>
@@ -75,14 +76,24 @@ class DetailsButton extends React.Component {
           show={this.state.show}
         >
           <dl>
-            <dt>Name</dt>
+            <dt>Exam Address</dt>
+            <dd>{this.object.examAddress}</dd>
+            <dt>Exam Name</dt>
             <dd>{this.object.name}</dd>
             <dt>Credits</dt>
             <dd>{this.object.credits}</dd>
-            <dt>Student number</dt>
-            <dd>{this.student}</dd>
+            <dt>Mandatory</dt>
+            <dd>{mandatory}</dd>
+            <dt>Solar year</dt>
+            <dd>{this.object.year}</dd>
+            <dt>Course Address</dt>
+            <dd>{this.object.courseAddress}</dd>
+            <dt>Course Name</dt>
+            <dd>{this.object.courseName}</dd>
             <dt>Teacher</dt>
             {this.teacher()}
+            <dt>Student number</dt>
+            <dd>{this.studentNumber}</dd>
           </dl>
         </ModalForm>
         <ModalForm
@@ -111,7 +122,9 @@ DetailsButton.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   object: PropTypes.object.isRequired,
   text: PropTypes.string.isRequired,
-  // student: PropTypes.number,
+  // studentNumber: PropTypes.number.isRequired,
+  // teacherList: PropTypes.arrayOf(Object).isRequired,
+  // setTeacher: PropTypes.func.isRequired,
 };
 
 export default DetailsButton;

@@ -10,6 +10,6 @@ describe('Index Admin', () => {
   it('Should render the index with right number of cards', () => {
     const wrapper = shallow(<Index />);
     assert.equal(wrapper.length, 1);
-    expect(wrapper.find(CardWithIcon)).to.have.length(6);
+    expect(wrapper.find(CardWithIcon)).to.have.length(5);
   });
 });

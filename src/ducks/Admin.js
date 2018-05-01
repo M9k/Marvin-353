@@ -12,6 +12,7 @@ const AdminDuck = new Duck({
     'SET_PENDING_TEACHERS_LIST',
     'CONFIRM_USER',
     'REMOVE_USER',
+    'UNCONFIRM_USER',
     'LIST_ERRORED',
     'LIST_LOADING',
   ],
@@ -73,6 +74,22 @@ const AdminDuck = new Duck({
           };
         } break;
       case (types.REMOVE_USER):
+        if (action.role === ROLES.STUDENT) { // is a  student
+          return {
+            ...state,
+            studentsList: copyNPop(state.studentsList, el => el === action.address),
+            loading: false,
+            errored: false,
+          };
+        } else if (action.role === ROLES.TEACHER) { // is a teacher
+          return {
+            ...state,
+            teachersList: copyNPop(state.teachersList, el => el === action.address),
+            loading: false,
+            errored: false,
+          };
+        } break;
+      case (types.UNCONFIRM_USER):
         if (action.role === ROLES.UNCONFIRMED_STUDENT) { // is a non-approved student
           return {
             ...state,
@@ -124,6 +141,9 @@ const AdminDuck = new Duck({
     ),
     removeUser: (role, address) => (
       { type: duck.types.REMOVE_USER, role, address }
+    ),
+    unconfirmUser: (role, address) => (
+      { type: duck.types.UNCONFIRM_USER, role, address }
     ),
     listIsLoading: () => (
       { type: duck.types.LIST_LOADING }

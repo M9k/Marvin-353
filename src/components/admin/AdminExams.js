@@ -1,32 +1,112 @@
 import React from 'react';
+import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+// import PropTypes from 'prop-types';
 import PageTableForm from '../template/PageTableForm';
 
-const examList = [
-  {
-    name: 'Programming',
-    credits: '10',
-    course: 'L-16',
-    teacher_surname: 'Filè',
-    teacher_name: 'Gilberto',
-  },
-  {
-    name: 'Database',
-    credits: '9',
-    course: 'L-16',
-    teacher_surname: 'Conti',
-    teacher_name: 'Mauro',
-  },
-];
-
-const AdminExams = () => (
-  <div>
-    <PageTableForm
-      getTableData={e => e}
-      tableData={examList}
-      headerInfo={['Name', 'Credits', 'Course', 'Teacher surname', 'Teacher name', 'Details']}
-      detailTableData={true} // eslint-disable-line
-    />
-  </div>
-);
-
+class AdminExams extends React.Component {
+  constructor(props) {
+    super(props);
+    this.solarYearList = [
+      '2017',
+      '2016',
+      '2015',
+    ];
+    this.examList = [
+      {
+        name: 'Programming',
+        credits: '10',
+        courseName: 'L-16',
+        year: '2017',
+        professorName: 'Filè',
+        professorSurname: 'Gilberto',
+        examAddress: '0x811da72aca31e56f770fc33df0e45fd08720e157',
+        mandatory: true,
+        courseAddress: '0x4bd1280852cadb002734647305afc1db7ddd6acb',
+        professorAddress: '0x79196b90d1e952c5a43d4847caa08d50b967c34a',
+      },
+      {
+        name: 'Programming',
+        credits: '10',
+        courseName: 'L-16',
+        year: '2016',
+        professorName: 'Filè',
+        professorSurname: 'Gilberto',
+        examAddress: '0x811da72aca31e56f770fc33df0e45fd08720e157',
+        mandatory: true,
+        courseAddress: '0x4bd1280852cadb002734647305afc1db7ddd6acb',
+        professorAddress: '0x79196b90d1e952c5a43d4847caa08d50b967c34a',
+      },
+      {
+        name: 'Programming',
+        credits: '10',
+        examAddress: '0x811da72aca31e56f770fc33df0e45fd08720e157',
+        courseName: 'L-16',
+        year: '2015',
+        professorName: 'Filè',
+        professorSurname: 'Gilberto',
+        mandatory: true,
+        courseAddress: '0x4bd1280852cadb002734647305afc1db7ddd6acb',
+        professorAddress: '0x79196b90d1e952c5a43d4847caa08d50b967c34a',
+      },
+      {
+        name: 'Logic',
+        credits: '10',
+        courseName: 'L-16',
+        year: '2017',
+        professorName: 'Gilberto',
+        professorSurname: 'Gilberto',
+        examAddress: '0x811da72aca31e56f770fc33df0e45fd08720e157',
+        mandatory: true,
+        courseAddress: '0x4bd1280852cadb002734647305afc1db7ddd6acb',
+        professorAddress: '0x79196b90d1e952c5a43d4847caa08d50b967c34a',
+      },
+    ];
+    this.list = this.examList.filter(exam => exam.year === this.solarYearList[0]);
+    this.state = { year: this.solarYearList[0] };
+    this.onChangeYear = this.onChangeYear.bind(this);
+  }
+  onChangeYear() {
+    if (this.state.year !== this.inputEl.value) {
+      this.setState({ year: this.inputEl.value });
+      this.changeTable();
+    }
+  }
+  changeTable() {
+    this.list = this.examList.filter(exam => exam.year === this.inputEl.value);
+  }
+  render() {
+    const options = [];
+    for (let i = 0; i < this.solarYearList.length; i += 1) {
+      options.push(<option value={this.solarYearList[i]}>{this.solarYearList[i]}</option>);
+    }
+    return (
+      <div>
+        <FormGroup controlId="selectYear">
+          <ControlLabel>Filter by academic year</ControlLabel>
+          <FormControl
+            onChange={this.onChangeYear}
+            inputRef={el => this.inputEl = el} // eslint-disable-line no-return-assign
+            componentClass="select"
+            placeholder="select"
+          >
+            {options}
+          </FormControl>
+        </FormGroup>
+        <PageTableForm
+          getTableData={e => e}
+          tableData={this.list}
+          headerInfo={['name', 'credits', 'courseName', 'year', 'professorSurname', 'professorName', 'details']}
+          detailTableData
+          columFilter
+        />
+      </div>
+    );
+  }
+}
+AdminExams.propTypes = {
+  // getExams: PropTypes.func.isRequired,
+  // setTeacher: PropTypes.func.isRequired,
+  // examList: PropTypes.arrayOf(Object).isRequired,
+  // solarYearList: PropTypes.arrayOf(String).isRequired,
+};
 export default AdminExams;

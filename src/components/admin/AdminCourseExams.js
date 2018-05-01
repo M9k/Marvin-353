@@ -10,30 +10,44 @@ class AdminCourseExams extends React.Component {
     super(props);
     this.params = this.props.params;
     this.getCourses = () => {};
-    this.exams = [
+    this.course = {
+      name: 'L-31',
+      solarYear: '2017',
+      courseAddress: '0xfae394561e33e242c551d15d4625309ea4c0b97f',
+      totalCredits: 180,
+    };
+    this.examList = [
       {
         name: 'Programming',
         credits: '10',
-        teacher_surname: 'Filè',
-        teacher_name: 'Gilberto',
+        mandatory: true,
+        professorName: 'Filè',
+        professorSurname: 'Gilberto',
+        professorAddress: '0x252dae0a4b9d9b80f504f6418acd2d364c0c59cd',
       },
       {
         name: 'Computer architecture',
         credits: '8',
-        teacher_surname: 'Sperduti',
-        teacher_name: 'Alessandro',
+        mandatory: true,
+        professorName: 'Sperduti',
+        professorSurname: 'Alessandro',
+        professorAddress: '0x252dae0a4b9d9b80f504f6418acd2d364c0c59cd',
       },
       {
         name: 'Logic',
         credits: '6',
-        teacher_surname: 'Maietti',
-        teacher_name: 'Maria Emilia',
+        mandatory: false,
+        professorName: 'Maietti',
+        professorSurname: 'Maria Emilia',
+        professorAddress: '0x252dae0a4b9d9b80f504f6418acd2d364c0c59cd',
       },
       {
         name: 'Database',
         credits: '9',
-        teacher_surname: '',
-        teacher_name: '',
+        mandatory: true,
+        professorName: '',
+        professorSurname: '',
+        professorAddress: '0x252dae0a4b9d9b80f504f6418acd2d364c0c59cd',
       },
     ];
   }
@@ -42,6 +56,16 @@ class AdminCourseExams extends React.Component {
     return (
       <div>
         <h3 className="text-center">Course {this.params.examid}</h3>
+        <dl>
+          <dt>Name</dt>
+          <dd>{this.course.name}</dd>
+          <dt>Solar year</dt>
+          <dd>{this.course.solarYear}</dd>
+          <dt>Total credits</dt>
+          <dd>{this.course.totalCredits}</dd>
+          <dt>Address</dt>
+          <dd>{this.course.courseAddress}</dd>
+        </dl>
         <Form
           description="Add a new exam"
           fields={[
@@ -74,9 +98,10 @@ class AdminCourseExams extends React.Component {
         />
         <PageTableForm
           getTableData={this.getCourses}
-          tableData={this.exams}
-          headerInfo={['Name', 'Credits', 'Teacher surname', 'Teacher name', 'Details']}
-          detailTableData={true} // eslint-disable-line
+          tableData={this.examList}
+          headerInfo={['name', 'credits', 'mandatory', 'professorName', 'professorSurname', 'details']}
+          detailTableData
+          columFilter
         />
       </div>
     );
@@ -88,7 +113,7 @@ AdminCourseExams.propTypes = {
   // getExams: PropTypes.func.isRequired,
   // addExam: PropTypes.func.isRequired,
   // validExam: PropTypes.func.isRequired,
-  // setTeacher: PropTypes.func.isRequired,
+  // examList: PropTypes.arrayOf(Object).isRequired,
 };
 
 export default AdminCourseExams;

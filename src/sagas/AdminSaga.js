@@ -3,14 +3,21 @@ import { creators as actionCreators } from '../ducks/Admin';
 import {
   getStudentContractAddressAt, getStudentNumber, getNotApprovedStudentNumber,
   getNotApprovedStudentContractAddressAt,
-  confirmStudent, removeStudent,
+  confirmStudent, removeStudent, denyStudent,
 } from '../web3calls/UniversityStudent';
 
 import {
   getTeacherContractAddressAt, getTeacherNumber,
   getNotApprovedTeacherNumber, getNotApprovedTeacherContractAddressAt,
-  confirmTeacher, removeTeacher,
+  confirmTeacher, removeTeacher, denyTeacher,
 } from '../web3calls/UniversityTeacher';
+
+import { getName, getSurname, getPublicAddress } from '../web3calls/User';
+
+import { getCourseContract } from '../web3calls/Student';
+import { getName as genCourseName } from '../web3calls/Course';
+
+import { toText } from '../util/web3/textConverter';
 
 import ROLES from '../util/logic/AccountEnum';
 
@@ -23,6 +30,7 @@ export const GET_PENDING_STUDENTS_LIST = actionType('GET_PENDING_STUDENTS_LIST')
 export const GET_PENDING_TEACHERS_LIST = actionType('GET_PENDING_TEACHERS_LIST');
 export const APPROVE_USER = actionType('APPROVE_USER');
 export const DELETE_USER = actionType('DELETE_USER');
+export const DENY_USER = actionType('DENY_USER');
 
 export function* getAllStudents() {
   yield put(actionCreators.listIsLoading());
@@ -30,7 +38,31 @@ export function* getAllStudents() {
     let num = yield call(getStudentNumber);
     num = Number(num);
     const apiCalls = Array(num).fill().map((_, i) => call(getStudentContractAddressAt, i));
-    const students = yield all(apiCalls);
+    const studentsContracts = yield all(apiCalls);
+
+    const apiNameCalls = Array(num).fill().map(() =>
+      call(getName, String(studentsContracts)));
+    const studentsName = (yield all(apiNameCalls)).map(toText);
+    const apiSurnameCalls = Array(num).fill().map(() =>
+      call(getSurname, String(studentsContracts)));
+    const studentsSurname = (yield all(apiSurnameCalls)).map(toText);
+    const apiCourseCalls = Array(num).fill().map(() =>
+      call(getCourseContract, String(studentsContracts)));
+    const studentsCourseContract = yield all(apiCourseCalls);
+    const apiCourseNameCalls = Array(num).fill().map(() =>
+      call(genCourseName, String(studentsCourseContract)));
+    const studentsCourse = (yield all(apiCourseNameCalls)).map(toText);
+    const apiPublicAddressCalls = Array(num).fill().map(() =>
+      call(getPublicAddress, String(studentsContracts)));
+    const studentsPublicAddress = (yield all(apiPublicAddressCalls));
+    const students = Array(num).fill().map((_, i) => ({
+      contract: studentsContracts[i],
+      address: studentsPublicAddress[i],
+      name: studentsName[i],
+      surname: studentsSurname[i],
+      course: studentsCourse[i],
+    }));
+    // console.log(students);
     yield put(actionCreators.setStudentsList(students));
   } catch (e) {
     console.log('Failed!');
@@ -44,7 +76,31 @@ export function* getPendingStudents() {
     num = Number(num);
     const apiCalls = Array(num).fill().map((_, i) =>
       call(getNotApprovedStudentContractAddressAt, i));
-    const pendingStudents = yield all(apiCalls);
+    const pendingStudentsContracts = yield all(apiCalls);
+
+    const apiNameCalls = Array(num).fill().map(() =>
+      call(getName, String(pendingStudentsContracts)));
+    const pendingStudentsName = (yield all(apiNameCalls)).map(toText);
+    const apiSurnameCalls = Array(num).fill().map(() =>
+      call(getSurname, String(pendingStudentsContracts)));
+    const pendingStudentsSurname = (yield all(apiSurnameCalls)).map(toText);
+    const apiCourseCalls = Array(num).fill().map(() =>
+      call(getCourseContract, String(pendingStudentsContracts)));
+    const pendingStudentsCourseContract = yield all(apiCourseCalls);
+    const apiCourseNameCalls = Array(num).fill().map(() =>
+      call(genCourseName, String(pendingStudentsCourseContract)));
+    const pendingStudentsCourse = (yield all(apiCourseNameCalls)).map(toText);
+    const apiPublicAddressCalls = Array(num).fill().map(() =>
+      call(getPublicAddress, String(pendingStudentsContracts)));
+    const pendingStudentsPublicAddress = (yield all(apiPublicAddressCalls));
+    const pendingStudents = Array(num).fill().map((_, i) => ({
+      contract: pendingStudentsContracts[i],
+      address: pendingStudentsPublicAddress[i],
+      name: pendingStudentsName[i],
+      surname: pendingStudentsSurname[i],
+      course: pendingStudentsCourse[i],
+    }));
+    // console.log(pendingStudents);
     yield put(actionCreators.setPendingStudentsList(pendingStudents));
   } catch (e) {
     console.log('Failed!');
@@ -58,7 +114,23 @@ export function* getAllTeachers() {
     let num = yield call(getTeacherNumber);
     num = Number(num);
     const apiCalls = Array(num).fill().map((_, i) => call(getTeacherContractAddressAt, i));
-    const teachers = yield all(apiCalls);
+    const teachersContracts = yield all(apiCalls);
+    const apiNameCalls = Array(num).fill().map(() =>
+      call(getName, String(teachersContracts)));
+    const teachersName = (yield all(apiNameCalls)).map(toText);
+    const apiSurnameCalls = Array(num).fill().map(() =>
+      call(getSurname, String(teachersContracts)));
+    const teachersSurname = (yield all(apiSurnameCalls)).map(toText);
+    const apiPublicAddressCalls = Array(num).fill().map(() =>
+      call(getPublicAddress, String(teachersContracts)));
+    const teachersPublicAddress = (yield all(apiPublicAddressCalls));
+    const teachers = Array(num).fill().map((_, i) => ({
+      contract: teachersContracts[i],
+      address: teachersPublicAddress[i],
+      name: teachersName[i],
+      surname: teachersSurname[i],
+    }));
+    // console.log(teachers);
     yield put(actionCreators.setTeachersList(teachers));
   } catch (e) {
     console.log('Failed!');
@@ -73,7 +145,23 @@ export function* getPendingTeachers() {
     num = Number(num);
     const apiCalls = Array(num).fill().map((_, i) =>
       call(getNotApprovedTeacherContractAddressAt, i));
-    const pendingTeachers = yield all(apiCalls);
+    const pendingTeachersContracts = yield all(apiCalls);
+    const apiNameCalls = Array(num).fill().map(() =>
+      call(getName, String(pendingTeachersContracts)));
+    const pendingTeachersName = (yield all(apiNameCalls)).map(toText);
+    const apiSurnameCalls = Array(num).fill().map(() =>
+      call(getSurname, String(pendingTeachersContracts)));
+    const pendingTeachersSurname = (yield all(apiSurnameCalls)).map(toText);
+    const apiPublicAddressCalls = Array(num).fill().map(() =>
+      call(getPublicAddress, String(pendingTeachersContracts)));
+    const pendingTeachersPublicAddress = (yield all(apiPublicAddressCalls));
+    const pendingTeachers = Array(num).fill().map((_, i) => ({
+      contract: pendingTeachersContracts[i],
+      address: pendingTeachersPublicAddress[i],
+      name: pendingTeachersName[i],
+      surname: pendingTeachersSurname[i],
+    }));
+    // console.log(pendingTeachers);
     yield put(actionCreators.setPendingTeachersList(pendingTeachers));
   } catch (e) {
     console.log('Failed!');
@@ -89,7 +177,7 @@ export function* approveUser(action) {
     } else if (action.role === ROLES.UNCONFIRMED_TEACHER) {
       yield call(confirmTeacher, action.address);
     }
-    yield put(actionCreators.confirmUser(action));
+    yield put(actionCreators.confirmUser(action.role, action.address));
   } catch (e) {
     console.log('Failed!');
     yield put(actionCreators.listHasErrored());
@@ -99,12 +187,27 @@ export function* approveUser(action) {
 export function* deleteUser(action) {
   yield put(actionCreators.listIsLoading());
   try {
-    if (action.role === ROLES.UNCONFIRMED_STUDENT) {
+    if (action.role === ROLES.STUDENT) {
       yield call(removeStudent, action.address);
-    } else if (action.role === ROLES.UNCONFIRMED_TEACHER) {
+    } else if (action.role === ROLES.TEACHER) {
       yield call(removeTeacher, action.address);
     }
-    yield put(actionCreators.removeUser(action));
+    yield put(actionCreators.removeUser(action.role, action.address));
+  } catch (e) {
+    console.log('Failed!');
+    yield put(actionCreators.listHasErrored());
+  }
+}
+
+export function* denyUser(action) {
+  yield put(actionCreators.listIsLoading());
+  try {
+    if (action.role === ROLES.UNCONFIRMED_STUDENT) {
+      yield call(denyStudent, action.address);
+    } else if (action.role === ROLES.UNCONFIRMED_TEACHER) {
+      yield call(denyTeacher, action.address);
+    }
+    yield put(actionCreators.unconfirmUser(action.role, action.address));
   } catch (e) {
     console.log('Failed!');
     yield put(actionCreators.listHasErrored());
@@ -124,17 +227,21 @@ export const creators = {
   getPendingTEachersAction: () => (
     { type: GET_PENDING_TEACHERS_LIST }
   ),
-  approveUserAction: address => (
-    { type: APPROVE_USER, address }
+  approveUserAction: (role, address) => (
+    { type: APPROVE_USER, role, address }
   ),
-  removeUserAction: address => (
-    { type: DELETE_USER, address }
+  removeUserAction: (role, address) => (
+    { type: DELETE_USER, role, address }
+  ),
+  denyUserAction: (role, address) => (
+    { type: DENY_USER, role, address }
   ),
 };
 
 export default function* handler() {
   yield [
     fork(takeEvery, DELETE_USER, deleteUser),
+    fork(takeEvery, DENY_USER, denyUser),
     fork(takeEvery, APPROVE_USER, approveUser),
     fork(takeLatest, GET_STUDENTS_LIST, getAllStudents),
     fork(takeLatest, GET_TEACHERS_LIST, getAllTeachers),

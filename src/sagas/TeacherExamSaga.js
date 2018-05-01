@@ -36,7 +36,7 @@ export function* getList({ userAddress }) {
   }
 }
 export const creators = {
-  getListAction: userAddress => (
+  getList: userAddress => (
     { type: GET_LIST, userAddress }
   ),
 };

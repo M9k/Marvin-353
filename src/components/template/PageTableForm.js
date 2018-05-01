@@ -2,21 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Table from 'react-bootstrap/lib/Table';
 import Button from 'react-bootstrap/lib/Button';
-import Form from '../custom/Form';
-import DeleteButton from '../custom/DeleteButton';
+import TemplateButton from '../custom/TemplateButton';
 import DetailsButton from '../custom/DetailsButton';
 import Utils from '../custom/utils';
 
 
 class PageTableForm extends React.Component {
+  static checkBooleanValue(item) {
+    if (item === true || item === false) {
+      return item ? 'Yes' : 'No';
+    }
+    return item;
+  }
+
   constructor(props) {
     super(props);
     this.refreshData = this.refreshData.bind(this);
-    this.getEditButton = this.getEditButton.bind(this);
-    this.getUnconfirmButton = this.getUnconfirmButton.bind(this);
-    this.getDeleteButton = this.getDeleteButton.bind(this);
     this.getDetailsButton = this.getDetailsButton.bind(this);
-    this.isFormRequired = this.isFormRequired.bind(this);
+    this.getButton = this.getButton.bind(this);
     this.getRows = this.getRows.bind(this);
     this.getRow = this.getRow.bind(this);
   }
@@ -25,19 +28,10 @@ class PageTableForm extends React.Component {
     this.refreshData();
   }
 
-  getEditButton() {
-    if (this.props.editTableData !== undefined) {
-      return (
-        <td><Button onClick={this.props.editTableData}>Edit button</Button></td>
-      );
-    }
-    return null;
-  }
-
   getDetailsButton(item) {
     if (this.props.linkTableData) {
       let path = document.location.pathname;
-      path = path.concat(`/${item.code}_${item.solarYear}`);
+      path = path.concat(`/${item.name}_${item.solarYear}`);
       return (
         <Button href={path}>Details</Button>
       );
@@ -50,48 +44,44 @@ class PageTableForm extends React.Component {
     return null;
   }
 
-  getDeleteButton(item) {
-    if (this.props.deleteTableData !== undefined) {
-      return (
-        <td><DeleteButton deleteFunction={this.props.deleteTableData} objectToRemove={item} text="Delete" /></td>
-      );
-    }
-    return null;
-  }
-  getUnconfirmButton(item) {
-    if (this.props.unconfirmUser !== undefined) {
-      return (
-        <td><DeleteButton deleteFunction={this.props.unconfirmUser} objectToRemove={item} text="Unconfirm" /></td>
-      );
-    }
-    return null;
-  }
   // eslint-disable-next-line
-  getRow(item) {
-    if (item instanceof Object) {
-      return Object.keys(item).map(key =>
-        <td>{item[key]}</td>);
-    }
-    return <td>{item}</td>;
+  getButton(key, item) {
+    return (
+      <td key={Utils.generateKey(key)}>
+        <TemplateButton
+          clickFunction={key.buttonFunction}
+          objectToWorkOn={item}
+          text={key.buttonText}
+          type={key.buttonType}
+        />
+      </td>
+    );
   }
+
+  getRow(item) {
+    const headers = this.props.headerInfo.map(header => header.toLowerCase());
+    if (item instanceof Object) {
+      if (this.props.columFilter) {
+        return Object.keys(item).filter(key => headers.includes(key.toLowerCase())).map(key =>
+          <td key={Utils.generateKey(item[key])}>{PageTableForm.checkBooleanValue(item[key])}</td>);
+      }
+      return Object.keys(item).map(key =>
+        <td key={Utils.generateKey(item[key])} >{PageTableForm.checkBooleanValue(item[key])}</td>);
+    }
+    return <td key={Utils.generateKey(item)} >{PageTableForm.checkBooleanValue(item)}</td>;
+  }
+
   getRows() {
     return this.props.tableData.map(item =>
       (
         <tr key={Utils.generateKey(item)}>
           {this.getRow(item)}
+          {this.props.tableButtons.map(key => (
+            this.getButton(key, item)
+          ))}
           {this.getDetailsButton(item)}
-          {this.getEditButton()}
-          {this.getDeleteButton({ item })}
-          {this.getUnconfirmButton({ item })}
         </tr>
       ));
-  }
-
-  isFormRequired() {
-    if (this.props.addTableData !== undefined) {
-      return <Form submitFunction={this.props.getTableData} />;
-    }
-    return null;
   }
 
   refreshData() {
@@ -103,7 +93,6 @@ class PageTableForm extends React.Component {
       <th key={Utils.generateKey(item)}>{item}</th>);
     return (
       <div>
-        {this.isFormRequired()}
         <Table striped bordered condensed hover>
           <thead>
             <tr>
@@ -121,23 +110,20 @@ class PageTableForm extends React.Component {
 
 PageTableForm.propTypes = {
   getTableData: PropTypes.func.isRequired,
-  editTableData: PropTypes.func,
-  deleteTableData: PropTypes.func,
-  addTableData: PropTypes.func,
-  unconfirmUser: PropTypes.func,
   tableData: PropTypes.arrayOf(Object).isRequired,
   headerInfo: PropTypes.arrayOf(String).isRequired,
+  // Temporaneamente not required, ma da aggiornare in isRequired piu avanti
+  tableButtons: PropTypes.arrayOf(Object),
   linkTableData: PropTypes.bool,
   detailTableData: PropTypes.bool,
+  columFilter: PropTypes.bool,
 };
 
 PageTableForm.defaultProps = {
-  editTableData: undefined,
-  unconfirmUser: undefined,
-  deleteTableData: undefined,
-  addTableData: undefined,
   linkTableData: false,
   detailTableData: false,
+  columFilter: false,
+  tableButtons: [],
 };
 
 export default PageTableForm;

@@ -18,7 +18,7 @@ function getNotApprovedTeacherNumber() {
   console.log('get not approved teacher number');
   const contractUniversityAdmin = getUniversityInstance();
   return contractUniversityAdmin.then(instance =>
-    instance.getNotApprovedTeacherNumber.call());
+    instance.getNonApprovedTeacherNumber.call());
 }
 
 function getNotApprovedTeacherContractAddressAt(_index) {

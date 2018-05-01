@@ -57,10 +57,10 @@ export function* assignVote({
 }
 
 export const creators = {
-  getListAction: examAddress => (
+  getList: examAddress => (
     { type: GET_LIST, examAddress }
   ),
-  assignVoteAction: (userAddress, examIndex, studentIndex, vote) => (
+  assignVote: (userAddress, examIndex, studentIndex, vote) => (
     {
       type: ASSIGN_VOTE,
       userAddress,

@@ -37,18 +37,6 @@ const testForm = () => (
     />
 
     <Form
-      description="What's the grade of the student?"
-      fields={[{
-        name: 'grade',
-        label: 'Grade:',
-        help: 'insert the student grade',
-        placeholder: '25',
-        type: FieldTypes.TEXT,
-        validateFunction: Utils.validGrade,
-      }]}
-    />
-
-    <Form
       description="Describe the exam that you want to add"
       fields={[{
         name: 'nameExam',

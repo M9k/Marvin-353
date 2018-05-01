@@ -17,10 +17,10 @@ class ModalForm extends React.Component {
   }
 
   handle() {
-    this.props.yesFunction(this.props.keyForModal);
     this.setState({
       showing: false,
     });
+    this.props.yesFunction(this.props.keyForModal);
   }
 
   close() {
@@ -40,8 +40,8 @@ class ModalForm extends React.Component {
             {this.props.children}
           </Modal.Body>
           <Modal.Footer>
-            {this.props.yesFunction !== undefined && <Button bsStyle="warning" onClick={this.handle}>Yes</Button>}
-            <Button bsStyle="Info" onClick={this.close}>Close</Button>
+            {this.props.yesFunction !== undefined && <Button bsStyle="primary" onClick={this.handle}>Yes</Button>}
+            <Button onClick={this.close}>Close</Button>
           </Modal.Footer>
         </Modal>
       </div>
@@ -54,7 +54,8 @@ ModalForm.propTypes = {
   show: PropTypes.bool,
   children: PropTypes.node,
   yesFunction: PropTypes.func,
-  keyForModal: PropTypes.number,
+  // eslint-disable-next-line react/forbid-prop-types
+  keyForModal: PropTypes.object,
 
 };
 
@@ -62,7 +63,7 @@ ModalForm.defaultProps = {
   show: false,
   children: null,
   yesFunction: undefined,
-  keyForModal: -1,
+  keyForModal: {},
 };
 
 export default ModalForm;
