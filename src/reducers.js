@@ -3,6 +3,7 @@ import { routerReducer } from 'react-router-redux';
 import { reducer as formReducer } from 'redux-form';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage/session';
+import Admin from './ducks/Admin';
 import AdminEmployer from './ducks/AdminEmployer';
 import Session from './ducks/Session';
 import Metamask from './ducks/Metamask';
@@ -10,7 +11,9 @@ import ManageYears from './ducks/ManageYears';
 import Booking from './ducks/Booking';
 import Evaluator from './ducks/Evaluator';
 import TeacherExam from './ducks/TeacherExam';
-import AdminDuck from './ducks/Admin';
+import TeachersList from './ducks/TeachersList';
+import CourseExams from './ducks/CourseExams';
+import ExamsList from './ducks/ExamsList';
 
 const persistConfig = {
   key: 'root',
@@ -23,6 +26,9 @@ const persistConfig = {
 const reducers = combineReducers({
   routing: routerReducer,
   form: formReducer,
+  accounts: Admin,
+  course: CourseExams,
+  exams: ExamsList,
   metamask: Metamask,
   user: Session,
   university: AdminEmployer,
@@ -30,7 +36,7 @@ const reducers = combineReducers({
   signup: Booking,
   selectedExam: Evaluator,
   teacherData: TeacherExam,
-  accounts: AdminDuck,
+  teachersList: TeachersList,
 });
 
 const persistentReducer = persistReducer(persistConfig, reducers);

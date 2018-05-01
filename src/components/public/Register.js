@@ -60,7 +60,7 @@ class Register extends React.Component {
             label: 'Role:',
             help: 'insert your desired role',
             type: FieldTypes.SELECT,
-            values: ['student', 'teacher'],
+            values: [null, 'student', 'teacher'],
             validateFunction: Utils.notNullValue,
           }]}
           submitFunction={this.addRole}
@@ -75,7 +75,7 @@ class Register extends React.Component {
               help: 'insert the code of the course',
               placeholder: 'A-36',
               type: FieldTypes.SELECT,
-              values: this.props.coursesForStudent,
+              values: [null].concat(this.props.coursesForStudent),
               validateFunction: Utils.notNullValue,
             }]}
             submitFunction={this.addStudent}

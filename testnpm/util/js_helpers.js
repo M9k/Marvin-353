@@ -57,3 +57,35 @@ describe('copyNPop function', () => {
     expect(() => Helpers.copyNPop([], fn)).to.not.throw();
   });
 });
+describe('updateObjInArr function', () => {
+  it('should return an identical copy if the provided function return false', () => {
+    const arr = [{ a: '5' }, { a: '6' }];
+    const fn = el => el.a === '7';
+    const obj = { a: '9' };
+    expect(Helpers.updateObjInArr(arr, fn, obj)).to.deep.equal([{ a: '5' }, { a: '6' }]);
+    expect(Helpers.updateObjInArr(arr, fn, obj)).to.not.equal(arr);
+  });
+  it('should update only the specified fields if the function return true', () => {
+    const arr = [{ a: '5', b: '8' }, { a: '6', b: '9' }];
+    const fn = el => el.a === '5';
+    const obj = { a: '9' };
+    expect(Helpers.updateObjInArr(arr, fn, obj)).to.deep.equal([
+      { a: '9', b: '8' },
+      { a: '6', b: '9' },
+    ]);
+  });
+  it('should throw TypeError if the specified function is not a function', () => {
+    const arr = [];
+    const fn = {};
+    const obj = {};
+    expect(() => Helpers.updateObjInArr(arr, fn, obj)).to.throw(TypeError);
+    expect(() => Helpers.updateObjInArr(arr, () => {}, obj)).to.not.throw();
+  });
+  it('should throw TypeError if the specified target has not a findIndex method', () => {
+    const arr = { findIndex: undefined };
+    const fn = () => false;
+    const obj = {};
+    expect(() => Helpers.updateObjInArr(arr, fn, obj)).to.throw(TypeError);
+    expect(() => Helpers.updateObjInArr([], fn, obj)).to.not.throw();
+  });
+});
