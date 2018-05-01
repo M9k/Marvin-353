@@ -14,6 +14,9 @@ import {
 
 import { getName, getSurname, getPublicAddress } from '../web3calls/User';
 
+import { getCourseContract } from '../web3calls/Student';
+import { getName as genCourseName } from '../web3calls/Course';
+
 import { toText } from '../util/web3/textConverter';
 
 import ROLES from '../util/logic/AccountEnum';
@@ -35,14 +38,37 @@ export function* getAllStudents() {
     let num = yield call(getStudentNumber);
     num = Number(num);
     const apiCalls = Array(num).fill().map((_, i) => call(getStudentContractAddressAt, i));
-    const students = yield all(apiCalls);
+    const studentsContracts = yield all(apiCalls);
+
+    const apiNameCalls = Array(num).fill().map(() =>
+      call(getName, String(studentsContracts)));
+    const studentsName = (yield all(apiNameCalls)).map(toText);
+    const apiSurnameCalls = Array(num).fill().map(() =>
+      call(getSurname, String(studentsContracts)));
+    const studentsSurname = (yield all(apiSurnameCalls)).map(toText);
+    const apiCourseCalls = Array(num).fill().map(() =>
+      call(getCourseContract, String(studentsContracts)));
+    const studentsCourseContract = yield all(apiCourseCalls);
+    const apiCourseNameCalls = Array(num).fill().map(() =>
+      call(genCourseName, String(studentsCourseContract)));
+    const studentsCourse = (yield all(apiCourseNameCalls)).map(toText);
+    const apiPublicAddressCalls = Array(num).fill().map(() =>
+      call(getPublicAddress, String(studentsContracts)));
+    const studentsPublicAddress = (yield all(apiPublicAddressCalls));
+    const students = Array(num).fill().map((_, i) => ({
+      contract: studentsContracts[i],
+      address: studentsPublicAddress[i],
+      name: studentsName[i],
+      surname: studentsSurname[i],
+      course: studentsCourse[i],
+    }));
+    // console.log(students);
     yield put(actionCreators.setStudentsList(students));
   } catch (e) {
     console.log('Failed!');
     yield put(actionCreators.listHasErrored());
   }
 }
-// TODO ottenere anche nomi, cognomi, indirizzi e corsi(guardare getPendingTeachers)
 export function* getPendingStudents() {
   yield put(actionCreators.listIsLoading());
   try {
@@ -50,7 +76,31 @@ export function* getPendingStudents() {
     num = Number(num);
     const apiCalls = Array(num).fill().map((_, i) =>
       call(getNotApprovedStudentContractAddressAt, i));
-    const pendingStudents = yield all(apiCalls);
+    const pendingStudentsContracts = yield all(apiCalls);
+
+    const apiNameCalls = Array(num).fill().map(() =>
+      call(getName, String(pendingStudentsContracts)));
+    const pendingStudentsName = (yield all(apiNameCalls)).map(toText);
+    const apiSurnameCalls = Array(num).fill().map(() =>
+      call(getSurname, String(pendingStudentsContracts)));
+    const pendingStudentsSurname = (yield all(apiSurnameCalls)).map(toText);
+    const apiCourseCalls = Array(num).fill().map(() =>
+      call(getCourseContract, String(pendingStudentsContracts)));
+    const pendingStudentsCourseContract = yield all(apiCourseCalls);
+    const apiCourseNameCalls = Array(num).fill().map(() =>
+      call(genCourseName, String(pendingStudentsCourseContract)));
+    const pendingStudentsCourse = (yield all(apiCourseNameCalls)).map(toText);
+    const apiPublicAddressCalls = Array(num).fill().map(() =>
+      call(getPublicAddress, String(pendingStudentsContracts)));
+    const pendingStudentsPublicAddress = (yield all(apiPublicAddressCalls));
+    const pendingStudents = Array(num).fill().map((_, i) => ({
+      contract: pendingStudentsContracts[i],
+      address: pendingStudentsPublicAddress[i],
+      name: pendingStudentsName[i],
+      surname: pendingStudentsSurname[i],
+      course: pendingStudentsCourse[i],
+    }));
+    // console.log(pendingStudents);
     yield put(actionCreators.setPendingStudentsList(pendingStudents));
   } catch (e) {
     console.log('Failed!');
@@ -58,14 +108,29 @@ export function* getPendingStudents() {
   }
 }
 
-// TODO ottenere anche nomi, cognomi ed indirizzi (guardare getPendingTeachers)
 export function* getAllTeachers() {
   yield put(actionCreators.listIsLoading());
   try {
     let num = yield call(getTeacherNumber);
     num = Number(num);
     const apiCalls = Array(num).fill().map((_, i) => call(getTeacherContractAddressAt, i));
-    const teachers = yield all(apiCalls);
+    const teachersContracts = yield all(apiCalls);
+    const apiNameCalls = Array(num).fill().map(() =>
+      call(getName, String(teachersContracts)));
+    const teachersName = (yield all(apiNameCalls)).map(toText);
+    const apiSurnameCalls = Array(num).fill().map(() =>
+      call(getSurname, String(teachersContracts)));
+    const teachersSurname = (yield all(apiSurnameCalls)).map(toText);
+    const apiPublicAddressCalls = Array(num).fill().map(() =>
+      call(getPublicAddress, String(teachersContracts)));
+    const teachersPublicAddress = (yield all(apiPublicAddressCalls));
+    const teachers = Array(num).fill().map((_, i) => ({
+      contract: teachersContracts[i],
+      address: teachersPublicAddress[i],
+      name: teachersName[i],
+      surname: teachersSurname[i],
+    }));
+    // console.log(teachers);
     yield put(actionCreators.setTeachersList(teachers));
   } catch (e) {
     console.log('Failed!');
