@@ -63,7 +63,7 @@ ModalForm.defaultProps = {
   show: false,
   children: null,
   yesFunction: undefined,
-  keyForModal: '',
+  keyForModal: {},
 };
 
 export default ModalForm;
