@@ -28,8 +28,10 @@ class TemplateButton extends React.Component {
 
 TemplateButton.propTypes = {
   clickFunction: PropTypes.func.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  objectToWorkOn: PropTypes.object.isRequired,
+  objectToWorkOn: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]).isRequired,
   text: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
 };
