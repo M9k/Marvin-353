@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Table from 'react-bootstrap/lib/Table';
-import Button from 'react-bootstrap/lib/Button';
 import TemplateButton from '../custom/TemplateButton';
-import DetailsButton from '../custom/DetailsButton';
 import Utils from '../custom/utils';
 
 
@@ -18,7 +16,6 @@ class PageTableForm extends React.Component {
   constructor(props) {
     super(props);
     this.refreshData = this.refreshData.bind(this);
-    this.getDetailsButton = this.getDetailsButton.bind(this);
     this.getButton = this.getButton.bind(this);
     this.getRows = this.getRows.bind(this);
     this.getRow = this.getRow.bind(this);
@@ -26,22 +23,6 @@ class PageTableForm extends React.Component {
 
   componentWillMount() {
     this.refreshData();
-  }
-
-  getDetailsButton(item) {
-    if (this.props.linkTableData) {
-      let path = document.location.pathname;
-      path = path.concat(`/${item.name}_${item.solarYear}`);
-      return (
-        <Button href={path}>Details</Button>
-      );
-    }
-    if (this.props.detailTableData) {
-      return (
-        <DetailsButton object={item} text="Details" />
-      );
-    }
-    return null;
   }
 
   // eslint-disable-next-line
@@ -79,7 +60,6 @@ class PageTableForm extends React.Component {
           {this.props.tableButtons.map(key => (
             this.getButton(key, item)
           ))}
-          {this.getDetailsButton(item)}
         </tr>
       ));
   }
@@ -114,14 +94,10 @@ PageTableForm.propTypes = {
   headerInfo: PropTypes.arrayOf(String).isRequired,
   // Temporaneamente not required, ma da aggiornare in isRequired piu avanti
   tableButtons: PropTypes.arrayOf(Object),
-  linkTableData: PropTypes.bool,
-  detailTableData: PropTypes.bool,
   columFilter: PropTypes.bool,
 };
 
 PageTableForm.defaultProps = {
-  linkTableData: false,
-  detailTableData: false,
   columFilter: false,
   tableButtons: [],
 };

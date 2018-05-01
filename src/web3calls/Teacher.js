@@ -11,7 +11,7 @@ function getExamNumber(address) {
   console.log('Teacher getExamNumber');
   const contractInstance = getTeacherContract(address);
   return contractInstance.then(instance =>
-    instance.getExamNumber.call());
+    instance.getExamNumber.call().then(Number));
 }
 
 function getExamContractAt(address, _index) {

@@ -15,9 +15,7 @@ import {
 import { getName, getSurname, getPublicAddress } from '../web3calls/User';
 
 import { getCourseContract } from '../web3calls/Student';
-import { getName as genCourseName } from '../web3calls/Course';
-
-import { toText } from '../util/web3/textConverter';
+import { getName as getCourseName } from '../web3calls/Course';
 
 import ROLES from '../util/logic/AccountEnum';
 
@@ -42,16 +40,16 @@ export function* getAllStudents() {
 
     const apiNameCalls = Array(num).fill().map((_, i) =>
       call(getName, String(studentsContracts[i])));
-    const studentsName = (yield all(apiNameCalls)).map(toText);
+    const studentsName = (yield all(apiNameCalls));
     const apiSurnameCalls = Array(num).fill().mmap((_, i) =>
       call(getSurname, String(studentsContracts[i])));
-    const studentsSurname = (yield all(apiSurnameCalls)).map(toText);
+    const studentsSurname = (yield all(apiSurnameCalls));
     const apiCourseCalls = Array(num).fill().map((_, i) =>
       call(getCourseContract, String(studentsContracts[i])));
     const studentsCourseContract = yield all(apiCourseCalls);
     const apiCourseNameCalls = Array(num).fill().map((_, i) =>
-      call(genCourseName, String(studentsCourseContract[i])));
-    const studentsCourse = (yield all(apiCourseNameCalls)).map(toText);
+      call(getCourseName, String(studentsCourseContract[i])));
+    const studentsCourse = (yield all(apiCourseNameCalls));
     const apiPublicAddressCalls = Array(num).fill().map((_, i) =>
       call(getPublicAddress, String(studentsContracts[i])));
     const studentsPublicAddress = (yield all(apiPublicAddressCalls));
@@ -80,16 +78,16 @@ export function* getPendingStudents() {
 
     const apiNameCalls = Array(num).fill().map((_, i) =>
       call(getName, String(pendingStudentsContracts[i])));
-    const pendingStudentsName = (yield all(apiNameCalls)).map(toText);
+    const pendingStudentsName = (yield all(apiNameCalls));
     const apiSurnameCalls = Array(num).fill().map((_, i) =>
       call(getSurname, String(pendingStudentsContracts[i])));
-    const pendingStudentsSurname = (yield all(apiSurnameCalls)).map(toText);
+    const pendingStudentsSurname = (yield all(apiSurnameCalls));
     const apiCourseCalls = Array(num).fill().map((_, i) =>
       call(getCourseContract, String(pendingStudentsContracts[i])));
     const pendingStudentsCourseContract = yield all(apiCourseCalls);
     const apiCourseNameCalls = Array(num).fill().map((_, i) =>
-      call(genCourseName, String(pendingStudentsCourseContract[i])));
-    const pendingStudentsCourse = (yield all(apiCourseNameCalls)).map(toText);
+      call(getCourseName, String(pendingStudentsCourseContract[i])));
+    const pendingStudentsCourse = (yield all(apiCourseNameCalls));
     const apiPublicAddressCalls = Array(num).fill().map((_, i) =>
       call(getPublicAddress, String(pendingStudentsContracts[i])));
     const pendingStudentsPublicAddress = (yield all(apiPublicAddressCalls));
@@ -117,10 +115,10 @@ export function* getAllTeachers() {
     const teachersContracts = yield all(apiCalls);
     const apiNameCalls = Array(num).fill().map((_, i) =>
       call(getName, String(teachersContracts[i])));
-    const teachersName = (yield all(apiNameCalls)).map(toText);
+    const teachersName = (yield all(apiNameCalls));
     const apiSurnameCalls = Array(num).fill().map((_, i) =>
       call(getSurname, String(teachersContracts[i])));
-    const teachersSurname = (yield all(apiSurnameCalls)).map(toText);
+    const teachersSurname = (yield all(apiSurnameCalls));
     const apiPublicAddressCalls = Array(num).fill().map((_, i) =>
       call(getPublicAddress, String(teachersContracts[i])));
     const teachersPublicAddress = (yield all(apiPublicAddressCalls));
@@ -148,10 +146,10 @@ export function* getPendingTeachers() {
     const pendingTeachersContracts = yield all(apiCalls);
     const apiNameCalls = Array(num).fill().map((_, i) =>
       call(getName, String(pendingTeachersContracts[i])));
-    const pendingTeachersName = (yield all(apiNameCalls)).map(toText);
+    const pendingTeachersName = (yield all(apiNameCalls));
     const apiSurnameCalls = Array(num).fill().map((_, i) =>
       call(getSurname, String(pendingTeachersContracts[i])));
-    const pendingTeachersSurname = (yield all(apiSurnameCalls)).map(toText);
+    const pendingTeachersSurname = (yield all(apiSurnameCalls));
     const apiPublicAddressCalls = Array(num).fill().map((_, i) =>
       call(getPublicAddress, String(pendingTeachersContracts[i])));
     const pendingTeachersPublicAddress = (yield all(apiPublicAddressCalls));
