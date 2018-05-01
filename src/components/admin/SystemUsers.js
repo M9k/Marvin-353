@@ -17,7 +17,7 @@ const SystemUsers = props => (
           buttonType: 'danger',
         },
       ]}
-      headerInfo={['Address', 'Remove']}
+      headerInfo={['Address', 'Name', 'Surname', 'Course', 'Remove']}
     />
     <h4>List of all teachers:</h4>
     <PageTableForm
@@ -30,7 +30,8 @@ const SystemUsers = props => (
           buttonType: 'danger',
         },
       ]}
-      headerInfo={['Teacher address', 'Contract address', 'Name', 'Surname', 'Remove']}
+      headerInfo={['Address', 'Name', 'Surname', 'Remove']}
+      columFilter
     />
   </div>
 );
