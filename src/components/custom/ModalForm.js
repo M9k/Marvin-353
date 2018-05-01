@@ -17,10 +17,10 @@ class ModalForm extends React.Component {
   }
 
   handle() {
-    this.props.yesFunction(this.props.keyForModal);
     this.setState({
       showing: false,
     });
+    this.props.yesFunction(this.props.keyForModal);
   }
 
   close() {
@@ -54,7 +54,8 @@ ModalForm.propTypes = {
   show: PropTypes.bool,
   children: PropTypes.node,
   yesFunction: PropTypes.func,
-  keyForModal: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
+  keyForModal: PropTypes.object,
 
 };
 

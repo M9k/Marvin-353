@@ -8,11 +8,17 @@ import Utils from '../custom/utils';
 
 
 class PageTableForm extends React.Component {
+  static checkBooleanValue(item) {
+    if (item === true || item === false) {
+      return item ? 'Yes' : 'No';
+    }
+    return item;
+  }
+
   constructor(props) {
     super(props);
     this.refreshData = this.refreshData.bind(this);
     this.getEditButton = this.getEditButton.bind(this);
-    this.getMultiColumnDeleteButton = this.getMultiColumnDeleteButton.bind(this);
     this.getDeleteButton = this.getDeleteButton.bind(this);
     this.getDetailsButton = this.getDetailsButton.bind(this);
     this.getConfirmationButton = this.getConfirmationButton.bind(this);
@@ -54,8 +60,8 @@ class PageTableForm extends React.Component {
       return (
         <td>
           <TemplateButton
-            deleteFunction={this.props.deleteSingleColumnRow}
-            objectToRemove={item}
+            clickFunction={this.props.deleteSingleColumnRow}
+            objectToWorkOn={item}
             text="Delete"
             type="danger"
           />
@@ -64,29 +70,14 @@ class PageTableForm extends React.Component {
     }
     return null;
   }
-  getMultiColumnDeleteButton(item) {
-    if (this.props.deleteMultiColumnRow !== undefined) {
-      console.log('Stampa del item', item);
-      return (
-        <td>
-          <TemplateButton
-            deleteFunction={this.props.deleteMultiColumnRow}
-            objectToRemove={item}
-            text={this.props.headerInfo[this.props.headerInfo.length - 1]}
-            type="danger"
-          />
-        </td>
-      );
-    }
-    return null;
-  }
+
   getConfirmationButton(item) {
     if (this.props.confirmationFunction !== undefined) {
       return (
         <td>
           <TemplateButton
-            deleteFunction={this.props.confirmationFunction}
-            objectToRemove={item}
+            clickFunction={this.props.confirmationFunction}
+            objectToWorkOn={item}
             text="Confirm"
             type="primary"
           />
@@ -95,36 +86,34 @@ class PageTableForm extends React.Component {
     }
     return null;
   }
-  // eslint-disable-next-line
+
   getRow(item) {
+    const headers = this.props.headerInfo.map(header => header.toLowerCase());
+
     if (item instanceof Object) {
       if (this.props.columFilter) {
-        return Object.keys(item).filter(key => this.props.headerInfo.includes(key)).map(key =>
-          <td>{this.checkBooleanValue(item[key])}</td>);
+        return Object.keys(item).filter(key => headers.includes(key)).map(key =>
+          <td key={Utils.generateKey(item[key])}>{PageTableForm.checkBooleanValue(item[key])}</td>);
       }
+
       return Object.keys(item).map(key =>
-        <td>{this.checkBooleanValue(item[key])}</td>);
+        <td key={Utils.generateKey(item[key])} >{PageTableForm.checkBooleanValue(item[key])}</td>);
     }
-    return <td>{this.checkBooleanValue(item)}</td>;
+
+    return <td key={Utils.generateKey(item)} >{PageTableForm.checkBooleanValue(item)}</td>;
   }
+
   getRows() {
     return this.props.tableData.map(item =>
       (
         <tr key={Utils.generateKey(item)}>
           {this.getRow(item)}
           {this.getDetailsButton(item)}
-          {this.getConfirmationButton(item.contract)}
+          {this.getConfirmationButton(item)}
           {this.getEditButton(item)}
           {this.getDeleteButton(item)}
-          {this.getMultiColumnDeleteButton(item)}
         </tr>
       ));
-  }
-  checkBooleanValue(item) { // eslint-disable-line class-methods-use-this
-    if (item === true || item === false) {
-      return item ? 'Yes' : 'No';
-    }
-    return item;
   }
 
   refreshData() {
@@ -155,7 +144,6 @@ PageTableForm.propTypes = {
   getTableData: PropTypes.func.isRequired,
   editTableData: PropTypes.func,
   deleteSingleColumnRow: PropTypes.func,
-  deleteMultiColumnRow: PropTypes.func,
   confirmationFunction: PropTypes.func,
   tableData: PropTypes.arrayOf(Object).isRequired,
   headerInfo: PropTypes.arrayOf(String).isRequired,
@@ -166,7 +154,6 @@ PageTableForm.propTypes = {
 
 PageTableForm.defaultProps = {
   editTableData: undefined,
-  deleteMultiColumnRow: undefined,
   deleteSingleColumnRow: undefined,
   confirmationFunction: undefined,
   linkTableData: false,

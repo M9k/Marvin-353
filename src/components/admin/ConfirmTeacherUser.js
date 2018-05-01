@@ -11,9 +11,9 @@ const ConfirmTeacher = props => (
     <PageTableForm
       getTableData={props.getPendingTeachers}
       tableData={props.pendingTeachers}
-      deleteMultiColumnRow={props.denyTeacher}
+      deleteSingleColumnRow={props.denyTeacher}
       confirmationFunction={props.confirmTeacher}
-      headerInfo={['address', 'name', 'surname', 'confirm user', 'unconfirm']}
+      headerInfo={['Address', 'Name', 'Surname', 'confirm', 'unconfirm']}
       columFilter
     />
   </div>
@@ -32,9 +32,12 @@ const mapStateToProps = state => ({
 
 function mapDispatchToProps(dispatch) {
   return {
-    confirmTeacher: address =>
-      dispatch(creators.approveUserAction(ROLES.UNCONFIRMED_TEACHER, address)),
-    denyTeacher: address => dispatch(creators.removeUserAction(ROLES.UNCONFIRMED_TEACHER, address)),
+    confirmTeacher: teacher =>
+      dispatch(creators.approveUserAction(ROLES.UNCONFIRMED_TEACHER, teacher.contract)),
+    denyTeacher: teacher => dispatch(creators.removeUserAction(
+      ROLES.UNCONFIRMED_TEACHER,
+      teacher.contract,
+    )),
     getPendingTeachers: () => dispatch(creators.getPendingTEachersAction()),
   };
 }

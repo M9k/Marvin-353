@@ -21,8 +21,10 @@ class TemplateButton extends React.Component {
     return (
       <div>
         <Button bsStyle={this.props.type} onClick={this.handleClick}>{this.props.text}</Button>
-        <ModalForm title="Delete confirmation" yesFunction={this.props.deleteFunction} keyForModal={this.props.objectToRemove} show={this.state.showing}>
-          Are you sure you want to {this.props.text.toLowerCase()} {this.props.objectToRemove}?
+        <ModalForm title="Confirmation" yesFunction={this.props.clickFunction} keyForModal={this.props.objectToWorkOn} show={this.state.showing}>
+          <p>
+            Are you sure you want to {this.props.text.toLowerCase() } this?
+          </p>
         </ModalForm>
       </div>
     );
@@ -30,9 +32,9 @@ class TemplateButton extends React.Component {
 }
 
 TemplateButton.propTypes = {
-  deleteFunction: PropTypes.func.isRequired,
+  clickFunction: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
-  objectToRemove: PropTypes.string.isRequired,
+  objectToWorkOn: PropTypes.object.isRequired,
   text: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
 };
