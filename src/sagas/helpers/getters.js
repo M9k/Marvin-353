@@ -12,8 +12,8 @@ export function* getTeacherData(teacherAddress, adapter = obj => obj) {
   const [name, surname] = yield all(dataFetch);
   return adapter({
     address: teacherAddress,
-    name: toText(name),
-    surname: toText(surname),
+    name,
+    surname,
   });
 }
 export function* getExamData(examAddress, adapter = obj => obj) {
@@ -33,12 +33,12 @@ export function* getExamData(examAddress, adapter = obj => obj) {
   }
   return adapter({
     address,
-    name: toText(name),
+    name,
     credits,
     mandatory,
     teacherAddress,
-    teacherName: toText(teacherData.name),
-    teacherSurname: toText(teacherData.surname),
+    teacherName: teacherData.name,
+    teacherSurname: teacherData.surname,
   });
 }
 export function* getCourseData(courseAddress, adapter = obj => obj) {
@@ -48,7 +48,8 @@ export function* getCourseData(courseAddress, adapter = obj => obj) {
   ];
   const [courseName, solarYear] = yield all(dataFetch);
   return adapter({
-    courseName: toText(courseName),
+    courseName,
+    courseAddress,
     solarYear: Number(solarYear),
   });
 }
