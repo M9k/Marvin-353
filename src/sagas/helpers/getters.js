@@ -24,7 +24,12 @@ export function* getExamData(examAddress) {
     call(Exam.getTeacherContract, address),
   ];
   const [name, credits, mandatory, teacherAddress] = yield all(dataFetch);
-  const teacherData = yield call(getTeacherData, teacherAddress);
+  let teacherData;
+  if (teacherAddress === null) {
+    teacherData = { name: null, surname: null };
+  } else {
+    teacherData = yield call(getTeacherData, teacherAddress);
+  }
   return {
     address,
     name,

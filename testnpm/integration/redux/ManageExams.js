@@ -10,6 +10,50 @@ import * as Getters from '../../../src/sagas/helpers/getters';
 import * as UniversityYear from '../../../src/web3calls/UniversityYear';
 import * as Year from '../../../src/web3calls/Year';
 import * as UniversityTeacher from '../../../src/web3calls/UniversityTeacher';
+import * as Course from '../../../src/web3calls/Course';
+
+const examsState = {
+  loading: false,
+  errored: false,
+  list: [
+    {
+      courseName: 'Filosofia',
+      courseAddress: '002',
+      solarYear: 2017,
+      address: 'E03',
+      name: 'Filosofia di qualcosa',
+      credits: 6,
+      mandatory: false,
+      professorName: 'Un bravo',
+      professorSurname: 'Filosofo',
+      professorAddress: '003',
+    },
+  ],
+};
+const courseExamsState = {
+  loading: false,
+  errored: false,
+  list: [
+    {
+      address: 'E01',
+      name: 'Analisi Matematica',
+      credits: 12,
+      mandatory: true,
+      professorName: 'Caterina',
+      professorSurname: 'Sartori',
+      professorAddress: '001',
+    },
+    {
+      address: 'E02',
+      name: 'Calcolo Numerico',
+      credits: 7,
+      mandatory: true,
+      professorName: 'Michela',
+      professorSurname: 'Zaglia',
+      professorAddress: '002',
+    },
+  ],
+};
 
 const { creators } = sagas;
 const courseDetail = {
@@ -159,35 +203,119 @@ describe('ManageExams feature', () => {
     })
     .put(TeacherCreators.listIsLoading())
     .run());
-  it('should create a new exams and push it in the course list', () => {
-    // expect(false).to.be.true;
-  });
-  /*
-  it('should assign a teacher to an exam in the course exams list', () => expectSaga(
-    sagas.associateProfessorToCourseExamA,
-    creators.associateProfessorToCourseExamAction('1', '2'),
+  it('should create a new exams and push it in the course list', () => expectSaga(
+    sagas.addNewExam,
+    creators.addNewExamAction('001', 'Sistemi Operativi', 10, true),
   )
-    .withReducer(CourseReducer)
+    .withReducer(CourseReducer, courseExamsState)
     .provide([
-      [matchers.fn.call(sagas.associateProfessor, '1'), {
+      [
+        matchers.call.fn(Course.addNewExam, '001', 'Sistemi Operativi', 10, true),
+        true,
+      ],
+    ])
+    .hasFinalState({
+      loading: false,
+      errored: false,
+      list: [
+        {
+          address: 'E01',
+          name: 'Analisi Matematica',
+          credits: 12,
+          mandatory: true,
+          professorName: 'Caterina',
+          professorSurname: 'Sartori',
+          professorAddress: '001',
+        },
+        {
+          address: 'E02',
+          name: 'Calcolo Numerico',
+          credits: 7,
+          mandatory: true,
+          professorName: 'Michela',
+          professorSurname: 'Zaglia',
+          professorAddress: '002',
+        },
+        {
+          address: null,
+          name: 'Sistemi Operativi',
+          credits: 10,
+          mandatory: true,
+          professorName: null,
+          professorSurname: null,
+          professorAddress: null,
+        },
+      ],
+    })
+    .put(CourseCreators.listIsLoading())
+    .run());
+  it('should assign a teacher to an exam in the course exams list', () => expectSaga(
+    sagas.associateProfessorToCourseExam,
+    creators.associateProfessorToCourseExamAction('E02', '1'),
+  )
+    .withReducer(CourseReducer, courseExamsState)
+    .provide([
+      [matchers.call.fn(sagas.associateProfessor, 'E02', '1'), {
         professorAddress: '1',
         professorName: 'Primo',
         professorSurname: 'Levi',
       }],
     ])
+    .hasFinalState({
+      loading: false,
+      errored: false,
+      list: [
+        {
+          address: 'E01',
+          name: 'Analisi Matematica',
+          credits: 12,
+          mandatory: true,
+          professorName: 'Caterina',
+          professorSurname: 'Sartori',
+          professorAddress: '001',
+        },
+        {
+          address: 'E02',
+          name: 'Calcolo Numerico',
+          credits: 7,
+          mandatory: true,
+          professorAddress: '1',
+          professorName: 'Primo',
+          professorSurname: 'Levi',
+        },
+      ],
+    })
+    .put(CourseCreators.listIsLoading())
     .run());
   it('should assing a teacher to an exam in the all exams list', () => expectSaga(
     sagas.associateProfessorToExam,
-    creators.associateProfessorToExamAction('1', '2'),
+    creators.associateProfessorToExamAction('E03', '1'),
   )
-    .withReducer(ExamsReducer)
+    .withReducer(ExamsReducer, examsState)
     .provide([
-      [matchers.fn.call(sagas.associateProfessor, '1'), {
+      [matchers.call.fn(sagas.associateProfessor, 'E03', '1'), {
         professorAddress: '1',
         professorName: 'Primo',
         professorSurname: 'Levi',
       }],
     ])
+    .hasFinalState({
+      loading: false,
+      errored: false,
+      list: [
+        {
+          courseName: 'Filosofia',
+          courseAddress: '002',
+          solarYear: 2017,
+          address: 'E03',
+          name: 'Filosofia di qualcosa',
+          credits: 6,
+          mandatory: false,
+          professorAddress: '1',
+          professorName: 'Primo',
+          professorSurname: 'Levi',
+        },
+      ],
+    })
     .run());
-    */
 });

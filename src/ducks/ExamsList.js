@@ -1,4 +1,5 @@
 import Duck from 'extensible-duck';
+import { updateObjInArr } from '../util/js_helpers';
 
 const ExamsListDuck = new Duck({
   namespace: 'marvin',
@@ -32,6 +33,16 @@ const ExamsListDuck = new Duck({
           list: action.list,
         };
       case (types.SET_PROFESSOR):
+        return {
+          ...state,
+          loading: false,
+          errored: false,
+          list: updateObjInArr(
+            state.list,
+            obj => obj.address === action.examAddress,
+            action.teacher,
+          ),
+        };
       default:
         return state;
     }

@@ -6,6 +6,7 @@ import * as UniversityExam from '../web3calls/UniversityExam';
 import * as UniversityYear from '../web3calls/UniversityYear';
 import * as Year from '../web3calls/Year';
 import * as UniversityTeacher from '../web3calls/UniversityTeacher';
+import * as Course from '../web3calls/Course';
 import * as Getters from './helpers/getters';
 
 const actionType = type => `marvin/ManageExamsSaga/${type}`;
@@ -16,18 +17,24 @@ const GET_TEACHERS = actionType('GET_TEACHERS');
 const APTCE = actionType('ASSOCIATE_PROFESSOR_TO_COURSE_EXAM');
 const APTE = actionType('ASSOCIATE_PROFESSOR_TO_EXAM');
 
-
-export function* associateProfessor(examAddress, teacherAddress) {
-  yield call(UniversityExam.associateTeacherToExam, teacherAddress, examAddress);
-  const teacherData = yield call(Getters.getTeacherData, teacherAddress);
-  return {
-    professorAddress: teacherData.address,
-    professorName: teacherData.name,
-    professorSurname: teacherData.surname,
-  };
-}
-export function* addNewExam({ courseAddress, name, credits, mandatory }){
-
+export function* addNewExam({
+  courseAddress, name, credits, mandatory,
+}) {
+  try {
+    yield put(CourseCreators.listIsLoading());
+    yield call(Course.addNewExam, courseAddress, name, credits, mandatory);
+    yield put(CourseCreators.pushNewExam({
+      address: null,
+      name,
+      credits,
+      mandatory,
+      professorAddress: null,
+      professorName: null,
+      professorSurname: null,
+    }));
+  } catch (e) {
+    yield put(CourseCreators.listHasErrored());
+  }
 }
 export function* getAllExams({ solarYear }) {
   try {
@@ -86,11 +93,29 @@ export function* getTeachers() {
     yield put(TeacherCreators.listHasErrored());
   }
 }
-export function* associateProfessorToExam() {
-
+export function* associateProfessor(examAddress, teacherAddress) {
+  yield call(UniversityExam.associateTeacherToExam, teacherAddress, examAddress);
+  const teacherData = yield call(Getters.getTeacherData, teacherAddress);
+  return {
+    professorAddress: teacherData.address,
+    professorName: teacherData.name,
+    professorSurname: teacherData.surname,
+  };
 }
-export function* associateProfessorToCourseExam() {
-
+function* associateProfessorTo(examAddress, teacherAddress, creators) {
+  try {
+    yield put(creators.listIsLoading());
+    const teacher = yield call(associateProfessor, examAddress, teacherAddress);
+    yield put(creators.setProfessor(examAddress, teacher));
+  } catch (e) {
+    yield put(creators.listHasErrored());
+  }
+}
+export function* associateProfessorToExam({ examAddress, teacherAddress }) {
+  yield call(associateProfessorTo, examAddress, teacherAddress, ExamsCreators);
+}
+export function* associateProfessorToCourseExam({ examAddress, teacherAddress }) {
+  yield call(associateProfessorTo, examAddress, teacherAddress, CourseCreators);
 }
 export const creators = {
   addNewExamAction: (courseAddress, name, credits, mandatory) => (
