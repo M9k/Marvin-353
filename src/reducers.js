@@ -10,6 +10,9 @@ import ManageYears from './ducks/ManageYears';
 import Booking from './ducks/Booking';
 import Evaluator from './ducks/Evaluator';
 import TeacherExam from './ducks/TeacherExam';
+import TeachersList from './ducks/TeachersList';
+import CourseExams from './ducks/CourseExams';
+import ExamsList from './ducks/ExamsList';
 
 const persistConfig = {
   key: 'root',
@@ -22,6 +25,8 @@ const persistConfig = {
 const reducers = combineReducers({
   routing: routerReducer,
   form: formReducer,
+  course: CourseExams,
+  exams: ExamsList,
   metamask: Metamask,
   user: Session,
   university: AdminEmployer,
@@ -29,6 +34,7 @@ const reducers = combineReducers({
   signup: Booking,
   selectedExam: Evaluator,
   teacherData: TeacherExam,
+  teachersList: TeachersList,
 });
 
 const persistentReducer = persistReducer(persistConfig, reducers);
