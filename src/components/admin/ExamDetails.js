@@ -53,8 +53,6 @@ class ExamDetails extends React.Component {
   }
 
   render() {
-    console.log('EXAMMM');
-    console.log(this.object);
     const options = [];
     for (let i = 0; i < this.teacherList.length; i += 1) {
       // eslint-disable-next-line
