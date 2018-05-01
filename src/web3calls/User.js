@@ -20,14 +20,14 @@ function getName(address) {
   console.log(`User getName of ${address}`);
   const contractInstance = getUserContract(address);
   return contractInstance.then(instance =>
-    instance.getName.call().then(name => toText(name)));
+    instance.getName.call().then(toText));
 }
 
 function getSurname(address) {
   console.log(`User getSurname of ${address}`);
   const contractInstance = getUserContract(address);
   return contractInstance.then(instance =>
-    instance.getSurname.call().then(surname => toText(surname)));
+    instance.getSurname.call().then(toText));
 }
 
 export { getPublicAddress, getName, getSurname };
