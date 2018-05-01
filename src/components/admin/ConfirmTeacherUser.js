@@ -12,6 +12,8 @@ class ConfirmTeacher extends React.Component {
     super(props);
     this.viewConfirm = this.viewConfirm.bind(this);
     this.viewDeny = this.viewDeny.bind(this);
+    this.closeConfirm = this.closeConfirm.bind(this);
+    this.closeDeny = this.closeDeny.bind(this);
     this.state = { deny: false, confirm: false };
   }
 
@@ -23,6 +25,14 @@ class ConfirmTeacher extends React.Component {
     this.setState({ deny: true, confirm: false, item });
   }
 
+  closeConfirm(item) {
+    this.setState({ confirm: false, deny: false });
+    this.props.confirmTeacher(item);
+  }
+  closeDeny(item) {
+    this.setState({ confirm: false, deny: false });
+    this.props.denyTeacher(item);
+  }
   render() {
     return (
       <div>
@@ -47,7 +57,7 @@ class ConfirmTeacher extends React.Component {
 
         <ModalForm
           title="Confirmation teacher"
-          yesFunction={this.props.confirmTeacher}
+          yesFunction={this.closeConfirm}
           keyForModal={{ item: this.state.item }}
           show={this.state.confirm}
         >
@@ -58,7 +68,7 @@ class ConfirmTeacher extends React.Component {
 
         <ModalForm
           title="Deny teacher"
-          yesFunction={this.props.denyTeacher}
+          yesFunction={this.closeDeny}
           keyForModal={{ item: this.state.item }}
           show={this.state.deny}
         >

@@ -30,7 +30,7 @@ const SystemUsers = props => (
           buttonType: 'danger',
         },
       ]}
-      headerInfo={['Address', 'Remove']}
+      headerInfo={['Teacher address', 'Contract address', 'Name', 'Surname', 'Remove']}
     />
   </div>
 );
