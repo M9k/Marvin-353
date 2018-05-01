@@ -62,7 +62,7 @@ class PageTableForm extends React.Component {
     const headers = this.props.headerInfo.map(header => header.toLowerCase());
     if (item instanceof Object) {
       if (this.props.columFilter) {
-        return Object.keys(item).filter(key => headers.includes(key)).map(key =>
+        return Object.keys(item).filter(key => headers.includes(key.toLowerCase())).map(key =>
           <td key={Utils.generateKey(item[key])}>{PageTableForm.checkBooleanValue(item[key])}</td>);
       }
       return Object.keys(item).map(key =>
@@ -79,6 +79,7 @@ class PageTableForm extends React.Component {
           {this.props.tableButtons.map(key => (
             this.getButton(key, item)
           ))}
+          {this.getDetailsButton(item)}
         </tr>
       ));
   }

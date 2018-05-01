@@ -23,7 +23,7 @@ const ConfirmTeacher = props => (
           buttonType: 'danger',
         },
       ]}
-      headerInfo={['Address', 'Name', 'Surname', 'confirm', 'unconfirm']}
+      headerInfo={['Address', 'Name', 'Surname', 'Confirm', 'Unconfirm']}
       columFilter
     />
   </div>
