@@ -37,24 +37,33 @@ class PageTableForm extends React.Component {
     this.refreshData();
   }
 
-  getRow(item) {
+  getRow(item, nonce) {
     const headers = this.props.headerInfo.map(header => header.toLowerCase());
     if (item instanceof Object) {
       if (this.props.columFilter) {
-        return Object.keys(item).filter(key => headers.includes(key.toLowerCase())).map(key =>
-          <td key={Utils.generateKey(item[key])}>{PageTableForm.checkBooleanValue(item[key])}</td>);
+        return Object.keys(item).filter(key => headers.includes(key.toLowerCase())).map((key, i) =>
+          (
+            <td key={Utils.generateKey(item[key]).concat(i).concat(nonce)}>
+              {PageTableForm.checkBooleanValue(item[key])}
+            </td>
+          ));
       }
-      return Object.keys(item).map(key =>
-        <td key={Utils.generateKey(item[key])} >{PageTableForm.checkBooleanValue(item[key])}</td>);
+      return Object.keys(item).map((key, i) => (
+        <td key={Utils.generateKey(item[key]).concat(i).concat(nonce)} >
+          {PageTableForm.checkBooleanValue(item[key])}
+        </td>
+      ));
     }
-    return <td key={Utils.generateKey(item)} >{PageTableForm.checkBooleanValue(item)}</td>;
+    return (
+      <td key={Utils.generateKey(item).concat(nonce)} >{PageTableForm.checkBooleanValue(item)}</td>
+    );
   }
 
   getRows() {
-    return this.props.tableData.map(item =>
+    return this.props.tableData.map((item, nonce) =>
       (
         <tr key={Utils.generateKey(item)}>
-          {this.getRow(item)}
+          {this.getRow(item, nonce)}
           {this.props.tableButtons.map(key => (
             PageTableForm.getButton(key, item)
           ))}
