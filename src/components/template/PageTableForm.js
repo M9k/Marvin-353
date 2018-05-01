@@ -13,20 +13,7 @@ class PageTableForm extends React.Component {
     return item;
   }
 
-  constructor(props) {
-    super(props);
-    this.refreshData = this.refreshData.bind(this);
-    this.getButton = this.getButton.bind(this);
-    this.getRows = this.getRows.bind(this);
-    this.getRow = this.getRow.bind(this);
-  }
-
-  componentWillMount() {
-    this.refreshData();
-  }
-
-  // eslint-disable-next-line
-  getButton(key, item) {
+  static getButton(key, item) {
     return (
       <td key={Utils.generateKey(key)}>
         <TemplateButton
@@ -37,6 +24,17 @@ class PageTableForm extends React.Component {
         />
       </td>
     );
+  }
+
+  constructor(props) {
+    super(props);
+    this.refreshData = this.refreshData.bind(this);
+    this.getRows = this.getRows.bind(this);
+    this.getRow = this.getRow.bind(this);
+  }
+
+  componentWillMount() {
+    this.refreshData();
   }
 
   getRow(item) {
@@ -58,7 +56,7 @@ class PageTableForm extends React.Component {
         <tr key={Utils.generateKey(item)}>
           {this.getRow(item)}
           {this.props.tableButtons.map(key => (
-            this.getButton(key, item)
+            PageTableForm.getButton(key, item)
           ))}
         </tr>
       ));
