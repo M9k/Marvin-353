@@ -6,6 +6,7 @@ import "./University.sol";
 @author 353
 @notice This contract manages the admins
 */
+
 contract UniversityAdmin is University {
     uint private countAdministratorsByIndex = 1;
     mapping (address => uint) internal administrators;
