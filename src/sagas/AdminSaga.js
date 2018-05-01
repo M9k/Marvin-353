@@ -40,20 +40,20 @@ export function* getAllStudents() {
     const apiCalls = Array(num).fill().map((_, i) => call(getStudentContractAddressAt, i));
     const studentsContracts = yield all(apiCalls);
 
-    const apiNameCalls = Array(num).fill().map(() =>
-      call(getName, String(studentsContracts)));
+    const apiNameCalls = Array(num).fill().map((_, i) =>
+      call(getName, String(studentsContracts[i])));
     const studentsName = (yield all(apiNameCalls)).map(toText);
-    const apiSurnameCalls = Array(num).fill().map(() =>
-      call(getSurname, String(studentsContracts)));
+    const apiSurnameCalls = Array(num).fill().mmap((_, i) =>
+      call(getSurname, String(studentsContracts[i])));
     const studentsSurname = (yield all(apiSurnameCalls)).map(toText);
-    const apiCourseCalls = Array(num).fill().map(() =>
-      call(getCourseContract, String(studentsContracts)));
+    const apiCourseCalls = Array(num).fill().map((_, i) =>
+      call(getCourseContract, String(studentsContracts[i])));
     const studentsCourseContract = yield all(apiCourseCalls);
-    const apiCourseNameCalls = Array(num).fill().map(() =>
-      call(genCourseName, String(studentsCourseContract)));
+    const apiCourseNameCalls = Array(num).fill().map((_, i) =>
+      call(genCourseName, String(studentsCourseContract[i])));
     const studentsCourse = (yield all(apiCourseNameCalls)).map(toText);
-    const apiPublicAddressCalls = Array(num).fill().map(() =>
-      call(getPublicAddress, String(studentsContracts)));
+    const apiPublicAddressCalls = Array(num).fill().map((_, i) =>
+      call(getPublicAddress, String(studentsContracts[i])));
     const studentsPublicAddress = (yield all(apiPublicAddressCalls));
     const students = Array(num).fill().map((_, i) => ({
       contract: studentsContracts[i],
@@ -78,20 +78,20 @@ export function* getPendingStudents() {
       call(getNotApprovedStudentContractAddressAt, i));
     const pendingStudentsContracts = yield all(apiCalls);
 
-    const apiNameCalls = Array(num).fill().map(() =>
-      call(getName, String(pendingStudentsContracts)));
+    const apiNameCalls = Array(num).fill().map((_, i) =>
+      call(getName, String(pendingStudentsContracts[i])));
     const pendingStudentsName = (yield all(apiNameCalls)).map(toText);
-    const apiSurnameCalls = Array(num).fill().map(() =>
-      call(getSurname, String(pendingStudentsContracts)));
+    const apiSurnameCalls = Array(num).fill().map((_, i) =>
+      call(getSurname, String(pendingStudentsContracts[i])));
     const pendingStudentsSurname = (yield all(apiSurnameCalls)).map(toText);
-    const apiCourseCalls = Array(num).fill().map(() =>
-      call(getCourseContract, String(pendingStudentsContracts)));
+    const apiCourseCalls = Array(num).fill().map((_, i) =>
+      call(getCourseContract, String(pendingStudentsContracts[i])));
     const pendingStudentsCourseContract = yield all(apiCourseCalls);
-    const apiCourseNameCalls = Array(num).fill().map(() =>
-      call(genCourseName, String(pendingStudentsCourseContract)));
+    const apiCourseNameCalls = Array(num).fill().map((_, i) =>
+      call(genCourseName, String(pendingStudentsCourseContract[i])));
     const pendingStudentsCourse = (yield all(apiCourseNameCalls)).map(toText);
-    const apiPublicAddressCalls = Array(num).fill().map(() =>
-      call(getPublicAddress, String(pendingStudentsContracts)));
+    const apiPublicAddressCalls = Array(num).fill().map((_, i) =>
+      call(getPublicAddress, String(pendingStudentsContracts[i])));
     const pendingStudentsPublicAddress = (yield all(apiPublicAddressCalls));
     const pendingStudents = Array(num).fill().map((_, i) => ({
       contract: pendingStudentsContracts[i],
@@ -115,14 +115,14 @@ export function* getAllTeachers() {
     num = Number(num);
     const apiCalls = Array(num).fill().map((_, i) => call(getTeacherContractAddressAt, i));
     const teachersContracts = yield all(apiCalls);
-    const apiNameCalls = Array(num).fill().map(() =>
-      call(getName, String(teachersContracts)));
+    const apiNameCalls = Array(num).fill().map((_, i) =>
+      call(getName, String(teachersContracts[i])));
     const teachersName = (yield all(apiNameCalls)).map(toText);
-    const apiSurnameCalls = Array(num).fill().map(() =>
-      call(getSurname, String(teachersContracts)));
+    const apiSurnameCalls = Array(num).fill().map((_, i) =>
+      call(getSurname, String(teachersContracts[i])));
     const teachersSurname = (yield all(apiSurnameCalls)).map(toText);
-    const apiPublicAddressCalls = Array(num).fill().map(() =>
-      call(getPublicAddress, String(teachersContracts)));
+    const apiPublicAddressCalls = Array(num).fill().map((_, i) =>
+      call(getPublicAddress, String(teachersContracts[i])));
     const teachersPublicAddress = (yield all(apiPublicAddressCalls));
     const teachers = Array(num).fill().map((_, i) => ({
       contract: teachersContracts[i],
@@ -146,14 +146,14 @@ export function* getPendingTeachers() {
     const apiCalls = Array(num).fill().map((_, i) =>
       call(getNotApprovedTeacherContractAddressAt, i));
     const pendingTeachersContracts = yield all(apiCalls);
-    const apiNameCalls = Array(num).fill().map(() =>
-      call(getName, String(pendingTeachersContracts)));
+    const apiNameCalls = Array(num).fill().map((_, i) =>
+      call(getName, String(pendingTeachersContracts[i])));
     const pendingTeachersName = (yield all(apiNameCalls)).map(toText);
-    const apiSurnameCalls = Array(num).fill().map(() =>
-      call(getSurname, String(pendingTeachersContracts)));
+    const apiSurnameCalls = Array(num).fill().map((_, i) =>
+      call(getSurname, String(pendingTeachersContracts[i])));
     const pendingTeachersSurname = (yield all(apiSurnameCalls)).map(toText);
-    const apiPublicAddressCalls = Array(num).fill().map(() =>
-      call(getPublicAddress, String(pendingTeachersContracts)));
+    const apiPublicAddressCalls = Array(num).fill().map((_, i) =>
+      call(getPublicAddress, String(pendingTeachersContracts[i])));
     const pendingTeachersPublicAddress = (yield all(apiPublicAddressCalls));
     const pendingTeachers = Array(num).fill().map((_, i) => ({
       contract: pendingTeachersContracts[i],
