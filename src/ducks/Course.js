@@ -37,7 +37,7 @@ const CourseDuck = new Duck({
           coursesListByYear: action.course,
           loading: false,
           errored: false,
-        }
+        };
       case (types.LIST_LOADING):
         return {
           ...state,
