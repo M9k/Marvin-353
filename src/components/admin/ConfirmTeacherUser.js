@@ -11,8 +11,18 @@ const ConfirmTeacher = props => (
     <PageTableForm
       getTableData={props.getPendingTeachers}
       tableData={props.pendingTeachers}
-      deleteSingleColumnRow={props.denyTeacher}
-      confirmationFunction={props.confirmTeacher}
+      tableButtons={[
+        {
+          buttonFunction: props.confirmTeacher,
+          buttonText: 'Confirm',
+          buttonType: 'primary',
+        },
+        {
+          buttonFunction: props.denyTeacher,
+          buttonText: 'Deny',
+          buttonType: 'danger',
+        },
+      ]}
       headerInfo={['Address', 'Name', 'Surname', 'confirm', 'unconfirm']}
       columFilter
     />

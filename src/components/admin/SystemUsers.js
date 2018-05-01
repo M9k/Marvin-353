@@ -10,14 +10,26 @@ const SystemUsers = props => (
     <PageTableForm
       getTableData={props.getStudents}
       tableData={props.studentAccounts}
-      deleteSingleColumnRow={props.deleteTeacher}
+      tableButtons={[
+        {
+          buttonFunction: props.deleteTeacher,
+          buttonText: 'Delete',
+          buttonType: 'danger',
+        },
+      ]}
       headerInfo={['Address', 'Remove']}
     />
     <h4>List of all teachers:</h4>
     <PageTableForm
       getTableData={props.getTeachers}
       tableData={props.teacherAccounts}
-      deleteSingleColumnRow={props.deleteStudent}
+      tableButtons={[
+        {
+          buttonFunction: props.deleteStudent,
+          buttonText: 'Delete',
+          buttonType: 'danger',
+        },
+      ]}
       headerInfo={['Address', 'Remove']}
     />
   </div>

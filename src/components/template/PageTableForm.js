@@ -18,25 +18,14 @@ class PageTableForm extends React.Component {
   constructor(props) {
     super(props);
     this.refreshData = this.refreshData.bind(this);
-    this.getEditButton = this.getEditButton.bind(this);
-    this.getDeleteButton = this.getDeleteButton.bind(this);
     this.getDetailsButton = this.getDetailsButton.bind(this);
-    this.getConfirmationButton = this.getConfirmationButton.bind(this);
+    this.getButton = this.getButton.bind(this);
     this.getRows = this.getRows.bind(this);
     this.getRow = this.getRow.bind(this);
   }
 
   componentWillMount() {
     this.refreshData();
-  }
-
-  getEditButton(item) {
-    if (this.props.editTableData !== undefined) {
-      return (
-        <td><Button onClick={this.props.editTableData(item)}>Edit button</Button></td>
-      );
-    }
-    return null;
   }
 
   getDetailsButton(item) {
@@ -55,51 +44,30 @@ class PageTableForm extends React.Component {
     return null;
   }
 
-  getDeleteButton(item) {
-    if (this.props.deleteSingleColumnRow !== undefined) {
-      return (
-        <td>
-          <TemplateButton
-            clickFunction={this.props.deleteSingleColumnRow}
-            objectToWorkOn={item}
-            text="Delete"
-            type="danger"
-          />
-        </td>
-      );
-    }
-    return null;
-  }
-
-  getConfirmationButton(item) {
-    if (this.props.confirmationFunction !== undefined) {
-      return (
-        <td>
-          <TemplateButton
-            clickFunction={this.props.confirmationFunction}
-            objectToWorkOn={item}
-            text="Confirm"
-            type="primary"
-          />
-        </td>
-      );
-    }
-    return null;
+  // eslint-disable-next-line
+  getButton(key, item) {
+    return (
+      <td>
+        <TemplateButton
+          clickFunction={key.buttonFunction}
+          objectToWorkOn={item}
+          text={key.buttonText}
+          type={key.buttonType}
+        />
+      </td>
+    );
   }
 
   getRow(item) {
     const headers = this.props.headerInfo.map(header => header.toLowerCase());
-
     if (item instanceof Object) {
       if (this.props.columFilter) {
         return Object.keys(item).filter(key => headers.includes(key)).map(key =>
           <td key={Utils.generateKey(item[key])}>{PageTableForm.checkBooleanValue(item[key])}</td>);
       }
-
       return Object.keys(item).map(key =>
         <td key={Utils.generateKey(item[key])} >{PageTableForm.checkBooleanValue(item[key])}</td>);
     }
-
     return <td key={Utils.generateKey(item)} >{PageTableForm.checkBooleanValue(item)}</td>;
   }
 
@@ -108,10 +76,9 @@ class PageTableForm extends React.Component {
       (
         <tr key={Utils.generateKey(item)}>
           {this.getRow(item)}
-          {this.getDetailsButton(item)}
-          {this.getConfirmationButton(item)}
-          {this.getEditButton(item)}
-          {this.getDeleteButton(item)}
+          {this.props.tableButtons.map(key => (
+            this.getButton(key, item)
+          ))}
         </tr>
       ));
   }
@@ -142,23 +109,20 @@ class PageTableForm extends React.Component {
 
 PageTableForm.propTypes = {
   getTableData: PropTypes.func.isRequired,
-  editTableData: PropTypes.func,
-  deleteSingleColumnRow: PropTypes.func,
-  confirmationFunction: PropTypes.func,
   tableData: PropTypes.arrayOf(Object).isRequired,
   headerInfo: PropTypes.arrayOf(String).isRequired,
+  // Temporaneamente not required, ma da aggiornare in isRequired piu avanti
+  tableButtons: PropTypes.arrayOf(Object),
   linkTableData: PropTypes.bool,
   detailTableData: PropTypes.bool,
   columFilter: PropTypes.bool,
 };
 
 PageTableForm.defaultProps = {
-  editTableData: undefined,
-  deleteSingleColumnRow: undefined,
-  confirmationFunction: undefined,
   linkTableData: false,
   detailTableData: false,
   columFilter: false,
+  tableButtons: [],
 };
 
 export default PageTableForm;

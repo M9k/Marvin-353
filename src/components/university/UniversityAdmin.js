@@ -24,7 +24,11 @@ const UniversityAdmin = props => (
     />
     <PageTableForm
       getTableData={props.getAdmins}
-      deleteSingleColumnRow={props.deleteAdmin}
+      tableButtons={[{
+        buttonFunction: props.deleteAdmin,
+        buttonText: 'Delete',
+        buttonType: 'danger',
+      }]}
       tableData={props.adminAccounts}
       headerInfo={['Admin Address', 'Delete']}
     />

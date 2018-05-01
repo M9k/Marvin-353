@@ -11,8 +11,18 @@ const ConfirmStudent = props => (
     <PageTableForm
       getTableData={props.getPendingStudents}
       tableData={props.studentAccounts}
-      deleteSingleColumnRow={props.denyStudent}
-      confirmationFunction={props.confirmStudent}
+      tableButtons={[
+        {
+          buttonFunction: props.confirmStudent,
+          buttonText: 'Confirm',
+          buttonType: 'primary',
+        },
+        {
+          buttonFunction: props.denyStudent,
+          buttonText: 'Deny',
+          buttonType: 'danger',
+        },
+      ]}
       headerInfo={['Address', 'Confirm', 'Deny']}
     />
   </div>
@@ -32,8 +42,10 @@ const mapStateToProps = state => ({
 
 function mapDispatchToProps(dispatch) {
   return {
-    confirmStudent: add => dispatch(creators.approveUserAction(ROLES.UNCONFIRMED_STUDENT, add)),
-    denyStudent: add => dispatch(creators.removeUserAction(ROLES.UNCONFIRMED_STUDENT, add)),
+    // eslint-disable-next-line
+    confirmStudent: add => dispatch(creators.approveUserAction(ROLES.UNCONFIRMED_STUDENT, add.contract)),
+    // eslint-disable-next-line
+    denyStudent: add => dispatch(creators.removeUserAction(ROLES.UNCONFIRMED_STUDENT, add.contract)),
     getPendingStudents: () => dispatch(creators.getPendingStudentsAction())
     ,
   };

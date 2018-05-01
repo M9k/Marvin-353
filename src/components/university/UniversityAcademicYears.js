@@ -27,7 +27,11 @@ const UniversityAcademic = props => (
       getTableData={props.getYears}
       tableData={props.academicYears}
       headerInfo={['Year', 'Delete']}
-      deleteSingleColumnRow={props.deleteYears}
+      tableButtons={[{
+        buttonFunction: props.deleteYears,
+        buttonText: 'Delete',
+        buttonType: 'danger',
+      }]}
     />
   </div>
 );
