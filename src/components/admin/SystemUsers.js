@@ -11,17 +11,24 @@ class SystemUsers extends React.Component {
     super(props);
     this.viewDeleteTeacher = this.viewDeleteTeacher.bind(this);
     this.closeDeleteTeacher = this.closeDeleteTeacher.bind(this);
-    this.state = { deleteTeacher: false };
+    this.viewDeleteStudent = this.viewDeleteStudent.bind(this);
+    this.closeDeleteStudent = this.closeDeleteStudent.bind(this);
+    this.state = { deleteTeacher: false, deleteStudent: false };
   }
 
   viewDeleteTeacher(item) {
     this.setState({ deleteTeacher: true, item });
   }
-
-
   closeDeleteTeacher(item) {
     this.setState({ deleteTeacher: false });
     this.props.deleteTeacher(item.item);
+  }
+  viewDeleteStudent(item) {
+    this.setState({ deleteStudent: true, item });
+  }
+  closeDeleteStudent(item) {
+    this.setState({ deleteStudent: false });
+    this.props.deleteStudent(item.item);
   }
   render() {
     return (
@@ -32,7 +39,7 @@ class SystemUsers extends React.Component {
           tableData={this.props.studentAccounts}
           tableButtons={[
             {
-              buttonFunction: this.props.deleteStudent,
+              buttonFunction: this.viewDeleteStudent,
               buttonText: 'Delete',
               buttonType: 'danger',
             },
@@ -63,6 +70,16 @@ class SystemUsers extends React.Component {
             Are you sure you want to delete this teacher from system?
           </p>
         </ModalForm>
+        <ModalForm
+          title="STUDENT ELIMINATION"
+          yesFunction={this.closeDeleteStudent}
+          keyForModal={{ item: this.state.item }}
+          show={this.state.deleteStudent}
+        >
+          <p>
+            Are you sure you want to delete this student from system?
+          </p>
+        </ModalForm>
 
       </div>
     );
@@ -90,7 +107,7 @@ function mapDispatchToProps(dispatch) {
     getStudents: () => dispatch(creators.getAllTEachersAction()),
     // Metodi sotto sono da sistemare nella parte di Redux
     deleteTeacher: add => dispatch(creators.removeUserAction(ROLES.TEACHER, add.contract)),
-    deleteStudent: add => dispatch(creators.removeUserAction(add)),
+    deleteStudent: add => dispatch(creators.removeUserAction(ROLES.TEACHER, add.contract)),
   };
 }
 
