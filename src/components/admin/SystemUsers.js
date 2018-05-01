@@ -107,7 +107,7 @@ function mapDispatchToProps(dispatch) {
     getStudents: () => dispatch(creators.getAllTEachersAction()),
     // Metodi sotto sono da sistemare nella parte di Redux
     deleteTeacher: add => dispatch(creators.removeUserAction(ROLES.TEACHER, add.contract)),
-    deleteStudent: add => dispatch(creators.removeUserAction(ROLES.TEACHER, add.contract)),
+    deleteStudent: add => dispatch(creators.removeUserAction(ROLES.STUDENT, add.contract)),
   };
 }
 
