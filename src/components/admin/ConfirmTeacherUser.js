@@ -4,30 +4,74 @@ import { connect } from 'react-redux';
 import PageTableForm from '../template/PageTableForm';
 import { creators } from '../../sagas/AdminSaga';
 import ROLES from '../../util/logic/AccountEnum';
+import ModalForm from '../custom/ModalForm';
 
 
-const ConfirmTeacher = props => (
-  <div>
-    <PageTableForm
-      getTableData={props.getPendingTeachers}
-      tableData={props.pendingTeachers}
-      tableButtons={[
-        {
-          buttonFunction: props.confirmTeacher,
-          buttonText: 'Confirm',
-          buttonType: 'primary',
-        },
-        {
-          buttonFunction: props.denyTeacher,
-          buttonText: 'Deny',
-          buttonType: 'danger',
-        },
-      ]}
-      headerInfo={['Address', 'Name', 'Surname', 'Confirm', 'Unconfirm']}
-      columFilter
-    />
-  </div>
-);
+class ConfirmTeacher extends React.Component {
+  constructor(props) {
+    super(props);
+    this.viewConfirm = this.viewConfirm.bind(this);
+    this.viewDeny = this.viewDeny.bind(this);
+    this.state = { deny: false, confirm: false };
+  }
+
+  viewConfirm(item) {
+    this.setState({ confirm: true, deny: false, item });
+  }
+
+  viewDeny(item) {
+    this.setState({ deny: true, confirm: false, item });
+  }
+
+  render() {
+    return (
+      <div>
+        <PageTableForm
+          getTableData={this.props.getPendingTeachers}
+          tableData={this.props.pendingTeachers}
+          tableButtons={[
+          {
+            buttonFunction: this.viewConfirm,
+            buttonText: 'Confirm',
+            buttonType: 'primary',
+          },
+          {
+            buttonFunction: this.viewDeny,
+            buttonText: 'Deny',
+            buttonType: 'danger',
+          },
+        ]}
+          headerInfo={['Address', 'Name', 'Surname', 'Confirm', 'Unconfirm']}
+          columFilter
+        />
+
+
+        <ModalForm
+          title="Confirmation teacher"
+          yesFunction={this.props.confirmTeacher}
+          keyForModal={{ item: this.state.item }}
+          show={this.state.confirm}
+        >
+          <p>
+          Are you sure you want to confirm this teacher?
+          </p>
+        </ModalForm>
+
+        <ModalForm
+          title="Deny teacher"
+          yesFunction={this.props.denyTeacher}
+          keyForModal={{ item: this.state.item }}
+          show={this.state.deny}
+        >
+          <p>
+          Are you sure you want to deny this teacher?
+          </p>
+        </ModalForm>
+
+      </div>);
+  }
+}
+
 
 ConfirmTeacher.propTypes = {
   confirmTeacher: PropTypes.func.isRequired,
@@ -42,13 +86,12 @@ const mapStateToProps = state => ({
 
 function mapDispatchToProps(dispatch) {
   return {
-    confirmTeacher: teacher =>
-      dispatch(creators.approveUserAction(ROLES.UNCONFIRMED_TEACHER, teacher.contract)),
-    denyTeacher: teacher => dispatch(creators.removeUserAction(
-      ROLES.UNCONFIRMED_TEACHER,
-      teacher.contract,
-    )),
-    getPendingTeachers: () => dispatch(creators.getPendingTEachersAction()),
+    confirmTeacher: objArr =>
+      dispatch(creators.approveUserAction(ROLES.UNCONFIRMED_TEACHER, objArr.item.contract)),
+    denyTeacher: objArr =>
+      dispatch(creators.removeUserAction(ROLES.UNCONFIRMED_TEACHER, objArr.item.contract)),
+    getPendingTeachers: () =>
+      dispatch(creators.getPendingTEachersAction()),
   };
 }
 
