@@ -6,11 +6,24 @@ import { creators as teacherExamSaga } from '../../sagas/TeacherExamSaga';
 
 
 class TeacherExams extends React.Component {
+  /**
+   * Redirect user to the selected exam
+   * @param item the row/exam object with all the info about
+   * the exam but just need the code or primary key of it
+   */
+  static seeExam(item) {
+    document.location.href = `/exams/${item.code}/`;
+  }
+
   constructor(props) {
     super(props);
     this.getMyAssignedExamsAddr = this.getMyAssignedExamsAddr.bind(this);
   }
 
+  /**
+   * load the exams of the currently loggedin teacher looking
+   * at this address in the props
+   */
   getMyAssignedExamsAddr() {
     this.props.getMyAssignedExams(this.props.myWeb3Address);
   }
@@ -22,7 +35,13 @@ class TeacherExams extends React.Component {
           getTableData={this.getMyAssignedExamsAddr}
           tableData={this.props.assignedExams}
           headerInfo={['Name', 'credits', 'Name of the associated  course', 'year', 'details']}
-          linkTableData
+          tableButtons={[
+            {
+              buttonFunction: TeacherExams.seeExam,
+              buttonText: 'View students',
+              buttonType: 'primary',
+            },
+          ]}
         />
       </div>
     );

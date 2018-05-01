@@ -47,7 +47,7 @@ class PageTableForm extends React.Component {
   // eslint-disable-next-line
   getButton(key, item) {
     return (
-      <td>
+      <td key={Utils.generateKey(key)}>
         <TemplateButton
           clickFunction={key.buttonFunction}
           objectToWorkOn={item}

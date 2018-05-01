@@ -12,11 +12,18 @@ class UniversityAdmin extends React.Component {
   constructor(props) {
     super(props);
     this.viewDelete = this.viewDelete.bind(this);
+    this.closeDelete = this.closeDelete.bind(this);
     this.state = { delete: false };
   }
   viewDelete(item) {
     this.setState({ delete: true, item });
   }
+
+  closeDelete(objArr) {
+    this.setState({ delete: false });
+    this.props.deleteAdmin(objArr.item.address);
+  }
+
   render() {
     return (
       <div>
@@ -32,6 +39,7 @@ class UniversityAdmin extends React.Component {
           }]}
           submitFunction={this.props.addAdmin}
         />
+
         <PageTableForm
           getTableData={this.props.getAdmins}
           tableButtons={[{
@@ -42,10 +50,11 @@ class UniversityAdmin extends React.Component {
           tableData={this.props.adminAccounts}
           headerInfo={['Admin Address', 'Delete']}
         />
+
         <ModalForm
           title="Confirmation teacher"
-          yesFunction={this.props.deleteAdmin}
-          keyForModal={this.state.item}
+          yesFunction={this.closeDelete}
+          keyForModal={{ item: { address: this.state.item } }}
           show={this.state.delete}
         >
           <p>
