@@ -74,7 +74,7 @@ class AdminCourses extends React.Component {
               label: 'Academic Year:',
               help: 'insert the associated year',
               type: FieldTypes.SELECT,
-              values: this.props.academicYears,
+              values: [null].concat(this.props.academicYears),
               validateFunction: Utils.notNullValue,
             },
             {
@@ -82,7 +82,7 @@ class AdminCourses extends React.Component {
               label: 'Total credits:',
               help: 'insert the total credits',
               type: FieldTypes.SELECT,
-              values: this.totalCredits,
+              values: [null].concat(this.totalCredits),
               validateFunction: Utils.notNullValue,
             },
           ]}
