@@ -7,7 +7,7 @@ const Index = () => (
     <CardWithIcon
       title="Exams list"
       text="Show all my exams"
-      image="default.png"
+      image="teacherExams.png"
       links={[{ path: '/exams', label: 'Click here to see your exams' }]}
     />
   </div>

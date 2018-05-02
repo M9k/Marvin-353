@@ -12,11 +12,16 @@ class UniversityAdmin extends React.Component {
   constructor(props) {
     super(props);
     this.viewDelete = this.viewDelete.bind(this);
+    this.notDelete = this.notDelete.bind(this);
     this.closeDelete = this.closeDelete.bind(this);
     this.state = { delete: false };
   }
   viewDelete(item) {
     this.setState({ delete: true, item });
+  }
+
+  notDelete() {
+    this.setState({ delete: false });
   }
 
   closeDelete(objArr) {
@@ -54,6 +59,7 @@ class UniversityAdmin extends React.Component {
         <ModalForm
           title="Confirmation teacher"
           yesFunction={this.closeDelete}
+          noFunction={this.notDelete}
           keyForModal={{ item: { address: this.state.item } }}
           show={this.state.delete}
         >
