@@ -76,14 +76,6 @@ class PageTableForm extends React.Component {
   }
 
   render() {
-    if (this.props.tableData.length === 0) {
-      return (
-        <div>
-          <h4 className="text-center">There is no data to display!</h4>
-          <img alt="page not found" className="img-responsive imageIndexTop" src="/media/cards/nodata.png" />
-        </div>
-      );
-    }
     const tableHead = this.props.headerInfo.map(item =>
       <th key={Utils.generateKey(item)}>{item}</th>);
     return (
@@ -98,6 +90,8 @@ class PageTableForm extends React.Component {
             {this.getRows()}
           </tbody>
         </Table>
+        {this.props.tableData.length === 0 &&
+        <div> <h5 className="text-center">There is no data to display!</h5> </div>}
       </div>
     );
   }

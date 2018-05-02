@@ -6,16 +6,16 @@ const Index = () => (
     <h3 className="text-center">Welcome Admin</h3>
     <img alt="" className="img-responsive imageIndexTop" src="/media/cards/adminIndex.png" />
     <CardWithIcon
-      title="Confirm teacher accounts"
-      text="Confirm pending unconfirmed users for teacher role."
-      image="confirm.png"
-      links={[{ path: '/confirmTeachers', label: 'Click here to confirm' }]}
-    />
-    <CardWithIcon
       title="Confirm student accounts"
       text="Confirm pending unconfirmed users for student role."
       image="confirm.png"
       links={[{ path: '/confirmStudents', label: 'Click here to confirm' }]}
+    />
+    <CardWithIcon
+      title="Confirm teacher accounts"
+      text="Confirm pending unconfirmed users for teacher role."
+      image="confirm.png"
+      links={[{ path: '/confirmTeachers', label: 'Click here to confirm' }]}
     />
     <CardWithIcon
       title="Manage Users"
