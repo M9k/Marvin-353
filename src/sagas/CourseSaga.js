@@ -75,15 +75,15 @@ export function* addCourse(action) {
 }
 
 export const creators = {
-  getAllCoursesAction: () => (
+  getAllCourses: () => (
     { type: GET_ALL_COURSES }
   ),
-  addNewCourseAction: (year, name, credits) => (
+  addNewCourse: (year, name, credits) => (
     {
       type: ADD_NEW_COURSE, year, name, credits,
     }
   ),
-  getCoursesByYearAction: year => (
+  getCoursesByYear: year => (
     { type: GET_COURSES_BY_YEAR, year }
   ),
 };

@@ -1,6 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
-// import PropTypes from 'prop-types';
+
+import { creators as universitySagaAction } from '../../sagas/ManageYearsSaga';
+import { creators as courseSagaAction } from '../../sagas/CourseSaga';
+
 import PageTableForm from '../template/PageTableForm';
 import Form from '../custom/Form';
 import Utils from '../custom/utils';
@@ -9,60 +14,33 @@ import FieldTypes from '../custom/fieldtypes';
 class AdminCourses extends React.Component {
   constructor(props) {
     super(props);
+    this.props.getYears();
+
     this.totalCredits = [
       '120',
       '180',
       '300',
       '360',
     ];
-    this.solarYearList = [
-      '2017',
-      '2016',
-      '2015',
-    ];
-    this.getCourses = () => {};
-    this.courseList = [
-      {
-        name: 'L-31',
-        solarYear: '2017',
-        courseAddress: '0xfae394561e33e242c551d15d4625309ea4c0b97f',
-        totalCredits: 180,
-      },
-      {
-        name: 'L-35',
-        solarYear: '2016',
-        courseAddress: '0xfae394561e33e242c551d15d4625309ea4c0b97f',
-        totalCredits: 120,
-      },
-      {
-        name: 'L-35',
-        solarYear: '2017',
-        courseAddress: '0xfae394561e33e242c551d15d4625309ea4c0b97f',
-        totalCredits: 300,
-      },
-      {
-        name: 'L-30',
-        solarYear: '2015',
-        courseAddress: '0xfae394561e33e242c551d15d4625309ea4c0b97f',
-        totalCredits: 360,
-      },
-    ];
-    this.list = this.courseList;
+
     this.state = { year: 'ALL' };
     this.onChangeYear = this.onChangeYear.bind(this);
   }
+
   onChangeYear() {
     if (this.state.year !== this.inputEl.value) {
       this.setState({ year: this.inputEl.value });
       this.changeTable();
     }
   }
+
   changeTable() {
     this.list = this.courseList;
     if (this.inputEl.value !== 'ALL') {
       this.list = this.courseList.filter(course => course.solarYear === this.inputEl.value);
     }
   }
+
   // Questa funzione non può essere statica
   showExams(item) { // eslint-disable-line class-methods-use-this
     let path = document.location.pathname;
@@ -71,9 +49,11 @@ class AdminCourses extends React.Component {
   }
   render() {
     const options = [];
-    options.push(<option value="ALL">ALL</option>);
-    for (let i = 0; i < this.solarYearList.length; i += 1) {
-      options.push(<option value={this.solarYearList[i]}>{this.solarYearList[i]}</option>);
+    options.push(<option key={Utils.generateKey('ALL')} value="ALL">ALL</option>);
+    const years = this.props.academicYears;
+    for (let i = 0; i < years.length; i += 1) {
+      // eslint-disable-next-line max-len
+      options.push(<option key={Utils.generateKey(years[i])} value={years[i]}>{years[i]}</option>);
     }
 
     return (
@@ -94,8 +74,8 @@ class AdminCourses extends React.Component {
               label: 'Academic Year:',
               help: 'insert the associated year',
               type: FieldTypes.SELECT,
-              values: this.solarYearList,
-              validateFunction: Utils.alwaysTrue,
+              values: this.props.academicYears,
+              validateFunction: Utils.notNullValue,
             },
             {
               name: 'courseTotalCredits',
@@ -103,10 +83,10 @@ class AdminCourses extends React.Component {
               help: 'insert the total credits',
               type: FieldTypes.SELECT,
               values: this.totalCredits,
-              validateFunction: Utils.alwaysTrue,
+              validateFunction: Utils.notNullValue,
             },
           ]}
-          submitFunction={null}
+          submitFunction={this.props.addCourse}
         />
         <FormGroup controlId="selectYear">
           <ControlLabel>Filter by academic year</ControlLabel>
@@ -120,9 +100,9 @@ class AdminCourses extends React.Component {
           </FormControl>
         </FormGroup>
         <PageTableForm
-          getTableData={this.getCourses}
-          tableData={this.list}
-          headerInfo={['name', 'solarYear', 'Details']}
+          getTableData={this.props.getCourses}
+          tableData={this.props.courseList}
+          headerInfo={['Name', 'SolarYear', 'Details']}
           tableButtons={[{
             buttonFunction: this.showExams,
             buttonText: 'Details',
@@ -136,12 +116,30 @@ class AdminCourses extends React.Component {
 }
 
 AdminCourses.propTypes = {
-  // addCourse: PropTypes.func.isRequired,
-  // getCourses: PropTypes.func.isRequired,
+  addCourse: PropTypes.func.isRequired,
+  getCourses: PropTypes.func.isRequired,
   // validCourse: PropTypes.func.isRequired,
-  // courseList: PropTypes.arrayOf(Object).isRequired,
-  // solarYearList: PropTypes.arrayOf(String).isRequired,
+  courseList: PropTypes.arrayOf(Object).isRequired,
+  getYears: PropTypes.func.isRequired,
+  academicYears: PropTypes.arrayOf(String).isRequired,
 };
 
-export default AdminCourses;
+const mapStateToProps = state => ({
+  courseList: state.course.list,
+  academicYears: state.manageYears.accademicYears,
+});
+
+function mapDispatchToProps(dispatch) {
+  return {
+    addCourse: objForm => dispatch(courseSagaAction.addNewCourse(
+      objForm.courseYear.value,
+      objForm.courseCode.value,
+      objForm.courseTotalCredits.value,
+    )),
+    getCourses: () => dispatch(courseSagaAction.getAllCourses()),
+    getYears: () => dispatch(universitySagaAction.getAllYears()),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminCourses);
 
