@@ -102,13 +102,13 @@ class AdminCourses extends React.Component {
         <PageTableForm
           getTableData={this.props.getCourses}
           tableData={this.props.courseList}
-          headerInfo={['Name', 'SolarYear', 'Details']}
+          headerInfo={['Name', 'SolarYear', 'Credits to graduate', 'Details']}
           tableButtons={[{
             buttonFunction: this.showExams,
             buttonText: 'Details',
             buttonType: 'default',
           }]}
-          columFilter
+          // columFilter
         />
       </div>
     );
@@ -125,7 +125,7 @@ AdminCourses.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  courseList: state.course.list,
+  courseList: state.course.coursesList,
   academicYears: state.manageYears.accademicYears,
 });
 

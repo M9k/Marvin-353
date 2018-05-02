@@ -12,6 +12,7 @@ import Booking from './ducks/Booking';
 import Evaluator from './ducks/Evaluator';
 import TeacherExam from './ducks/TeacherExam';
 import TeachersList from './ducks/TeachersList';
+import Course from './ducks/Course';
 import CourseExams from './ducks/CourseExams';
 import ExamsList from './ducks/ExamsList';
 
@@ -27,7 +28,8 @@ const reducers = combineReducers({
   routing: routerReducer,
   form: formReducer,
   accounts: Admin,
-  course: CourseExams,
+  course: Course,
+  courseExams: CourseExams,
   exams: ExamsList,
   metamask: Metamask,
   user: Session,
