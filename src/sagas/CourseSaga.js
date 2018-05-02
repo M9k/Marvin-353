@@ -18,11 +18,11 @@ export function* getCoursesByYear(year) { // dato un anno preciso
     num = Number(num);
     const apiCalls = Array(num).fill().map((_, i) => call(getCourseContractAt, i));
     const contracts = yield all(apiCalls);
-    const apiNameCalls = Array(num).fill.map((_, i) => call(getName, contracts[i]));
+    const apiNameCalls = Array(num).fill().map((_, i) => call(getName, contracts[i]));
     const names = yield all(apiNameCalls);
-    const apiYearCalls = Array(num).fill.map((_, i) => call(getSolarYear, contracts[i]));
+    const apiYearCalls = Array(num).fill().map((_, i) => call(getSolarYear, contracts[i]));
     const years = yield all(apiYearCalls);
-    const courses = Array(num).fill.map((_, i) => ({
+    const courses = Array(num).fill().map((_, i) => ({
       name: names[i],
       year: years[i],
     }));
@@ -38,16 +38,16 @@ export function* getAllCourses() {
   try {
     let num = yield call(getAcademicYearNumber);
     num = Number(num);
-    const apiYearNumberCall = Array(num).fill.map((_, i) => call(getAcademicYearContractAt, i));
+    const apiYearNumberCall = Array(num).fill().map((_, i) => call(getAcademicYearContractAt, i));
     const academicYearContracts = yield all(apiYearNumberCall);
-    const apiCourseNumberCall = Array(num).fill.map((_, i) =>
+    const apiCourseNumberCall = Array(num).fill().map((_, i) =>
       call(getCourseNumber, academicYearContracts[i]));
     const numberOfCourses = yield all(apiCourseNumberCall);
-    const apiNameCall = Array(num).fill.map((_, i) => call(getName, numberOfCourses[i]));
+    const apiNameCall = Array(num).fill().map((_, i) => call(getName, numberOfCourses[i]));
     const names = yield all(apiNameCall);
-    const apiYearCall = Array(num).fill.map((_, i) => call(getSolarYear, numberOfCourses[i]));
+    const apiYearCall = Array(num).fill().map((_, i) => call(getSolarYear, numberOfCourses[i]));
     const years = yield all(apiYearCall);
-    const courses = Array(num).fill.map((_, i) => ({
+    const courses = Array(num).fill().map((_, i) => ({
       name: names[i],
       year: years[i],
     }));
