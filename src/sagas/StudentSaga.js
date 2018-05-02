@@ -2,8 +2,8 @@ import { call, put, fork, all, takeEvery, takeLatest } from 'redux-saga/effects'
 import { creators as actionCreators } from '../ducks/Student';
 import * as studentExams from '../web3calls/Student';
 import { getExamNumber, getExamContractAt } from '../web3calls/Course';
-import getCredits from '../web3calls/Exam';
-import getExamData from './helpers/getters';
+import { getCredits } from '../web3calls/Exam';
+import { getExamData } from './helpers/getters';
 
 const actionType = type => `marvin/StudentSaga/${type}`;
 
