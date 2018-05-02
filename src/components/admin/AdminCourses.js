@@ -102,7 +102,7 @@ class AdminCourses extends React.Component {
         <PageTableForm
           getTableData={this.props.getCourses}
           tableData={this.props.courseList}
-          headerInfo={['Name', 'SolarYear', 'Credits to graduate', 'Details']}
+          headerInfo={['INDIRIZZO DA NASCONDERE', 'Name', 'SolarYear', 'Credits to graduate', 'Details']}
           tableButtons={[{
             buttonFunction: this.showExams,
             buttonText: 'Details',

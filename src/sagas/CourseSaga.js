@@ -59,6 +59,7 @@ export function* getAllCourses() {
       call(getCreditsToGraduate, CourseContracts[i]));
     const credits = yield all(apiCreditsCall);
     const courses = Array(CourseContracts.length).fill().map((_, i) => ({
+      address: CourseContracts[i],
       name: names[i],
       year: years[i],
       credits: credits[i],
@@ -79,6 +80,7 @@ export function* addCourse(action) {
     yield put(actionCreators.pushNewCourse({
       address: contract,
       name: action.name,
+      year: action.year,
       credits: action.credits,
     }));
   } catch (e) {
