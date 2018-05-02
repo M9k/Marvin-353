@@ -70,7 +70,9 @@ export function* getAllStudents() {
 export function* getPendingStudents() {
   yield put(actionCreators.listIsLoading());
   try {
+    console.log('START');
     let num = yield call(getNotApprovedStudentNumber);
+    console.log(num);
     num = Number(num);
     const apiCalls = Array(num).fill().map((_, i) =>
       call(getNotApprovedStudentContractAddressAt, i));

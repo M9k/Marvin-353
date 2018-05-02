@@ -22,7 +22,7 @@ class Register extends React.Component {
 
   addRole(objArr) {
     if (objArr.userType.value !== 'student') {
-      this.props.signUp(objArr.name.value, objArr.surname.value);
+      this.props.signUp(objArr.name.value, objArr.surname.value, null);
     } else {
       this.setState({
         viewModalCourse: true,
@@ -33,13 +33,11 @@ class Register extends React.Component {
   }
 
   addStudent(courseForm) {
-    if (courseForm.courseCode.valid !== 0) {
-      this.props.signUp(
-        this.state.name,
-        this.state.surname,
-        this.props.coursesContracts[courseForm.courseCode.valid],
-      );
-    }
+    this.props.signUp(
+      this.state.name,
+      this.state.surname,
+      this.props.coursesContracts[courseForm.courseCode.index],
+    );
   }
 
   render() {
