@@ -1,5 +1,6 @@
 import Index from '../student/Index';
 import StudentExam from '../student/StudentExam';
+import OptionalExasm from '../student/OptionalExams';
 
 const StudentRoutes = [
   {
@@ -13,6 +14,12 @@ const StudentRoutes = [
     label: 'Exams',
     position: 'left',
     component: StudentExam,
+  },
+  {
+    path: '/optionalexams',
+    label: 'Optional Exams',
+    position: 'left',
+    component: OptionalExasm,
   },
 ];
 

@@ -95,9 +95,11 @@ const mapStateToProps = state => ({
 function mapDispatchToProps(dispatch) {
   return {
     confirmStudent: add =>
-      dispatch(creators.approveUserAction(ROLES.UNCONFIRMED_STUDENT, add.contract)),
-    denyStudent: add =>
-      dispatch(creators.removeUserAction(ROLES.UNCONFIRMED_STUDENT, add.contract)),
+      dispatch(creators.approveUserAction(ROLES.UNCONFIRMED_STUDENT, add.item.contract)),
+    denyStudent: (add) => {
+      console.log('il valore di add', add.item.contract);
+      dispatch(creators.denyUserAction(ROLES.UNCONFIRMED_STUDENT, add.item.contract));
+    },
     getPendingStudents: () => dispatch(creators.getPendingStudentsAction())
     ,
   };
