@@ -11,7 +11,16 @@ describe('NavbarCustom component', () => {
     assert.equal(wrapper.length, 1);
   });
   it('should have the links', () => {
-    const wrapper = shallow(<NavbarCustom />);
+    const TestComp = () => (<p>Test</p>);
+    const wrapper = shallow(<NavbarCustom
+      loggedIn
+      links={[{
+        path: 'testlink1',
+        label: 'test1',
+        position: 'left',
+        component: TestComp,
+}]}
+    />);
     assert.equal(wrapper.find(Nav) !== -1, true);
   });
   it('should have the header', () => {

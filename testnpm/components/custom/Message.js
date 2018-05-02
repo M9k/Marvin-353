@@ -8,8 +8,18 @@ import assert from 'assert';
 import MessageBox from '../../../src/components/custom/Message';
 
 describe('MessageBox component', () => {
-  it('should render the component', () => {
+  it('should render success type messagebox', () => {
     const props = { message: 'Test message', type: 'success' };
+    const wrapper = shallow(<MessageBox {...props} onHide={e => e} />);
+    assert.equal(wrapper.length, 1);
+  });
+  it('should render error type messagebox', () => {
+    const props = { message: 'Test message', type: 'error' };
+    const wrapper = shallow(<MessageBox {...props} onHide={e => e} />);
+    assert.equal(wrapper.length, 1);
+  });
+  it('should render default type messagebox', () => {
+    const props = { message: 'Test message', type: 'default' };
     const wrapper = shallow(<MessageBox {...props} onHide={e => e} />);
     assert.equal(wrapper.length, 1);
   });
