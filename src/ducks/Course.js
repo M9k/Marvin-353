@@ -11,7 +11,6 @@ const CourseDuck = new Duck({
     errored: false,
     coursesList: [],
     coursesListByYear: [],
-    examsList: [], // exams list for a course
   },
 
   reducer: (state, action, duck) => {

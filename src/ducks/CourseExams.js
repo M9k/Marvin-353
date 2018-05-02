@@ -5,7 +5,11 @@ const CourseExamsDuck = new Duck({
   namespace: 'marvin',
   store: 'CourseExams',
   types: ['SET_COURSE', 'SET_LIST', 'SET_PROFESSOR', 'PUSH_NEW_EXAM', 'LIST_LOADING', 'LIST_ERRORED'],
-  initialState: {},
+  initialState: {
+    loading: false,
+    errored: false,
+    list: [],
+  },
   reducer: (state, action, duck) => {
     const { types } = duck;
     switch (action.type) {

@@ -9,6 +9,8 @@ import TeacherExam from './sagas/TeacherExamSaga';
 import Course from './sagas/CourseSaga';
 import ManageExams from './sagas/ManageExamsSaga';
 
+import Student from './sagas/StudentSaga';
+
 
 export default function* sagas() {
   yield [
@@ -21,5 +23,6 @@ export default function* sagas() {
     fork(TeacherExam),
     fork(Course),
     fork(ManageExams),
+    fork(Student),
   ];
 }
