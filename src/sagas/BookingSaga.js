@@ -26,7 +26,8 @@ export function* loadCourses({ year }) {
     const coursesPack = coursesNames.map((name, index) => (
       { address: courseAddresses[index], name }
     ));
-    yield put(actionCreators.setCourses(coursesPack));
+    yield put(actionCreators.setCoursesAddress(courseAddresses));
+    yield put(actionCreators.setCoursesNames(coursesNames));
   } catch (e) {
     yield put(actionCreators.listHasErrored());
   }
