@@ -58,7 +58,7 @@ export function* getAllCourses() {
     const apiCreditsCall = Array(CourseContracts.length).fill().map((_, i) =>
       call(getCreditsToGraduate, CourseContracts[i]));
     const credits = yield all(apiCreditsCall);
-    const courses = Array(num).fill().map((_, i) => ({
+    const courses = Array(CourseContracts.length).fill().map((_, i) => ({
       name: names[i],
       year: years[i],
       credits: credits[i],
