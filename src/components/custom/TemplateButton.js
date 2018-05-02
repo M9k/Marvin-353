@@ -31,6 +31,7 @@ TemplateButton.propTypes = {
   objectToWorkOn: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
+    PropTypes.object,
   ]).isRequired,
   text: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
