@@ -44,7 +44,7 @@ class AdminCourses extends React.Component {
   // Questa funzione non può essere statica
   showExams(item) { // eslint-disable-line class-methods-use-this
     let path = document.location.pathname;
-    path = path.concat(`/${item.name}_${item.solarYear}`);
+    path = path.concat(`/${item.address}`);
     document.location.href = path;
   }
   render() {
@@ -102,7 +102,7 @@ class AdminCourses extends React.Component {
         <PageTableForm
           getTableData={this.props.getCourses}
           tableData={this.props.courseList}
-          headerInfo={['Name', 'SolarYear', 'Credits to graduate', 'Details']}
+          headerInfo={['INDIRIZZO DA NASCONDERE', 'Name', 'SolarYear', 'Credits to graduate', 'Details']}
           tableButtons={[{
             buttonFunction: this.showExams,
             buttonText: 'Details',
