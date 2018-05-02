@@ -2,7 +2,7 @@ import { call, put, fork, all, takeLatest, takeEvery } from 'redux-saga/effects'
 import { creators as actionCreators } from '../ducks/Course';
 import { getCourseNumber, getCourseContractAt, addNewCourse } from '../web3calls/Year';
 import { getAcademicYearNumber, getAcademicYearContractAt, getAcademicYearContractByYear } from '../web3calls/UniversityYear';
-import { getName, getSolarYear } from '../web3calls/Course';
+import { getName, getSolarYear, getCreditsToGraduate } from '../web3calls/Course';
 
 const actionType = type => `marvin/CourseSaga/${type}`;
 
@@ -38,19 +38,32 @@ export function* getAllCourses() {
   try {
     let num = yield call(getAcademicYearNumber);
     num = Number(num);
-    const apiYearNumberCall = Array(num).fill().map((_, i) => call(getAcademicYearContractAt, i));
-    const academicYearContracts = yield all(apiYearNumberCall);
+    const apiYearContractsCall = Array(num).fill().map((_, i) =>
+      call(getAcademicYearContractAt, i));
+    const YearContracts = yield all(apiYearContractsCall);
     const apiCourseNumberCall = Array(num).fill().map((_, i) =>
-      call(getCourseNumber, academicYearContracts[i]));
+      call(getCourseNumber, YearContracts[i]));
     const numberOfCourses = yield all(apiCourseNumberCall);
-    const apiNameCall = Array(num).fill().map((_, i) => call(getName, numberOfCourses[i]));
+    // console.log(numberOfCourses);
+    const apiCourseContractsCall = Array(num).fill().map((_, i) =>
+      Array(numberOfCourses[i]).fill().map((_, j) =>
+        call(getCourseContractAt, YearContracts[i], j))).flatten();
+    const CourseContracts = yield all(apiCourseContractsCall);
+    const apiNameCall = Array(CourseContracts.length).fill().map((_, i) =>
+      call(getName, CourseContracts[i]));
     const names = yield all(apiNameCall);
-    const apiYearCall = Array(num).fill().map((_, i) => call(getSolarYear, numberOfCourses[i]));
+    const apiYearCall = Array(CourseContracts.length).fill().map((_, i) =>
+      call(getSolarYear, CourseContracts[i]));
     const years = yield all(apiYearCall);
+    const apiCreditsCall = Array(CourseContracts.length).fill().map((_, i) =>
+      call(getCreditsToGraduate, CourseContracts[i]));
+    const credits = yield all(apiCreditsCall);
     const courses = Array(num).fill().map((_, i) => ({
       name: names[i],
       year: years[i],
+      credits: credits[i],
     }));
+    // console.log(courses);
     yield put(actionCreators.setCoursesList(courses));
   } catch (e) {
     console.log('Failed!');
