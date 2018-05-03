@@ -3,6 +3,7 @@ import { creators as actionCreators } from '../ducks/Course';
 import { getCourseNumber, getCourseContractAt, addNewCourse } from '../web3calls/Year';
 import { getAcademicYearNumber, getAcademicYearContractAt, getAcademicYearContractByYear } from '../web3calls/UniversityYear';
 import { getName, getSolarYear, getCreditsToGraduate } from '../web3calls/Course';
+import { getCourseData } from './helpers/getters';
 
 const actionType = type => `marvin/CourseSaga/${type}`;
 
@@ -77,6 +78,11 @@ export function* addCourse(action) {
   try {
     const contract = yield call(getAcademicYearContractByYear, action.year);
     yield call(addNewCourse, contract, action.name, action.credits);
+    let numCourses = yield call(getCourseNumber, contract);
+    numCourses = Number(numCourses);
+    const address = yield call(getCourseContractAt, contract, numCourses);
+    const course = yield call(getCourseData, address);
+    yield put(actionCreators.pushNewCourse(course));
   } catch (e) {
     console.log('Failed!');
     yield put(actionCreators.listHasErrored());
