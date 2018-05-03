@@ -20,7 +20,7 @@ export function* getEnrolledExams(action) {
     num = Number(num);
     console.log('Arrivo fino a qui', num);
     const apiExamContractCall = Array(num).fill().map((_, i) =>
-      call(studentExams.getExamContractAt,  i));
+      call(studentExams.getExamContractAt, i));
     console.log('Arrivo fino a qui o no');
     const examsContract = yield all(apiExamContractCall);
     const apiExamDataCall = Array(num).fill().map((_, i) => call(getExamData, examsContract[i]));
