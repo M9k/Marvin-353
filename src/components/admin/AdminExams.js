@@ -1,91 +1,70 @@
 import React from 'react';
 import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
-// import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
+import { creators as universitySagaAction } from '../../sagas/ManageYearsSaga';
+import { creators as examSagaAction } from '../../sagas/ManageExamsSaga';
+
 import ExamDetails from './ExamDetails'; // eslint-disable-line import/no-extraneous-dependencies
 import PageTableForm from '../template/PageTableForm';
+import Utils from '../custom/utils';
 
 class AdminExams extends React.Component {
   constructor(props) {
     super(props);
-    this.solarYearList = [
-      '2017',
-      '2016',
-      '2015',
-    ];
-    this.examList = [
-      {
-        name: 'Programming',
-        credits: '10',
-        courseName: 'L-16',
-        year: '2017',
-        professorName: '',
-        professorSurname: '',
-        examAddress: '0x811da72aca31e56f770fc33df0e45fd08720e157',
-        mandatory: true,
-        courseAddress: '0x4bd1280852cadb002734647305afc1db7ddd6acb',
-        professorAddress: '',
-      },
-      {
-        name: 'Programming',
-        credits: '10',
-        courseName: 'L-16',
-        year: '2016',
-        professorName: 'Filè',
-        professorSurname: 'Gilberto',
-        examAddress: '0x811da72aca31e56f770fc33df0e45fd08720e157',
-        mandatory: true,
-        courseAddress: '0x4bd1280852cadb002734647305afc1db7ddd6acb',
-        professorAddress: '0x79196b90d1e952c5a43d4847caa08d50b967c34a',
-      },
-      {
-        name: 'Programming',
-        credits: '10',
-        examAddress: '0x811da72aca31e56f770fc33df0e45fd08720e157',
-        courseName: 'L-16',
-        year: '2015',
-        professorName: 'Filè',
-        professorSurname: 'Gilberto',
-        mandatory: true,
-        courseAddress: '0x4bd1280852cadb002734647305afc1db7ddd6acb',
-        professorAddress: '0x79196b90d1e952c5a43d4847caa08d50b967c34a',
-      },
-      {
-        name: 'Logic',
-        credits: '10',
-        courseName: 'L-16',
-        year: '2017',
-        professorName: 'Gilberto',
-        professorSurname: 'Gilberto',
-        examAddress: '0x811da72aca31e56f770fc33df0e45fd08720e157',
-        mandatory: true,
-        courseAddress: '0x4bd1280852cadb002734647305afc1db7ddd6acb',
-        professorAddress: '0x79196b90d1e952c5a43d4847caa08d50b967c34a',
-      },
-    ];
-    this.list = this.examList.filter(exam => exam.year === this.solarYearList[0]);
+    this.props.getYears();
     this.state = {
-      year: this.solarYearList[0],
       showDetails: false,
     };
     this.onChangeYear = this.onChangeYear.bind(this);
     this.viewDetails = this.viewDetails.bind(this);
   }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.academicYears !== this.props.academicYears) {
+      this.setState({
+        year: nextProps.academicYears[0],
+      });
+      this.props.getAllExams(nextProps.academicYears[0]);
+    }
+  }
+
   onChangeYear() {
     if (this.state.year !== this.inputEl.value) {
       this.setState({ year: this.inputEl.value, showDetails: false });
-      this.changeTable();
+      this.props.getAllExams(this.inputEl.value);
     }
-  }
-  changeTable() {
-    this.list = this.examList.filter(exam => exam.year === this.inputEl.value);
   }
   viewDetails(item) {
     this.setState({ showDetails: true, item });
   }
   render() {
     const options = [];
-    for (let i = 0; i < this.solarYearList.length; i += 1) {
-      options.push(<option value={this.solarYearList[i]}>{this.solarYearList[i]}</option>);
+    if (!this.props.yearLoading) {
+      for (let i = 0; i < this.props.academicYears.length; i += 1) {
+        options.push(<option key={Utils.generateKey(this.props.academicYears[i])} value={this.props.academicYears[i]}>{this.props.academicYears[i]}</option>); // eslint-disable-line max-len
+      }
+    } else {
+      // caricamento
+      console.log('NO YEAR');
+    }
+    let table = null;
+    if (!this.props.listLoading) {
+      table = (<PageTableForm
+        getTableData={e => e}
+        tableData={this.props.examList}
+        headerInfo={['Name', 'Credits', 'CourseName', 'Year', 'ProfessorSurname', 'ProfessorName', 'Details']}
+        tableButtons={[{
+          buttonFunction: this.viewDetails,
+          buttonText: 'Details',
+          buttonType: 'default',
+        }]}
+        columFilter
+      />);
+    } else {
+      // caricamento
+      console.log('NO TABLE');
     }
     let details = null;
     if (this.state.showDetails) {
@@ -104,26 +83,34 @@ class AdminExams extends React.Component {
             {options}
           </FormControl>
         </FormGroup>
-        <PageTableForm
-          getTableData={e => e}
-          tableData={this.list}
-          headerInfo={['Name', 'Credits', 'CourseName', 'Year', 'ProfessorSurname', 'ProfessorName', 'Details']}
-          tableButtons={[{
-            buttonFunction: this.viewDetails,
-            buttonText: 'Details',
-            buttonType: 'default',
-          }]}
-          columFilter
-        />
+        {table}
         {details}
       </div>
     );
   }
 }
 AdminExams.propTypes = {
-  // getExams: PropTypes.func.isRequired,
   // setTeacher: PropTypes.func.isRequired,
-  // examList: PropTypes.arrayOf(Object).isRequired,
-  // solarYearList: PropTypes.arrayOf(String).isRequired,
+  examList: PropTypes.arrayOf(Object).isRequired,
+  getYears: PropTypes.func.isRequired,
+  getAllExams: PropTypes.func.isRequired,
+  academicYears: PropTypes.arrayOf(String).isRequired,
+  yearLoading: PropTypes.bool.isRequired,
+  listLoading: PropTypes.bool.isRequired,
 };
-export default AdminExams;
+
+const mapStateToProps = state => ({
+  academicYears: state.manageYears.accademicYears,
+  examList: state.exams.list,
+  yearLoading: state.manageYears.loading,
+  listLoading: state.exams.loading,
+});
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getYears: () => dispatch(universitySagaAction.getAllYears()),
+    getAllExams: year => dispatch(examSagaAction.getAllExamsAction(year)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminExams);
