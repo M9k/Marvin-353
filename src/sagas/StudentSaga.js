@@ -54,7 +54,7 @@ export function* getExamsCredits(action) {
     let num = yield call(studentExams.getExamNumber, action.address);
     num = Number(num);
     const apiContractCall = Array(num).fill().map((_, i) =>
-      call(studentExams.getExamContractAt, action.address,  i));
+      call(studentExams.getExamContractAt, action.address, i));
     const contracts = yield all(apiContractCall);
     const apiExamsValutationCall = Array(num).fill().map((_, i) =>
       call(studentExams.getExamValuationAt, action.address, contracts[i]));
@@ -87,7 +87,7 @@ export const creators = {
   getEnrolledExamsAction: address => (
     { type: GET_ENROLLED_EXAMS, address }
   ),
-  getOptionalExamsAciotn: address => (
+  getOptionalExamsAction: address => (
     { type: GET_OPTIONAL_EXAMS, address }
   ),
   enrollToExamAction: address => ( // exam address
