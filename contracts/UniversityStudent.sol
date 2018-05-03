@@ -103,7 +103,7 @@ contract UniversityStudent is UniversityTeacher {
 
     /**
     @notice Return the role given an address
-    @dev 4 is the sstuddent role, 14 is the unconfirmed studdent role
+    @dev 4 is the student role, 14 is the unconfirmed student role
     @param _address The wanted address
     @return the number of the role
     */
@@ -133,7 +133,7 @@ contract UniversityStudent is UniversityTeacher {
     /**
     @notice Confirm a student account request
     @dev only an admin can do it, only if the student contract is valid
-    @param _student The studdent that must be confirmed
+    @param _student The student that must be confirmed
     */
     function confirmStudent(Student _student) public onlyAdmin isValidContractUnconfirmedStudent(_student) {
         address askingAccount = _student.getPublicAddress();
