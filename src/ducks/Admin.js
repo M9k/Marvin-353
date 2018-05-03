@@ -79,14 +79,14 @@ const AdminDuck = new Duck({
         if (action.role === ROLES.STUDENT) { // is a  student
           return {
             ...state,
-            studentsList: copyNPop(state.studentsList, el => el === action.address),
+            studentsList: copyNPop(state.studentsList, el => el.contract === action.address),
             loading: false,
             errored: false,
           };
         } else if (action.role === ROLES.TEACHER) { // is a teacher
           return {
             ...state,
-            teachersList: copyNPop(state.teachersList, el => el === action.address),
+            teachersList: copyNPop(state.teachersList, el => el.contract === action.address),
             loading: false,
             errored: false,
           };
@@ -95,14 +95,16 @@ const AdminDuck = new Duck({
         if (action.role === ROLES.UNCONFIRMED_STUDENT) { // is a non-approved student
           return {
             ...state,
-            pendingStudentsList: copyNPop(state.pendingStudentsList, el => el === action.address),
+            pendingStudentsList: copyNPop(state.pendingStudentsList, el =>
+              el.contract === action.address),
             loading: false,
             errored: false,
           };
         } else if (action.role === ROLES.UNCONFIRMED_TEACHER) { // is a non-approved teacher
           return {
             ...state,
-            pendingTeachersList: copyNPop(state.pendingTeachersList, el => el === action.address),
+            pendingTeachersList: copyNPop(state.pendingTeachersList, el =>
+              el.contract === action.address),
             loading: false,
             errored: false,
           };
