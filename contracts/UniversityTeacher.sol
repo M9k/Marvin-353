@@ -21,11 +21,19 @@ contract UniversityTeacher is UniversityAdmin {
     mapping (address => Teacher) internal teacherAddressToContract;
     mapping (address => Teacher) internal unconfirmedTeacherAddressToContract;
 
+    /**
+    @notice Revert if the unconfirmed teacher contract is not valid
+    @param _teacher The teacher to be checked
+    */
     modifier isValidContractUnconfirmedTeacher(Teacher _teacher) {
         if (unconfirmedTeachers[_teacher] == 0) revert();
         _;
     }
 
+    /**
+    @notice revert if the teacher contract is not valid
+    @param _teacher The teacher to be checked
+    */
     modifier isValidContractTeacher(Teacher _teacher) {
         if (teachers[_teacher] == 0) revert();
         _;
