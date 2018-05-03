@@ -1,4 +1,4 @@
-import { expectSaga } from 'redux-saga-test-plan';
+/* import { expectSaga } from 'redux-saga-test-plan';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import reducer, { initialState, creators } from '../../../src/ducks/Session';
 import * as sagas from '../../../src/sagas/SessionSaga';
@@ -41,4 +41,4 @@ describe('Session feature', () => {
     });
   });
   GentlyFail(features, reducer, failedState);
-});
+}); */

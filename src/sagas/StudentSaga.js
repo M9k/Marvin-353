@@ -18,14 +18,11 @@ export function* getEnrolledExams(action) {
   try {
     let num = yield call(studentExams.getExamNumber, action.address);
     num = Number(num);
-    console.log('Arrivo fino qui? ', num);
     const apiExamContractCall = Array(num).fill().map((_, i) =>
       call(studentExams.getExamContractAt, action.address, i));
-    console.log('Arrivo fino a qui o no');
     const examsContract = yield all(apiExamContractCall);
     const apiExamDataCall = Array(num).fill().map((_, i) => call(getExamData, examsContract[i]));
     const examsData = yield all(apiExamDataCall);
-    console.log(examsData);
     yield put(actionCreators.setEnrolledExams(examsData));
   } catch (e) {
     console.log('failed to get enrolled list');
@@ -52,15 +49,15 @@ export function* getOptionalExams(action) {
   }
 }
 
-export function* getExamsCredits() {
+export function* getExamsCredits(action) {
   try {
-    let num = yield call(studentExams.getExamNumber);
+    let num = yield call(studentExams.getExamNumber, action.address);
     num = Number(num);
     const apiContractCall = Array(num).fill().map((_, i) =>
-      call(studentExams.getExamContractAt, i));
+      call(studentExams.getExamContractAt, action.address,  i));
     const contracts = yield all(apiContractCall);
     const apiExamsValutationCall = Array(num).fill().map((_, i) =>
-      call(studentExams.getExamValuationAt, contracts[i]));
+      call(studentExams.getExamValuationAt, action.address, contracts[i]));
     const valutations = yield all(contracts, apiExamsValutationCall);
     valutations.filter(() => valutations > 17);
     const apiCreditsCall = Array(num).fill().map((_, i) =>
