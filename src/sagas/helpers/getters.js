@@ -27,10 +27,8 @@ export function* getExamData(examAddress, adapter = obj => obj) {
   let teacherData;
   console.log(teacherAddress);
   if (teacherAddress === '0x0000000000000000000000000000000000000000') {
-    console.log('NO TEACHER');
     teacherData = { name: '', surname: '' };
   } else {
-    console.log('SI TEACHER');
     teacherData = yield call(getTeacherData, teacherAddress);
   }
   return adapter({
