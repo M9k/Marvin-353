@@ -26,7 +26,7 @@ contract Year {
 
     /**
     @notice Creates a year
-    @param _solarYear
+    @param _solarYear The solar year
     */
     function Year(uint16 _solarYear) public {
         solarYear = _solarYear;
