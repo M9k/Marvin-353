@@ -1,52 +1,49 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import PageTableForm from '../template/PageTableForm';
+import { creators as studentExamSaga } from '../../sagas/StudentSaga';
 
 class StudentExam extends React.Component {
   constructor(props) {
     super(props);
-    this.examList = [
-      {
-        name: 'Programming',
-        credits: '10',
-        mandatory: true,
-        vote: '30',
-      },
-      {
-        name: 'Logic',
-        credits: '6',
-        mandatory: false,
-        vote: '23',
-      },
-      {
-        name: 'Database',
-        credits: '9',
-        mandatory: true,
-        vote: '25',
-      },
-      {
-        name: 'Computer architecture',
-        credits: '8',
-        mandatory: false,
-        vote: '29',
-      },
-    ];
+    this.getExams = this.getExams.bind(this);
+  }
+  getExams() {
+    this.props.getEnrolledExams(this.props.myAddress);
   }
   render() {
+    console.log('Il valore del address', this.props.myAddress);
+
     return (
       <div>
         <PageTableForm
-          getTableData={e => e}
-          tableData={this.examList}
+          getTableData={this.getExams}
+          tableData={this.props.ExamsList}
           headerInfo={['Name', 'Credits', 'Mandatory', 'Valutation']}
         />
       </div>
     );
   }
 }
+
 StudentExam.propTypes = {
-  // getExams: PropTypes.func.isRequired,
-  // examList: PropTypes.arrayOf(Object).isRequired,
+  getEnrolledExams: PropTypes.func.isRequired,
+  ExamsList: PropTypes.arrayOf(Object).isRequired,
+  myAddress: PropTypes.string.isRequired,
 };
 
-export default StudentExam;
+const mapStateToProps = state => ({
+  ExamsList: state.student.enrolledExamsList,
+  myAddress: state.metamask.account,
+});
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getEnrolledExams: add =>
+      dispatch(studentExamSaga.getEnrolledExamsAction(add)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(StudentExam);
+
