@@ -13,10 +13,10 @@ export const ENROLL_TO_AN_EXAM = actionType('ENROLL_TO_AN_EXAM');
 export const GET_CREDITS = actionType('GET_CREDITS');
 
 
-export function* getEnrolledExams(action) {
+export function* getEnrolledExams() {
   yield put(actionCreators.listIsLoading());
   try {
-    let num = yield call(getExamNumber, action.address);
+    let num = yield call(studentExams.getExamNumber);
     num = Number(num);
     const apiExamContractCall = Array(num).fill().map((_, i) =>
       call(studentExams.getExamContractAt, i));
@@ -48,9 +48,9 @@ export function* getOptionalExams(action) {
   }
 }
 
-export function* getExamsCredits(action) {
+export function* getExamsCredits() {
   try {
-    let num = yield call(studentExams.getExamNumber, action.address);
+    let num = yield call(studentExams.getExamNumber);
     num = Number(num);
     const apiContractCall = Array(num).fill().map((_, i) =>
       call(studentExams.getExamContractAt, i));
