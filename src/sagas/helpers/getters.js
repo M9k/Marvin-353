@@ -45,14 +45,12 @@ export function* getCourseData(courseAddress, adapter = obj => obj) {
   const dataFetch = [
     call(Course.getName, courseAddress),
     call(Course.getSolarYear, courseAddress),
-    call(Course.getCreditsToGraduate, courseAddress),
   ];
-  const [name, year, credits] = yield all(dataFetch);
+  const [courseName, solarYear] = yield all(dataFetch);
   return adapter({
-    address: courseAddress,
-    name,
-    year,
-    credits,
+    courseName,
+    courseAddress,
+    solarYear: Number(solarYear),
   });
 }
 export function* getCourseExamsList(courseAddress, adapter = obj => obj) {
