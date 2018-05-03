@@ -6,11 +6,12 @@ const initialDataState = {
   name: null,
   surname: null,
   course: null,
+  contract: null,
 };
 const SessionDuck = new Duck({
   namespace: 'marvin',
   store: 'user',
-  types: ['SET_ROLE', 'SET_DATA', 'CLEAN_DATA', 'ROLE_LOADING', 'DATA_LOADING'],
+  types: ['SET_ROLE', 'SET_CONTRACT', 'SET_DATA', 'CLEAN_DATA', 'ROLE_LOADING', 'DATA_LOADING'],
   initialState: {
     errored: false,
     loading: false,
@@ -25,6 +26,13 @@ const SessionDuck = new Duck({
         return {
           ...state,
           role: action.role,
+          errored: action.errored,
+          loading: false,
+        };
+      case (types.SET_CONTRACT):
+        return {
+          ...state,
+          contract: action.contract,
           errored: action.errored,
           loading: false,
         };
@@ -56,6 +64,9 @@ const SessionDuck = new Duck({
   creators: duck => ({
     setRole: (role, errored = false) => (
       { type: duck.types.SET_ROLE, role, errored }
+    ),
+    setContract: (contract, errored = false) => (
+      { type: duck.types.SET_CONTRACT, contract, errored }
     ),
     setData: (data, errored = false) => ({
       type: duck.types.SET_DATA,
