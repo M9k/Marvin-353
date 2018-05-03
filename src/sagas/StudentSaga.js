@@ -13,13 +13,15 @@ export const ENROLL_TO_AN_EXAM = actionType('ENROLL_TO_AN_EXAM');
 export const GET_CREDITS = actionType('GET_CREDITS');
 
 
-export function* getEnrolledExams() {
+export function* getEnrolledExams(action) {
   yield put(actionCreators.listIsLoading());
   try {
-    let num = yield call(studentExams.getExamNumber);
+    let num = yield call(studentExams.getExamNumber, action.address);
     num = Number(num);
+    console.log('Arrivo fino a qui', num);
     const apiExamContractCall = Array(num).fill().map((_, i) =>
-      call(studentExams.getExamContractAt, i));
+      call(studentExams.getExamContractAt,  i));
+    console.log('Arrivo fino a qui o no');
     const examsContract = yield all(apiExamContractCall);
     const apiExamDataCall = Array(num).fill().map((_, i) => call(getExamData, examsContract[i]));
     const examsData = yield all(apiExamDataCall);

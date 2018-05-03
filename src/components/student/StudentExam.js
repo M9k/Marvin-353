@@ -35,7 +35,7 @@ StudentExam.propTypes = {
 
 const mapStateToProps = state => ({
   ExamsList: state.student.enrolledExamsList,
-  myAddress: state.metamask.account,
+  myAddress: state.user.contract,
 });
 
 function mapDispatchToProps(dispatch) {
