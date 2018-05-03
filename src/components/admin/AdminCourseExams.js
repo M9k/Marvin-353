@@ -9,7 +9,7 @@ import Utils from '../custom/utils';
 import Form from '../custom/Form';
 import PageTableForm from '../template/PageTableForm';
 import ExamDetails from './ExamDetails';
-import {creators as courseSagaAction} from "../../sagas/CourseSaga";
+// import { creators as courseSagaAction } from '../../sagas/CourseSaga';
 
 class AdminCourseExams extends React.Component {
   constructor(props) {
@@ -64,8 +64,11 @@ class AdminCourseExams extends React.Component {
     ];
     */
   }
+  getExamsByAddress() {
+    this.props.getExams(this.courseAdress);
+  }
   addExamBuilder(objForm) {
-    const optional = objForm.optionalExam.value ? true : false;
+    const optional = objForm.optionalExam.value;
     const array = [
       this.courseAdress,
       objForm.examName.value,
@@ -73,9 +76,6 @@ class AdminCourseExams extends React.Component {
       optional,
     ];
     this.props.addExam(array);
-  }
-  getExamsByAddress() {
-    this.props.getExams(this.courseAdress);
   }
   viewDetails(item) {
     this.setState({ showDetails: true, item });
