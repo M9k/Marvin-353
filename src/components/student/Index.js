@@ -14,9 +14,9 @@ const Index = () => (
 check how many credits you need to end and you can choose and add optional exams to your study plan.
         </p>
         <p>
-          <h5>Your total credits: {30}</h5>
+          <h5>Your total credits: {120}</h5>
           <h5>Total credits need to end: {180}</h5>
-          <ProgressBar active bsStyle="success" now={(30 / 180) * 100} />
+          <ProgressBar active bsStyle="success" now={(120 / 180) * 100} />
         </p>
       </Jumbotron>
 

@@ -58,7 +58,8 @@ export function* getAllCourses() {
     const apiCreditsCall = Array(CourseContracts.length).fill().map((_, i) =>
       call(getCreditsToGraduate, CourseContracts[i]));
     const credits = yield all(apiCreditsCall);
-    const courses = Array(num).fill().map((_, i) => ({
+    const courses = Array(CourseContracts.length).fill().map((_, i) => ({
+      address: CourseContracts[i],
       name: names[i],
       year: years[i],
       credits: credits[i],
@@ -76,11 +77,6 @@ export function* addCourse(action) {
   try {
     const contract = yield call(getAcademicYearContractByYear, action.year);
     yield call(addNewCourse, contract, action.name, action.credits);
-    yield put(actionCreators.pushNewCourse({
-      address: contract,
-      name: action.name,
-      credits: action.credits,
-    }));
   } catch (e) {
     console.log('Failed!');
     yield put(actionCreators.listHasErrored());

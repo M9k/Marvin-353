@@ -47,7 +47,7 @@ const getData = (role) => {
 };
 
 const signUp = (name, surname, course) => {
-  if (course === null || course === undefined || course === '') return requestTeacherAccount(name, surname);
+  if (course === null) return requestTeacherAccount(name, surname);
   return requestStudentAccount(name, surname, course);
 };
 

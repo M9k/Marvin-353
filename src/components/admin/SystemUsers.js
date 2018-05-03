@@ -44,7 +44,8 @@ class SystemUsers extends React.Component {
               buttonType: 'danger',
             },
           ]}
-          headerInfo={['Address', 'Name', 'Surname', 'Course', 'Remove']}
+          headerInfo={['Address', 'Name', 'Surname', 'Course', 'Delete']}
+          columFilter
         />
         <h4>List of all teachers:</h4>
         <PageTableForm

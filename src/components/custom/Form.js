@@ -16,7 +16,7 @@ class Form extends React.Component {
     // eslint-disable-next-line no-return-assign
     this.props.fields.map(field => (
       this.state = {
-        fields: { ...this.state.fields, [field.name]: { value: '', valid: -1 } },
+        fields: { ...this.state.fields, [field.name]: { value: '', valid: -1, index: -1 } },
         reset: false,
       }));
   }
@@ -39,12 +39,15 @@ class Form extends React.Component {
 
   render() {
     const fields = [];
-    this.props.fields.map(field => (
+    this.props.fields.map((field, i) => (
       fields.push(<Field
         {...field}
         onChangeValue={(e) => {
         this.setState({
- fields: { ...this.state.fields, [field.name]: { value: e, valid: field.validateFunction(e) } },
+ fields: {
+ ...this.state.fields,
+   [field.name]: { value: e, valid: field.validateFunction(e), index: i },
+},
         });
       }}
         reset={this.state.reset}

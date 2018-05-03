@@ -22,7 +22,7 @@ class Register extends React.Component {
 
   addRole(objArr) {
     if (objArr.userType.value !== 'student') {
-      this.props.signUp(objArr.name.value, objArr.surname.value);
+      this.props.signUp(objArr.name.value, objArr.surname.value, null);
     } else {
       this.setState({
         viewModalCourse: true,
@@ -33,7 +33,17 @@ class Register extends React.Component {
   }
 
   addStudent(courseForm) {
-    this.props.signUp(this.state.name, this.state.surname, courseForm.courseCode.value);
+    this.props.signUp(
+      this.state.name,
+      this.state.surname,
+      this.props.coursesContracts[courseForm.courseCode.index],
+    );
+
+    this.setState({
+      viewModalCourse: false,
+      name: '',
+      surname: '',
+    });
   }
 
   render() {
@@ -90,10 +100,12 @@ Register.propTypes = {
   signUp: PropTypes.func.isRequired,
   getCourses: PropTypes.func.isRequired, // loadCourses
   coursesForStudent: PropTypes.arrayOf(String).isRequired,
+  coursesContracts: PropTypes.arrayOf(String).isRequired,
 };
 
 const mapStateToProps = state => ({
-  coursesForStudent: state.signup.availableCourses.list,
+  coursesForStudent: state.signup.listNames,
+  coursesContracts: state.signup.listAddress,
 });
 
 function mapDispatchToProps(dispatch) {
