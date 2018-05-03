@@ -45,6 +45,7 @@ class SystemUsers extends React.Component {
             },
           ]}
           headerInfo={['Address', 'Name', 'Surname', 'Course', 'Delete']}
+          columFilter
         />
         <h4>List of all teachers:</h4>
         <PageTableForm

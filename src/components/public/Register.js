@@ -38,6 +38,12 @@ class Register extends React.Component {
       this.state.surname,
       this.props.coursesContracts[courseForm.courseCode.index],
     );
+
+    this.setState({
+      viewModalCourse: false,
+      name: '',
+      surname: '',
+    });
   }
 
   render() {

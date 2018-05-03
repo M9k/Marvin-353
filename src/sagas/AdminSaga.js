@@ -41,7 +41,7 @@ export function* getAllStudents() {
     const apiNameCalls = Array(num).fill().map((_, i) =>
       call(getName, String(studentsContracts[i])));
     const studentsName = (yield all(apiNameCalls));
-    const apiSurnameCalls = Array(num).fill().mmap((_, i) =>
+    const apiSurnameCalls = Array(num).fill().map((_, i) =>
       call(getSurname, String(studentsContracts[i])));
     const studentsSurname = (yield all(apiSurnameCalls));
     const apiCourseCalls = Array(num).fill().map((_, i) =>
@@ -63,7 +63,7 @@ export function* getAllStudents() {
     // console.log(students);
     yield put(actionCreators.setStudentsList(students));
   } catch (e) {
-    console.log('Failed!');
+    console.log(e);
     yield put(actionCreators.listHasErrored());
   }
 }
@@ -194,7 +194,7 @@ export function* deleteUser(action) {
     }
     yield put(actionCreators.removeUser(action.role, action.address));
   } catch (e) {
-    console.log('Failed!');
+    console.log(e);
     yield put(actionCreators.listHasErrored());
   }
 }
