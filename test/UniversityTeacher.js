@@ -10,7 +10,7 @@ contract('UniversityTeacher', (accounts) => {
     contract = await UniversityTeacher.new({ from: accounts[0] });
   });
   // 18
-  it('Should say University found isn\'t a teacher', async () => {
+  it('Should say University founder isn\'t a teacher', async () => {
     assert.equal(await contract.isTeacher.call(accounts[0]), false);
     await contract.addNewAdmin(accounts[5]);
     assert.equal(await contract.isAdmin.call(accounts[5]), true);
@@ -82,7 +82,7 @@ contract('UniversityTeacher', (accounts) => {
     throw new Error('Test failed!');
   });
   // 26
-  it('An invalid teacher contract shouldn\'t be remove', async () => {
+  it('An invalid teacher contract shouldn\'t be removed', async () => {
     await contract.addNewAdmin(accounts[1], { from: accounts[0] });
     try {
       await contract.removeTeacher(accounts[4], { from: accounts[1] });
@@ -92,7 +92,7 @@ contract('UniversityTeacher', (accounts) => {
     throw new Error('Test failed!');
   });
   // 27
-  it('A non approved teacher contract shouldn\'t be remove', async () => {
+  it('A non approved teacher contract shouldn\'t be removed', async () => {
     await contract.addNewAdmin(accounts[1], { from: accounts[0] });
     await contract.requestTeacherAccount('name', 'surname', { from: accounts[2] });
     try {
@@ -131,7 +131,7 @@ contract('UniversityTeacher', (accounts) => {
     assert.equal(await contract.getTeacherNumber.call(), 0);
   });
   // 29
-  it('Should ask but not approve a teacher', async () => {
+  it('Should ask but not approve a denied teacher', async () => {
     await contract.addNewAdmin(accounts[1], { from: accounts[0] });
     await contract.requestTeacherAccount('name', 'surname', { from: accounts[2] });
     assert.equal(await contract.getTeacherNumber.call(), 0);
