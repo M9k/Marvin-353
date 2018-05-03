@@ -25,9 +25,12 @@ export function* getExamData(examAddress, adapter = obj => obj) {
   ];
   const [name, credits, mandatory, teacherAddress] = yield all(dataFetch);
   let teacherData;
-  if (teacherAddress === null) {
-    teacherData = { name: null, surname: null };
+  console.log(teacherAddress);
+  if (teacherAddress === '0x0000000000000000000000000000000000000000') {
+    console.log('NO TEACHER');
+    teacherData = { name: '', surname: '' };
   } else {
+    console.log('SI TEACHER');
     teacherData = yield call(getTeacherData, teacherAddress);
   }
   return adapter({
@@ -54,6 +57,8 @@ export function* getCourseData(courseAddress, adapter = obj => obj) {
 }
 export function* getCourseExamsList(courseAddress, adapter = obj => obj) {
   const courseNumber = yield call(Course.getExamNumber, courseAddress);
+  console.log('Course number');
+  console.log(courseNumber);
   const examsAddressFetch = Array(Number(courseNumber)).fill().map((_, id) => (
     call(Course.getExamContractAt, courseAddress, id)
   ));

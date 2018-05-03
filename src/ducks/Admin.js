@@ -60,7 +60,8 @@ const AdminDuck = new Duck({
           return {
             ...state,
             studentsList: copyNPush(state.studentsList, action.address),
-            pendingStudentsList: copyNPop(state.pendingStudentsList, el => el === action.address),
+            pendingStudentsList: copyNPop(state.pendingStudentsList, el =>
+              el.contract === action.address),
             loading: false,
             errored: false,
           };
@@ -68,7 +69,8 @@ const AdminDuck = new Duck({
           return {
             ...state,
             teachersList: copyNPush(state.teachersList, action.address),
-            pendingTeachersList: copyNPop(state.pendingTeachersList, el => el === action.address),
+            pendingTeachersList: copyNPop(state.pendingTeachersList, el =>
+              el.contract === action.address),
             loading: false,
             errored: false,
           };

@@ -39,12 +39,12 @@ class ExamDetails extends React.Component {
     this.setState({ assignTeacher: true });
   }
   teacher() {
-    if (this.object.professorSurname !== '' && this.object.professorName !== '') {
+    if (this.object.teacherName !== '' && this.object.teacherSurname !== '') {
       return (
         <dd>
-          {this.object.professorSurname}
-          {this.object.professorName}
-          {this.object.professorAddress}
+          {this.object.teacherSurname}
+          {this.object.teacherName}
+          {this.object.teacherAddress}
         </dd>
       );
     }

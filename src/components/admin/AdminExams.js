@@ -29,7 +29,6 @@ class AdminExams extends React.Component {
       this.props.getAllExams(nextProps.academicYears[0]);
     }
   }
-
   onChangeYear() {
     if (this.state.year !== this.inputEl.value) {
       this.setState({ year: this.inputEl.value, showDetails: false });
@@ -45,16 +44,13 @@ class AdminExams extends React.Component {
       for (let i = 0; i < this.props.academicYears.length; i += 1) {
         options.push(<option key={Utils.generateKey(this.props.academicYears[i])} value={this.props.academicYears[i]}>{this.props.academicYears[i]}</option>); // eslint-disable-line max-len
       }
-    } else {
-      // caricamento
-      console.log('NO YEAR');
     }
     let table = null;
     if (!this.props.listLoading) {
       table = (<PageTableForm
         getTableData={e => e}
         tableData={this.props.examList}
-        headerInfo={['Name', 'Credits', 'CourseName', 'Year', 'ProfessorSurname', 'ProfessorName', 'Details']}
+        headerInfo={['Name', 'Credits', 'CourseName', 'SolarYear', 'TeacherSurname', 'TeacherName', 'Details']}
         tableButtons={[{
           buttonFunction: this.viewDetails,
           buttonText: 'Details',
@@ -62,9 +58,6 @@ class AdminExams extends React.Component {
         }]}
         columFilter
       />);
-    } else {
-      // caricamento
-      console.log('NO TABLE');
     }
     let details = null;
     if (this.state.showDetails) {
@@ -90,7 +83,6 @@ class AdminExams extends React.Component {
   }
 }
 AdminExams.propTypes = {
-  // setTeacher: PropTypes.func.isRequired,
   examList: PropTypes.arrayOf(Object).isRequired,
   getYears: PropTypes.func.isRequired,
   getAllExams: PropTypes.func.isRequired,

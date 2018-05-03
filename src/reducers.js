@@ -6,6 +6,7 @@ import storage from 'redux-persist/lib/storage/session';
 import Admin from './ducks/Admin';
 import AdminEmployer from './ducks/AdminEmployer';
 import Session from './ducks/Session';
+import Student from './ducks/Student';
 import Metamask from './ducks/Metamask';
 import ManageYears from './ducks/ManageYears';
 import Booking from './ducks/Booking';
@@ -39,6 +40,7 @@ const reducers = combineReducers({
   selectedExam: Evaluator,
   teacherData: TeacherExam,
   teachersList: TeachersList,
+  student: Student,
 });
 
 const persistentReducer = persistReducer(persistConfig, reducers);
