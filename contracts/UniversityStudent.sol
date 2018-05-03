@@ -150,7 +150,7 @@ contract UniversityStudent is UniversityTeacher {
     /**
     @notice Deny a student account request
     @dev only an admin can do it, only if the contract is valid
-    @param _student The studdent that must be denied
+    @param _student The student that must be denied
     */
     function denyStudent(Student _student) public onlyAdmin isValidContractUnconfirmedStudent(_student) {
         address askingAccount = _student.getPublicAddress();
