@@ -14,7 +14,7 @@ class OptionalExams extends React.Component {
     this.state = { select: false };
   }
   getExams() {
-    this.props.getOptionalExams(this.props.myAddress);
+    this.props.getExams(this.props.myAddress);
   }
   viewSelect(item) {
     this.setState({ select: true, item });
@@ -25,11 +25,12 @@ class OptionalExams extends React.Component {
     this.props.enrollToExam(item);
   }
   render() {
+    console.log(this.props.ExamsList);
     return (
       <div>
         <PageTableForm
           getTableData={this.getExams}
-          tableData={this.props.OptionalExams}
+          tableData={(this.props.ExamsList).filter(line => (!line.mandatory && !line.subscription))}
           headerInfo={['Name', 'Credits', 'Mandatory', 'TeacherName', 'TeacherSurname', 'Select optional exam']}
           columFilter
           tableButtons={[
@@ -56,23 +57,27 @@ class OptionalExams extends React.Component {
 }
 
 OptionalExams.propTypes = {
-  getOptionalExams: PropTypes.func.isRequired,
-  enrollToExam: PropTypes.func.isRequired,
-  OptionalExams: PropTypes.arrayOf(Object).isRequired,
+  getExams: PropTypes.func,
+  ExamsList: PropTypes.arrayOf(Object),
   myAddress: PropTypes.string.isRequired,
+  enrollToExam: PropTypes.func.isRequired,
+};
+
+OptionalExams.defaultProps = {
+  getExams: () => {},
+  ExamsList: [],
 };
 
 const mapStateToProps = state => ({
-  OptionalExams: state.student.optionalExamsList,
-  myAddress: state.user.contract,
+  ExamsList: state.student.examsList,
+  myAddress: state.user.data.contract,
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    getOptionalExams: add =>
-      dispatch(studentExamSaga.getOptionalExamsAction(add)),
+    getExams: add =>
+      dispatch(studentExamSaga.getExamsAction(add)),
     enrollToExam: (objArr) => {
-      console.log('SOno in qui il valore è', objArr.item.address);
       dispatch(studentExamSaga.enrollToExamAction(objArr.item.address));
     },
   };

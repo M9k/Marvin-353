@@ -13,7 +13,7 @@ class StudentExam extends React.Component {
     this.props.getEnrolledExams(this.props.myAddress);
   }
   render() {
-    console.log('Il valore del address', this.props.myAddress);
+    console.log('StudentExam is using address ', this.props.myAddress);
 
     return (
       <div>
@@ -35,14 +35,14 @@ StudentExam.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  ExamsList: state.student.enrolledExamsList,
+  ExamsList: state.student.examsList,
   myAddress: state.user.data.contract,
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     getEnrolledExams: add =>
-      dispatch(studentExamSaga.getEnrolledExamsAction(add)),
+      dispatch(studentExamSaga.getExamsAction(add)),
   };
 }
 
