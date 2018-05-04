@@ -36,7 +36,7 @@ function getExamSubscriptionAt(address, _index) {
 }
 
 function getExamValuationAt(address, _index) {
-  console.log('Student getExamValuationAt');
+  console.log(String.concat('Student getExamValuationAt ', _index, ' of ', address));
   const contractInstance = getStudentContract(address);
   return contractInstance.then(instance =>
     instance.getExamValuationAt(_index).then(Number));
