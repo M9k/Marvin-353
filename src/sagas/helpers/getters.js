@@ -25,7 +25,6 @@ export function* getExamData(examAddress, adapter = obj => obj) {
   ];
   const [name, credits, mandatory, teacherAddress] = yield all(dataFetch);
   let teacherData;
-  console.log(teacherAddress);
   if (teacherAddress === '0x0000000000000000000000000000000000000000') {
     teacherData = { name: '', surname: '' };
   } else {

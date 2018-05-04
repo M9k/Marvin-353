@@ -41,4 +41,5 @@ describe('Session feature', () => {
     });
   });
   GentlyFail(features, reducer, failedState);
-}); */
+});
+*/
