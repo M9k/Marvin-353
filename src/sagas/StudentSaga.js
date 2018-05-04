@@ -97,7 +97,6 @@ export function* getExamsCredits(action) {
     const courseContract = yield call(studentExams.getCourseContract, action.address);
     let graduationCredits = yield call(getCreditsToGraduate, courseContract);
     graduationCredits = Number(graduationCredits);
-    credits = credits.reduce((a, b) => a + b, 0);
     yield put(actionCreators.setCredits(credits, graduationCredits));
   } catch (e) {
     console.log('failed to get credits');
@@ -123,6 +122,9 @@ export const creators = {
   ),
   getOptionalExamsAction: address => (
     { type: GET_OPTIONAL_EXAMS, address }
+  ),
+  getCreditsAction: address => (
+    { type: GET_CREDITS, address }
   ),
   enrollToExamAction: address => ( // exam address
     { type: ENROLL_TO_AN_EXAM, address }
