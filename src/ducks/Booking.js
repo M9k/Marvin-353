@@ -58,7 +58,7 @@ const BookingDuck = new Duck({
         return {
           ...state,
           loading: false,
-          errored: false,
+          errored: true,
         };
       default:
         return state;
