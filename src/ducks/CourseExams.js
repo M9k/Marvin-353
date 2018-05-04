@@ -1,10 +1,10 @@
 import Duck from 'extensible-duck';
-import { updateObjInArr, copyNPush } from '../util/js_helpers';
+import { updateObjInArr } from '../util/js_helpers';
 
 const CourseExamsDuck = new Duck({
   namespace: 'marvin',
   store: 'CourseExams',
-  types: ['SET_COURSE', 'SET_LIST', 'SET_PROFESSOR', 'PUSH_NEW_EXAM', 'LIST_LOADING', 'LIST_ERRORED'],
+  types: ['SET_COURSE', 'SET_LIST', 'SET_PROFESSOR', 'EXAM_INSERTED', 'LIST_LOADING', 'LIST_ERRORED'],
   initialState: {
     loading: false,
     errored: false,
@@ -43,12 +43,11 @@ const CourseExamsDuck = new Duck({
             action.teacher,
           ),
         };
-      case (types.PUSH_NEW_EXAM):
+      case (types.EXAM_INSERTED):
         return {
           ...state,
           loading: false,
           errored: false,
-          list: copyNPush(state.list, action.exam),
         };
       default:
         return state;
@@ -70,8 +69,8 @@ const CourseExamsDuck = new Duck({
     listHasErrored: () => (
       { type: types.LIST_ERRORED }
     ),
-    pushNewExam: exam => (
-      { type: types.PUSH_NEW_EXAM, exam }
+    examInserted: () => (
+      { type: types.EXAM_INSERTED }
     ),
   }),
 });

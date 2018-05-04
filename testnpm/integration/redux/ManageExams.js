@@ -202,7 +202,7 @@ describe('ManageExams feature', () => {
     })
     .put(TeacherCreators.listIsLoading())
     .run());
-  it('should create a new exams and push it in the course list', () => expectSaga(
+  it('should create a new exams and notify it succed', () => expectSaga(
     sagas.addNewExam,
     creators.addNewExamAction('001', 'Sistemi Operativi', 10, true),
   )
@@ -234,15 +234,6 @@ describe('ManageExams feature', () => {
           professorName: 'Michela',
           professorSurname: 'Zaglia',
           professorAddress: '002',
-        },
-        {
-          address: null,
-          name: 'Sistemi Operativi',
-          credits: 10,
-          mandatory: true,
-          professorName: null,
-          professorSurname: null,
-          professorAddress: null,
         },
       ],
     })

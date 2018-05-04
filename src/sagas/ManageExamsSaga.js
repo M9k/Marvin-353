@@ -23,15 +23,7 @@ export function* addNewExam({
   try {
     yield put(CourseCreators.listIsLoading());
     yield call(Course.addNewExam, courseAddress, name, credits, mandatory);
-    yield put(CourseCreators.pushNewExam({
-      address: null,
-      name,
-      credits,
-      mandatory,
-      professorAddress: null,
-      professorName: null,
-      professorSurname: null,
-    }));
+    yield put(CourseCreators.examInserted());
   } catch (e) {
     yield put(CourseCreators.listHasErrored());
   }
