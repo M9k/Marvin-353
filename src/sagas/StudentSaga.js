@@ -97,6 +97,9 @@ export const creators = {
   enrollToExamAction: address => ( // exam address
     { type: ENROLL_TO_AN_EXAM, address }
   ),
+  getCreditsAction: address => (
+    { type: GET_CREDITS, address }
+  ),
 };
 
 export default function* handler() {
