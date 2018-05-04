@@ -34,6 +34,7 @@ class LoginPage extends React.Component {
       return (
         <div>Logged in! You will be redirected to the homepage in a few seconds!<br />
         If it doesnt work click here: <a href="/">home</a>
+          <RedirectToHome type="success" message="Logged in! 🎊" />
         </div>
       );
     }
