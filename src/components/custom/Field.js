@@ -112,7 +112,7 @@ class Field extends React.Component {
         this.props.values.map(value => (
           options.push(<option key={Utils.generateKey(value)} value={value}>{value}</option>)
         ));
-        field.push(<FormControl key={Utils.generateKey(name)} componentClass="select" onClick={this.handleChange}>{options}</FormControl>);
+        field.push(<FormControl key={Utils.generateKey(name)} componentClass="select" onChange={this.handleChange}>{options}</FormControl>);
         break;
       case FieldTypes.TEXT:
       default:

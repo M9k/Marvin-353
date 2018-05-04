@@ -25,7 +25,7 @@ class TeacherExams extends React.Component {
    * at this address in the props
    */
   getMyAssignedExamsAddr() {
-    this.props.getMyAssignedExams(this.props.myWeb3Address);
+    this.props.getMyAssignedExams(this.props.myContract);
   }
 
   render() {
@@ -51,12 +51,12 @@ class TeacherExams extends React.Component {
 TeacherExams.propTypes = {
   getMyAssignedExams: PropTypes.func.isRequired,
   assignedExams: PropTypes.arrayOf(String).isRequired,
-  myWeb3Address: PropTypes.string.isRequired,
+  myContract: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
   assignedExams: state.teacherData.list,
-  myWeb3Address: state.metamask.account,
+  myContract: state.user.data.contract,
 });
 
 function mapDispatchToProps(dispatch) {
