@@ -19,12 +19,6 @@ class AdminCourseExams extends React.Component {
     this.viewDetails = this.viewDetails.bind(this);
     this.addExamBuilder = this.addExamBuilder.bind(this);
     this.getExamsByAddress = this.getExamsByAddress.bind(this);
-    this.course = {
-      name: 'L-31',
-      solarYear: '2017',
-      courseAddress: '0xfae394561e33e242c551d15d4625309ea4c0b97f',
-      totalCredits: 180,
-    };
   }
   getExamsByAddress() {
     this.props.getExams(this.courseAdress);
@@ -47,7 +41,6 @@ class AdminCourseExams extends React.Component {
     if (this.state.showDetails) {
       details = <ExamDetails object={this.state.item} show={this.state.showDetails} />;
     }
-    console.log(this.props.examList);
     return (
       <div>
         <h3 className="text-center">Course {this.params.examid}</h3>
@@ -73,7 +66,7 @@ class AdminCourseExams extends React.Component {
             {
               name: 'optionalExam',
               label: 'Optional:',
-              help: 'is the exam optional',
+              help: 'is the exam mandatory',
               type: FieldTypes.CHECKBOX,
               values: ['yes'],
               validateFunction: Utils.alwaysTrue,
