@@ -61,11 +61,12 @@ export function* getOptionalExams(action) {
       call(getExamContractAt, action.address, i));
     const contracts = yield all(apiContractCall);
     const apiExamsCall = Array(num).fill().map((_, i) => call(getExamData, contracts[i]));
-    const examsData = yield all(apiExamsCall);
-    examsData.filter(() => examsData.mandatory !== 1); // filter the exams that are not optional
+    let examsData = yield all(apiExamsCall);
+    console.log(examsData);
+    examsData = examsData.filter(x => x.mandatory === true); // filter the exams that are optional
     yield put(actionCreators.setOptionalExams(examsData));
   } catch (e) {
-    console.log('failed to get the oprional exams');
+    console.log('failed to get the optional exams');
     yield put(actionCreators.listHasErrored());
   }
 }
