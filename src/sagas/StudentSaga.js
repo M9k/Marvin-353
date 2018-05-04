@@ -54,32 +54,29 @@ export function* getExamsCredits(action) {
   try {
     let num = yield call(studentExams.getExamNumber, action.address);
     num = Number(num);
-    console.log('number of exams: ', num);
     const apiContractCall = Array(num).fill().map((_, i) =>
       call(studentExams.getExamContractAt, action.address, i));
     const contracts = yield all(apiContractCall);
-    console.log('contracts: ', contracts);
     const apiExamsValutationCall = Array(num).fill().map((_, i) =>
       call(studentExams.getExamValuationAt, action.address, contracts[i]));
     let valutations = yield all(apiExamsValutationCall);
-    console.log('valutations: ', valutations);
     valutations = valutations.map((valutation, i) => ({
       valutation,
       contract: contracts[i],
     }));
-    console.log('valutations prima di filter: ', valutations);
-    valutations.filter(x => x.valutation > 17);
-    console.log('valutations dopo filter: ', valutations);
-    const apiCreditsCall = Array(num).fill().map((_, i) =>
-      call(getCredits, contracts[i]));
-    let credits = yield all(apiCreditsCall);
-    credits = credits.reduce((a, b) => a + b, 0);
-    console.log('total credits: ', credits);
+    valutations = valutations.filter(x => x.valutation > 17);
+    let credits = null;
+    if (valutations.length !== 0) {
+      const apiCreditsCall = Array(num).fill().map((_, i) =>
+        call(getCredits, valutations[i].contract));
+      credits = yield all(apiCreditsCall);
+      credits = credits.reduce((a, b) => a + b, 0);
+    } else {
+      credits = 0;
+    }
     const courseContract = yield call(studentExams.getCourseContract, action.address);
-    console.log('courseContract: ', courseContract);
     let graduationCredits = yield call(getCreditsToGraduate, courseContract);
     graduationCredits = Number(graduationCredits);
-    console.log('courseContractCredits: ', graduationCredits);
     yield put(actionCreators.setCredits(credits, graduationCredits));
   } catch (e) {
     console.log('failed to get credits');
