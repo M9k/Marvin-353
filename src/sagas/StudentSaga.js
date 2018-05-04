@@ -58,16 +58,19 @@ export function* getExamsCredits(action) {
     const contracts = yield all(apiContractCall);
     const apiExamsValutationCall = Array(num).fill().map((_, i) =>
       call(studentExams.getExamValuationAt, action.address, contracts[i]));
-    const valutations = yield all(contracts, apiExamsValutationCall);
-    valutations.filter(() => valutations > 17);
+    let valutations = yield all(apiExamsValutationCall);
+    valutations = valutations.map((valutation, i) => ({
+      valutation,
+      contract: contracts[i],
+    }));
+    valutations.filter(x => x.valutation > 17);
     const apiCreditsCall = Array(num).fill().map((_, i) =>
-      call(getCredits, valutations.contracts[i]));
+      call(getCredits, valutations.contract[i]));
     let credits = yield all(apiCreditsCall);
     credits = credits.reduce((a, b) => a + b, 0);
     const courseContract = yield call(studentExams.getCourseContract, action.address);
     let graduationCredits = yield call(getCreditsToGraduate, courseContract);
     graduationCredits = Number(graduationCredits);
-    credits = credits.reduce((a, b) => a + b, 0);
     yield put(actionCreators.setCredits(credits, graduationCredits));
   } catch (e) {
     console.log('failed to get credits');
