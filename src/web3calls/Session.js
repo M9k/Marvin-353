@@ -26,7 +26,7 @@ const getStudentData = async (role) => {
     {},
     stdData,
     { courseName, courseContract },
-    { contract: courseContract },
+    { contract: stdContr },
   );
 };
 const getTeacherData = async (role) => {

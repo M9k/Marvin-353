@@ -5,7 +5,6 @@ const initialDataState = {
   loading: false,
   name: null,
   surname: null,
-  course: null,
   contract: null,
 };
 const SessionDuck = new Duck({
