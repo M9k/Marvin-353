@@ -34,6 +34,7 @@ export function* getExamsAction(action) {
     const personalExamsData = Array(num).fill().map((_, i) => ({
       address: examsData[i].address,
       name: examsData[i].name,
+      credits: examsData[i].credits,
       mandatory: examsData[i].mandatory,
       teacherAddress: examsData[i].teacherAddress,
       teacherName: examsData[i].teacherName,
