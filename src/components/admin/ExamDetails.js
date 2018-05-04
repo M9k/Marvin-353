@@ -21,7 +21,6 @@ class ExamDetails extends React.Component {
       teacherAddress: null,
     };
     this.object = this.props.object;
-    this.studentNumber = '70';
   }
   componentWillReceiveProps(nextProps) {
     if (this.props.object !== nextProps.object) {
@@ -33,7 +32,6 @@ class ExamDetails extends React.Component {
   }
   onChangeTeacher() {
     if (this.state.teacherAddress !== this.inputEl.value) {
-      console.log(this.inputEl.value);
       this.setState({ teacherAddress: this.inputEl.value });
     }
   }
@@ -58,7 +56,6 @@ class ExamDetails extends React.Component {
     this.setState({ assignTeacher: false });
   }
   assTeacher() {
-    console.log(this.props.object.address);
     this.props.setTeacher(this.props.object.address, this.state.teacherAddress);
   }
   moreDetails() {
