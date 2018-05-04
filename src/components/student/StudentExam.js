@@ -10,7 +10,7 @@ class StudentExam extends React.Component {
     this.getExams = this.getExams.bind(this);
   }
   getExams() {
-    this.props.getEnrolledExams(this.props.myAddress);
+    this.props.getExams(this.props.myAddress);
   }
   render() {
     console.log('StudentExam is using address ', this.props.myAddress);
@@ -29,9 +29,14 @@ class StudentExam extends React.Component {
 }
 
 StudentExam.propTypes = {
-  getEnrolledExams: PropTypes.func.isRequired,
-  ExamsList: PropTypes.arrayOf(Object).isRequired,
+  getExams: PropTypes.func,
+  ExamsList: PropTypes.arrayOf(Object),
   myAddress: PropTypes.string.isRequired,
+};
+
+StudentExam.defaultProps = {
+  getExams: () => {},
+  ExamsList: [],
 };
 
 const mapStateToProps = state => ({
@@ -41,7 +46,7 @@ const mapStateToProps = state => ({
 
 function mapDispatchToProps(dispatch) {
   return {
-    getEnrolledExams: add =>
+    getExams: add =>
       dispatch(studentExamSaga.getExamsAction(add)),
   };
 }
