@@ -1,5 +1,5 @@
 import Duck from 'extensible-duck';
-import { copyNPush, copyNPop } from '../util/js_helpers';
+import { copyNPush } from '../util/js_helpers';
 
 const StudentDuck = new Duck({
   namespace: 'marvin',
@@ -25,9 +25,7 @@ const StudentDuck = new Duck({
         return {
           loading: false,
           errored: false,
-          // TODO: aggiustare
-          enrolledExamsList: copyNPush(state.enrolledExamsList, action.exam),
-          optionalExamsList: copyNPop(state.optionalExamsList, el => el === action.exam),
+          examsList: copyNPush(state.examsList, action.exam),
         };
       case (types.SET_CREDITS):
         return {
