@@ -26,7 +26,7 @@ class ExamDetails extends React.Component {
     if (this.props.object !== nextProps.object) {
       this.object = nextProps.object;
     }
-    if (nextProps.teacherList !== this.props.teacherList) {
+    if (nextProps.teacherList !== this.props.teacherList && nextProps.teacherList.length > 0) {
       this.setState({ teacherAddress: nextProps.teacherList[0].address });
     }
   }
