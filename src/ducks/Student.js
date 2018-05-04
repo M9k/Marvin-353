@@ -1,5 +1,5 @@
 import Duck from 'extensible-duck';
-import { copyNPush } from '../util/js_helpers';
+import { updateObjInArr } from '../util/js_helpers';
 
 const StudentDuck = new Duck({
   namespace: 'marvin',
@@ -25,7 +25,11 @@ const StudentDuck = new Duck({
         return {
           loading: false,
           errored: false,
-          examsList: copyNPush(state.examsList, action.exam),
+          examsList: updateObjInArr(
+            state.examsList,
+            obj => obj.address === action.address,
+            action.subscription,
+          ),
         };
       case (types.SET_CREDITS):
         return {
