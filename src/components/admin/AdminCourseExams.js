@@ -93,10 +93,15 @@ class AdminCourseExams extends React.Component {
 
 AdminCourseExams.propTypes = {
   params: PropTypes.string.isRequired,
-  getExams: PropTypes.func.isRequired,
+  getExams: PropTypes.func,
   addExam: PropTypes.func.isRequired,
   // validExam: PropTypes.func.isRequired,
-  examList: PropTypes.arrayOf(Object).isRequired,
+  examList: PropTypes.arrayOf(Object),
+};
+
+AdminCourseExams.defaultProps = {
+  getExams: () => {},
+  examList: [],
 };
 
 const mapStateToProps = state => ({
