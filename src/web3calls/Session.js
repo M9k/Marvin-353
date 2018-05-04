@@ -5,30 +5,35 @@ import { getTeacherContractFromPublicAddress, requestTeacherAccount } from './Un
 import { getName, getSurname } from './User';
 import { getCourseContract } from './Student';
 import { getName as getCourseName } from './Course';
-import { toText } from '../util/web3/textConverter';
 
 async function userData(addr) {
   const name = await getName(addr);
   const surname = await getSurname(addr);
   return {
-    name: toText(name),
-    surname: toText(surname),
+    name,
+    surname,
   };
 }
 
 // Da testare probabilment non funziona
-const getStudentData = (role) => {
+const getStudentData = async (role) => {
   if (role === RoleMap.UNCONFIRMED_STUDENT) return {};
-  return getStudentContractFromPublicAddress(web3.eth.accounts[0]).then((addr) => {
-    getCourseContract(addr).then((courseContract) => {
-      getCourseName(courseContract).then(name =>
-        Object.assign({}, userData(addr), { course: toText(name) }));
-    });
-  });
+  const stdContr = await getStudentContractFromPublicAddress(web3.eth.accounts[0]);
+  const courseContract = await getCourseContract(stdContr);
+  const stdData = await userData(stdContr);
+  const courseName = await getCourseName(courseContract);
+  return Object.assign(
+    {},
+    stdData,
+    { courseName, courseContract },
+    { contract: courseContract },
+  );
 };
-const getTeacherData = (role) => {
+const getTeacherData = async (role) => {
   if (role === RoleMap.UNCONFIRMED_TEACHER) return {};
-  return getTeacherContractFromPublicAddress(web3.eth.accounts[0]).then(addr => userData(addr));
+  const tchContr = await getTeacherContractFromPublicAddress(web3.eth.accounts[0]);
+  const tchData = await userData(tchContr);
+  return Object.assign({}, tchData, { contract: tchContr });
 };
 
 const getRole = () => login().then(role => role);

@@ -39,7 +39,7 @@ const SessionDuck = new Duck({
       case (types.SET_DATA):
         return {
           ...state,
-          data: action.data,
+          data: Object.assign({}, initialDataState, action.data),
         };
       case (types.CLEAN_DATA):
         return initialState;

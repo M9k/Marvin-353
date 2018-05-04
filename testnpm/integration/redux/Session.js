@@ -1,4 +1,4 @@
-/* import { expectSaga } from 'redux-saga-test-plan';
+import { expectSaga } from 'redux-saga-test-plan';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import reducer, { initialState, creators } from '../../../src/ducks/Session';
 import * as sagas from '../../../src/sagas/SessionSaga';
@@ -10,12 +10,14 @@ const features = [sagas.performLogin];
 const failedState = Object.assign({}, initialState, { errored: true });
 const userData = {
   UNIVERSITY: {},
-  STUDENT: { name: 'Gianluca', surname: 'Marraffa', course: 'Informatica' },
-  TEACHER: { name: 'Tullio', surname: 'Vardanega' },
+  STUDENT: {
+    name: 'Gianluca', surname: 'Marraffa', course: 'Informatica', contract: '0x00',
+  },
+  TEACHER: { name: 'Tullio', surname: 'Vardanega', contract: '0x01' },
   NOTLOGGED: {},
   ADMIN: {},
-  UNCONFIRMED_STUDENT: { name: 'Studente', surname: 'Vero', course: 'Psicologia' },
-  UNCONFIRMED_TEACHER: { name: 'Professore', surname: 'Bravo' },
+  UNCONFIRMED_STUDENT: {},
+  UNCONFIRMED_TEACHER: {},
 };
 
 describe('Session feature', () => {
@@ -42,4 +44,3 @@ describe('Session feature', () => {
   });
   GentlyFail(features, reducer, failedState);
 });
-*/
