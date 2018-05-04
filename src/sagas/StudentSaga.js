@@ -27,6 +27,9 @@ export function* getEnrolledExams(action) {
     const apiExamValuationCall = Array(num).fill().map((_, i) =>
       call(studentExams.getExamValuationAt, action.address, i));
     const examsValuation = (yield all(apiExamValuationCall)).map(x => (x === 0 ? null : x - 1));
+    const apiExamSubscriptionCall = Array(num).fill().map((_, i) =>
+      call(studentExams.getExamSubscriptionAt, action.address, i));
+    const examsSubscription = yield all(apiExamSubscriptionCall);
     // console.log(examsValuation);
 
     const personalExamsData = Array(num).fill().map((_, i) => ({
@@ -37,6 +40,7 @@ export function* getEnrolledExams(action) {
       teacherName: examsData[i].teacherName,
       teacherSurname: examsData[i].teacherSurname,
       valuation: examsValuation[i],
+      subscription: examsSubscription[i],
     }));
     // console.log(personalExamsData);
 
