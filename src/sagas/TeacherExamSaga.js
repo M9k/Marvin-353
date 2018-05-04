@@ -15,8 +15,8 @@ export function* getExamData(userAddress, examIndex) {
   ]);
   const courseName = yield call(Course.getName, courseAddress);
   yield put(actionCreators.pushExam({
-    code: examName,
-    courseName,
+    examname: examName,
+    coursename: courseName,
     index: examIndex,
     address: examAddress,
   }));

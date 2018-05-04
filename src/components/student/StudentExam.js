@@ -19,7 +19,7 @@ class StudentExam extends React.Component {
       <div>
         <PageTableForm
           getTableData={this.getExams}
-          tableData={this.props.ExamsList}
+          tableData={(this.props.ExamsList).filter(e => (e.subscription))}
           headerInfo={['Name', 'Credits', 'Mandatory', 'TeacherName', 'TeacherSurname', 'Valuation']}
           columFilter
         />
