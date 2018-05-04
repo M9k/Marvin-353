@@ -44,7 +44,6 @@ export function* getAllCourses() {
     const apiCourseNumberCall = Array(num).fill().map((_, i) =>
       call(getCourseNumber, YearContracts[i]));
     const numberOfCourses = yield all(apiCourseNumberCall);
-    // console.log(numberOfCourses);
     const apiCourseContractsCall = Array(num).fill().map((_, i) =>
       Array(numberOfCourses[i]).fill().map((_2, j) =>
         call(getCourseContractAt, YearContracts[i], j))).flatten();
