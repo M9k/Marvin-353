@@ -108,7 +108,7 @@ export const creators = {
   getEnrolledExamsAction: address => (
     { type: GET_ENROLLED_EXAMS, address }
   ),
-  getOptionalExamsAciotn: address => (
+  getOptionalExamsAction: address => (
     { type: GET_OPTIONAL_EXAMS, address }
   ),
   enrollToExamAction: address => ( // exam address
