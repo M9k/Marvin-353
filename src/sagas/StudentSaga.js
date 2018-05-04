@@ -64,7 +64,11 @@ export function* getExamsCredits(action) {
       call(getCredits, valutations.contracts[i]));
     let credits = yield all(apiCreditsCall);
     credits = credits.reduce((a, b) => a + b, 0);
-    yield put(actionCreators.setCredits, credits);
+    const courseContract = yield call(studentExams.getCourseContract, action.address);
+    let graduationCredits = yield call(getCreditsToGraduate, courseContract);
+    graduationCredits = Number(graduationCredits);
+    credits = credits.reduce((a, b) => a + b, 0);
+    yield put(actionCreators.setCredits(credits, graduationCredits));
   } catch (e) {
     console.log('failed to get credits');
   }
