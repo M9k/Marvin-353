@@ -1,7 +1,7 @@
 import { call, put, fork, all, takeEvery, takeLatest } from 'redux-saga/effects';
 import { creators as actionCreators } from '../ducks/Student';
 import * as studentExams from '../web3calls/Student';
-import { getExamNumber, getExamContractAt } from '../web3calls/Course';
+import { getExamNumber, getExamContractAt, getCreditsToGraduate } from '../web3calls/Course';
 import { getCredits } from '../web3calls/Exam';
 import { getExamData } from './helpers/getters';
 
@@ -90,7 +90,11 @@ export function* getExamsCredits(action) {
       call(getCredits, valutations.contracts[i]));
     let credits = yield all(apiCreditsCall);
     credits = credits.reduce((a, b) => a + b, 0);
-    yield put(actionCreators.setCredits, credits);
+    const courseContract = yield call(studentExams.getCourseContract, action.address);
+    let graduationCredits = yield call(getCreditsToGraduate, courseContract);
+    graduationCredits = Number(graduationCredits);
+    credits = credits.reduce((a, b) => a + b, 0);
+    yield put(actionCreators.setCredits, credits, graduationCredits);
   } catch (e) {
     console.log('failed to get credits');
   }
