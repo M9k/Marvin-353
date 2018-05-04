@@ -19,12 +19,12 @@ class Index extends React.Component {
               Here you can enrol to your exams,
 check how many credits you need to end and you can choose and add optional exams to your study plan.
           </p>
-          <h5>Your total credits: {this.props.creditsObj.credits}</h5>
-          <h5>Total credits need to end: {this.props.creditsObj.graduationCredits}</h5>
+          <h5>Your total credits: {this.props.myCredits}</h5>
+          <h5>Total credits need to end: {this.props.graduationCredits}</h5>
           <ProgressBar
             active
             bsStyle="success"
-            now={(this.props.creditsObj.credits / this.props.creditsObj.graduationCredits) * 100}
+            now={(this.props.myCredits / this.props.graduationCredits) * 100}
           />
         </Jumbotron>
         <CardWithIcon
@@ -44,20 +44,16 @@ check how many credits you need to end and you can choose and add optional exams
   }
 }
 Index.propTypes = {
-  creditsObj: PropTypes.shape({
-    credits: PropTypes.number,
-    graduationCredits: PropTypes.number,
-  }),
+  myCredits: PropTypes.number.isRequired,
+  graduationCredits: PropTypes.number.isRequired,
   getCredits: PropTypes.func.isRequired,
   myAddress: PropTypes.string.isRequired,
 };
 
-Index.defaultProps = {
-  creditsObj: { credits: 0, graduationCredits: 0 },
-};
 
 const mapStateToProps = state => ({
-  credits: state.student.credits,
+  myCredits: state.student.credits,
+  graduationCredits: state.student.graduationCredits,
   myAddress: state.user.data.contract,
 });
 
