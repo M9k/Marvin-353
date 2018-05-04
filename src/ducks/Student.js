@@ -4,33 +4,27 @@ import { copyNPush, copyNPop } from '../util/js_helpers';
 const StudentDuck = new Duck({
   namespace: 'marvin',
   store: 'Student',
-  types: ['SET_ENROLLED_EXAMS', 'SET_OPTIONAL_EXAMS', 'PUSH_NEW_SUBSCRIPTION', 'SET_CREDITS', 'LIST_LOADING', 'LIST_ERRORED'],
+  types: ['SET_EXAMS', 'PUSH_NEW_SUBSCRIPTION', 'SET_CREDITS', 'LIST_LOADING', 'LIST_ERRORED'],
   initialState: {
     loading: false,
     errored: false,
-    enrolledExamsList: [],
-    optionalExamsList: [],
+    examsList: [],
     credits: null,
   },
   reducer: (state, action, duck) => {
     const { types } = duck;
     switch (action.type) {
-      case (types.SET_ENROLLED_EXAMS):
+      case (types.SET_EXAMS):
         return {
           loading: false,
           errored: false,
-          enrolledExamsList: action.exams,
-        };
-      case (types.SET_OPTIONAL_EXAMS):
-        return {
-          loading: false,
-          errored: false,
-          optionalExamsList: action.exams,
+          examsList: action.exams,
         };
       case (types.PUSH_NEW_SUBSCRIPTION):
         return {
           loading: false,
           errored: false,
+          // TODO: aggiustare
           enrolledExamsList: copyNPush(state.enrolledExamsList, action.exam),
           optionalExamsList: copyNPop(state.optionalExamsList, el => el === action.exam),
         };
@@ -60,11 +54,8 @@ const StudentDuck = new Duck({
 
   },
   creators: duck => ({
-    setEnrolledExams: exams => (
-      { type: duck.types.SET_ENROLLED_EXAMS, exams }
-    ),
-    setOptionalExams: exams => (
-      { type: duck.types.SET_OPTIONAL_EXAMS, exams }
+    setExams: exams => (
+      { type: duck.types.SET_EXAMS, exams }
     ),
     pushNewSubscription: exam => (
       { type: duck.types.PUSH_NEW_SUBSCRIPTION, exam }
