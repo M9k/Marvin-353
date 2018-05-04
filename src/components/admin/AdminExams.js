@@ -61,7 +61,7 @@ class AdminExams extends React.Component {
     }
     let details = null;
     if (this.state.showDetails) {
-      details = <ExamDetails object={this.state.item} show={this.state.showDetails} />;
+      details = <ExamDetails object={this.state.item} show={this.state.showDetails} moreDetails />;
     }
     return (
       <div>

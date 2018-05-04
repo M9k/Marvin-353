@@ -61,6 +61,21 @@ class ExamDetails extends React.Component {
     console.log(this.props.object.address);
     this.props.setTeacher(this.props.object.address, this.state.teacherAddress);
   }
+  moreDetails() {
+    if (this.props.moreDetails) {
+      return (
+        <div>
+          <dt>Solar year</dt>
+          <dd>{this.object.solarYear}</dd>
+          <dt>Course Address</dt>
+          <dd>{this.object.courseAddress}</dd>
+          <dt>Course Name</dt>
+          <dd>{this.object.courseName}</dd>
+        </div>
+      );
+    }
+    return null;
+  }
   render() {
     const options = [];
     console.log(this.props.teacherList);
@@ -83,23 +98,16 @@ class ExamDetails extends React.Component {
         >
           <dl>
             <dt>Exam Address</dt>
-            <dd>{this.object.examAddress}</dd>
+            <dd>{this.object.address}</dd>
             <dt>Exam Name</dt>
             <dd>{this.object.name}</dd>
             <dt>Credits</dt>
             <dd>{this.object.credits}</dd>
             <dt>Mandatory</dt>
             <dd>{mandatory}</dd>
-            <dt>Solar year</dt>
-            <dd>{this.object.year}</dd>
-            <dt>Course Address</dt>
-            <dd>{this.object.courseAddress}</dd>
-            <dt>Course Name</dt>
-            <dd>{this.object.courseName}</dd>
             <dt>Teacher</dt>
             {this.teacher()}
-            <dt>Student number</dt>
-            <dd>{this.studentNumber}</dd>
+            {this.moreDetails()}
           </dl>
         </ModalForm>
         <ModalForm
@@ -128,16 +136,18 @@ class ExamDetails extends React.Component {
 ExamDetails.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   object: PropTypes.object.isRequired,
-  show: PropTypes.func.isRequired,
+  show: PropTypes.bool.isRequired,
   getTeachers: PropTypes.func.isRequired,
   teacherList: PropTypes.arrayOf(Object),
-  loadingTeacher: PropTypes.bool.isRequired,
+  loadingTeacher: PropTypes.bool,
   setTeacher: PropTypes.func.isRequired,
-  // studentNumber: PropTypes.number.isRequired,
+  moreDetails: PropTypes.bool,
 };
 
 ExamDetails.defaultProps = {
   teacherList: [],
+  moreDetails: false,
+  loadingTeacher: false,
 };
 
 const mapStateToProps = state => ({
