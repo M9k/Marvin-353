@@ -13,7 +13,7 @@ class StudentExam extends React.Component {
     this.props.getEnrolledExams(this.props.myAddress);
   }
   render() {
-    console.log('Il valore del address', this.props.myAddress);
+    console.log('StudentExam is using address ', this.props.myAddress);
 
     return (
       <div>

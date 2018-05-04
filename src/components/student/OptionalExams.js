@@ -72,7 +72,6 @@ function mapDispatchToProps(dispatch) {
     getOptionalExams: add =>
       dispatch(studentExamSaga.getOptionalExamsAction(add)),
     enrollToExam: (objArr) => {
-      console.log('SOno in qui il valore è', objArr.item.address);
       dispatch(studentExamSaga.enrollToExamAction(objArr.item.address));
     },
   };
