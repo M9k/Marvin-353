@@ -1,9 +1,9 @@
 import Index from '../admin/Index';
-import { AdminCourseExams } from '../admin/AdminCourseExams';
-import { AdminCourses } from '../admin/AdminCourses';
+import AdminCourseExams from '../admin/AdminCourseExams'; // eslint-disable-line import/no-named-as-default
+import AdminCourses from '../admin/AdminCourses'; // eslint-disable-line import/no-named-as-default
 import ConfirmStudents from '../admin/ConfirmStudentUser';
 import ConfirmTeachers from '../admin/ConfirmTeacherUser';
-import { AdminExams } from '../admin/AdminExams';
+import AdminExams from '../admin/AdminExams'; // eslint-disable-line import/no-named-as-default
 import SystemUsers from '../admin/SystemUsers';
 
 const AdminRoutes = [
