@@ -29,12 +29,22 @@ class AdminExams extends React.Component {
       this.props.getAllExams(nextProps.academicYears[0]);
     }
   }
+
+  /**
+   * when the year in the spinner is changed,
+   * set the new value in the state year
+   */
   onChangeYear() {
     if (this.state.year !== this.inputEl.value) {
       this.setState({ year: this.inputEl.value, showDetails: false });
       this.props.getAllExams(this.inputEl.value);
     }
   }
+
+  /**
+   * show the details of the selectd exam
+   * @param item - selected item in the table
+   */
   viewDetails(item) {
     this.setState({ showDetails: true, item });
   }

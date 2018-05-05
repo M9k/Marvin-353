@@ -22,12 +22,19 @@ class AdminCourseExams extends React.Component {
     this.addExamBuilder = this.addExamBuilder.bind(this);
     this.getExamsByAddress = this.getExamsByAddress.bind(this);
   }
+  /**
+   * get the exams of the course with the address found in the props params
+   */
   getExamsByAddress() {
     this.props.getExams(this.courseAdress);
   }
+  /**
+   * build the correct params for add a new exam
+   * @param objForm - value of the form field
+   * of a new exam
+  */
   addExamBuilder(objForm) {
     const optional = objForm.optionalExam.value !== 'true';
-
     const array = [
       this.courseAdress,
       objForm.examName.value,
@@ -36,6 +43,10 @@ class AdminCourseExams extends React.Component {
     ];
     this.props.addExam(array);
   }
+  /**
+   * show the details of the selected exam
+   * @param item - table item
+   */
   viewDetails(item) {
     this.setState({ showDetails: true, item });
   }
