@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { creators } from '../../sagas/SessionSaga';
 import CardWithIcon from '../custom/CardWithIcon';
-import AlertDismissable from '../custom/Alert';
+import AlertDismissable from '../custom/AlertDismissable';
 
 class Index extends React.Component {
   constructor(props) {

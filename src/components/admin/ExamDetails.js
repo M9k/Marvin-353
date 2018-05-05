@@ -75,7 +75,6 @@ class ExamDetails extends React.Component {
   }
   render() {
     const options = [];
-    console.log(this.props.teacherList);
     if (!this.props.loadingTeacher) {
       for (let i = 0; i < this.props.teacherList.length; i += 1) {
         const teacher = this.props.teacherList[i];
