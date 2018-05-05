@@ -86,10 +86,10 @@ export function* getExamsCredits(action) {
 
 export function* enrollToExam(action) {
   try {
-    let index = yield call(studentExams.getIndexOfExam, action.address);
+    let index = yield call(studentExams.getIndexOfExam, action.addStudent, action.addExam);
     index = Number(index);
-    yield call(studentExams.enrollToOptionalExam, action.address, index);
-    const exam = yield call(getExamData, action.address);
+    yield call(studentExams.enrollToOptionalExam, action.addStudent, index);
+    const exam = yield call(studentExams.getExamData, action.addExam);
     yield put(actionCreators.pushNewSubscription, exam);
   } catch (e) {
     console.log('failed to enroll to the exam');
@@ -101,8 +101,8 @@ export const creators = {
   getExamsAction: address => (
     { type: GET_EXAMS, address }
   ),
-  enrollToExamAction: address => ( // exam address
-    { type: ENROLL_TO_AN_EXAM, address }
+  enrollToExamAction: (addStudent, addExam) => ( // exam address
+    { type: ENROLL_TO_AN_EXAM, addStudent, addExam }
   ),
   getCreditsAction: address => (
     { type: GET_CREDITS, address }
@@ -113,6 +113,6 @@ export default function* handler() {
   yield [
     fork(takeLatest, GET_EXAMS, getExamsAction),
     fork(takeLatest, GET_CREDITS, getExamsCredits),
-    fork(takeEvery, ENROLL_TO_AN_EXAM, enrollToExam()),
+    fork(takeEvery, ENROLL_TO_AN_EXAM, enrollToExam),
   ];
 }

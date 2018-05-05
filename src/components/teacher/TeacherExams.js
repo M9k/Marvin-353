@@ -34,7 +34,7 @@ class TeacherExams extends React.Component {
         <PageTableForm
           getTableData={this.getMyAssignedExamsAddr}
           tableData={this.props.assignedExams}
-          headerInfo={['ExamName', 'CourseName', 'Details']}
+          headerInfo={['Code', 'CourseName', 'Details']}
           tableButtons={[
             {
               buttonFunction: TeacherExams.seeExam,

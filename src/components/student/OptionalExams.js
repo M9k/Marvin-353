@@ -22,7 +22,7 @@ class OptionalExams extends React.Component {
 
   closeSelect(item) {
     this.setState({ select: false });
-    this.props.enrollToExam(item);
+    this.props.enrollToExam(this.props.myAddress, item);
   }
   render() {
     console.log(this.props.ExamsList);
@@ -77,8 +77,8 @@ function mapDispatchToProps(dispatch) {
   return {
     getExams: add =>
       dispatch(studentExamSaga.getExamsAction(add)),
-    enrollToExam: (objArr) => {
-      dispatch(studentExamSaga.enrollToExamAction(objArr.item.address));
+    enrollToExam: (student, exam) => {
+      dispatch(studentExamSaga.enrollToExamAction(student, exam.item.address));
     },
   };
 }
