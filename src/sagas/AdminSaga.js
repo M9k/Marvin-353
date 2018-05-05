@@ -172,12 +172,20 @@ export function* getPendingTeachers() {
 export function* approveUser(action) {
   yield put(actionCreators.listIsLoading());
   try {
+    const contract = action.address;
+    const address = yield call(getPublicAddress, action.address);
+    const name = yield call(getName, action.address);
+    const surname = yield call(getSurname, action.address);
+    const userData = [contract, address, name, surname];
     if (action.role === ROLES.UNCONFIRMED_STUDENT) {
       yield call(confirmStudent, action.address);
+      const course = yield call(getCourseContract, action.address);
+      const courseName = yield call(getCourseName, course);
+      userData.push(courseName);
     } else if (action.role === ROLES.UNCONFIRMED_TEACHER) {
       yield call(confirmTeacher, action.address);
     }
-    yield put(actionCreators.confirmUser(action.role, action.address));
+    yield put(actionCreators.confirmUser(action.role, contract, userData));
   } catch (e) {
     console.log('Failed!');
     yield put(actionCreators.listHasErrored());

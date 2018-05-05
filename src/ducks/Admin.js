@@ -59,18 +59,18 @@ const AdminDuck = new Duck({
         if (action.role === ROLES.UNCONFIRMED_STUDENT) { // is a non-approved student
           return {
             ...state,
-            studentsList: copyNPush(state.studentsList, action.address),
+            studentsList: copyNPush(state.studentsList, action.data),
             pendingStudentsList: copyNPop(state.pendingStudentsList, el =>
-              el.contract === action.address),
+              el.contract === action.contract),
             loading: false,
             errored: false,
           };
         } else if (action.role === ROLES.UNCONFIRMED_TEACHER) { // is a non-approved teacher
           return {
             ...state,
-            teachersList: copyNPush(state.teachersList, action.address),
+            teachersList: copyNPush(state.teachersList, action.data),
             pendingTeachersList: copyNPop(state.pendingTeachersList, el =>
-              el.contract === action.address),
+              el.contract === action.contract),
             loading: false,
             errored: false,
           };
@@ -140,8 +140,13 @@ const AdminDuck = new Duck({
     setPendingTeachersList: account => (
       { type: duck.types.SET_PENDING_TEACHERS_LIST, account }
     ),
-    confirmUser: (role, address) => (
-      { type: duck.types.CONFIRM_USER, role, address }
+    confirmUser: (role, contract, data) => (
+      {
+        type: duck.types.CONFIRM_USER,
+        role,
+        contract,
+        data,
+      }
     ),
     removeUser: (role, address) => (
       { type: duck.types.REMOVE_USER, role, address }
