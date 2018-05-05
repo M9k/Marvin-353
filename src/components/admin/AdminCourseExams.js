@@ -24,7 +24,7 @@ class AdminCourseExams extends React.Component {
     this.props.getExams(this.courseAdress);
   }
   addExamBuilder(objForm) {
-    const optional = objForm.optionalExam.value;
+    const optional = !objForm.optionalExam.value;
     const array = [
       this.courseAdress,
       objForm.examName.value,
@@ -66,7 +66,7 @@ class AdminCourseExams extends React.Component {
             {
               name: 'optionalExam',
               label: 'Optional:',
-              help: 'is the exam mandatory',
+              help: 'is the exam optional',
               type: FieldTypes.CHECKBOX,
               values: ['yes'],
               validateFunction: Utils.alwaysTrue,
