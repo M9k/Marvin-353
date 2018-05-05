@@ -17,6 +17,17 @@ const GET_TEACHERS = actionType('GET_TEACHERS');
 const APTCE = actionType('ASSOCIATE_PROFESSOR_TO_COURSE_EXAM');
 const APTE = actionType('ASSOCIATE_PROFESSOR_TO_EXAM');
 
+const courseTeacherAdapter = exam => (
+  Object.assign(
+    exam,
+    {
+      professorName: exam.teacherName,
+      professorSurname: exam.teacherSurname,
+      professorAddress: exam.professorAddress,
+    },
+  )
+);
+
 export function* addNewExam({
   courseAddress, name, credits, mandatory,
 }) {
@@ -39,7 +50,7 @@ export function* getAllExams({ solarYear }) {
     const exams = [];
     const coursesAddresses = yield all(coursesFetch);
     const examsFetch = coursesAddresses.map(courseAddress => (
-      call(Getters.getCourseExamsList, courseAddress)
+      call(Getters.getCourseExamsList, courseAddress, courseTeacherAdapter)
     ));
     const coursesDataFetch = coursesAddresses.map(courseAddress => (
       call(Getters.getCourseData, courseAddress)
@@ -64,7 +75,7 @@ export function* getAllExams({ solarYear }) {
 export function* getExamsByCourse({ courseAddress }) {
   try {
     yield put(CourseCreators.listIsLoading());
-    const examsList = yield call(Getters.getCourseExamsList, courseAddress);
+    const examsList = yield call(Getters.getCourseExamsList, courseAddress, courseTeacherAdapter);
     yield put(CourseCreators.setList(examsList));
   } catch (e) {
     yield put(CourseCreators.listHasErrored());
