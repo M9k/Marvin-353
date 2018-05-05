@@ -128,7 +128,7 @@ function mapDispatchToProps(dispatch) {
         profAddress,
         examIndex,
         studentIndex,
-        grade,
+        grade <= 30 ? grade + 1 : 32,
       ))
     ),
   };
