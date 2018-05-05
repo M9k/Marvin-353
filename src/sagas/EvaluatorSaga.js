@@ -11,7 +11,7 @@ const GET_LIST = actionType('GET_LIST');
 const ASSIGN_VOTE = actionType('ASSIGN_VOTE');
 
 export function* getStudentData(examAddress, studentIndex) {
-  const studentAddress = yield call(Exam.getEnrolledContractAt, studentIndex);
+  const studentAddress = yield call(Exam.getEnrolledContractAt, examAddress, studentIndex);
   if (studentAddress === null) throw new Error();
   const [studentName, studentSurname, examIndex] = yield all([
     call(User.getName, studentAddress),
@@ -32,6 +32,7 @@ export function* getList({ examAddress }) {
   yield put(actionCreators.listIsLoading());
   try {
     const studentNumber = yield call(Exam.getEnrolledNumber, examAddress);
+    console.log(`Students number:${yield studentNumber}`);
     const studentFetches = Array(Number(studentNumber)).fill().map((_, index) => (
       call(getStudentData, examAddress, index)
     ));
@@ -45,6 +46,8 @@ export function* getList({ examAddress }) {
 export function* assignVote({
   userAddress, examIndex, studentIndex, vote,
 }) {
+  console.log(userAddress, examIndex, studentIndex, vote);
+
   yield put(actionCreators.voteIsLoading());
   try {
     const teacherAddress =

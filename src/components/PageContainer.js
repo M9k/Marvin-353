@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import NavbarCustom from './custom/NavbarCustom';
 import Footer from './custom/Footer';
 import ErrorTaker from './custom/ErrorTaker';
-import AlertDismissable from './custom/Alert';
+import AlertDismissable from './custom/AlertDismissable';
 import LoadingSpinner from './custom/LoadingSpinner';
 
 class PageContainer extends React.Component {

@@ -12,7 +12,7 @@ class TeacherExams extends React.Component {
    * the exam but just need the code or primary key of it
    */
   static seeExam(item) {
-    document.location.href = `/exams/${item.code}/`;
+    document.location.href = `/exams/${item.address}/?code=${item.code}&index=${item.index}`;
   }
 
   constructor(props) {

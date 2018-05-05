@@ -16,15 +16,19 @@ class TeacherExamStudents extends React.Component {
     this.openModal = this.openModal.bind(this);
     this.getStudentsOfThisExam = this.getStudentsOfThisExam.bind(this);
     this.addGradeBuilder = this.addGradeBuilder.bind(this);
-    this.examCode = this.props.params.examid;
+
     this.state = { viewModalAddVote: false };
+
+    this.examAddress = this.props.params.examid;
+    this.examCode = this.props.location.query.code;
+    this.examIndex = this.props.location.query.index;
   }
 
   /**
    * get Students of the exam with coude found in the Url examid - examCode
    */
   getStudentsOfThisExam() {
-    this.props.getStudentsOfExam(this.examCode);
+    this.props.getStudentsOfExam(this.examAddress);
   }
 
   /**
@@ -33,9 +37,8 @@ class TeacherExamStudents extends React.Component {
    * to call the redux function on yesFunction of the Modal
    */
   openModal(student) {
-    console.dir(student);
     this.setState({
-      viewModalAddVote: true, studentIndex: student.index,
+      viewModalAddVote: true, studentIndex: student.studentIndex,
     });
   }
 
@@ -49,9 +52,9 @@ class TeacherExamStudents extends React.Component {
   addGradeBuilder(objForm) {
     this.props.addGradeToStudent(
       this.props.myWeb3Address,
-      this.props.examIndex,
+      this.examIndex,
       this.state.studentIndex,
-      objForm.grade,
+      objForm.grade.value,
     );
   }
 
@@ -78,7 +81,7 @@ class TeacherExamStudents extends React.Component {
         <PageTableForm
           getTableData={this.getStudentsOfThisExam}
           tableData={this.props.studentsOfExam}
-          headerInfo={['Name', 'Surname', 'Grade']}
+          headerInfo={['Name', 'Surname', 'Vote', 'Set grade']}
           tableButtons={[
             {
               buttonFunction: this.openModal,
@@ -86,6 +89,7 @@ class TeacherExamStudents extends React.Component {
               buttonType: 'primary',
             },
           ]}
+          columFilter
         />
 
       </div>
@@ -96,11 +100,11 @@ class TeacherExamStudents extends React.Component {
 TeacherExamStudents.propTypes = {
 // eslint-disable-next-line react/forbid-prop-types
   params: PropTypes.object.isRequired,
+  myWeb3Address: PropTypes.string.isRequired,
   studentsOfExam: PropTypes.arrayOf(Object).isRequired,
   getStudentsOfExam: PropTypes.func.isRequired,
   addGradeToStudent: PropTypes.func.isRequired,
-  myWeb3Address: PropTypes.string.isRequired,
-  examIndex: PropTypes.number.isRequired,
+  location: PropTypes.object.isRequired, // eslint-disable-line
 };
 
 const mapStateToProps = state => ({
@@ -114,12 +118,17 @@ function mapDispatchToProps(dispatch) {
     getStudentsOfExam: examId => (
       dispatch(evaluatorCreators.getList(examId))
     ),
-    addGradeToStudent: objArr => (
+    addGradeToStudent: (
+      profAddress,
+      examIndex,
+      studentIndex,
+      grade,
+    ) => (
       dispatch(evaluatorCreators.assignVote(
-        objArr.profAddress,
-        objArr.examIndex,
-        objArr.studentIndex,
-        objArr.grade,
+        profAddress,
+        examIndex,
+        studentIndex,
+        grade,
       ))
     ),
   };

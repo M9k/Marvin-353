@@ -24,7 +24,8 @@ class AdminCourseExams extends React.Component {
     this.props.getExams(this.courseAdress);
   }
   addExamBuilder(objForm) {
-    const optional = !objForm.optionalExam.value;
+    const optional = objForm.optionalExam.value !== 'true';
+
     const array = [
       this.courseAdress,
       objForm.examName.value,
@@ -92,7 +93,8 @@ class AdminCourseExams extends React.Component {
 }
 
 AdminCourseExams.propTypes = {
-  params: PropTypes.string.isRequired,
+// eslint-disable-next-line react/forbid-prop-types
+  params: PropTypes.object.isRequired,
   getExams: PropTypes.func,
   addExam: PropTypes.func.isRequired,
   // validExam: PropTypes.func.isRequired,
