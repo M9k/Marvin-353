@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { selectors } from '../../src/ducks/TeacherExam';
+import reducer, { selectors, initialState, creators } from '../../src/ducks/TeacherExam';
 import { ORDERING } from '../../src/util/js_helpers';
 
 const state = {
@@ -16,6 +16,21 @@ const state = {
 };
 
 describe('TeacherExams duck', () => {
+  describe('setList', () => {
+    it('should set the correct list', () => {
+      expect(reducer(initialState, creators.setList([1, 2, 3])))
+        .to.deep.equal({
+          loading: false,
+          errored: false,
+          list: [1, 2, 3],
+        });
+    });
+    it('should set an empty list when the list is null or undefined', () => {
+      expect(reducer(initialState, creators.setList()).list).to.deep.equal([]);
+      expect(reducer(initialState, creators.setList(null)).list).to.deep.equal([]);
+      expect(reducer(initialState, creators.setList(undefined)).list).to.deep.equal([]);
+    });
+  });
   describe('examsbycode', () => {
     it('should return the exams ordered by code in ascending order', () => {
       expect(selectors.examsByCode(state)).to.deep.equal([

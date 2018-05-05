@@ -23,6 +23,7 @@ export function* getExamData(userAddress, examIndex) {
 }
 
 export function* getList({ userAddress }) {
+  yield put(actionCreators.setList([]));
   yield put(actionCreators.listIsLoading());
   try {
     const examNumber = yield call(Teacher.getExamNumber, userAddress);
