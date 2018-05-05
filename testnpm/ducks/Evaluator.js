@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import reducer, { selectors, creators } from '../../src/ducks/Evaluator';
+import reducer, { selectors, creators, initialState } from '../../src/ducks/Evaluator';
 
 const emptyList = {
   selectedExam: {
@@ -37,6 +37,29 @@ const state = {
   },
 };
 describe('Evaluator ducks', () => {
+  describe('setList', () => {
+    it('should set the correct list', () => {
+      expect(reducer(initialState, creators.setList([1, 2, 3])))
+        .to.deep.equal({
+          loading: false,
+          errored: false,
+          address: null,
+          index: null,
+          code: null,
+          course: null,
+          studentList: {
+            errored: false,
+            loading: false,
+            list: [1, 2, 3],
+          },
+        });
+    });
+    it('should set an empty list when the list is null or undefined', () => {
+      expect(reducer(initialState, creators.setList()).studentList.list).to.deep.equal([]);
+      expect(reducer(initialState, creators.setList(null)).studentList.list).to.deep.equal([]);
+      expect(reducer(initialState, creators.setList(undefined)).studentList.list).to.deep.equal([]);
+    });
+  });
   describe('student by name selector', () => {
     it('should not fail when the list is empty', () => {
       expect(selectors.studentByName(emptyList)).to.deep.equal([]);

@@ -4,7 +4,7 @@ import { copyNPush, ORDERING } from '../util/js_helpers';
 const TeacherExamDuck = new Duck({
   namespace: 'marvin',
   store: 'TeacherExam',
-  types: ['PUSH_EXAM', 'LIST_LOADING', 'LIST_ERRORED', 'LIST_FINISHED'],
+  types: ['PUSH_EXAM', 'LIST_LOADING', 'LIST_ERRORED', 'LIST_FINISHED', 'SET_LIST'],
   initialState: {
     loading: false,
     errored: false,
@@ -35,6 +35,11 @@ const TeacherExamDuck = new Duck({
           loading: false,
           errored: false,
         };
+      case (types.SET_LIST):
+        return {
+          ...state,
+          list: ((action.list === null || action.list === undefined) ? [] : action.list),
+        };
       default:
         return state;
     }
@@ -59,6 +64,9 @@ const TeacherExamDuck = new Duck({
     ),
     listHasFinished: () => (
       { type: types.LIST_FINISHED }
+    ),
+    setList: list => (
+      { type: types.SET_LIST, list }
     ),
   }),
 });
