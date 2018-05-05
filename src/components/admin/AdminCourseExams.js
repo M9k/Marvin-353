@@ -81,7 +81,7 @@ class AdminCourseExams extends React.Component {
           tableButtons={[{
             buttonFunction: this.viewDetails,
             buttonText: 'Details',
-            buttonType: 'default',
+            buttonType: 'primary',
           }]}
           columFilter
         />

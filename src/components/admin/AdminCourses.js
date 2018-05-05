@@ -15,32 +15,28 @@ class AdminCourses extends React.Component {
   constructor(props) {
     super(props);
     this.props.getYears();
-
     this.totalCredits = [
       '120',
       '180',
       '300',
       '360',
     ];
-
     this.state = { year: 'ALL' };
     this.onChangeYear = this.onChangeYear.bind(this);
+    this.tableData = this.tableData.bind(this);
   }
-
   onChangeYear() {
     if (this.state.year !== this.inputEl.value) {
       this.setState({ year: this.inputEl.value });
-      this.changeTable();
     }
   }
-
-  changeTable() {
-    this.list = this.courseList;
-    if (this.inputEl.value !== 'ALL') {
-      this.list = this.courseList.filter(course => course.solarYear === this.inputEl.value);
+  tableData() {
+    if (this.state.year === 'ALL') {
+      return this.props.courseList;
     }
+    const year = parseInt(this.state.year, 10);
+    return this.props.courseList.filter(course => course.year === year);
   }
-
   // Questa funzione non può essere statica
   showExams(item) { // eslint-disable-line class-methods-use-this
     let path = document.location.pathname;
@@ -101,12 +97,12 @@ class AdminCourses extends React.Component {
         </FormGroup>
         <PageTableForm
           getTableData={this.props.getCourses}
-          tableData={this.props.courseList}
+          tableData={this.tableData()}
           headerInfo={['Name', 'Year', 'Credits', 'Details']}
           tableButtons={[{
             buttonFunction: this.showExams,
             buttonText: 'Details',
-            buttonType: 'default',
+            buttonType: 'primary',
           }]}
           columFilter
         />
@@ -118,7 +114,6 @@ class AdminCourses extends React.Component {
 AdminCourses.propTypes = {
   addCourse: PropTypes.func.isRequired,
   getCourses: PropTypes.func.isRequired,
-  // validCourse: PropTypes.func.isRequired,
   courseList: PropTypes.arrayOf(Object).isRequired,
   getYears: PropTypes.func.isRequired,
   academicYears: PropTypes.arrayOf(String).isRequired,
