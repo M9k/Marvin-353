@@ -16,6 +16,8 @@ class AdminCourseExams extends React.Component {
     this.state = { showDetails: false };
     this.params = this.props.params;
     this.courseAdress = this.params.examid;
+    this.courseName = this.props.location.query.name;
+    this.courseYear = this.props.location.query.year;
     this.viewDetails = this.viewDetails.bind(this);
     this.addExamBuilder = this.addExamBuilder.bind(this);
     this.getExamsByAddress = this.getExamsByAddress.bind(this);
@@ -44,7 +46,7 @@ class AdminCourseExams extends React.Component {
     }
     return (
       <div>
-        <h3 className="text-center">Course {this.params.examid}</h3>
+        <h1>Course - {this.courseName} {this.courseYear}</h1>
         <Form
           description="Add a new exam"
           fields={[
@@ -97,8 +99,8 @@ AdminCourseExams.propTypes = {
   params: PropTypes.object.isRequired,
   getExams: PropTypes.func,
   addExam: PropTypes.func.isRequired,
-  // validExam: PropTypes.func.isRequired,
   examList: PropTypes.arrayOf(Object),
+  location: PropTypes.object.isRequired, // eslint-disable-line
 };
 
 AdminCourseExams.defaultProps = {
