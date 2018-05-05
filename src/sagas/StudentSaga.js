@@ -58,18 +58,18 @@ export function* getExamsCredits(action) {
     const apiContractCall = Array(num).fill().map((_, i) =>
       call(studentExams.getExamContractAt, action.address, i));
     const contracts = yield all(apiContractCall);
-    const apiExamsValutationCall = Array(num).fill().map((_, i) =>
+    const apiExamsValuationCall = Array(num).fill().map((_, i) =>
       call(studentExams.getExamValuationAt, action.address, contracts[i]));
-    let valutations = yield all(apiExamsValutationCall);
-    valutations = valutations.map((valutation, i) => ({
-      valutation,
+    let valuations = yield all(apiExamsValuationCall);
+    valuations = valuations.map((valuation, i) => ({
+      valuation,
       contract: contracts[i],
     }));
-    valutations = valutations.filter(x => x.valutation > 17);
+    valuations = valuations.filter(x => x.valuation > 17);
     let credits = null;
-    if (valutations.length !== 0) {
+    if (valuations.length !== 0) {
       const apiCreditsCall = Array(num).fill().map((_, i) =>
-        call(getCredits, valutations[i].contract));
+        call(getCredits, valuations[i].contract));
       credits = yield all(apiCreditsCall);
       credits = credits.reduce((a, b) => a + b, 0);
     } else {
