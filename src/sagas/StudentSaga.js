@@ -59,16 +59,16 @@ export function* getExamsCredits(action) {
       call(studentExams.getExamContractAt, action.address, i));
     const contracts = yield all(apiContractCall);
     const apiExamsValuationCall = Array(num).fill().map((_, i) =>
-      call(studentExams.getExamValuationAt, action.address, contracts[i]));
+      call(studentExams.getExamValuationAt, action.address, i));
     let valuations = yield all(apiExamsValuationCall);
     valuations = valuations.map((valuation, i) => ({
       valuation,
       contract: contracts[i],
     }));
-    valuations = valuations.filter(x => x.valuation > 17);
+    valuations = valuations.filter(x => x.valuation > 18); // 18 because it indicate the vote 17
     let credits = null;
     if (valuations.length !== 0) {
-      const apiCreditsCall = Array(num).fill().map((_, i) =>
+      const apiCreditsCall = Array(valuations.length).fill().map((_, i) =>
         call(getCredits, valuations[i].contract));
       credits = yield all(apiCreditsCall);
       credits = credits.reduce((a, b) => a + b, 0);
