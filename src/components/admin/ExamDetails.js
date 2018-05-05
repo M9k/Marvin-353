@@ -6,7 +6,7 @@ import ModalForm from '../custom/ModalForm';
 import Utils from '../custom/utils';
 import { creators as examSagaAction } from '../../sagas/ManageExamsSaga';
 
-class ExamDetails extends React.Component {
+export class ExamDetails extends React.Component {
   constructor(props) {
     super(props);
     this.showAssignTeacher = this.showAssignTeacher.bind(this);
