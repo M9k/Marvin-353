@@ -25,11 +25,20 @@ class AdminCourses extends React.Component {
     this.onChangeYear = this.onChangeYear.bind(this);
     this.tableData = this.tableData.bind(this);
   }
+
+  /**
+   * when the value in the year spinner changed
+   * the state year change with the new value
+   */
   onChangeYear() {
     if (this.state.year !== this.inputEl.value) {
       this.setState({ year: this.inputEl.value });
     }
   }
+
+  /**
+   * set the correct data in the table
+   */
   tableData() {
     if (this.state.year === 'ALL') {
       return this.props.courseList;
@@ -37,7 +46,12 @@ class AdminCourses extends React.Component {
     const year = parseInt(this.state.year, 10);
     return this.props.courseList.filter(course => course.year === year);
   }
-  // Questa funzione non può essere statica
+
+  /**
+   * redirect to a new page with all the exams of the
+   * selected course
+   * @param item - table item selected
+   */
   showExams(item) { // eslint-disable-line class-methods-use-this
     let path = document.location.pathname;
     path = path.concat(`/${item.address}/?name=${item.name}&year=${item.year}`);
