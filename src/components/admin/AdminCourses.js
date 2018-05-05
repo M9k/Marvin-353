@@ -40,7 +40,7 @@ class AdminCourses extends React.Component {
   // Questa funzione non può essere statica
   showExams(item) { // eslint-disable-line class-methods-use-this
     let path = document.location.pathname;
-    path = path.concat(`/${item.address}`);
+    path = path.concat(`/${item.address}/?name=${item.name}&year=${item.year}`);
     document.location.href = path;
   }
   render() {
