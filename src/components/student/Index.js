@@ -44,12 +44,17 @@ check how many credits you need to end and you can choose and add optional exams
   }
 }
 Index.propTypes = {
-  myCredits: PropTypes.number.isRequired,
-  graduationCredits: PropTypes.number.isRequired,
-  getCredits: PropTypes.func.isRequired,
+  myCredits: PropTypes.number,
+  graduationCredits: PropTypes.number,
+  getCredits: PropTypes.func,
   myAddress: PropTypes.string.isRequired,
 };
 
+Index.defaultProps = {
+  getCredits: () => {},
+  myCredits: 0,
+  graduationCredits: 0,
+};
 
 const mapStateToProps = state => ({
   myCredits: state.student.credits,
