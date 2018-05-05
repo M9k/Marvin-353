@@ -27,8 +27,8 @@ const StudentDuck = new Duck({
           errored: false,
           examsList: updateObjInArr(
             state.examsList,
-            obj => obj.address === action.address,
-            action.subscription,
+            obj => obj.address === action.exam.address,
+            action.exam,
           ),
         };
       case (types.SET_CREDITS):

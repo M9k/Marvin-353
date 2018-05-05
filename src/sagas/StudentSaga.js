@@ -12,7 +12,7 @@ export const ENROLL_TO_AN_EXAM = actionType('ENROLL_TO_AN_EXAM');
 export const GET_CREDITS = actionType('GET_CREDITS');
 
 
-export function* getExamsAction(action) {
+export function* getExams(action) {
   yield put(actionCreators.listIsLoading());
   try {
     let num = yield call(studentExams.getExamNumber, action.address);
@@ -66,14 +66,12 @@ export function* getExamsCredits(action) {
       contract: contracts[i],
     }));
     valuations = valuations.filter(x => x.valuation > 18); // 18 because it indicate the vote 17
-    let credits = null;
+    let credits = 0;
     if (valuations.length !== 0) {
       const apiCreditsCall = Array(valuations.length).fill().map((_, i) =>
         call(getCredits, valuations[i].contract));
       credits = yield all(apiCreditsCall);
       credits = credits.reduce((a, b) => a + b, 0);
-    } else {
-      credits = 0;
     }
     const courseContract = yield call(studentExams.getCourseContract, action.address);
     let graduationCredits = yield call(getCreditsToGraduate, courseContract);
@@ -89,13 +87,16 @@ export function* enrollToExam(action) {
     let index = yield call(studentExams.getIndexOfExam, action.addStudent, action.addExam);
     index = Number(index);
     yield call(studentExams.enrollToOptionalExam, action.addStudent, index);
-    const exam = yield call(studentExams.getExamData, action.addExam);
-    yield put(actionCreators.pushNewSubscription, exam);
+    const exam = yield call(getExamData, action.addExam);
+    const examValuation = yield call(studentExams.getExamValuationAt, action.addStudent, index);
+    exam.valutation = examValuation;
+    exam.subscription = true;
+    console.log(exam);
+    yield put(actionCreators.pushNewSubscription(exam));
   } catch (e) {
     console.log('failed to enroll to the exam');
   }
 }
-
 
 export const creators = {
   getExamsAction: address => (
@@ -111,7 +112,7 @@ export const creators = {
 
 export default function* handler() {
   yield [
-    fork(takeLatest, GET_EXAMS, getExamsAction),
+    fork(takeLatest, GET_EXAMS, getExams),
     fork(takeLatest, GET_CREDITS, getExamsCredits),
     fork(takeEvery, ENROLL_TO_AN_EXAM, enrollToExam),
   ];
