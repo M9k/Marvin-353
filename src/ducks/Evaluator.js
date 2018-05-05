@@ -20,6 +20,7 @@ const EvaluatorDuck = new Duck({
     'VOTE_ERRORED',
     'SET_VOTE',
     'SET_EXAM',
+    'SET_LIST',
   ],
   initialState: {
     loading: false,
@@ -104,6 +105,15 @@ const EvaluatorDuck = new Duck({
           code: action.code,
           course: action.course,
         };
+      case (types.SET_LIST):
+        return {
+          ...state,
+          studentList: {
+            errored: false,
+            loading: false,
+            list: ((action.list === null || action.list === undefined) ? [] : action.list),
+          },
+        };
       default:
         return state;
     }
@@ -162,6 +172,9 @@ const EvaluatorDuck = new Duck({
         code,
         course,
       }
+    ),
+    setList: list => (
+      { type: types.SET_LIST, list }
     ),
   }),
 });
