@@ -1,9 +1,9 @@
 import Index from '../admin/Index';
-import AdminCourseExams from '../admin/AdminCourseExams';
-import AdminCourses from '../admin/AdminCourses';
+import { AdminCourseExams } from '../admin/AdminCourseExams';
+import { AdminCourses } from '../admin/AdminCourses';
 import ConfirmStudents from '../admin/ConfirmStudentUser';
 import ConfirmTeachers from '../admin/ConfirmTeacherUser';
-import AdminExams from '../admin/AdminExams';
+import { AdminExams } from '../admin/AdminExams';
 import SystemUsers from '../admin/SystemUsers';
 
 const AdminRoutes = [

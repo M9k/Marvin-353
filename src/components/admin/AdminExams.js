@@ -10,7 +10,7 @@ import { ExamDetails } from './ExamDetails'; // eslint-disable-line import/no-ex
 import PageTableForm from '../template/PageTableForm';
 import Utils from '../custom/utils';
 
-class AdminExams extends React.Component {
+export class AdminExams extends React.Component {
   constructor(props) {
     super(props);
     this.props.getYears();

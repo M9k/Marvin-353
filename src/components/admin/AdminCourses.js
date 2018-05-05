@@ -11,7 +11,7 @@ import Form from '../custom/Form';
 import Utils from '../custom/utils';
 import FieldTypes from '../custom/fieldtypes';
 
-class AdminCourses extends React.Component {
+export class AdminCourses extends React.Component {
   constructor(props) {
     super(props);
     this.props.getYears();

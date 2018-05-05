@@ -10,7 +10,7 @@ import Form from '../custom/Form';
 import PageTableForm from '../template/PageTableForm';
 import { ExamDetails } from './ExamDetails';
 
-class AdminCourseExams extends React.Component {
+export class AdminCourseExams extends React.Component {
   constructor(props) {
     super(props);
     this.state = { showDetails: false };

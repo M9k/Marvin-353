@@ -43,7 +43,14 @@ describe('DetailsButton component', () => {
   let store;
   beforeEach(() => { // eslint-disable-line max-len
     store = mockStore(initialState);
-    wrapper1 = shallow(<ExamDetails object={exam1} show getTeachers={e => e} setTeacher={e => e} store={store} />); // eslint-disable-line max-len
+    wrapper1 = shallow( // eslint-disable-line function-paren-newline
+      <ExamDetails
+        object={exam1}
+        show
+        getTeachers={e => e}
+        setTeacher={e => e}
+        store={store}
+      />);
     wrapper2 = shallow(<ExamDetails object={exam2} show getTeachers={e => e} setTeacher={e => e} store={store} />); // eslint-disable-line max-len
   });
   it('Should render the component', () => {
