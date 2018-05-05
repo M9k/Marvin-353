@@ -48,6 +48,7 @@ describe('AdminCourseExams component', () => {
   });
   it('Should render the component', () => {
     assert.equal(wrapper.length, 1);
+    expect(wrapper.html().search('<h1') !== -1, true);
     expect(wrapper.find(Form)).to.have.length(1);
     expect(wrapper.find(PageTableForm)).to.have.length(1);
   });
