@@ -21,7 +21,7 @@ class TeacherExams extends React.Component {
   }
 
   /**
-   * load the exams of the currently loggedin teacher looking
+   * load the exams of the currently logged in teacher looking
    * at this address in the props
    */
   getMyAssignedExamsAddr() {

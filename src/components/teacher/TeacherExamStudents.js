@@ -50,11 +50,19 @@ class TeacherExamStudents extends React.Component {
    * the section as declared in the form
    */
   addGradeBuilder(objForm) {
+    let grade = Number(objForm.grade.value);
+    if (grade <= 30) {
+      grade += 1;
+    } else {
+      grade = 32;
+    }
+
+
     this.props.addGradeToStudent(
       this.props.myWeb3Address,
       this.examIndex,
       this.state.studentIndex,
-      objForm.grade.value,
+      grade,
     );
   }
 
@@ -128,7 +136,7 @@ function mapDispatchToProps(dispatch) {
         profAddress,
         examIndex,
         studentIndex,
-        grade <= 30 ? grade + 1 : 32,
+        grade,
       ))
     ),
   };
