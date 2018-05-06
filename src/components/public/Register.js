@@ -78,7 +78,7 @@ class Register extends React.Component {
 
         <ModalForm title="Select your course" show={this.state.viewModalCourse} >
           <Form
-            description="choose the course/degree:"
+            description="Available only CURRENT year courses, choose the right one for your desire:"
             fields={[{
               name: 'courseCode',
               label: 'Code:',
