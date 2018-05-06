@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { creators as universitySagaAction } from '../../sagas/ManageYearsSaga';
 import { creators as examSagaAction } from '../../sagas/ManageExamsSaga';
 
-import { ExamDetails } from './ExamDetails'; // eslint-disable-line import/no-extraneous-dependencies
+import ExamDetails from './ExamDetails'; // eslint-disable-line import/no-extraneous-dependencies
 import PageTableForm from '../template/PageTableForm';
 import Utils from '../custom/utils';
 
