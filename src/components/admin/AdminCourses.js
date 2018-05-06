@@ -71,7 +71,7 @@ export class AdminCourses extends React.Component {
       course.credits === credits && course.name === name && course.year === year
     ));
     if (exist.length === 0) {
-      this.props.addCourse();
+      this.props.addCourse(item);
     } else {
       this.setState({ viewErrorMessage: true });
     }
