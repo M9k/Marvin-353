@@ -10,8 +10,9 @@ import PageTableForm from '../template/PageTableForm';
 import Form from '../custom/Form';
 import Utils from '../custom/utils';
 import FieldTypes from '../custom/fieldtypes';
+import Message from '../custom/Message';
 
-class AdminCourses extends React.Component {
+export class AdminCourses extends React.Component {
   constructor(props) {
     super(props);
     this.props.getYears();
@@ -21,9 +22,14 @@ class AdminCourses extends React.Component {
       '300',
       '360',
     ];
-    this.state = { year: 'ALL' };
+    this.state = {
+      year: 'ALL',
+      viewErrorMessage: false,
+    };
     this.onChangeYear = this.onChangeYear.bind(this);
     this.tableData = this.tableData.bind(this);
+    this.validateCourse = this.validateCourse.bind(this);
+    this.closeErrorMessage = this.closeErrorMessage.bind(this);
   }
 
   /**
@@ -56,6 +62,23 @@ class AdminCourses extends React.Component {
     let path = document.location.pathname;
     path = path.concat(`/${item.address}/?name=${item.name}&year=${item.year}`);
     document.location.href = path;
+  }
+  validateCourse(item) {
+    const credits = parseInt(item.courseTotalCredits.value, 10);
+    const name = item.courseCode.value;
+    const year = parseInt(item.courseYear.value, 10);
+    const exist = this.props.courseList.filter(course => (
+      course.credits === credits && course.name === name && course.year === year
+    ));
+    if (exist.length === 0) {
+      this.props.addCourse();
+    } else {
+      this.setState({ viewErrorMessage: true });
+    }
+  }
+
+  closeErrorMessage() {
+    this.setState({ viewErrorMessage: false });
   }
   render() {
     const options = [];
@@ -96,7 +119,7 @@ class AdminCourses extends React.Component {
               validateFunction: Utils.notNullValue,
             },
           ]}
-          submitFunction={this.props.addCourse}
+          submitFunction={this.validateCourse}
         />
         <FormGroup controlId="selectYear">
           <ControlLabel>Filter by academic year</ControlLabel>
@@ -119,6 +142,12 @@ class AdminCourses extends React.Component {
             buttonType: 'primary',
           }]}
           columFilter
+        />
+        <Message
+          message="Course not added. The course already exists."
+          type="error"
+          show={this.state.viewErrorMessage}
+          onHide={this.closeErrorMessage}
         />
       </div>
     );
