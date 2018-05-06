@@ -12,7 +12,8 @@ const Index = props => (
       <Jumbotron>
         <h1>Welcome {props.userName} {props.userSurname}</h1>
         <p className="jumbotron-text">
-You are the administrator. Here you can manage all your exams and students valuations.
+You are logged in Marvin with a teacher account.
+          Here you can manage all your exams and students valuations.
               To know how much each operation costs please visit the price page.
         </p>
         <p>

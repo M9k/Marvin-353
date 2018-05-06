@@ -14,9 +14,9 @@ class Index extends React.Component {
     return (
       <div>
         <Jumbotron>
-          <h1>Welcome Student</h1>
+          <h1>Welcome {this.props.userName} {this.props.userSurname}</h1>
           <p>
-              Here you can enrol to your exams,
+You are logged in Marvin with a student account. Here you can enrol to your exams,
 check how many credits you need to end and you can choose and add optional exams to your study plan.
           </p>
           <h5>Your total credits: {this.props.myCredits}</h5>
@@ -48,18 +48,24 @@ Index.propTypes = {
   graduationCredits: PropTypes.number,
   getCredits: PropTypes.func,
   myAddress: PropTypes.string.isRequired,
+  userName: PropTypes.string,
+  userSurname: PropTypes.string,
 };
 
 Index.defaultProps = {
   getCredits: () => {},
   myCredits: 0,
   graduationCredits: 0,
+  userName: '',
+  userSurname: '',
 };
 
 const mapStateToProps = state => ({
   myCredits: state.student.credits,
   graduationCredits: state.student.graduationCredits,
   myAddress: state.user.data.contract,
+  userName: state.user.data.name,
+  userSurname: state.user.data.surname,
 });
 
 function mapDispatchToProps(dispatch) {
