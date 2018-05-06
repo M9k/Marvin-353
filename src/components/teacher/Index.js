@@ -1,16 +1,19 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Jumbotron from 'react-bootstrap/lib/Jumbotron';
 import Button from 'react-bootstrap/lib/Button';
 import CardWithIcon from '../custom/CardWithIcon';
 
-const Index = () => (
+const Index = props => (
+
   <div>
     <div>
       <Jumbotron>
-        <h1>Welcome Teacher</h1>
+        <h1>Welcome {props.userName} {props.userSurname}</h1>
         <p className="jumbotron-text">
-          Here you can manage all your exams and students valutations.
-          To know how much each operation costs please visit the price page.
+You are the administrator. Here you can manage all your exams and students valuations.
+              To know how much each operation costs please visit the price page.
         </p>
         <p>
           <Button bsStyle="primary" href="price">Price page</Button>
@@ -26,4 +29,18 @@ const Index = () => (
   </div>
 );
 
-export default Index;
+Index.propTypes = {
+  userName: PropTypes.string,
+  userSurname: PropTypes.string,
+};
+
+Index.defaultProps = {
+  userName: '',
+  userSurname: '',
+};
+const mapStateToProps = state => ({
+  userName: state.user.data.name,
+  userSurname: state.user.data.surname,
+});
+
+export default connect(mapStateToProps)(Index);
