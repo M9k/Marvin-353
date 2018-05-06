@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'; // eslint-disable-line import/no-extraneous-de
 import assert from 'assert';
 import License from '../../../src/components/public/License';
 
-describe('Help component', () => {
+describe('License component', () => {
   it('Should render the component', () => {
     const wrapper = shallow(<License />);
     assert.equal(wrapper.length, 1);

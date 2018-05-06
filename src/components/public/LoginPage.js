@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import RedirectToHome from './RedirectToHome';
 import { creators } from '../../sagas/SessionSaga';
 
-class LoginPage extends React.Component {
+export class LoginPage extends React.Component {
   componentDidMount() {
     this.props.performLogin();
   }
