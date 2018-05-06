@@ -30,6 +30,11 @@ const examList = [
   },
 ];
 
+const nextProps = {
+  examList: { examList },
+  academicYears: { academicYears },
+}
+
 describe('AdminExams component', () => {
   const initialState = {
     loading: false,
@@ -57,7 +62,7 @@ describe('AdminExams component', () => {
       />);
     wrapper2 = shallow( // eslint-disable-line function-paren-newline
       <AdminExams
-        examList={examList}
+        examList={null}
         getYears={e => e}
         getAllExams={e => e}
         academicYears={academicYears}
@@ -90,5 +95,14 @@ describe('AdminExams component', () => {
   });
   it('Should have the correct initial state', () => {
     expect(wrapper.state().showDetails).to.equal(false);
+  });
+  it('Should call componentWillReceiveProps(nextProps)', () => {
+    wrapper2.instance().componentWillReceiveProps(nextProps);
+    expect(wrapper2.state().year).to.equal(nextProps.academicYears[0]);
+  });
+  it('Should call viewDetails(item)', () => {
+    wrapper2.instance().viewDetails(examList[0]);
+    expect(wrapper2.state().showDetails).to.equal(true);
+    expect(wrapper2.state().item).to.equal(examList[0]);
   });
 });
