@@ -70,7 +70,7 @@ class Register extends React.Component {
             label: 'Role:',
             help: 'insert your desired role',
             type: FieldTypes.SELECT,
-            values: [null, 'student', 'teacher'],
+            values: ['student', 'teacher'],
             validateFunction: Utils.notNullValue,
           }]}
           submitFunction={this.addRole}

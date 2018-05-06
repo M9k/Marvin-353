@@ -10,6 +10,7 @@ class Form extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.updateStateFields = this.updateStateFields.bind(this);
     this.allValidFields = this.allValidFields.bind(this);
     this.state = { reset: false, fields: {} };
 
@@ -37,18 +38,22 @@ class Form extends React.Component {
     }
   }
 
+  updateStateFields(field, e, i) {
+    this.setState(prevState => ({
+      fields: {
+        ...prevState.fields,
+        [field.name]: { value: e, valid: field.validateFunction(e), index: i },
+      },
+    }));
+  }
+
   render() {
     const fields = [];
     this.props.fields.map((field, i) => (
       fields.push(<Field
         {...field}
         onChangeValue={(e) => {
-        this.setState({
- fields: {
- ...this.state.fields,
-   [field.name]: { value: e, valid: field.validateFunction(e), index: i },
-},
-        });
+          this.updateStateFields(field, e, i);
       }}
         reset={this.state.reset}
         key={Utils.generateKey(field.name)}

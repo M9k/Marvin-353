@@ -45,7 +45,7 @@ class Field extends React.Component {
     this.updateCurrentState = this.updateCurrentState.bind(this);
     this.getValidationState = this.getValidationState.bind(this);
     this.reset = this.reset.bind(this);
-    this.state = { value: '' };
+    this.state = { value: '', selected: 0 };
   }
 
   /**
@@ -72,7 +72,7 @@ class Field extends React.Component {
   // when I want to update the state of this field you need to change
   // the state and notifiy parent "form" component
   updateCurrentState(setTo) {
-    this.setState({ value: setTo });
+    this.setState({ value: setTo, selected: setTo });
     this.props.onChangeValue(setTo);
   }
 
@@ -89,7 +89,6 @@ class Field extends React.Component {
    * when reset props changes we reset the state value -> textbox or selected value
     */
   reset() {
-    this.setState({ value: '' });
     this.updateCurrentState('');
   }
 
@@ -109,10 +108,11 @@ class Field extends React.Component {
         ));
         break;
       case FieldTypes.SELECT:
+        options.push(<option key={Utils.generateKey('')} value={null}>{null}</option>);
         this.props.values.map(value => (
           options.push(<option key={Utils.generateKey(value)} value={value}>{value}</option>)
         ));
-        field.push(<FormControl key={Utils.generateKey(name)} componentClass="select" onChange={this.handleChange}>{options}</FormControl>);
+        field.push(<FormControl value={this.state.selected} key={Utils.generateKey(name)} componentClass="select" onChange={this.handleChange}>{options}</FormControl>);
         break;
       case FieldTypes.TEXT:
       default:

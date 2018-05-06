@@ -22,19 +22,22 @@ export class AdminCourseExams extends React.Component {
     this.addExamBuilder = this.addExamBuilder.bind(this);
     this.getExamsByAddress = this.getExamsByAddress.bind(this);
   }
+
   /**
    * get the exams of the course with the address found in the props params
    */
   getExamsByAddress() {
     this.props.getExams(this.courseAdress);
   }
+
   /**
    * build the correct params for add a new exam
    * @param objForm - value of the form field
    * of a new exam
   */
   addExamBuilder(objForm) {
-    const optional = objForm.optionalExam.value !== 'true';
+    const optional = objForm.optionalExam.value === 'yes';
+    console.log(optional, objForm.optionalExam.value);
     const array = [
       this.courseAdress,
       objForm.examName.value,
@@ -81,7 +84,7 @@ export class AdminCourseExams extends React.Component {
               name: 'optionalExam',
               label: 'Optional:',
               help: 'is the exam optional',
-              type: FieldTypes.CHECKBOX,
+              type: FieldTypes.SELECT,
               values: ['yes'],
               validateFunction: Utils.alwaysTrue,
             },
