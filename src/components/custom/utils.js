@@ -1,8 +1,12 @@
 
 class Utils {
   static generateKey(paramObj) {
-    const obj = JSON.stringify(paramObj);
-    return btoa(obj);
+    try {
+      const obj = JSON.stringify(paramObj);
+      return btoa(obj);
+    } catch (e) {
+      return paramObj.toString();
+    }
   }
 
   static existValue(e) {
