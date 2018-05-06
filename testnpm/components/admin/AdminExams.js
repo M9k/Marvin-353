@@ -33,7 +33,7 @@ const examList = [
 const nextProps = {
   examList: { examList },
   academicYears: { academicYears },
-}
+};
 
 describe('AdminExams component', () => {
   const initialState = {
