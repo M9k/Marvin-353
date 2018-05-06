@@ -123,7 +123,7 @@ class Field extends React.Component {
           onChange={this.handleChange}
           value={this.state.value}
           key={Utils.generateKey(`field${name}`)}
-          autocomplete="off"
+          autoComplete="off"
         />);
         break;
     }// switch FieldTypes
