@@ -1,4 +1,4 @@
-import Index from '../student/Index';
+import Index from '../student/Index'; // eslint-disable-line import/no-named-as-default
 import StudentExam from '../student/StudentExam';
 import OptionalExasm from '../student/OptionalExams';
 

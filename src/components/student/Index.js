@@ -6,7 +6,7 @@ import Jumbotron from 'react-bootstrap/lib/Jumbotron';
 import CardWithIcon from '../custom/CardWithIcon';
 import { creators } from '../../sagas/StudentSaga';
 
-class Index extends React.Component {
+export class Index extends React.Component {
   componentWillMount() {
     this.props.getCredits(this.props.myAddress);
   }

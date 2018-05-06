@@ -5,7 +5,7 @@ import Jumbotron from 'react-bootstrap/lib/Jumbotron';
 import Button from 'react-bootstrap/lib/Button';
 import CardWithIcon from '../custom/CardWithIcon';
 
-const Index = props => (
+export const Index = props => (
 
   <div>
     <div>
