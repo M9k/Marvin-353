@@ -8,6 +8,7 @@ import Form from '../custom/Form';
 import { creators as universitySagaAction } from '../../sagas/ManageYearsSaga';
 import PageTableForm from '../template/PageTableForm';
 import ModalForm from '../custom/ModalForm';
+import Message from '../custom/Message';
 
 class UniversityAcademic extends React.Component {
   constructor(props) {
@@ -15,7 +16,12 @@ class UniversityAcademic extends React.Component {
     this.viewDelete = this.viewDelete.bind(this);
     this.notDelete = this.notDelete.bind(this);
     this.closeDelete = this.closeDelete.bind(this);
-    this.state = { delete: false };
+    this.validateYear = this.validateYear.bind(this);
+    this.closeErrorMessage = this.closeErrorMessage.bind(this);
+    this.state = {
+      delete: false,
+      viewErrorMessage: false,
+    };
   }
 
   viewDelete(item) {
@@ -30,6 +36,20 @@ class UniversityAcademic extends React.Component {
     this.setState({ delete: false });
     this.props.deleteYears(objArr.item.year);
   }
+
+  closeErrorMessage() {
+    this.setState({ viewErrorMessage: false });
+  }
+
+  validateYear(item) {
+    const newYear = parseInt(item.year.value, 10);
+    const exist = this.props.academicYears.filter(year => year === newYear);
+    if (exist.length === 0) {
+      this.props.addYear(item);
+    } else {
+      this.setState({ viewErrorMessage: true });
+    }
+  }
   render() {
     return (
       <div>
@@ -43,7 +63,7 @@ class UniversityAcademic extends React.Component {
             type: FieldTypes.TEXT,
             validateFunction: Utils.moreThanCurrentYear,
           }]}
-          submitFunction={this.props.addYear}
+          submitFunction={this.validateYear}
         />
 
         <PageTableForm
@@ -67,6 +87,12 @@ class UniversityAcademic extends React.Component {
             Are you sure you want to delete this academic year?
           </p>
         </ModalForm>
+        <Message
+          message="Academic year not added. It already exists."
+          type="error"
+          show={this.state.viewErrorMessage}
+          onHide={this.closeErrorMessage}
+        />
       </div>
     );
   }
