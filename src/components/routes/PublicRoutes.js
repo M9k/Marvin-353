@@ -1,4 +1,4 @@
-import Index from '../public/Index';
+import Index from '../public/Index'; // eslint-disable-line import/no-named-as-default
 import Register from '../public/Register';
 import LoginPage from '../public/LoginPage';
 

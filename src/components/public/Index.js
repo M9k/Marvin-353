@@ -5,7 +5,7 @@ import { creators } from '../../sagas/SessionSaga';
 import CardWithIcon from '../custom/CardWithIcon';
 import AlertDismissable from '../custom/AlertDismissable';
 
-class Index extends React.Component {
+export class Index extends React.Component {
   constructor(props) {
     super(props);
     this.metamask = this.props.metamask;
