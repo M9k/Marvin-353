@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react';
 import { shallow } from 'enzyme/build/index';
 import { expect } from 'chai';
 import assert from 'assert';
@@ -13,3 +13,4 @@ describe('Index Teacher', () => {
     expect(wrapper.find(CardWithIcon)).to.have.length(1);
   });
 });
+*/
