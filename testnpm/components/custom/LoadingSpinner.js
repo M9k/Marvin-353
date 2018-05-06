@@ -1,7 +1,6 @@
 import React from 'react';
 // eslint-disable-next-line
 import { shallow, mount } from 'enzyme';
-import { expect } from 'chai'; // eslint-disable-line import/no-extraneous-dependencies
 import assert from 'assert';
 import LoadingSpinner from '../../../src/components/custom/LoadingSpinner';
 
