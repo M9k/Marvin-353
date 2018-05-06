@@ -85,7 +85,7 @@ export class AdminCourseExams extends React.Component {
               label: 'Optional:',
               help: 'is the exam optional',
               type: FieldTypes.SELECT,
-              values: ['yes'],
+              values: ['yes', 'no'],
               validateFunction: Utils.alwaysTrue,
             },
           ]}
