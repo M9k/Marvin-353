@@ -8,7 +8,7 @@ import FieldTypes from '../custom/fieldtypes';
 import Utils from '../custom/utils';
 import Form from '../custom/Form';
 import PageTableForm from '../template/PageTableForm';
-import ExamDetails from './ExamDetails';
+import ExamDetails from './ExamDetails'; // eslint-disable-line import/no-named-as-default
 
 export class AdminCourseExams extends React.Component {
   constructor(props) {
