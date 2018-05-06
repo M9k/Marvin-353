@@ -8,7 +8,7 @@ import FieldTypes from '../custom/fieldtypes';
 import ModalForm from '../custom/ModalForm';
 import { creators } from '../../sagas/BookingSaga';
 
-class Register extends React.Component {
+export class Register extends React.Component {
   constructor(props) {
     super(props);
     this.addRole = this.addRole.bind(this);
