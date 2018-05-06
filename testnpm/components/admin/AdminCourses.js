@@ -29,6 +29,42 @@ const academicYears = [
   2020,
 ];
 
+const objForm = {
+  courseCode: {
+    index: 0,
+    valid: 1,
+    value: 'P-44',
+  },
+  courseTotalCredits: {
+    index: 2,
+    valid: 1,
+    value: '300',
+  },
+  courseYear: {
+    index: 1,
+    valid: 1,
+    value: '2019',
+  },
+};
+
+const objForm2 = {
+  courseCode: {
+    index: 0,
+    valid: 1,
+    value: 'G-44',
+  },
+  courseTotalCredits: {
+    index: 2,
+    valid: 1,
+    value: '180',
+  },
+  courseYear: {
+    index: 1,
+    valid: 1,
+    value: '2018',
+  },
+};
+
 describe('AdminCourses component', () => {
   const initialState = {
     loading: false,
@@ -37,6 +73,9 @@ describe('AdminCourses component', () => {
     teachersList: [],
     pendingStudentsList: [],
     pendingTeachersList: [],
+  };
+  const location = {
+    pathname: '/course',
   };
   const mockStore = configureStore();
   let wrapper;
@@ -51,6 +90,7 @@ describe('AdminCourses component', () => {
         getYears={e => e}
         academicYears={academicYears}
         store={store}
+        location={location}
       />);
   });
   it('Should render the component', () => {
@@ -63,6 +103,27 @@ describe('AdminCourses component', () => {
   });
   it('Should have the correct initial state', () => {
     expect(wrapper.state().year).to.equal('ALL');
+    expect(wrapper.state().viewErrorMessage).to.equal(false);
   });
+
+  it('Should call tableData()', () => {
+    wrapper.instance().tableData();
+  });
+  it('Should call validateCourse(item) and add it', () => {
+    wrapper.instance().validateCourse(objForm);
+  });
+  it('Should call validateCourse(item) and not add it', () => {
+    wrapper.instance().validateCourse(objForm2);
+  });
+  /*
+  it('Should call showExams(item)', () => {
+    wrapper.instance().showExams(courseList[0]);
+  });
+  it('Should call onChangeYear() and change state if the year is different', () => {
+    wrapper.instance().onChangeYear();
+    // const year = 2018;
+    // expect(wrapper.state().year).to.equal(year);
+  });
+  */
 });
 

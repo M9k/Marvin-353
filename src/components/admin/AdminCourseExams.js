@@ -37,7 +37,6 @@ export class AdminCourseExams extends React.Component {
   */
   addExamBuilder(objForm) {
     const optional = objForm.optionalExam.value === 'yes';
-    console.log(optional, objForm.optionalExam.value);
     const array = [
       this.courseAdress,
       objForm.examName.value,
