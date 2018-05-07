@@ -53,15 +53,6 @@ contract Student is User {
     }
 
     /**
-    @notice Revert if there's already a valuation
-    @param _index The chosen position
-    */
-    modifier withoutValuation(uint _index) {
-        if (valuation[_index] != 0) revert();
-        _;
-    }
-
-    /**
     @notice Create a student
     @dev Student constructor
     @param _name The student's name, _surname The student's surname, _publicAddress The student's public address,
@@ -137,7 +128,7 @@ contract Student is User {
     @dev Only if there isn't already a valuation
     @param _index The correct position
     */
-    function registerValuation(uint _index, uint8 _valuation) public withoutValuation(_index)
+    function registerValuation(uint _index, uint8 _valuation) public
         byCorrectProfessor(_index) confirmedStudent enrolled(_index) {
         valuation[_index] = _valuation;
     }
