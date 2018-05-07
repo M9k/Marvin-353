@@ -62,8 +62,7 @@
       "src/sagas.js",
       "src/store.js",
       "src/web3calls/**/*.js",
-      "src/util/web3/getWeb3.js",
-      "src/util/web3/textConverter.js"
+      "src/util/web3/**/*.js"
     ],
     "report-dir": "./js-coverage",
     "all": true

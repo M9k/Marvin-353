@@ -6,6 +6,7 @@ import * as Getters from '../../../src/sagas/helpers/getters';
 import * as Exam from '../../../src/web3calls/Exam';
 import * as User from '../../../src/web3calls/User';
 import * as Course from '../../../src/web3calls/Course';
+import { NULL_ADDRESS } from '../../../src/util/web3/consts';
 
 describe('Getters', () => {
   describe('getExamData', () => {
@@ -35,6 +36,23 @@ describe('Getters', () => {
         [matchers.call.fn(Exam.getName, '0'), throwError(new Error())],
       ])
       .put('error')
+      .run());
+    it('should retrieve the correct data even without a teacher', () => expectSaga(sagaStub, Getters.getExamData, '0')
+      .provide([
+        [matchers.call.fn(Exam.getName, '0'), 'Analisi Matematica'],
+        [matchers.call.fn(Exam.getCredits, '0'), 12],
+        [matchers.call.fn(Exam.getObligatoriness, '0'), true],
+        [matchers.call.fn(Exam.getTeacherContract, '0'), NULL_ADDRESS],
+      ])
+      .put({
+        address: '0',
+        name: 'Analisi Matematica',
+        credits: 12,
+        mandatory: true,
+        teacherAddress: NULL_ADDRESS,
+        teacherName: '',
+        teacherSurname: '',
+      })
       .run());
   });
   describe('getTeacherData', () => {
