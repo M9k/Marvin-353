@@ -65,6 +65,7 @@ describe('ConfirmTeachers component', () => {
     SimpleWrapper.instance().viewConfirm(teacher);
     expect(SimpleWrapper.state().confirm).to.deep.equal(true);
     expect(SimpleWrapper.state().deny).to.deep.equal(false);
+    expect(SimpleWrapper.state().item).to.deep.equal(teacher);
   });
   it('Should have correct states value after running closeConfirm()', () => {
     SimpleWrapper.instance().closeConfirm(teacher);
@@ -75,6 +76,7 @@ describe('ConfirmTeachers component', () => {
     SimpleWrapper.instance().viewDeny(teacher);
     expect(SimpleWrapper.state().confirm).to.deep.equal(false);
     expect(SimpleWrapper.state().deny).to.deep.equal(true);
+    expect(SimpleWrapper.state().item).to.deep.equal(teacher);
   });
   it('Should have correct states value after running closeDeny()', () => {
     SimpleWrapper.instance().closeDeny(teacher);
