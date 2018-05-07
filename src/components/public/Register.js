@@ -85,7 +85,7 @@ export class Register extends React.Component {
               help: 'insert the code of the course',
               placeholder: 'A-36',
               type: FieldTypes.SELECT,
-              values: [null].concat(this.props.coursesForStudent),
+              values: this.props.coursesForStudent,
               validateFunction: Utils.notNullValue,
             }]}
             submitFunction={this.addStudent}
