@@ -1,9 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
+import configureStore from 'redux-mock-store'; // eslint-disable-line import/no-extraneous-dependencies
 import { UniversityAdmin } from '../../../src/components/university/UniversityAdmin';
-import configureStore from 'redux-mock-store';
-import PropTypes from 'prop-types';
 
 
 describe('UniversityAdmin component', () => {

@@ -1,6 +1,6 @@
 import Index from '../university/Index';
 import UniversityAcademicYears from '../university/UniversityAcademicYears';
-import UniversityAdmin from '../university/UniversityAdmin';
+import UniversityAdmin from '../university/UniversityAdmin'; // eslint-disable-line import/no-named-as-default
 
 const UniversityRoutes = [
   {
