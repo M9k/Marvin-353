@@ -24,7 +24,7 @@ describe('Session feature', () => {
   describe('login feature', () => {
     Object.keys(AccountEnum).forEach((role) => {
       const val = AccountEnum[role];
-      it(`should login correctly with ${role}`, () => expectSaga(sagas.performLogin)
+      it(`should login correctly with ${role}`, () => expectSaga(sagas.performLogin, sagas.creators.loginAction())
         .withReducer(reducer)
         .provide([
           [matchers.call.fn(getRole), val],

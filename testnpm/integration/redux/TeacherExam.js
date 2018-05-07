@@ -18,7 +18,7 @@ const failedState = {
 
 describe('TeacherExam feature', () => {
   GentlyFail(features, reducer, failedState);
-  it('should fail when the user does not have the permit', () => expectSaga(sagas.getList, { userAddres: 'nope' })
+  it('should fail when the user does not have the permit', () => expectSaga(sagas.getList, sagas.creators.getList('nope'))
     .withReducer(reducer)
     .provide([
       [matchers.call.fn(Teacher.getExamNumber, 'nope'), throwError(new Error())],
@@ -59,7 +59,7 @@ describe('TeacherExam feature', () => {
       }],
     })
     .run());
-  it('should gently fail when a single exam fail to retrive the data', () => expectSaga(sagas.getList, { userAddres: 'prof' })
+  it('should gently fail when a single exam fail to retrive the data', () => expectSaga(sagas.getList, sagas.creators.getList('prof'))
     .withReducer(reducer)
     .provide([
       [matchers.call.fn(Teacher.getExamNumber, 'prof'), 1],

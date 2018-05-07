@@ -10,7 +10,7 @@ import * as Course from '../../../src/web3calls/Course';
 import { creators as sessionCreators } from '../../../src/sagas/SessionSaga';
 
 describe('Booking feature', () => {
-  it('should retrive an empty course list when there are not courses', () => expectSaga(sagas.loadCourses, { year: 2018 })
+  it('should retrive an empty course list when there are not courses', () => expectSaga(sagas.loadCourses, sagas.creators.performLoad(2018))
     .withReducer(reducer)
     .provide([
       [matchers.call.fn(UniversityYear.getAcademicYearContractByYear, 2018), '0x0'],
@@ -27,7 +27,7 @@ describe('Booking feature', () => {
       listNames: [],
     })
     .run());
-  it('should retrive the correct course list', () => expectSaga(sagas.loadCourses, { year: 2018 })
+  it('should retrive the correct course list', () => expectSaga(sagas.loadCourses, sagas.creators.performLoad(2018))
     .withReducer(reducer)
     .provide({
       call: (effect, next) => {
@@ -52,7 +52,7 @@ describe('Booking feature', () => {
     })
     .put(creators.listIsLoading())
     .run());
-  it('should fire the reducer when performing signup fail', () => expectSaga(sagas.signUp, { name: '', surname: '', course: '' })
+  it('should fire the reducer when performing signup fail', () => expectSaga(sagas.signUp, sagas.creators.performSignUp('', '', ''))
     .withReducer(reducer)
     .provide([
       [matchers.call.fn(Session.signUp), throwError(new Error())],
@@ -72,7 +72,7 @@ describe('Booking feature', () => {
   it('should perform the login after a successfull student signup', () => (
     expectSaga(
       sagas.signUp,
-      { name: 'Mario', surname: 'Rossi', course: '0x0' },
+      sagas.creators.performSignUp('Mario', 'Rossi', '0x0'),
     )
       .provide([
         [matchers.call.fn(Session.signUp, 'Mario', 'Rossi', '0x0'), true],
@@ -83,7 +83,7 @@ describe('Booking feature', () => {
   it('should perform the login after a successfull teacher signup', () => (
     expectSaga(
       sagas.signUp,
-      { name: 'Mario', surname: 'Bianchi', course: '' },
+      sagas.creators.performSignUp('Mario', 'Rossi', ''),
     )
       .provide([
         [matchers.call.fn(Session.signUp, 'Mario', 'Bianchi', ''), true],
