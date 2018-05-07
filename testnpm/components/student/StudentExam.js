@@ -41,7 +41,7 @@ const defaultStore = {
   },
 };
 
-describe('ConfirmTeachers component', () => {
+describe('StudentExam component', () => {
   // Testing simple component
   const SimpleWrapper = shallow(<SimpleComponent
     myAddress={address}
