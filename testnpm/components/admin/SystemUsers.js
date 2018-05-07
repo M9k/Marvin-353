@@ -15,6 +15,14 @@ const add = {
   name: 'TeacherName',
   surname: 'TeacherSurname',
 };
+const item = {
+  item: {
+    contract: '0xfa429bef26906146be2438c1892f8499e217b277',
+    address: '0x1eff47bc3a10a45d4b230b5d10e37751fe6aa718',
+    name: 'TeacherName',
+    surname: 'TeacherSurname',
+  },
+};
 const roleT = ROLES.TEACHER;
 const roleS = ROLES.STUDENT;
 const teachers = [{
@@ -66,7 +74,33 @@ describe('SystemUsers component', () => {
   it('Should render the child components', () => {
     expect(SimpleWrapper.find(PageTable)).to.have.length(2);
   });
-
+  // Testing states and methods
+  it('Should have the correct initial states', () => {
+    expect(SimpleWrapper.state().deleteTeacher).to.deep.equal(false);
+    expect(SimpleWrapper.state().deleteStudent).to.deep.equal(false);
+  });
+  it('Should have correct states value after running viewDeleteTeacher()', () => {
+    SimpleWrapper.instance().viewDeleteTeacher(item);
+    expect(SimpleWrapper.state().deleteTeacher).to.deep.equal(true);
+    expect(SimpleWrapper.state().deleteStudent).to.deep.equal(false);
+    expect(SimpleWrapper.state().item).to.deep.equal(item);
+  });
+  it('Should have correct states value after running closeDeleteTeacher()', () => {
+    SimpleWrapper.instance().closeDeleteTeacher(item);
+    expect(SimpleWrapper.state().deleteTeacher).to.deep.equal(false);
+    expect(SimpleWrapper.state().deleteStudent).to.deep.equal(false);
+  });
+  it('Should have correct states value after running viewDeleteStudent()', () => {
+    SimpleWrapper.instance().viewDeleteStudent(item);
+    expect(SimpleWrapper.state().deleteTeacher).to.deep.equal(false);
+    expect(SimpleWrapper.state().deleteStudent).to.deep.equal(true);
+    expect(SimpleWrapper.state().item).to.deep.equal(item);
+  });
+  it('Should have correct states value after running closeDeleteStudent()', () => {
+    SimpleWrapper.instance().closeDeleteStudent(item);
+    expect(SimpleWrapper.state().deleteTeacher).to.deep.equal(false);
+    expect(SimpleWrapper.state().deleteStudent).to.deep.equal(false);
+  });
   // Testing container part
   it('Should connect right to the props', () => {
     const wrapper = shallowWithStore(<ContainerComponent />, defaultStore);
