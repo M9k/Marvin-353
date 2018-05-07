@@ -37,6 +37,43 @@ const state = {
   },
 };
 describe('Evaluator ducks', () => {
+  describe('assignVote', () => {
+    it('should assign the vote to the correct user', () => {
+      const currentState = Object.assign(
+        {},
+        initialState,
+        {
+          studentList: {
+            loading: false,
+            errored: false,
+            list: [
+              {
+                studentIndex: 1,
+                vote: null,
+              },
+            ],
+          },
+        },
+      );
+      expect(reducer(currentState, creators.setVote(1, 28)))
+        .to.deep.equal(Object.assign(
+          {},
+          initialState,
+          {
+            studentList: {
+              loading: false,
+              errored: false,
+              list: [
+                {
+                  studentIndex: 1,
+                  vote: 28,
+                },
+              ],
+            },
+          },
+        ));
+    });
+  });
   describe('setList', () => {
     it('should set the correct list', () => {
       expect(reducer(initialState, creators.setList([1, 2, 3])))

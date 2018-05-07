@@ -1,11 +1,11 @@
 import Duck from 'extensible-duck';
 import { copyNPush } from '../util/js_helpers';
 
-const setVote = (oldList, studentIndex, vote) => {
+const setVote = (oldList, studentIndex, assignVote) => {
   const list = Object.assign([], oldList);
   const studentId = list.findIndex(std => std.studentIndex === studentIndex);
   if (studentId === -1) return list;
-  list[studentId].vote = vote;
+  list[studentId] = Object.assign({}, list[studentId], { vote: assignVote });
   return list;
 };
 const EvaluatorDuck = new Duck({
