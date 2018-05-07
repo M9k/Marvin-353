@@ -29,7 +29,7 @@ describe('Index Student', () => {
     assert.equal(wrapper.length, 1);
     expect(wrapper.find(CardWithIcon)).to.have.length(2);
   });
-  it('Should render the correct bootsrap component', () => {
+  it('Should render the correct bootstrap component', () => {
     const wrapper = shallow(<SimpleIndex myAddress="myAddress" />);
     assert.equal(wrapper.length, 1);
     expect(wrapper.find(Jumbotron)).to.have.length(1);

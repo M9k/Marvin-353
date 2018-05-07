@@ -35,7 +35,7 @@ describe('Utils functions', () => {
     assert.equal(addr3, 1);
   });
 
-  it('should work moreThanCurrenyYear', () => {
+  it('should work moreThanCurrentYear', () => {
     const year1 = Utils.moreThanCurrentYear('');
     assert.equal(year1, 2);
     const year2 = Utils.moreThanCurrentYear((new Date()).getFullYear());
