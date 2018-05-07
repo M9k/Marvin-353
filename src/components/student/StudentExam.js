@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PageTableForm from '../template/PageTableForm';
 import { creators as studentExamSaga } from '../../sagas/StudentSaga';
 
-class StudentExam extends React.Component {
+export class StudentExam extends React.Component {
   constructor(props) {
     super(props);
     this.getExams = this.getExams.bind(this);

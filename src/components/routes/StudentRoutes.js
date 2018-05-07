@@ -1,6 +1,6 @@
 import Index from '../student/Index'; // eslint-disable-line import/no-named-as-default
-import StudentExam from '../student/StudentExam';
-import OptionalExams from '../student/OptionalExams';
+import StudentExam from '../student/StudentExam'; // eslint-disable-line import/no-named-as-default
+import OptionalExams from '../student/OptionalExams'; // eslint-disable-line import/no-named-as-default
 
 const StudentRoutes = [
   {
