@@ -36,7 +36,7 @@ export class Register extends React.Component {
     this.props.signUp(
       this.state.name,
       this.state.surname,
-      this.props.coursesContracts[courseForm.courseCode.index],
+      courseForm.courseCode.value.substring(courseForm.courseCode.value.lastIndexOf(' - ') + 3),
     );
 
     this.setState({
@@ -85,7 +85,7 @@ export class Register extends React.Component {
               help: 'insert the code of the course',
               placeholder: 'A-36',
               type: FieldTypes.SELECT,
-              values: this.props.coursesForStudent,
+              values: this.props.coursesForStudent.map((name, i) => name.concat(' - ').concat(this.props.coursesContracts[i])),
               validateFunction: Utils.notNullValue,
             }]}
             submitFunction={this.addStudent}
