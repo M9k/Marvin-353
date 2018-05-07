@@ -52,14 +52,17 @@
   },
   "nyc": {
     "include": [
-      "src/**/*.js"
+      "src/**/*.js",
+      "src/web3calls/UniversityContractSupplier.js"
     ],
     "exclude": [
       "src/index.js",
       "src/initWeb3.js",
       "src/reducers.js",
       "src/sagas.js",
-      "src/store.js"
+      "src/store.js",
+      "src/web3calls/**/*.js",
+      "src/util/web3/**/*.js"
     ],
     "report-dir": "./js-coverage",
     "all": true

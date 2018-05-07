@@ -23,6 +23,7 @@ jobs:
     - stage: test
       install:
         - npm install
+        - sudo pip install --upgrade pip
         - sudo pip install unirest
       before_script:
         - export STAGE_NAME=test

@@ -1,4 +1,5 @@
 import { call, all } from 'redux-saga/effects';
+import { NULL_ADDRESS } from '../../util/web3/consts';
 import * as User from '../../web3calls/User';
 import * as Exam from '../../web3calls/Exam';
 import * as Course from '../../web3calls/Course';
@@ -25,7 +26,7 @@ export function* getExamData(examAddress, adapter = obj => obj) {
   ];
   const [name, credits, mandatory, teacherAddress] = yield all(dataFetch);
   let teacherData;
-  if (teacherAddress === '0x0000000000000000000000000000000000000000') {
+  if (teacherAddress === NULL_ADDRESS) {
     teacherData = { name: '', surname: '' };
   } else {
     teacherData = yield call(getTeacherData, teacherAddress);
@@ -54,8 +55,6 @@ export function* getCourseData(courseAddress, adapter = obj => obj) {
 }
 export function* getCourseExamsList(courseAddress, adapter = obj => obj) {
   const courseNumber = yield call(Course.getExamNumber, courseAddress);
-  console.log('Course number');
-  console.log(courseNumber);
   const examsAddressFetch = Array(Number(courseNumber)).fill().map((_, id) => (
     call(Course.getExamContractAt, courseAddress, id)
   ));
