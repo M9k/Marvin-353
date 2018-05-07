@@ -39,7 +39,11 @@ function getExamValuationAt(address, _index) {
   console.log('Student getExamValuationAt');
   const contractInstance = getStudentContract(address);
   return contractInstance.then(instance =>
-    instance.getExamValuationAt(_index).then(Number));
+    instance.getExamValuationAt(_index).then((valuation) => {
+      let correctEvaluation = Number(valuation);
+      if (correctEvaluation !== 0) correctEvaluation -= 1;
+      return correctEvaluation;
+    }));
 }
 
 function enrollToOptionalExam(address, _index) {
