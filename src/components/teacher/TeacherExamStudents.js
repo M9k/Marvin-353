@@ -51,12 +51,8 @@ class TeacherExamStudents extends React.Component {
    */
   addGradeBuilder(objForm) {
     let grade = Number(objForm.grade.value);
-    if (grade <= 30) {
-      grade += 1;
-    } else {
-      grade = 32;
-    }
-
+    if (grade < 0) grade = 0;
+    if (grade > 30) grade = 32;
 
     this.props.addGradeToStudent(
       this.props.myWeb3Address,
