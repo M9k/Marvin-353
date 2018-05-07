@@ -20,13 +20,14 @@ describe('UniversityAdmin component', () => {
   const mockStore = configureStore();
   let wrapper;
   let store;
-  let deletedAdminAddr = '';
+  let deletedAdminAddr;
 
   function setDelete(e) {
     deletedAdminAddr = e;
   }
 
   beforeEach(() => {
+    deletedAdminAddr = '';
     store = mockStore(initialState);
     wrapper = shallow( // eslint-disable-line function-paren-newline
       <UniversityAdmin
