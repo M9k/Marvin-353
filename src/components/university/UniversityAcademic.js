@@ -10,7 +10,7 @@ import PageTableForm from '../template/PageTableForm';
 import ModalForm from '../custom/ModalForm';
 import Message from '../custom/Message';
 
-class UniversityAcademic extends React.Component {
+export class UniversityAcademic extends React.Component {
   constructor(props) {
     super(props);
     this.viewDelete = this.viewDelete.bind(this);
@@ -29,11 +29,11 @@ class UniversityAcademic extends React.Component {
   }
 
   notDelete() {
-    this.setState({ delete: false });
+    this.setState({ delete: false, item: '' });
   }
 
   closeDelete(objArr) {
-    this.setState({ delete: false });
+    this.setState({ delete: false, item: '' });
     this.props.deleteYears(objArr.item.year);
   }
 
@@ -45,7 +45,7 @@ class UniversityAcademic extends React.Component {
     const newYear = parseInt(item.year.value, 10);
     const exist = this.props.academicYears.filter(year => year === newYear);
     if (exist.length === 0) {
-      this.props.addYear(item);
+      this.props.addYear(item.year.value);
     } else {
       this.setState({ viewErrorMessage: true });
     }
@@ -112,8 +112,8 @@ const mapStateToProps = state => ({
 
 function mapDispatchToProps(dispatch) {
   return {
-    addYear: objArr => (
-      dispatch(universitySagaAction.addYear(objArr.year.value))
+    addYear: year => (
+      dispatch(universitySagaAction.addYear(year))
     ),
     getYears: () => dispatch(universitySagaAction.getAllYears()),
     deleteYears: year => dispatch(universitySagaAction.removeEmptyYear(year)),
