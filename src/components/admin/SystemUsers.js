@@ -6,7 +6,7 @@ import { creators } from '../../sagas/AdminSaga';
 import ROLES from '../../util/logic/AccountEnum';
 import ModalForm from '../custom/ModalForm';
 
-class SystemUsers extends React.Component {
+export class SystemUsers extends React.Component {
   constructor(props) {
     super(props);
     this.viewDeleteTeacher = this.viewDeleteTeacher.bind(this);

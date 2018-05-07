@@ -4,7 +4,7 @@ import AdminCourses from '../admin/AdminCourses'; // eslint-disable-line import/
 import ConfirmStudents from '../admin/ConfirmStudentUser';
 import ConfirmTeachers from '../admin/ConfirmTeacherUser';
 import AdminExams from '../admin/AdminExams'; // eslint-disable-line import/no-named-as-default
-import SystemUsers from '../admin/SystemUsers';
+import SystemUsers from '../admin/SystemUsers'; // eslint-disable-line import/no-named-as-default
 
 const AdminRoutes = [
   {
