@@ -24,7 +24,7 @@ export function* getStudentData(examAddress, studentIndex) {
     surname: studentSurname,
     studentAddress,
     studentIndex,
-    vote,
+    vote: vote === 0 ? null : vote - 1,
   }));
 }
 
