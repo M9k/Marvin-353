@@ -28,7 +28,7 @@ function registerNewVoteStudentExam(address, _examindex, _student, _valuation) {
     instance.registerNewVoteStudentExam(
       _examindex,
       _student,
-      _valuation,
+      (_valuation + 1),
       { from: web3.eth.accounts[0] },
     ));
 }

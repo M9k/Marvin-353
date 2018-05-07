@@ -24,7 +24,7 @@ export function* getStudentData(examAddress, studentIndex) {
     surname: studentSurname,
     studentAddress,
     studentIndex,
-    vote: vote === 0 ? null : vote - 1,
+    vote,
   }));
 }
 
@@ -47,8 +47,6 @@ export function* getList({ examAddress }) {
 export function* assignVote({
   userAddress, examIndex, studentIndex, vote,
 }) {
-  console.log(userAddress, examIndex, studentIndex, vote);
-
   yield put(actionCreators.voteIsLoading());
   try {
     const teacherAddress =
