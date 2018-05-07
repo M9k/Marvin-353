@@ -8,7 +8,7 @@ import PageTableForm from '../template/PageTableForm';
 import ModalForm from '../custom/ModalForm';
 import { creators as universitySagaAction } from '../../sagas/AdminEmployerSaga';
 
-class UniversityAdmin extends React.Component {
+export class UniversityAdmin extends React.Component {
   constructor(props) {
     super(props);
     this.viewDelete = this.viewDelete.bind(this);
@@ -21,11 +21,11 @@ class UniversityAdmin extends React.Component {
   }
 
   notDelete() {
-    this.setState({ delete: false });
+    this.setState({ delete: false, item: '' });
   }
 
   closeDelete(objArr) {
-    this.setState({ delete: false });
+    this.setState({ delete: false, item: '' });
     this.props.deleteAdmin(objArr.item.address);
   }
 
