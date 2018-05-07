@@ -85,7 +85,7 @@ export class AdminCourseExams extends React.Component {
               help: 'is the exam optional',
               type: FieldTypes.SELECT,
               values: ['yes', 'no'],
-              validateFunction: Utils.alwaysTrue,
+              validateFunction: Utils.notNullValue,
             },
           ]}
           submitFunction={this.addExamBuilder}
