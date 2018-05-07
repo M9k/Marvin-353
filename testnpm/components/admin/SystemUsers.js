@@ -129,4 +129,7 @@ describe('SystemUsers component', () => {
     wrapper.props().deleteTeacher(add);
     expect(store.isActionDispatched(creators.removeUserAction(roleT, add.contract))).to.be.true;
   });
+  it('Should create an instance', () => {
+    SimpleWrapper.instance().constructor();
+  });
 });
