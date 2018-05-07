@@ -1,8 +1,9 @@
 import React from 'react';
-import { shallow, render } from 'enzyme';
+import { shallow } from 'enzyme';
 import assert from 'assert';
+import { expect } from 'chai';
 import AlertDismissable from '../../../src/components/custom/AlertDismissable';
-import {expect} from "chai";
+
 
 describe('Alert dismissable component', () => {
   it('Should render the success component', () => {

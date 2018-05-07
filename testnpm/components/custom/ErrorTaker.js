@@ -1,11 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
-import assert from 'assert';
 import ErrorTaker from '../../../src/components/custom/ErrorTaker';
 
 describe('Error taker component', () => {
-
   it('renders', () => {
     const wrapper = shallow(<ErrorTaker><div>test</div></ErrorTaker>);
     expect(wrapper).to.have.length(1);
