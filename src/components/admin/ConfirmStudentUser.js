@@ -7,7 +7,7 @@ import ROLES from '../../util/logic/AccountEnum';
 import ModalForm from '../custom/ModalForm';
 
 
-class ConfirmStudent extends React.Component {
+export class ConfirmStudent extends React.Component {
   constructor(props) {
     super(props);
     this.viewConfirm = this.viewConfirm.bind(this);

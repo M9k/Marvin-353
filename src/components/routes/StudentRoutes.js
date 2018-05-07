@@ -1,6 +1,6 @@
 import Index from '../student/Index'; // eslint-disable-line import/no-named-as-default
 import StudentExam from '../student/StudentExam';
-import OptionalExasm from '../student/OptionalExams';
+import OptionalExams from '../student/OptionalExams';
 
 const StudentRoutes = [
   {
@@ -19,7 +19,7 @@ const StudentRoutes = [
     path: '/optionalexams',
     label: 'Optional Exams',
     position: 'left',
-    component: OptionalExasm,
+    component: OptionalExams,
   },
 ];
 
