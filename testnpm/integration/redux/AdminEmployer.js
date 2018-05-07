@@ -19,6 +19,7 @@ const filledState = {
 };
 describe('AdminEmployer feature', () => {
   describe('add new admin', () => {
+    // 1
     it('should succesfully add the admin provided', () => expectSaga(sagas.addAdmin, sagas.creators.addNewAdminAction('pippo'))
       .withReducer(reducer)
       .provide([
@@ -31,6 +32,7 @@ describe('AdminEmployer feature', () => {
       })
       .put(creators.listIsLoading())
       .run());
+    // 2
     it('should fail gently when add an admin that already exist', () => expectSaga(sagas.addAdmin, sagas.creators.addNewAdminAction('pippo'))
       .withReducer(reducer, filledState)
       .provide([
@@ -40,6 +42,7 @@ describe('AdminEmployer feature', () => {
       .run());
   });
   describe('remove admin', () => {
+    // 3
     it('should remove the correct admin', () => expectSaga(sagas.removeAdmin, sagas.creators.removeAdminAction('pippo'))
       .withReducer(reducer, filledState)
       .provide([
@@ -51,6 +54,7 @@ describe('AdminEmployer feature', () => {
         adminAccount: ['topolino', 'paperino'],
       })
       .run());
+    // 4
     it('shouldnt remove an admin that not exist', () => expectSaga(sagas.removeAdmin, sagas.creators.removeAdminAction('pluto'))
       .withReducer(reducer, filledState)
       .provide([
@@ -60,6 +64,7 @@ describe('AdminEmployer feature', () => {
       .run());
   });
   describe('get admin list', () => {
+    // 5
     it('should get the list', () => expectSaga(sagas.getAllAdmins, sagas.creators.getAllAdminsAction())
       .withReducer(reducer, failedState)
       .provide({

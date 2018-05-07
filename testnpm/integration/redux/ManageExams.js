@@ -98,6 +98,7 @@ const allExams = [
 ];
 
 describe('ManageExams feature', () => {
+  // 18
   it('should retrieve the list of all exams given a solar year', async () => {
     const { storeState } = await expectSaga(sagas.getAllExams, creators.getAllExamsAction(2017))
       .withReducer(ExamsReducer)
@@ -144,6 +145,7 @@ describe('ManageExams feature', () => {
       list: allExams,
     });
   });
+  // 19
   it('should retrieve the list of all exams in a course given the address', () => expectSaga(sagas.getExamsByCourse, creators.getExamsByCourseAction('001'))
     .withReducer(CourseReducer)
     .provide([
@@ -156,6 +158,7 @@ describe('ManageExams feature', () => {
     })
     .put(CourseCreators.listIsLoading())
     .run());
+  // 20
   it('should retrieve the list of all the active teachers', () => expectSaga(sagas.getTeachers, creators.getTeachers())
     .withReducer(TeacherReducer)
     .provide({
@@ -202,6 +205,7 @@ describe('ManageExams feature', () => {
     })
     .put(TeacherCreators.listIsLoading())
     .run());
+  // 21
   it('should create a new exams and notify it succed', () => expectSaga(
     sagas.addNewExam,
     creators.addNewExamAction('001', 'Sistemi Operativi', 10, true),
@@ -239,6 +243,7 @@ describe('ManageExams feature', () => {
     })
     .put(CourseCreators.listIsLoading())
     .run());
+  // 22
   it('should assign a teacher to an exam in the course exams list', () => expectSaga(
     sagas.associateProfessorToCourseExam,
     creators.associateProfessorToCourseExamAction('E02', '1'),
@@ -277,6 +282,7 @@ describe('ManageExams feature', () => {
     })
     .put(CourseCreators.listIsLoading())
     .run());
+  // 23
   it('should assing a teacher to an exam in the all exams list', () => expectSaga(
     sagas.associateProfessorToExam,
     creators.associateProfessorToExamAction('E03', '1'),

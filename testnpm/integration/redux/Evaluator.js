@@ -12,6 +12,7 @@ import * as Teacher from '../../../src/web3calls/Teacher';
 
 describe('Evaluator feature', () => {
   describe('Getting student data', () => {
+    // 11
     it('should throw an error if student does not exist', () => {
       const saga = expectSaga(sagas.getStudentData, '0x1', 0)
         .withReducer(reducer)
@@ -24,6 +25,7 @@ describe('Evaluator feature', () => {
         expect(true).to.be.true;
       });
     });
+    // 12
     it('should correctly pack all the student data when it exixsts', () => expectSaga(sagas.getStudentData, '0x1', 0)
       .withReducer(reducer, Object.assign({}, initialState, {
         studentList: {
@@ -55,6 +57,7 @@ describe('Evaluator feature', () => {
       .run());
   });
   describe('getting student list', () => {
+    // 13
     it('should gently if getting one student fail', () => expectSaga(sagas.getList, sagas.creators.getList('0x0'))
       .withReducer(reducer)
       .provide([
@@ -73,6 +76,7 @@ describe('Evaluator feature', () => {
         },
       ))
       .run());
+    // 14
     it('should correctly retrive an empty list', () => expectSaga(sagas.getList, sagas.creators.getList('0x0'))
       .withReducer(reducer)
       .provide([
@@ -80,6 +84,7 @@ describe('Evaluator feature', () => {
       ])
       .hasFinalState(initialState)
       .run());
+    // 15
     it('should correctly retrive a list', () => expectSaga(sagas.getList, '0x0')
       .provide({
         call: (effect, next) => {
@@ -95,6 +100,7 @@ describe('Evaluator feature', () => {
       .run());
   });
   describe('assign a vote', () => {
+    // 16
     it('should gently fail if some params are not correct', () => expectSaga(
       sagas.assignVote,
       sagas.creators.assignVote('0', 0, 0, 0),
@@ -108,6 +114,7 @@ describe('Evaluator feature', () => {
       ])
       .hasFinalState(Object.assign({}, initialState, { errored: true }))
       .run());
+    // 17
     it('should update the list correctly and assign the vote', () => expectSaga(
       sagas.assignVote,
       sagas.creators.assignVote('0', 1, 0, 28),

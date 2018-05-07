@@ -16,6 +16,7 @@ const failedState = {
 describe('ManageYears feature', () => {
   GentlyFail(features, reducer, failedState);
   describe('Fetching existents solar years', () => {
+    // 24
     it('should get an empty list', () => expectSaga(sagas.getAllYears, sagas.creators.getAllYears())
       .withReducer(reducer)
       .provide({
@@ -29,6 +30,7 @@ describe('ManageYears feature', () => {
       })
       .put(creators.listIsLoading())
       .run());
+    // 25
     it('should return the correct list', () => expectSaga(sagas.getAllYears, sagas.creators.getAllYears())
       .withReducer(reducer)
       .provide({
@@ -47,6 +49,7 @@ describe('ManageYears feature', () => {
       })
       .put(creators.listIsLoading())
       .run());
+    // 26
     it('should add a given year', () => expectSaga(sagas.addYear, sagas.creators.addYear(2011))
       .withReducer(reducer)
       .provide([
@@ -59,6 +62,7 @@ describe('ManageYears feature', () => {
       })
       .put(creators.listIsLoading())
       .run());
+    // 27
     it('should remove an empty year', () => expectSaga(sagas.removeEmptyYear, sagas.creators.removeEmptyYear(2011))
       .withReducer(reducer, { loading: false, errored: false, accademicYears: [2011] })
       .provide([

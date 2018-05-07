@@ -24,6 +24,7 @@ describe('Session feature', () => {
   describe('login feature', () => {
     Object.keys(AccountEnum).forEach((role) => {
       const val = AccountEnum[role];
+      // 28
       it(`should login correctly with ${role}`, () => expectSaga(sagas.performLogin, sagas.creators.loginAction())
         .withReducer(reducer)
         .provide([

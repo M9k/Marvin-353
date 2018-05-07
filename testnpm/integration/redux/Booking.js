@@ -10,6 +10,7 @@ import * as Course from '../../../src/web3calls/Course';
 import { creators as sessionCreators } from '../../../src/sagas/SessionSaga';
 
 describe('Booking feature', () => {
+  // 6
   it('should retrive an empty course list when there are not courses', () => expectSaga(sagas.loadCourses, sagas.creators.performLoad(2018))
     .withReducer(reducer)
     .provide([
@@ -27,6 +28,7 @@ describe('Booking feature', () => {
       listNames: [],
     })
     .run());
+  // 7
   it('should retrive the correct course list', () => expectSaga(sagas.loadCourses, sagas.creators.performLoad(2018))
     .withReducer(reducer)
     .provide({
@@ -52,6 +54,7 @@ describe('Booking feature', () => {
     })
     .put(creators.listIsLoading())
     .run());
+  // 8
   it('should fire the reducer when performing signup fail', () => expectSaga(sagas.signUp, sagas.creators.performSignUp('', '', ''))
     .withReducer(reducer)
     .provide([
@@ -69,6 +72,7 @@ describe('Booking feature', () => {
     })
     .put(creators.signUpLoading())
     .run());
+  // 9
   it('should perform the login after a successfull student signup', () => (
     expectSaga(
       sagas.signUp,
@@ -80,6 +84,7 @@ describe('Booking feature', () => {
       .put(sessionCreators.loginAction())
       .run()
   ));
+  // 10
   it('should perform the login after a successfull teacher signup', () => (
     expectSaga(
       sagas.signUp,

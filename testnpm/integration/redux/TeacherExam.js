@@ -18,6 +18,7 @@ const failedState = {
 
 describe('TeacherExam feature', () => {
   GentlyFail(features, reducer, failedState);
+  // 29
   it('should fail when the user does not have the permit', () => expectSaga(sagas.getList, sagas.creators.getList('nope'))
     .withReducer(reducer)
     .provide([
@@ -25,6 +26,7 @@ describe('TeacherExam feature', () => {
     ])
     .hasFinalState(failedState)
     .run());
+  // 30
   it('should throw an error when retriving exam data fail', () => {
     const saga = expectSaga(sagas.getExamData, 'nope', 0)
       .provide([
@@ -36,6 +38,7 @@ describe('TeacherExam feature', () => {
       expect(true).to.be.true;
     });
   });
+  // 31
   it('should retrive the correct single exam data', () => expectSaga(sagas.getExamData, 'prof', 0)
     .withReducer(reducer, {
       loading: true,
@@ -59,6 +62,7 @@ describe('TeacherExam feature', () => {
       }],
     })
     .run());
+  // 32
   it('should gently fail when a single exam fail to retrive the data', () => expectSaga(sagas.getList, sagas.creators.getList('prof'))
     .withReducer(reducer)
     .provide([
@@ -71,6 +75,7 @@ describe('TeacherExam feature', () => {
       list: [],
     })
     .run());
+  // 33
   it('should retrive all the exams', () => expectSaga(sagas.getList, { userAddress: 'prof' })
     .withReducer(reducer)
     .provide([
