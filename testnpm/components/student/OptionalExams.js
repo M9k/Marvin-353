@@ -62,7 +62,20 @@ describe('StudentOptionalExams component', () => {
   it('Should render the child components', () => {
     expect(SimpleWrapper.find(PageTable)).to.have.length(1);
   });
-
+  // Testing states and methods
+  it('Should have the correct initial states', () => {
+    expect(SimpleWrapper.state().select).to.deep.equal(false);
+  });
+  /* it('Should have correct states value after running viewSelect()', () => {
+    SimpleWrapper.instance().viewSelect('test');
+    expect(SimpleWrapper.state().select).to.deep.equal(true);
+    expect(SimpleWrapper.state().item).to.deep.equal('test');
+  });
+  it('Should have correct states value after running closeSelect()', () => {
+    SimpleWrapper.instance().closeSelect(item);
+    expect(SimpleWrapper.state().select).to.deep.equal(false);
+  });
+*/
   // Testing container part
   it('Should connect right to the props', () => {
     const wrapper = shallowWithStore(<ContainerComponent />, defaultStore);
