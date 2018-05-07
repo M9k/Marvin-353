@@ -3,9 +3,11 @@ import configureStore from 'redux-mock-store'; // eslint-disable-line import/no-
 import { shallow } from 'enzyme'; // eslint-disable-line import/no-extraneous-dependencies
 import assert from 'assert';
 import { expect } from 'chai'; // eslint-disable-line import/no-extraneous-dependencies
-import { Register } from '../../../src/components/public/Register';
+import ContainerComponent, { Register } from '../../../src/components/public/Register';
 import Form from '../../../src/components/custom/Form';
 import ModalForm from '../../../src/components/custom/ModalForm';
+import { creators } from '../../../src/sagas/BookingSaga';
+import { shallowWithStore, createMockStore } from '../../helpers/component-with-store';
 
 const objForm = {
   name: {
@@ -59,29 +61,27 @@ const coursesForStudent = [
   'P-44',
 ];
 
-describe('AdminCourseExams component', () => {
-  const initialState = {
+const defaultStore = {
+  signup: {
     loading: false,
     errored: false,
-    studentsList: [],
-    teachersList: [],
-    pendingStudentsList: [],
-    pendingTeachersList: [],
-  };
-  const mockStore = configureStore();
-  let wrapper;
-  let store;
-  beforeEach(() => {
-    store = mockStore(initialState);
-    wrapper = shallow( // eslint-disable-line function-paren-newline
-      <Register
-        store={store}
-        signUp={e => e}
-        getCourses={e => e}
-        coursesForStudent={coursesForStudent}
-        coursesContracts={coursesContracts}
-      />);
-  });
+    availableCourses: {
+      loading: false,
+      errored: false,
+    },
+    listAddress: coursesContracts,
+    listNames: coursesForStudent,
+  },
+};
+
+describe('AdminCourseExams component', () => {
+  const wrapper = shallow( // eslint-disable-line function-paren-newline
+    <Register
+      signUp={e => e}
+      getCourses={e => e}
+      coursesForStudent={coursesForStudent}
+      coursesContracts={coursesContracts}
+    />);
   it('Should render the component', () => {
     assert.equal(wrapper.length, 1);
     expect(wrapper.html().search('<h1') !== -1, true);
@@ -108,5 +108,19 @@ describe('AdminCourseExams component', () => {
     expect(wrapper.state().viewModalCourse).to.equal(false);
     expect(wrapper.state().name).to.equal('');
     expect(wrapper.state().surname).to.equal('');
+  });
+  it('Should connect right to the props', () => {
+    const wrapper2 = shallowWithStore(<ContainerComponent />, defaultStore);
+    expect(wrapper2.props().coursesForStudent).to.equal(coursesForStudent);
+    expect(wrapper2.props().coursesContracts).to.equal(coursesContracts);
+  });
+  it('Should fire the correct actions', () => {
+    const store = createMockStore(defaultStore);
+    const wrapper2 = shallowWithStore(<ContainerComponent />, store);
+    wrapper2.props().getCourses();
+    expect(store.isActionDispatched(creators.performLoad((new Date()).getFullYear())))
+      .to.equal(true);
+    wrapper2.props().signUp('pippo', 'pluto', null);
+    expect(store.isActionDispatched(creators.performSignUp('pippo', 'pluto', null))).to.equal(true);
   });
 });
