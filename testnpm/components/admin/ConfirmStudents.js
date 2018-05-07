@@ -57,6 +57,32 @@ describe('ConfirmTeachers component', () => {
     expect(SimpleWrapper.find(PageTable)).to.have.length(1);
   });
 
+  // Testing states and methods
+  it('Should have the correct initial states', () => {
+    expect(SimpleWrapper.state().confirm).to.deep.equal(false);
+    expect(SimpleWrapper.state().deny).to.deep.equal(false);
+  });
+  it('Should have correct states value after running viewConfirm()', () => {
+    SimpleWrapper.instance().viewConfirm(student);
+    expect(SimpleWrapper.state().confirm).to.deep.equal(true);
+    expect(SimpleWrapper.state().deny).to.deep.equal(false);
+  });
+  it('Should have correct states value after running closeConfirm()', () => {
+    SimpleWrapper.instance().closeConfirm(student);
+    expect(SimpleWrapper.state().confirm).to.deep.equal(false);
+    expect(SimpleWrapper.state().deny).to.deep.equal(false);
+  });
+  it('Should have correct states value after running viewDeny()', () => {
+    SimpleWrapper.instance().viewDeny(student);
+    expect(SimpleWrapper.state().confirm).to.deep.equal(false);
+    expect(SimpleWrapper.state().deny).to.deep.equal(true);
+  });
+  it('Should have correct states value after running closeDeny()', () => {
+    SimpleWrapper.instance().closeDeny(student);
+    expect(SimpleWrapper.state().confirm).to.deep.equal(false);
+    expect(SimpleWrapper.state().deny).to.deep.equal(false);
+  });
+
   // Testing container part
   it('Should connect right to the props', () => {
     const wrapper = shallowWithStore(<ContainerComponent />, defaultStore);
