@@ -1,5 +1,4 @@
 import React from 'react';
-import configureStore from 'redux-mock-store'; // eslint-disable-line import/no-extraneous-dependencies
 import { shallow } from 'enzyme'; // eslint-disable-line import/no-extraneous-dependencies
 import assert from 'assert';
 import { expect } from 'chai'; // eslint-disable-line import/no-extraneous-dependencies
