@@ -48,7 +48,7 @@ describe('Evaluator feature', () => {
             surname: 'Rossi',
             studentAddress: '0x0',
             studentIndex: 0,
-            vote: 23,
+            vote: 22,
           }],
         },
       }))
