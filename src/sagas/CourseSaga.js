@@ -8,32 +8,8 @@ const actionType = type => `marvin/CourseSaga/${type}`;
 
 export const GET_ALL_COURSES = actionType('GET_ALL_COURSES');
 export const ADD_NEW_COURSE = actionType('ADD_NEW_COURSE');
-export const GET_COURSES_BY_YEAR = actionType('GET_COURSES_BY_YEAR');
 
-export function* getCoursesByYear(year) { // dato un anno preciso
-  yield put(actionCreators.listIsLoading());
-  try {
-    const academicYearContract = yield call(getAcademicYearContractByYear, year);
-    let num = yield call(getCourseNumber, academicYearContract);
-    num = Number(num);
-    const apiCalls = Array(num).fill().map((_, i) => call(getCourseContractAt, i));
-    const contracts = yield all(apiCalls);
-    const apiNameCalls = Array(num).fill().map((_, i) => call(getName, contracts[i]));
-    const names = yield all(apiNameCalls);
-    const apiYearCalls = Array(num).fill().map((_, i) => call(getSolarYear, contracts[i]));
-    const years = yield all(apiYearCalls);
-    const courses = Array(num).fill().map((_, i) => ({
-      name: names[i],
-      year: years[i],
-    }));
-    yield put(actionCreators.setCoursesByYearList(courses));
-  } catch (e) {
-    console.log('Failed!');
-    yield put(actionCreators.listHasErrored());
-  }
-}
-
-export function* getAllCourses() {
+export function* getCourses() {
   yield put(actionCreators.listIsLoading());
   try {
     let num = yield call(getAcademicYearNumber);
@@ -48,6 +24,7 @@ export function* getAllCourses() {
       Array(numberOfCourses[i]).fill().map((_2, j) =>
         call(getCourseContractAt, YearContracts[i], j))).flatten();
     const CourseContracts = yield all(apiCourseContractsCall);
+    console.log(CourseContracts);
     const apiNameCall = Array(CourseContracts.length).fill().map((_, i) =>
       call(getName, CourseContracts[i]));
     const names = yield all(apiNameCall);
@@ -76,6 +53,7 @@ export function* addCourse(action) {
   try {
     const contract = yield call(getAcademicYearContractByYear, action.year);
     yield call(addNewCourse, contract, action.name, action.credits);
+    yield put(actionCreators.pushNewCourse());
   } catch (e) {
     console.log('Failed!');
     yield put(actionCreators.listHasErrored());
@@ -91,15 +69,11 @@ export const creators = {
       type: ADD_NEW_COURSE, year, name, credits,
     }
   ),
-  getCoursesByYear: year => (
-    { type: GET_COURSES_BY_YEAR, year }
-  ),
 };
 
 export default function* handler() {
   yield [
     fork(takeEvery, ADD_NEW_COURSE, addCourse),
-    fork(takeLatest, GET_ALL_COURSES, getAllCourses),
-    fork(takeLatest, GET_COURSES_BY_YEAR, getCoursesByYear),
+    fork(takeLatest, GET_ALL_COURSES, getCourses),
   ];
 }

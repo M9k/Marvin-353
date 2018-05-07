@@ -1,16 +1,13 @@
 import Duck from 'extensible-duck';
-import { copyNPush } from '../util/js_helpers';
-// , copyNPop, ORDERING
 
 const CourseDuck = new Duck({
   namespace: 'marvin',
   store: 'Course',
-  types: ['PUSH_NEW_COURSE', 'SET_COURSES_LIST', 'SET_COURSES_BY_YEAR_LIST', 'SET_EXAMS_LIST', 'LIST_LOADING', 'LIST_ERRORED'],
+  types: ['PUSH_NEW_COURSE', 'SET_COURSES_LIST', 'SET_EXAMS_LIST', 'LIST_LOADING', 'LIST_ERRORED'],
   initialState: {
     loading: false,
     errored: false,
     coursesList: [],
-    coursesListByYear: [],
   },
 
   reducer: (state, action, duck) => {
@@ -20,20 +17,12 @@ const CourseDuck = new Duck({
       case (types.PUSH_NEW_COURSE):
         return {
           ...state,
-          coursesList: copyNPush(state.coursesList, action.course),
           loading: false,
         };
       case (types.SET_COURSES_LIST):
         return {
           ...state,
           coursesList: action.course,
-          loading: false,
-          errored: false,
-        };
-      case (types.SET_COURSES_BY_YEAR_LIST):
-        return {
-          ...state,
-          coursesListByYear: action.course,
           loading: false,
           errored: false,
         };
@@ -58,11 +47,8 @@ const CourseDuck = new Duck({
     setCoursesList: course => (
       { type: duck.types.SET_COURSES_LIST, course }
     ),
-    setCoursesByYearList: course => (
-      { type: duck.types.SET_COURSES_BY_YEAR_LIST, course }
-    ),
-    pushNewCourse: course => (
-      { type: duck.types.PUSH_NEW_COURSE, course }
+    pushNewCourse: () => (
+      { type: duck.types.PUSH_NEW_COURSE }
     ),
     listIsLoading: () => (
       { type: duck.types.LIST_LOADING }
