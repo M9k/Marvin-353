@@ -101,7 +101,4 @@ describe('ConfirmTeachers component', () => {
     expect(store.isActionDispatched(creators.approveUserAction(role, contract))).to.be.true;
     expect(store.isActionDispatched(creators.denyUserAction(role, contract))).to.be.true;
   });
-  it('Should create an instance', () => {
-    SimpleWrapper.instance().constructor();
-  });
 });
