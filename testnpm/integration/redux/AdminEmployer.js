@@ -55,7 +55,7 @@ describe('AdminEmployer feature', () => {
       })
       .run());
     // 4
-    it('shouldnt remove an admin that not exist', () => expectSaga(sagas.removeAdmin, sagas.creators.removeAdminAction('pluto'))
+    it('shouldnt remove an admin that does not exist', () => expectSaga(sagas.removeAdmin, sagas.creators.removeAdminAction('pluto'))
       .withReducer(reducer, filledState)
       .provide([
         [matchers.call.fn(UniversityAdmin.removeAdmin), true],
