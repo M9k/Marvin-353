@@ -1,6 +1,6 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import { expect } from 'chai';
+import { shallow } from 'enzyme'; // eslint-disable-line import/no-extraneous-dependencies
+import { expect } from 'chai'; // eslint-disable-line import/no-extraneous-dependencies
 import ErrorTaker from '../../../src/components/custom/ErrorTaker';
 
 describe('Error taker component', () => {
@@ -13,5 +13,10 @@ describe('Error taker component', () => {
     wrapper.setState({ hasError: true });
     expect(wrapper.find('h3').text()).to.equal('Sorry, something went wrong somewhere');
     expect(wrapper.find('p').text()).to.equal('We are working to solve this issue.');
+  });
+  it('Should call componentDidCatch(error, info) and change state', () => {
+    const wrapper = shallow(<ErrorTaker>test</ErrorTaker>);
+    wrapper.instance().componentDidCatch('error', 'info');
+    expect(wrapper.state().hasError).to.equal(true);
   });
 });
