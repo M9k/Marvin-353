@@ -1,5 +1,4 @@
 import { expectSaga } from 'redux-saga-test-plan';
-import { throwError } from 'redux-saga-test-plan/providers';
 import reducer, { creators } from '../../../src/ducks/Admin';
 import * as sagas from '../../../src/sagas/AdminSaga';
 import * as User from '../../../src/web3calls/User';
@@ -7,52 +6,6 @@ import * as Students from '../../../src/web3calls/UniversityStudent';
 import { getCourseContract } from '../../../src/web3calls/Student';
 import { getName } from '../../../src/web3calls/Course';
 import * as Teachers from '../../../src/web3calls/UniversityTeacher';
-import ROLES from '../../../src/util/logic/AccountEnum';
-import * as matchers from "redux-saga-test-plan/matchers";
-
-const failedState = {
-  loading: false,
-  errored: true,
-  studentsList: [],
-  teachersList: [],
-  pendingStudentsList: [],
-  pendingTeachersList: [],
-};
-
-const filledState = {
-  loading: false,
-  errored: false,
-  studentsList: [
-    {
-      contract: 'contratto1',
-      address: 'indirizzo1',
-      name: 'pippo',
-      surname: 'inzaghi',
-      course: 'farmacia',
-    }],
-  teachersList: [
-    {
-      contract: 'contratto2',
-      address: 'indirizzo2',
-      name: 'fabio',
-      surname: 'cannavaro',
-    }],
-  pendingStudentsList: [
-    {
-      contract: 'contratto3',
-      address: 'indirizzo3',
-      name: 'gianluca',
-      surname: 'zambrotta',
-      course: 'informatica',
-    }],
-  pendingTeachersList: [
-    {
-      contract: 'contratto4',
-      address: 'indirizzo4',
-      name: 'rino',
-      surname: 'gattuso',
-    }],
-};
 
 describe('Admin lists', () => {
   it('should get all the students', () => expectSaga(sagas.getAllStudents, sagas.creators.getAllStudentsAction())
