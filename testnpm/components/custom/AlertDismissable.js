@@ -31,7 +31,7 @@ describe('Alert dismissable component', () => {
     expect(wrapper.find('p').text()).to.equal('test');
   });
   it('Should render the component with null title', () => {
-    const wrapper = shallow(<AlertDismissable message="test" type='other' />);
+    const wrapper = shallow(<AlertDismissable message="test" type="other" />);
     assert.equal(wrapper.length, 1);
     expect(wrapper.find('h4').text()).to.equal('');
     expect(wrapper.find('p').text()).to.equal('test');
