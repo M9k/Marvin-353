@@ -27,7 +27,7 @@ describe('TeacherExam feature', () => {
     .hasFinalState(failedState)
     .run());
   // 30
-  it('should throw an error when retriving exam data fail', () => {
+  it('should throw an error when retrieving exam data fail', () => {
     const saga = expectSaga(sagas.getExamData, 'nope', 0)
       .provide([
         [matchers.call.fn(Teacher.getExamContractAt, 'nope', '0'), throwError(new Error())],
@@ -63,7 +63,7 @@ describe('TeacherExam feature', () => {
     })
     .run());
   // 32
-  it('should gently fail when a single exam fail to retrive the data', () => expectSaga(sagas.getList, sagas.creators.getList('prof'))
+  it('should gently fail when a single exam fail to retrieve the data', () => expectSaga(sagas.getList, sagas.creators.getList('prof'))
     .withReducer(reducer)
     .provide([
       [matchers.call.fn(Teacher.getExamNumber, 'prof'), 1],
@@ -76,7 +76,7 @@ describe('TeacherExam feature', () => {
     })
     .run());
   // 33
-  it('should retrive all the exams', () => expectSaga(sagas.getList, { userAddress: 'prof' })
+  it('should retrieve all the exams', () => expectSaga(sagas.getList, { userAddress: 'prof' })
     .withReducer(reducer)
     .provide([
       [matchers.call.fn(Teacher.getExamNumber, 'prof'), 0],

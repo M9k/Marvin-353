@@ -73,7 +73,7 @@ describe('Booking feature', () => {
     .put(creators.signUpLoading())
     .run());
   // 9
-  it('should perform the login after a successfull student signup', () => (
+  it('should perform the login after a successful student signup', () => (
     expectSaga(
       sagas.signUp,
       sagas.creators.performSignUp('Mario', 'Rossi', '0x0'),
@@ -85,7 +85,7 @@ describe('Booking feature', () => {
       .run()
   ));
   // 10
-  it('should perform the login after a successfull teacher signup', () => (
+  it('should perform the login after a successful teacher signup', () => (
     expectSaga(
       sagas.signUp,
       sagas.creators.performSignUp('Mario', 'Rossi', ''),

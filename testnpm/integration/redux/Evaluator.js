@@ -26,7 +26,7 @@ describe('Evaluator feature', () => {
       });
     });
     // 12
-    it('should correctly pack all the student data when it exixsts', () => expectSaga(sagas.getStudentData, '0x1', 0)
+    it('should correctly pack all the student data when it exists', () => expectSaga(sagas.getStudentData, '0x1', 0)
       .withReducer(reducer, Object.assign({}, initialState, {
         studentList: {
           errored: false,
@@ -77,7 +77,7 @@ describe('Evaluator feature', () => {
       ))
       .run());
     // 14
-    it('should correctly retrive an empty list', () => expectSaga(sagas.getList, sagas.creators.getList('0x0'))
+    it('should correctly retrieve an empty list', () => expectSaga(sagas.getList, sagas.creators.getList('0x0'))
       .withReducer(reducer)
       .provide([
         [matchers.call.fn(Exam.getEnrolledNumber, '0x0'), 0],
@@ -85,7 +85,7 @@ describe('Evaluator feature', () => {
       .hasFinalState(initialState)
       .run());
     // 15
-    it('should correctly retrive a list', () => expectSaga(sagas.getList, '0x0')
+    it('should correctly retrieve a list', () => expectSaga(sagas.getList, '0x0')
       .provide({
         call: (effect, next) => {
           if (effect.fn === Exam.getEnrolledNumber) return 2;

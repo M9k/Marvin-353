@@ -206,7 +206,7 @@ describe('ManageExams feature', () => {
     .put(TeacherCreators.listIsLoading())
     .run());
   // 21
-  it('should create a new exams and notify it succed', () => expectSaga(
+  it('should create a new exams and notify its success', () => expectSaga(
     sagas.addNewExam,
     creators.addNewExamAction('001', 'Sistemi Operativi', 10, true),
   )
@@ -283,7 +283,7 @@ describe('ManageExams feature', () => {
     .put(CourseCreators.listIsLoading())
     .run());
   // 23
-  it('should assing a teacher to an exam in the all exams list', () => expectSaga(
+  it('should assign a teacher to an exam in the all exams list', () => expectSaga(
     sagas.associateProfessorToExam,
     creators.associateProfessorToExamAction('E03', '1'),
   )
