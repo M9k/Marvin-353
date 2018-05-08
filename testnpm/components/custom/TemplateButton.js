@@ -1,7 +1,7 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme'; // eslint-disable-line import/no-extraneous-dependencies
 import assert from 'assert';
-import { expect } from 'chai';
+import { expect } from 'chai'; // eslint-disable-line import/no-extraneous-dependencies
 import { Button } from 'react-bootstrap';
 import TemplateButton from '../../../src/components/custom/TemplateButton';
 
@@ -24,5 +24,14 @@ describe('TemplateButton component', () => {
     expect(wrapper.props().text).to.equal('Text');
     expect(wrapper.props().type).to.equal('danger');
     expect(wrapper.props().clickFunction('returnTestF')).to.equal('returnTestF');
+  });
+  it('Should call handleClick()', () => {
+    const wrapper = mount(<TemplateButton
+      clickFunction={e => e}
+      objectToWorkOn="test"
+      text="Text"
+      type="danger"
+    />);
+    wrapper.instance().handleClick();
   });
 });

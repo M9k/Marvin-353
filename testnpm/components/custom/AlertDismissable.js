@@ -1,7 +1,7 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow } from 'enzyme'; // eslint-disable-line import/no-extraneous-dependencies
 import assert from 'assert';
-import { expect } from 'chai';
+import { expect } from 'chai'; // eslint-disable-line import/no-extraneous-dependencies
 import AlertDismissable from '../../../src/components/custom/AlertDismissable';
 
 
@@ -29,6 +29,17 @@ describe('Alert dismissable component', () => {
     assert.equal(wrapper.length, 1);
     expect(wrapper.find('h4').text()).to.equal('Info!');
     expect(wrapper.find('p').text()).to.equal('test');
+  });
+  it('Should render the component with null title', () => {
+    const wrapper = shallow(<AlertDismissable message="test" type='other' />);
+    assert.equal(wrapper.length, 1);
+    expect(wrapper.find('h4').text()).to.equal('');
+    expect(wrapper.find('p').text()).to.equal('test');
+  });
+  it('Should call handleDismiss() and change state', () => {
+    const wrapper = shallow(<AlertDismissable message="test" type="info" />);
+    wrapper.instance().handleDismiss();
+    expect(wrapper.state().show).to.equal(false);
   });
 });
 
