@@ -22,14 +22,12 @@ export function* getExams(action) {
     const examsContract = yield all(apiExamContractCall);
     const apiExamDataCall = Array(num).fill().map((_, i) => call(getExamData, examsContract[i]));
     const examsData = yield all(apiExamDataCall);
-    // console.log(examsData);
     const apiExamValuationCall = Array(num).fill().map((_, i) =>
       call(studentExams.getExamValuationAt, action.address, i));
     const examsValuation = (yield all(apiExamValuationCall)).map(x => (x === 0 ? null : x - 1));
     const apiExamSubscriptionCall = Array(num).fill().map((_, i) =>
       call(studentExams.getExamSubscriptionAt, action.address, i));
     const examsSubscription = yield all(apiExamSubscriptionCall);
-    // console.log(examsValuation);
 
     const personalExamsData = Array(num).fill().map((_, i) => ({
       address: examsData[i].address,
@@ -42,8 +40,6 @@ export function* getExams(action) {
       valuation: examsValuation[i],
       subscription: examsSubscription[i],
     }));
-    // console.log(personalExamsData);
-
     yield put(actionCreators.setExams(personalExamsData));
   } catch (e) {
     console.log('failed to get enrolled list');
@@ -79,6 +75,7 @@ export function* getExamsCredits(action) {
     yield put(actionCreators.setCredits(credits, graduationCredits));
   } catch (e) {
     console.log('failed to get credits');
+    yield put(actionCreators.listHasErrored());
   }
 }
 
@@ -89,12 +86,13 @@ export function* enrollToExam(action) {
     yield call(studentExams.enrollToOptionalExam, action.addStudent, index);
     const exam = yield call(getExamData, action.addExam);
     const examValuation = yield call(studentExams.getExamValuationAt, action.addStudent, index);
-    exam.valutation = examValuation;
+    exam.valuation = examValuation;
     exam.subscription = true;
     console.log(exam);
     yield put(actionCreators.pushNewSubscription(exam));
   } catch (e) {
     console.log('failed to enroll to the exam');
+    yield put(actionCreators.listHasErrored());
   }
 }
 
