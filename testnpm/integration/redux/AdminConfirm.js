@@ -8,8 +8,6 @@ import { getCourseContract } from '../../../src/web3calls/Student';
 import { getName } from '../../../src/web3calls/Course';
 import * as Teachers from '../../../src/web3calls/UniversityTeacher';
 import ROLES from '../../../src/util/logic/AccountEnum';
-import * as matchers from "redux-saga-test-plan/matchers";
-import * as UniversityAdmin from "../../../src/web3calls/UniversityAdmin";
 
 const failedState = {
   loading: false,

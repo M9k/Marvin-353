@@ -1,24 +1,11 @@
 import { expectSaga } from 'redux-saga-test-plan';
-import { throwError } from 'redux-saga-test-plan/providers';
-import reducer, { creators } from '../../../src/ducks/Admin';
+import * as matchers from 'redux-saga-test-plan/matchers';
+import reducer from '../../../src/ducks/Admin';
 import * as sagas from '../../../src/sagas/AdminSaga';
-import * as User from '../../../src/web3calls/User';
 import * as Students from '../../../src/web3calls/UniversityStudent';
-import { getCourseContract } from '../../../src/web3calls/Student';
-import { getName } from '../../../src/web3calls/Course';
 import * as Teachers from '../../../src/web3calls/UniversityTeacher';
 import ROLES from '../../../src/util/logic/AccountEnum';
-import * as matchers from "redux-saga-test-plan/matchers";
-import * as UniversityAdmin from "../../../src/web3calls/UniversityAdmin";
 
-const failedState = {
-  loading: false,
-  errored: true,
-  studentsList: [],
-  teachersList: [],
-  pendingStudentsList: [],
-  pendingTeachersList: [],
-};
 
 const filledState = {
   loading: false,
