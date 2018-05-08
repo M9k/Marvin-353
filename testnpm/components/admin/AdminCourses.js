@@ -1,12 +1,14 @@
 import React from 'react';
-import configureStore from 'redux-mock-store'; // eslint-disable-line import/no-extraneous-dependencies
 import { shallow } from 'enzyme'; // eslint-disable-line import/no-extraneous-dependencies
 import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 import assert from 'assert';
 import { expect } from 'chai'; // eslint-disable-line import/no-extraneous-dependencies
-import { AdminCourses } from '../../../src/components/admin/AdminCourses';
+import ContainerComponent, { AdminCourses } from '../../../src/components/admin/AdminCourses';
 import Form from '../../../src/components/custom/Form';
 import PageTableForm from '../../../src/components/template/PageTableForm';
+import { creators as universitySagaAction } from '../../../src/sagas/ManageYearsSaga';
+import { creators as courseSagaAction } from '../../../src/sagas/CourseSaga';
+import { shallowWithStore, createMockStore } from '../../helpers/component-with-store';
 
 const courseList = [
   {
@@ -65,35 +67,33 @@ const objForm2 = {
   },
 };
 
-describe('AdminCourses component', () => {
-  const initialState = {
+const defaultStore = {
+  course: {
     loading: false,
     errored: false,
-    studentsList: [],
-    teachersList: [],
-    pendingStudentsList: [],
-    pendingTeachersList: [],
-  };
-  const location = {
-    pathname: '/course',
-  };
-  const mockStore = configureStore();
-  let wrapper;
-  let store;
-  beforeEach(() => {
-    store = mockStore(initialState);
-    wrapper = shallow( // eslint-disable-line function-paren-newline
+    coursesList: courseList,
+  },
+  manageYears: {
+    loading: false,
+    errored: false,
+    accademicYears: academicYears,
+  },
+};
+const location = {
+  pathname: '/course',
+};
+
+describe('AdminCourses component', () => {
+  it('Should render the component', () => {
+    const wrapper = shallow( // eslint-disable-line function-paren-newline
       <AdminCourses
         addCourse={e => e}
         getCourses={e => e}
         courseList={courseList}
         getYears={e => e}
         academicYears={academicYears}
-        store={store}
         location={location}
       />);
-  });
-  it('Should render the component', () => {
     assert.equal(wrapper.length, 1);
     expect(wrapper.find(Form)).to.have.length(1);
     expect(wrapper.find(FormGroup)).to.have.length(1);
@@ -102,28 +102,75 @@ describe('AdminCourses component', () => {
     expect(wrapper.find(PageTableForm)).to.have.length(1);
   });
   it('Should have the correct initial state', () => {
+    const wrapper = shallow( // eslint-disable-line function-paren-newline
+      <AdminCourses
+        addCourse={e => e}
+        getCourses={e => e}
+        courseList={courseList}
+        getYears={e => e}
+        academicYears={academicYears}
+        location={location}
+      />);
     expect(wrapper.state().year).to.equal('ALL');
     expect(wrapper.state().viewErrorMessage).to.equal(false);
   });
 
   it('Should call tableData()', () => {
+    const wrapper = shallow( // eslint-disable-line function-paren-newline
+      <AdminCourses
+        addCourse={e => e}
+        getCourses={e => e}
+        courseList={courseList}
+        getYears={e => e}
+        academicYears={academicYears}
+        location={location}
+      />);
     wrapper.instance().tableData();
   });
   it('Should call validateCourse(item) and add it', () => {
+    const wrapper = shallow( // eslint-disable-line function-paren-newline
+      <AdminCourses
+        addCourse={e => e}
+        getCourses={e => e}
+        courseList={courseList}
+        getYears={e => e}
+        academicYears={academicYears}
+        location={location}
+      />);
     wrapper.instance().validateCourse(objForm);
   });
   it('Should call validateCourse(item) and not add it', () => {
+    const wrapper = shallow( // eslint-disable-line function-paren-newline
+      <AdminCourses
+        addCourse={e => e}
+        getCourses={e => e}
+        courseList={courseList}
+        getYears={e => e}
+        academicYears={academicYears}
+        location={location}
+      />);
     wrapper.instance().validateCourse(objForm2);
   });
-  /*
-  it('Should call showExams(item)', () => {
-    wrapper.instance().showExams(courseList[0]);
+  it('Should connect right to the props', () => {
+    const wrapper = shallowWithStore(<ContainerComponent />, defaultStore);
+    expect(wrapper.props().academicYears).to.deep.equal(academicYears);
+    expect(wrapper.props().courseList).to.deep.equal(courseList);
   });
-  it('Should call onChangeYear() and change state if the year is different', () => {
-    wrapper.instance().onChangeYear();
-    // const year = 2018;
-    // expect(wrapper.state().year).to.equal(year);
+  it('Should fire the correct actions', () => {
+    const store = createMockStore(defaultStore);
+    const wrapper = shallowWithStore(<ContainerComponent />, store);
+    wrapper.props().addCourse(objForm);
+    wrapper.props().getCourses();
+    wrapper.props().getYears();
+    expect(store.isActionDispatched(courseSagaAction.addNewCourse(
+      objForm.courseYear.value,
+      objForm.courseCode.value,
+      objForm.courseTotalCredits.value,
+    ))).to.equal(true);
+    expect(store.isActionDispatched(courseSagaAction.getAllCourses()))
+      .to.equal(true);
+    expect(store.isActionDispatched(universitySagaAction.getAllYears()))
+      .to.equal(true);
   });
-  */
 });
 
