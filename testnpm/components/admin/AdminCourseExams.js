@@ -133,13 +133,19 @@ describe('AdminCourseExams component', () => {
     wrapper.instance().getExamsByAddress();
   });
   it('Should connect right to the props', () => {
-    const wrapper = shallowWithStore(<ContainerComponent />, defaultStore);
+    const wrapper = shallowWithStore(<ContainerComponent
+      params={params}
+      location={location}
+    />, defaultStore);
     expect(wrapper.props().academicYears).to.deep.equal([2018, 2019, 2020]);
     expect(wrapper.props().examList).to.deep.equal([exam]);
   });
   it('Should fire the correct actions', () => {
     const store = createMockStore(defaultStore);
-    const wrapper = shallowWithStore(<ContainerComponent />, store);
+    const wrapper = shallowWithStore(<ContainerComponent
+      params={params}
+      location={location}
+    />, store);
     wrapper.props().addExam(array);
     wrapper.props().getExams(array[0]);
     expect(store.isActionDispatched(examSagaAction.addNewExamAction(

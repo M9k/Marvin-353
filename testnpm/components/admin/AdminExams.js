@@ -1,11 +1,13 @@
 import React from 'react';
-import configureStore from 'redux-mock-store'; // eslint-disable-line import/no-extraneous-dependencies
 import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 import { shallow } from 'enzyme'; // eslint-disable-line import/no-extraneous-dependencies
 import assert from 'assert';
 import { expect } from 'chai'; // eslint-disable-line import/no-extraneous-dependencies
-import { AdminExams } from '../../../src/components/admin/AdminExams';
+import ContainerComponent, { AdminExams } from '../../../src/components/admin/AdminExams';
 import PageTableForm from '../../../src/components/template/PageTableForm';
+import { creators as universitySagaAction } from '../../../src/sagas/ManageYearsSaga';
+import { creators as examSagaAction } from '../../../src/sagas/ManageExamsSaga';
+import { shallowWithStore, createMockStore } from '../../helpers/component-with-store';
 
 const academicYears = [
   2018,
@@ -35,22 +37,22 @@ const nextProps = {
   academicYears: { academicYears },
 };
 
-describe('AdminExams component', () => {
-  const initialState = {
+const defaultStore = {
+  manageYears: {
     loading: false,
     errored: false,
-    studentsList: [],
-    teachersList: [],
-    pendingStudentsList: [],
-    pendingTeachersList: [],
-  };
-  const mockStore = configureStore();
-  let wrapper;
-  let wrapper2;
-  let store;
-  beforeEach(() => {
-    store = mockStore(initialState);
-    wrapper = shallow( // eslint-disable-line function-paren-newline
+    accademicYears: academicYears,
+  },
+  exams: {
+    errored: false,
+    loading: false,
+    list: examList,
+  },
+};
+
+describe('AdminExams component', () => {
+  it('Should render the component', () => {
+    const wrapper = shallow( // eslint-disable-line function-paren-newline
       <AdminExams
         examList={examList}
         getYears={e => e}
@@ -58,20 +60,7 @@ describe('AdminExams component', () => {
         academicYears={academicYears}
         yearLoading={false}
         listLoading={false}
-        store={store}
       />);
-    wrapper2 = shallow( // eslint-disable-line function-paren-newline
-      <AdminExams
-        examList={null}
-        getYears={e => e}
-        getAllExams={e => e}
-        academicYears={academicYears}
-        yearLoading={false}
-        listLoading
-        store={store}
-      />);
-  });
-  it('Should render the component', () => {
     assert.equal(wrapper.length, 1);
     expect(wrapper.find(FormGroup)).to.have.length(1);
     expect(wrapper.find(ControlLabel)).to.have.length(1);
@@ -79,6 +68,15 @@ describe('AdminExams component', () => {
     expect(wrapper.find(PageTableForm)).to.have.length(1);
   });
   it('Should non render the table if the table is not loading', () => {
+    const wrapper2 = shallow( // eslint-disable-line function-paren-newline
+      <AdminExams
+        examList={null}
+        getYears={e => e}
+        getAllExams={e => e}
+        academicYears={academicYears}
+        yearLoading={false}
+        listLoading
+      />);
     assert.equal(wrapper2.length, 1);
     expect(wrapper2.find(FormGroup)).to.have.length(1);
     expect(wrapper2.find(ControlLabel)).to.have.length(1);
@@ -86,23 +84,76 @@ describe('AdminExams component', () => {
     expect(wrapper2.find(PageTableForm)).to.have.length(0);
   });
   it('Should non render the year options if the year list is not loading', () => {
+    const wrapper2 = shallow( // eslint-disable-line function-paren-newline
+      <AdminExams
+        examList={null}
+        getYears={e => e}
+        getAllExams={e => e}
+        academicYears={academicYears}
+        yearLoading={false}
+        listLoading
+      />);
     assert.equal(wrapper2.length, 1);
     expect(wrapper2.find(FormGroup)).to.have.length(1);
     expect(wrapper2.find(ControlLabel)).to.have.length(1);
     expect(wrapper2.find(FormControl)).to.have.length(1);
     expect(wrapper2.find(PageTableForm)).to.have.length(0);
-    expect(wrapper.html().search('<options') !== -1, false);
+    expect(wrapper2.html().search('<options') !== -1, false);
   });
   it('Should have the correct initial state', () => {
+    const wrapper = shallow( // eslint-disable-line function-paren-newline
+      <AdminExams
+        examList={examList}
+        getYears={e => e}
+        getAllExams={e => e}
+        academicYears={academicYears}
+        yearLoading={false}
+        listLoading={false}
+      />);
     expect(wrapper.state().showDetails).to.equal(false);
   });
   it('Should call componentWillReceiveProps(nextProps)', () => {
+    const wrapper2 = shallow( // eslint-disable-line function-paren-newline
+      <AdminExams
+        examList={null}
+        getYears={e => e}
+        getAllExams={e => e}
+        academicYears={academicYears}
+        yearLoading={false}
+        listLoading
+      />);
     wrapper2.instance().componentWillReceiveProps(nextProps);
     expect(wrapper2.state().year).to.equal(nextProps.academicYears[0]);
   });
   it('Should call viewDetails(item)', () => {
+    const wrapper2 = shallow( // eslint-disable-line function-paren-newline
+      <AdminExams
+        examList={null}
+        getYears={e => e}
+        getAllExams={e => e}
+        academicYears={academicYears}
+        yearLoading={false}
+        listLoading
+      />);
     wrapper2.instance().viewDetails(examList[0]);
     expect(wrapper2.state().showDetails).to.equal(true);
     expect(wrapper2.state().item).to.equal(examList[0]);
+  });
+  it('Should connect right to the props', () => {
+    const wrapper = shallowWithStore(<ContainerComponent />, defaultStore);
+    expect(wrapper.props().academicYears).to.deep.equal(academicYears);
+    expect(wrapper.props().examList).to.deep.equal(examList);
+    expect(wrapper.props().listLoading).to.equal(false);
+    expect(wrapper.props().yearLoading).to.equal(false);
+  });
+  it('Should fire the correct actions', () => {
+    const store = createMockStore(defaultStore);
+    const wrapper = shallowWithStore(<ContainerComponent />, store);
+    wrapper.props().getAllExams(2018);
+    wrapper.props().getYears();
+    expect(store.isActionDispatched(examSagaAction.getAllExamsAction(2018)))
+      .to.equal(true);
+    expect(store.isActionDispatched(universitySagaAction.getAllYears()))
+      .to.equal(true);
   });
 });
