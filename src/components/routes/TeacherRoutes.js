@@ -1,6 +1,6 @@
 import Index from '../teacher/Index'; // eslint-disable-line import/no-named-as-default
-import TeacherExams from '../teacher/TeacherExams';
-import TeacherExamStudents from '../teacher/TeacherExamStudents';
+import TeacherExams from '../teacher/TeacherExams'; // eslint-disable-line import/no-named-as-default
+import TeacherExamStudents from '../teacher/TeacherExamStudents'; // eslint-disable-line import/no-named-as-default
 
 const TeacherRoutes = [
   {

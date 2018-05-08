@@ -10,7 +10,7 @@ import PageTableForm from '../template/PageTableForm';
 
 import { creators as evaluatorCreators } from '../../sagas/EvaluatorSaga';
 
-class TeacherExamStudents extends React.Component {
+export class TeacherExamStudents extends React.Component {
   constructor(props) {
     super(props);
     this.openModal = this.openModal.bind(this);
