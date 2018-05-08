@@ -37,7 +37,6 @@ export function* getAllStudents() {
     num = Number(num);
     const apiCalls = Array(num).fill().map((_, i) => call(getStudentContractAddressAt, i));
     const studentsContracts = yield all(apiCalls);
-
     const apiNameCalls = Array(num).fill().map((_, i) =>
       call(getName, String(studentsContracts[i])));
     const studentsName = (yield all(apiNameCalls));
@@ -172,20 +171,24 @@ export function* getPendingTeachers() {
 export function* approveUser(action) {
   yield put(actionCreators.listIsLoading());
   try {
-    const contract = action.address;
-    const address = yield call(getPublicAddress, action.address);
-    const name = yield call(getName, action.address);
-    const surname = yield call(getSurname, action.address);
-    const userData = [contract, address, name, surname];
+    const contractData = action.address;
+    const addressData = yield call(getPublicAddress, action.address);
+    const nameData = yield call(getName, action.address);
+    const surnameData = yield call(getSurname, action.address);
+    const userData = {
+      contract: contractData,
+      address: addressData,
+      name: nameData,
+      surname: surnameData,
+    };
     if (action.role === ROLES.UNCONFIRMED_STUDENT) {
       yield call(confirmStudent, action.address);
       const course = yield call(getCourseContract, action.address);
-      const courseName = yield call(getCourseName, course);
-      userData.push(courseName);
+      userData.course = yield call(getCourseName, course);
     } else if (action.role === ROLES.UNCONFIRMED_TEACHER) {
       yield call(confirmTeacher, action.address);
     }
-    yield put(actionCreators.confirmUser(action.role, contract, userData));
+    yield put(actionCreators.confirmUser(action.role, contractData, userData));
   } catch (e) {
     console.log('Failed!');
     yield put(actionCreators.listHasErrored());

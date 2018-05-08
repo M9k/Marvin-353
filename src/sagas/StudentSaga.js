@@ -75,7 +75,6 @@ export function* getExamsCredits(action) {
     yield put(actionCreators.setCredits(credits, graduationCredits));
   } catch (e) {
     console.log('failed to get credits');
-    yield put(actionCreators.listHasErrored());
   }
 }
 
@@ -92,7 +91,6 @@ export function* enrollToExam(action) {
     yield put(actionCreators.pushNewSubscription(exam));
   } catch (e) {
     console.log('failed to enroll to the exam');
-    yield put(actionCreators.listHasErrored());
   }
 }
 
