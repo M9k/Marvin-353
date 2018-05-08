@@ -5,7 +5,7 @@ import PageTableForm from '../template/PageTableForm';
 import { creators as teacherExamSaga } from '../../sagas/TeacherExamSaga';
 
 
-class TeacherExams extends React.Component {
+export class TeacherExams extends React.Component {
   /**
    * Redirect user to the selected exam
    * @param item the row/exam object with all the info about
