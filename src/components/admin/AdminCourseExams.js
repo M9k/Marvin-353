@@ -122,7 +122,6 @@ AdminCourseExams.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  courseList: state.course.coursesList,
   academicYears: state.manageYears.accademicYears,
   examList: state.courseExams.list,
 });
