@@ -57,26 +57,55 @@ describe('Course feature', () => {
           if (effect.args[0] === 1) return 'paperino';
         }
         if (effect.fn === Year.getCourseNumber) {
-          if (effect.args[0] === 0) return '1';
-          if (effect.args[0] === 1) return '2';
+          if (effect.args[0] === 'pluto') return 1;
+          if (effect.args[0] === 'paperino') return 2;
         }
         if (effect.fn === Year.getCourseContractAt) {
-          if (effect.args[0] === 0) return 'qui';
-          if (effect.args[0] === 1) return 'quo';
-          if (effect.args[0] === 2) return 'qua';
+          if (effect.args[0] === 'pluto' && effect.args[1] === 0) return 'qui';
+          if (effect.args[0] === 'paperino' && effect.args[1] === 0) return 'quo';
+          if (effect.args[0] === 'paperino' && effect.args[1] === 1) return 'qua';
         }
         if (effect.fn === Course.getName) {
-          if (effect.args[0] === 0) return 'topolino';
-          if (effect.args[0] === 1) return 'troppolino';
-          if (effect.args[0] === 1) return 'paperone';
+          if (effect.args[0] === 'qui') return 'topolino';
+          if (effect.args[0] === 'quo') return 'troppolino';
+          if (effect.args[0] === 'qua') return 'paperone';
+        }
+        if (effect.fn === Course.getSolarYear) {
+          if (effect.args[0] === 'qui') return 2017;
+          if (effect.args[0] === 'quo') return 2018;
+          if (effect.args[0] === 'qua') return 2018;
         }
         if (effect.fn === Course.getCreditsToGraduate) {
-          if (effect.args[0] === 0) return '180';
-          if (effect.args[0] === 1) return '300';
-          if (effect.args[0] === 2) return '120';
+          if (effect.args[0] === 'qui') return 180;
+          if (effect.args[0] === 'quo') return 300;
+          if (effect.args[0] === 'qua') return 120;
         }
         return next();
       },
+    })
+    .hasFinalState({
+      loading: false,
+      errored: false,
+      coursesList: [
+        {
+          address: 'qui',
+          name: 'topolino',
+          year: 2017,
+          credits: 180,
+        },
+        {
+          address: 'quo',
+          name: 'troppolino',
+          year: 2018,
+          credits: 300,
+        },
+        {
+          address: 'qua',
+          name: 'paperone',
+          year: 2018,
+          credits: 120,
+        },
+      ],
     })
     .put(creators.listIsLoading())
     .run());
