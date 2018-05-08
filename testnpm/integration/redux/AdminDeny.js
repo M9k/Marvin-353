@@ -43,6 +43,7 @@ const filledState = {
 };
 
 describe('Admin remove', () => {
+  // 41
   it('should remove a student', () => expectSaga(sagas.deleteUser, sagas.creators.removeUserAction(ROLES.STUDENT, 'contratto1'))
     .withReducer(reducer, filledState)
     .provide([
@@ -76,6 +77,7 @@ describe('Admin remove', () => {
         }],
     })
     .run());
+  // 42
   it('should remove a teacher', () => expectSaga(sagas.deleteUser, sagas.creators.removeUserAction(ROLES.TEACHER, 'contratto2'))
     .withReducer(reducer, filledState)
     .provide([
@@ -110,6 +112,7 @@ describe('Admin remove', () => {
         }],
     })
     .run());
+  // 43
   it('should deny a student', () => expectSaga(sagas.denyUser, sagas.creators.denyUserAction(ROLES.UNCONFIRMED_STUDENT, 'contratto3'))
     .withReducer(reducer, filledState)
     .provide([
@@ -144,6 +147,7 @@ describe('Admin remove', () => {
       ],
     })
     .run());
+  // 44
   it('should deny a teacher', () => expectSaga(sagas.denyUser, sagas.creators.denyUserAction(ROLES.UNCONFIRMED_TEACHER, 'contratto4'))
     .withReducer(reducer, filledState)
     .provide([

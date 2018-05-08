@@ -41,6 +41,7 @@ const filledState = {
 };
 
 describe('Student feature', () => {
+  // 37
   it('should load all his exams', () => expectSaga(sagas.getExams, sagas.creators.getExamsAction('pippo'))
     .withReducer(reducer)
     .provide({
@@ -140,6 +141,7 @@ describe('Student feature', () => {
     })
     .put(creators.listIsLoading())
     .run());
+  // 38
   it('should get all the student\'s credit', () => expectSaga(sagas.getExamsCredits, sagas.creators.getCreditsAction('pippo'))
     .withReducer(reducer)
     .provide({
@@ -171,6 +173,7 @@ describe('Student feature', () => {
       graduationCredits: 180,
     })
     .run());
+  // 39
   it('should set 0 credits', () => expectSaga(sagas.getExamsCredits, sagas.creators.getCreditsAction('pippo'))
     .withReducer(reducer)
     .provide({
@@ -198,6 +201,7 @@ describe('Student feature', () => {
       graduationCredits: 180,
     })
     .run());
+  // 40
   it('should enroll a student to an exam', () => expectSaga(sagas.enrollToExam, sagas.creators.enrollToExamAction('pippo', 'calcolo'))
     .withReducer(reducer, filledState)
     .provide({

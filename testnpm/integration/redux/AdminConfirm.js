@@ -55,6 +55,7 @@ const filledState = {
 
 describe('Admin approve', () => {
   describe('Confirm a user', () => {
+    // 45
     it('should confirm the selected student', () => expectSaga(sagas.approveUser, sagas.creators.approveUserAction(ROLES.UNCONFIRMED_STUDENT, 'contratto3'))
       .withReducer(reducer, filledState)
       .provide({
@@ -104,7 +105,8 @@ describe('Admin approve', () => {
       })
       .put(creators.listIsLoading())
       .run());
-    it('should confirm the selected teacer', () => expectSaga(sagas.approveUser, sagas.creators.approveUserAction(ROLES.UNCONFIRMED_TEACHER, 'contratto4'))
+    // 46
+    it('should confirm the selected teacher', () => expectSaga(sagas.approveUser, sagas.creators.approveUserAction(ROLES.UNCONFIRMED_TEACHER, 'contratto4'))
       .withReducer(reducer, filledState)
       .provide({
         call: (effect, next) => {
@@ -152,6 +154,7 @@ describe('Admin approve', () => {
       })
       .put(creators.listIsLoading())
       .run());
+    // 47
     it('should fail if a student isn\'t in the pending list', () =>
       expectSaga(sagas.approveUser, sagas.creators.approveUserAction(ROLES.UNCONFIRMED_STUDENT, 'contratto5'))
         .withReducer(reducer)
@@ -168,6 +171,7 @@ describe('Admin approve', () => {
         })
         .hasFinalState(failedState)
         .run());
+    // 48
     it('should fail if a teacher isn\'t in the pending list', () =>
       expectSaga(sagas.approveUser, sagas.creators.approveUserAction(ROLES.UNCONFIRMED_TEACHER, 'contratto5'))
         .withReducer(reducer)

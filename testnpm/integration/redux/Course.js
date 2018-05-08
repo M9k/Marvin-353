@@ -21,6 +21,7 @@ const filledState = {
   ],
 };
 describe('Course feature', () => {
+  // 34
   it('should add a course', () => expectSaga(sagas.addCourse, sagas.creators.addNewCourse(2018, 'ciao', 180))
     .withReducer(reducer)
     .provide([
@@ -34,6 +35,7 @@ describe('Course feature', () => {
     })
     .put(creators.listIsLoading())
     .run());
+  // 35
   it('should\'t add a course if it\'s already in the list', () => expectSaga(sagas.addCourse, sagas.creators.addNewCourse(2018, 'ciao', 180))
     .withReducer(reducer, filledState)
     .provide([
@@ -47,7 +49,8 @@ describe('Course feature', () => {
     })
     .put(creators.listIsLoading())
     .run());
-  it('should get the couses list', () => expectSaga(sagas.getCourses, sagas.creators.getAllCourses())
+  // 36
+  it('should get the courses list', () => expectSaga(sagas.getCourses, sagas.creators.getAllCourses())
     .withReducer(reducer, filledState)
     .provide({
       call: (effect, next) => {
