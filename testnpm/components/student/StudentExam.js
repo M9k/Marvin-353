@@ -48,21 +48,25 @@ describe('StudentExam component', () => {
     ExamsList={exams}
     getExams={e => e}
   />);
+  // 187
   it('Should render the simple component', () => {
     assert.equal(SimpleWrapper.length, 1);
     SimpleWrapper.instance().getExams();
     SimpleWrapper.instance().constructor();
   });
+  // 188
   it('Should render the child components', () => {
     expect(SimpleWrapper.find(PageTable)).to.have.length(1);
   });
 
   // Testing container part
+  // 189
   it('Should connect right to the props', () => {
     const wrapper = shallowWithStore(<ContainerComponent />, defaultStore);
     expect(wrapper.props().ExamsList).to.deep.equal(exams);
     expect(wrapper.props().myAddress).to.deep.equal(address);
   });
+  // 190
   it('Should fire the correct actions', () => {
     const store = createMockStore(defaultStore);
     const wrapper = shallowWithStore(<ContainerComponent />, store);

@@ -41,7 +41,7 @@ describe('UniversityAdmin component', () => {
       />);
   });
 
-
+  // 215
   it('Should show the form and table correctly', () => {
     /**
      * Admin page should have one form to add, table with list of admins
@@ -56,26 +56,26 @@ describe('UniversityAdmin component', () => {
 
     // expect(addedAdmin.to.equal(1));
   });
-
+  // 216
   it('Should viewDelete set right the state', () => {
     const adminDel = '0xc8321642f5a2549c58b1a6f34a68ec76e2c107b8';
     wrapper.instance().viewDelete(adminDel);
     expect(wrapper.state().item).to.equal(item);
     expect(wrapper.state().delete).to.equal(true);
   });
-
+  // 217
   it('Should viewDelete set right the state', () => {
     wrapper.instance().viewDelete(item);
     expect(wrapper.state().item).to.equal(item);
     expect(wrapper.state().delete).to.equal(true);
   });
-
+  // 218
   it('Should close modal and reset state', () => {
     wrapper.instance().notDelete();
     expect(wrapper.state().item).to.equal('');
     expect(wrapper.state().delete).to.equal(false);
   });
-
+  // 219
   it('Should close modal and reset state not deleting store', () => {
     expect(deletedAdminAddr).to.equal('');
     wrapper.instance().closeDelete({ item: { address: '0xc8321642f5a2549c58b1a6f34a68ec76e2c107b9' } });
@@ -98,22 +98,26 @@ describe('UniversityAdmin component', () => {
       value: '0xc8321642f5a2549c58b1a6f34a68ec76e2c107b9',
     },
   };
+  // 220
   it('Should connect right to the props', () => {
     const wrapperContainer = shallowWithStore(<ContainerComponent />, defaultStore);
     expect(wrapperContainer.props().adminAccounts).to.deep.equal(addedAdmin);
   });
+  // 221
   it('Should fire the correct action to get all admins', () => {
     const storeContainer = createMockStore(defaultStore);
     const wrapperContainer = shallowWithStore(<ContainerComponent />, storeContainer);
     wrapperContainer.props().getAdmins();
     expect(storeContainer.isActionDispatched(creators.getAllAdminsAction())).to.be.true;
   });
+  // 222
   it('Should fire the correct action to delete admin', () => {
     const storeContainer = createMockStore(defaultStore);
     const wrapperContainer = shallowWithStore(<ContainerComponent />, storeContainer);
     wrapperContainer.props().deleteAdmin('0xc8321642f5a2549c58b1a6f34a68ec76e2c107b9');
     expect(storeContainer.isActionDispatched(creators.removeAdminAction('0xc8321642f5a2549c58b1a6f34a68ec76e2c107b9',))).to.be.true;// eslint-disable-line
   });
+  // 223
   it('Should fire the correct action to add admin', () => {
     const storeContainer = createMockStore(defaultStore);
     const wrapperContainer = shallowWithStore(<ContainerComponent />, storeContainer);

@@ -54,15 +54,18 @@ describe('StudentOptionalExams component', () => {
     getExams={e => e}
     enrollToExam={e => e}
   />);
+  // 181
   it('Should render the simple component', () => {
     assert.equal(SimpleWrapper.length, 1);
     SimpleWrapper.instance().getExams();
     SimpleWrapper.instance().constructor();
   });
+  // 182
   it('Should render the child components', () => {
     expect(SimpleWrapper.find(PageTable)).to.have.length(1);
   });
   // Testing states and methods
+  // 183
   it('Should have the correct initial states', () => {
     expect(SimpleWrapper.state().select).to.deep.equal(false);
   });
@@ -77,17 +80,20 @@ describe('StudentOptionalExams component', () => {
   });
 */
   // Testing container part
+  // 184
   it('Should connect right to the props', () => {
     const wrapper = shallowWithStore(<ContainerComponent />, defaultStore);
     expect(wrapper.props().ExamsList).to.deep.equal(exams);
     expect(wrapper.props().myAddress).to.deep.equal(address);
   });
+  // 185
   it('Should fire the correct actions', () => {
     const store = createMockStore(defaultStore);
     const wrapper = shallowWithStore(<ContainerComponent />, store);
     wrapper.props().getExams(address);
     expect(store.isActionDispatched(creators.getExamsAction(address))).to.be.true;
   });
+  // 186
   it('Should fire the correct actions', () => {
     const store = createMockStore(defaultStore);
     const wrapper = shallowWithStore(<ContainerComponent />, store);

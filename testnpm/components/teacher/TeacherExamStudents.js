@@ -54,19 +54,19 @@ describe('TeacherExamStudents component', () => {
       />);
   });
 
-
+  // 197
   it('Should show the form and table correctly with state', () => {
     expect(wrapper.find('div').children()).to.have.length(3);
     expect(wrapper.state().viewModalAddVote).to.equal(false);
   });
-
+  // 198
   it('Should openModal set right the state', () => {
     const student = { studentIndex: 0, name: 'mario' };
     wrapper.instance().openModal(student);
     expect(wrapper.state().viewModalAddVote).to.equal(true);
     expect(wrapper.state().studentIndex).to.equal(0);
   });
-
+  // 199
   it('Should build the right vote to send to redux', () => {
     const student = { studentIndex: 11, name: 'mario' };
     wrapper.instance().openModal(student);
@@ -110,18 +110,21 @@ describe('TeacherExamStudents component', () => {
   };
 
   const contract = '0xfa429bef26906146be2438c1892f8499e217b277';
+  // 200
   it('Should connect right to the props', () => {
     const wrapperContainer = shallowWithStore(<ContainerComponent />, defaultStore);
     expect(wrapperContainer.props().myWeb3Address).to.deep.equal(contract);
     expect(wrapperContainer.props().studentsOfExam).to.deep.equal(List);
     expect(wrapperContainer.props().examIndex).to.deep.equal(0);
   });
+  // 201
   it('Should fire the correct action to get list', () => {
     const storeContainer = createMockStore(defaultStore);
     const wrapperContainer = shallowWithStore(<ContainerComponent />, storeContainer);
     wrapperContainer.props().getStudentsOfExam(contract);
     expect(storeContainer.isActionDispatched(creators.getList(contract))).to.be.true;
   });
+  // 202
   it('Should fire the correct action to assgn vote', () => {
     const storeContainer = createMockStore(defaultStore);
     const wrapperContainer = shallowWithStore(<ContainerComponent />, storeContainer);

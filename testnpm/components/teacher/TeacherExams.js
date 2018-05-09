@@ -50,11 +50,11 @@ describe('TeacherExams component', () => {
       />);
   });
 
-
+  // 193
   it('Should show the table correctly', () => {
     expect(wrapper.find('div').children()).to.have.length(1);
   });
-
+  // 194
   it('Should get the exams from teacher address passed to him', () => {
     expect(address).to.equal('');
     wrapper.instance().getMyAssignedExamsAddr();
@@ -86,11 +86,13 @@ describe('TeacherExams component', () => {
     },
   };
   const contract = '0xfa429bef26906146be2438c1892f8499e217b277';
+  // 195
   it('Should connect right to the props', () => {
     const wrapperContainer = shallowWithStore(<ContainerComponent />, defaultStore);
     expect(wrapperContainer.props().assignedExams).to.deep.equal(exams);
     expect(wrapperContainer.props().myContract).to.deep.equal(contract);
   });
+  // 196
   it('Should fire the correct actions', () => {
     const storeContainer = createMockStore(defaultStore);
     const wrapperContainer = shallowWithStore(<ContainerComponent />, storeContainer);

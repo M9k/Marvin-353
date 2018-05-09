@@ -24,11 +24,13 @@ const defaultStore = {
 };
 describe('Index Student', () => {
   // Testing simple component
+  // 177
   it('Should render the index with right number of cards', () => {
     const wrapper = shallow(<SimpleIndex myAddress="myAddress" />);
     assert.equal(wrapper.length, 1);
     expect(wrapper.find(CardWithIcon)).to.have.length(2);
   });
+  // 178
   it('Should render the correct bootstrap component', () => {
     const wrapper = shallow(<SimpleIndex myAddress="myAddress" />);
     assert.equal(wrapper.length, 1);
@@ -36,6 +38,7 @@ describe('Index Student', () => {
   });
 
   // Testing container part
+  // 179
   it('Should connect right to the props', () => {
     const wrapper = shallowWithStore(<ContainerIndex />, defaultStore);
     expect(wrapper.props().myCredits).to.deep.equal(80);
@@ -44,6 +47,7 @@ describe('Index Student', () => {
     expect(wrapper.props().userName).to.deep.equal('StudentName');
     expect(wrapper.props().userSurname).to.deep.equal('SudentSurname');
   });
+  // 180
   it('Should fire the correct actions', () => {
     const store = createMockStore(defaultStore);
     const wrapper = shallowWithStore(<ContainerIndex />, store);
