@@ -17,6 +17,7 @@ const state = {
 
 describe('TeacherExams duck', () => {
   describe('setList', () => {
+    // 53
     it('should set the correct list', () => {
       expect(reducer(initialState, creators.setList([1, 2, 3])))
         .to.deep.equal({
@@ -25,6 +26,7 @@ describe('TeacherExams duck', () => {
           list: [1, 2, 3],
         });
     });
+    // 54
     it('should set an empty list when the list is null or undefined', () => {
       expect(reducer(initialState, creators.setList()).list).to.deep.equal([]);
       expect(reducer(initialState, creators.setList(null)).list).to.deep.equal([]);
@@ -32,6 +34,7 @@ describe('TeacherExams duck', () => {
     });
   });
   describe('examsbycode', () => {
+    // 55
     it('should return the exams ordered by code in ascending order', () => {
       expect(selectors.examsByCode(state)).to.deep.equal([
         {
@@ -44,7 +47,8 @@ describe('TeacherExams duck', () => {
         },
       ]);
     });
-    it('should return the exams oredered by code in descending order', () => {
+    // 56
+    it('should return the exams ordered by code in descending order', () => {
       expect(selectors.examsByCode(state, ORDERING.DESC)).to.deep.equal([
         {
           code: 'B',
@@ -58,7 +62,8 @@ describe('TeacherExams duck', () => {
     });
   });
   describe('examsbycourse', () => {
-    it('should return the exams ordered by curse in ascending order', () => {
+    // 57
+    it('should return the exams ordered by course in ascending order', () => {
       expect(selectors.examsByCourse(state)).to.deep.equal([
         {
           code: 'B',
@@ -70,6 +75,7 @@ describe('TeacherExams duck', () => {
         },
       ]);
     });
+    // 58
     it('should return the exams ordered by course in descending order', () => {
       expect(selectors.examsByCourse(state, ORDERING.DESC)).to.deep.equal([
         {

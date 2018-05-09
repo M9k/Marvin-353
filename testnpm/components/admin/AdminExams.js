@@ -51,6 +51,7 @@ const defaultStore = {
 };
 
 describe('AdminExams component', () => {
+  // 24
   it('Should render the component', () => {
     const wrapper = shallow( // eslint-disable-line function-paren-newline
       <AdminExams
@@ -67,6 +68,7 @@ describe('AdminExams component', () => {
     expect(wrapper.find(FormControl)).to.have.length(1);
     expect(wrapper.find(PageTableForm)).to.have.length(1);
   });
+  // 25
   it('Should non render the table if the table is not loading', () => {
     const wrapper2 = shallow( // eslint-disable-line function-paren-newline
       <AdminExams
@@ -83,6 +85,7 @@ describe('AdminExams component', () => {
     expect(wrapper2.find(FormControl)).to.have.length(1);
     expect(wrapper2.find(PageTableForm)).to.have.length(0);
   });
+  // 26
   it('Should non render the year options if the year list is not loading', () => {
     const wrapper2 = shallow( // eslint-disable-line function-paren-newline
       <AdminExams
@@ -100,6 +103,7 @@ describe('AdminExams component', () => {
     expect(wrapper2.find(PageTableForm)).to.have.length(0);
     expect(wrapper2.html().search('<options') !== -1, false);
   });
+  // 27
   it('Should have the correct initial state', () => {
     const wrapper = shallow( // eslint-disable-line function-paren-newline
       <AdminExams
@@ -112,6 +116,7 @@ describe('AdminExams component', () => {
       />);
     expect(wrapper.state().showDetails).to.equal(false);
   });
+  // 28
   it('Should call componentWillReceiveProps(nextProps)', () => {
     const wrapper2 = shallow( // eslint-disable-line function-paren-newline
       <AdminExams
@@ -125,6 +130,7 @@ describe('AdminExams component', () => {
     wrapper2.instance().componentWillReceiveProps(nextProps);
     expect(wrapper2.state().year).to.equal(nextProps.academicYears[0]);
   });
+  // 29
   it('Should call viewDetails(item)', () => {
     const wrapper2 = shallow( // eslint-disable-line function-paren-newline
       <AdminExams
@@ -139,6 +145,7 @@ describe('AdminExams component', () => {
     expect(wrapper2.state().showDetails).to.equal(true);
     expect(wrapper2.state().item).to.equal(examList[0]);
   });
+  // 30
   it('Should connect right to the props', () => {
     const wrapper = shallowWithStore(<ContainerComponent />, defaultStore);
     expect(wrapper.props().academicYears).to.deep.equal(academicYears);
@@ -146,6 +153,7 @@ describe('AdminExams component', () => {
     expect(wrapper.props().listLoading).to.equal(false);
     expect(wrapper.props().yearLoading).to.equal(false);
   });
+  // 31
   it('Should fire the correct actions', () => {
     const store = createMockStore(defaultStore);
     const wrapper = shallowWithStore(<ContainerComponent />, store);

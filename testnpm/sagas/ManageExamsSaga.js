@@ -8,6 +8,7 @@ import * as Getters from '../../src/sagas/helpers/getters';
 
 describe('ManageExamsSaga', () => {
   describe('associateProfessor', () => {
+    // 28
     it('should return the teacher data when everything goes right', () => expectSaga(sagaStub, sagas.associateProfessor, '1', '2')
       .provide([
         [matchers.call.fn(UniversityExam.associateTeacherToExam, '1', '2'), true],
@@ -23,6 +24,7 @@ describe('ManageExamsSaga', () => {
         professorSurname: 'Levi',
       })
       .run());
+    // 29
     it('should not catch the error if something goes wrong', () => expectSaga(sagaStub, sagas.associateProfessor, '1', '2')
       .provide([
         [matchers.call.fn(UniversityExam.associateTeacherToExam, '1', '2'), throwError(new Error())],

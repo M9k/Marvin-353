@@ -81,38 +81,46 @@ describe('AdminCourseExams component', () => {
       coursesForStudent={coursesForStudent}
       coursesContracts={coursesContracts}
     />);
+  // 157
   it('Should render the component', () => {
     assert.equal(wrapper.length, 1);
     expect(wrapper.html().search('<h1') !== -1, true);
     expect(wrapper.find(Form)).to.have.length(2);
     expect(wrapper.find(ModalForm)).to.have.length(1);
   });
+  // 158
   it('Should have the correct initial state', () => {
     expect(wrapper.state().viewModalCourse).to.equal(false);
   });
+  // 159
   it('Should call componentDidMount()', () => {
     wrapper.instance().componentDidMount();
   });
+  // 160
   it('Should call addRole(objArr) to register a new student', () => {
     wrapper.instance().addRole(objForm);
     expect(wrapper.state().viewModalCourse).to.equal(true);
     expect(wrapper.state().name).to.equal(objForm.name.value);
     expect(wrapper.state().surname).to.equal(objForm.surname.value);
   });
+  // 161
   it('Should call addRole(objArr) to register a new teacher', () => {
     wrapper.instance().addRole(objForm2);
   });
+  // 162
   it('Should call addStudent(courseForm) to set the course of a new student', () => {
     wrapper.instance().addStudent(objCourse);
     expect(wrapper.state().viewModalCourse).to.equal(false);
     expect(wrapper.state().name).to.equal('');
     expect(wrapper.state().surname).to.equal('');
   });
+  // 163
   it('Should connect right to the props', () => {
     const wrapper2 = shallowWithStore(<ContainerComponent />, defaultStore);
     expect(wrapper2.props().coursesForStudent).to.equal(coursesForStudent);
     expect(wrapper2.props().coursesContracts).to.equal(coursesContracts);
   });
+  // 164
   it('Should fire the correct actions', () => {
     const store = createMockStore(defaultStore);
     const wrapper2 = shallowWithStore(<ContainerComponent />, store);

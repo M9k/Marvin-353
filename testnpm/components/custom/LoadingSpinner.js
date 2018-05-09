@@ -5,6 +5,7 @@ import assert from 'assert';
 import LoadingSpinner from '../../../src/components/custom/LoadingSpinner';
 
 describe('LoadingSpinner component', () => {
+  // 98
   it('Should render the loading when isLoading = true', () => {
     const wrapper = shallow( // eslint-disable-line function-paren-newline
       <LoadingSpinner
@@ -15,6 +16,7 @@ describe('LoadingSpinner component', () => {
     assert.equal(wrapper.length, 1);
     assert.equal(wrapper.html().search('<div') !== -1, true);
   });
+  // 99
   it('Should not render the loading when isLoading = false', () => {
     const wrapper = shallow( // eslint-disable-line function-paren-newline
       <LoadingSpinner

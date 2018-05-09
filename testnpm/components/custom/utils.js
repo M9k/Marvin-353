@@ -2,39 +2,41 @@ import assert from 'assert';
 import Utils from '../../../src/components/custom/utils';
 
 describe('Utils functions', () => {
+  // 124
   it('should generate correct key', () => {
     const keyGenerated = Utils.generateKey('prova');
     assert.equal(keyGenerated, 'InByb3ZhIg==');
   });
-
+  // 125
   it('should existValue', () => {
     const existValue = Utils.existValue('prova');
     assert.equal(existValue, 1);
   });
+  // 126
   it('should not existValue', () => {
     const existValue1 = Utils.existValue();
     assert.equal(existValue1, 2);
     const existValue2 = Utils.existValue('');
     assert.equal(existValue2, 2);
   });
-
+  // 127
   it('should notNullValue', () => {
     const value = Utils.notNullValue('gianni');
     assert.equal(value, 1);
   });
-
+  // 128
   it('should not notNullValue', () => {
     const value = Utils.notNullValue('');
     assert.equal(value, 2);
   });
-
+  // 129
   it('should work Eth address checker', () => {
     const addr1 = Utils.validEthAddress('');
     assert.equal(addr1, 2);
     const addr3 = Utils.validEthAddress('0x5AEDA56215b167893e80B4fE645BA6d5Bab767DE');
     assert.equal(addr3, 1);
   });
-
+  // 130
   it('should work moreThanCurrentYear', () => {
     const year1 = Utils.moreThanCurrentYear('');
     assert.equal(year1, 2);
@@ -43,7 +45,7 @@ describe('Utils functions', () => {
     const year3 = Utils.moreThanCurrentYear((new Date()).getFullYear() - 1);
     assert.equal(year3, 0);
   });
-
+  // 131
   it('should work grade from 0 to 31 (summa lode)', () => {
     const grade1 = Utils.validGrade('');
     assert.equal(grade1, 2);
@@ -55,7 +57,7 @@ describe('Utils functions', () => {
     const grade4 = Utils.validGrade(1);
     assert.equal(grade4, 1);
   });
-
+  // 132
   it('always true', () => {
     assert.equal(Utils.alwaysTrue(), 1);
     assert.equal(Utils.alwaysTrue(3), 1);

@@ -7,12 +7,13 @@ import TemplateButton from '../../../src/components/custom/TemplateButton';
 
 
 describe('TemplateButton component', () => {
+  // 121
   it('Should render the component', () => {
     const wrapper = shallow(<TemplateButton clickFunction={e => e} objectToWorkOn="test" text="Text" type="danger" />);
     assert.equal(wrapper.length, 1);
     expect(wrapper.find(Button)).to.have.length(1);
   });
-
+  // 122
   it('should save correct props', () => {
     const wrapper = mount(<TemplateButton
       clickFunction={e => e}
@@ -25,6 +26,7 @@ describe('TemplateButton component', () => {
     expect(wrapper.props().type).to.equal('danger');
     expect(wrapper.props().clickFunction('returnTestF')).to.equal('returnTestF');
   });
+  // 123
   it('Should call handleClick()', () => {
     const wrapper = mount(<TemplateButton
       clickFunction={e => e}

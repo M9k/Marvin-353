@@ -68,40 +68,48 @@ describe('SystemUsers component', () => {
     teacherAccounts={teachers}
     studentAccounts={students}
   />);
+  // 63
   it('Should render the simple component', () => {
     assert.equal(SimpleWrapper.length, 1);
   });
+  // 64
   it('Should render the child components', () => {
     expect(SimpleWrapper.find(PageTable)).to.have.length(2);
   });
   // Testing states and methods
+  // 65
   it('Should have the correct initial states', () => {
     expect(SimpleWrapper.state().deleteTeacher).to.deep.equal(false);
     expect(SimpleWrapper.state().deleteStudent).to.deep.equal(false);
   });
+  // 66
   it('Should have correct states value after running viewDeleteTeacher()', () => {
     SimpleWrapper.instance().viewDeleteTeacher(item);
     expect(SimpleWrapper.state().deleteTeacher).to.deep.equal(true);
     expect(SimpleWrapper.state().deleteStudent).to.deep.equal(false);
     expect(SimpleWrapper.state().item).to.deep.equal(item);
   });
+  // 67
   it('Should have correct states value after running closeDeleteTeacher()', () => {
     SimpleWrapper.instance().closeDeleteTeacher(item);
     expect(SimpleWrapper.state().deleteTeacher).to.deep.equal(false);
     expect(SimpleWrapper.state().deleteStudent).to.deep.equal(false);
   });
+  // 68
   it('Should have correct states value after running viewDeleteStudent()', () => {
     SimpleWrapper.instance().viewDeleteStudent(item);
     expect(SimpleWrapper.state().deleteTeacher).to.deep.equal(false);
     expect(SimpleWrapper.state().deleteStudent).to.deep.equal(true);
     expect(SimpleWrapper.state().item).to.deep.equal(item);
   });
+  // 69
   it('Should have correct states value after running closeDeleteStudent()', () => {
     SimpleWrapper.instance().closeDeleteStudent(item);
     expect(SimpleWrapper.state().deleteTeacher).to.deep.equal(false);
     expect(SimpleWrapper.state().deleteStudent).to.deep.equal(false);
   });
   // Testing container part
+  // 70
   it('Should connect right to the props', () => {
     const wrapper = shallowWithStore(<ContainerComponent />, defaultStore);
     expect(wrapper.props().teacherAccounts).to.deep.equal(teachers);
@@ -109,6 +117,7 @@ describe('SystemUsers component', () => {
     expect(wrapper.props().studentAccounts).to.deep.equal(students);
     expect(wrapper.props().studentAccounts).to.be.an('array');
   });
+  // 71
   it('Should fire the correct actions for getting lists', () => {
     const store = createMockStore(defaultStore);
     const wrapper = shallowWithStore(<ContainerComponent />, store);
@@ -117,12 +126,14 @@ describe('SystemUsers component', () => {
     expect(store.isActionDispatched(creators.getAllTEachersAction())).to.be.true;
     expect(store.isActionDispatched(creators.getAllStudentsAction())).to.be.true;
   });
+  // 72
   it('Should fire the student users action for delete', () => {
     const store = createMockStore(defaultStore);
     const wrapper = shallowWithStore(<ContainerComponent />, store);
     wrapper.props().deleteStudent(add);
     expect(store.isActionDispatched(creators.removeUserAction(roleS, add.contract))).to.be.true;
   });
+  // 73
   it('Should fire the teacher users action for delete', () => {
     const store = createMockStore(defaultStore);
     const wrapper = shallowWithStore(<ContainerComponent />, store);

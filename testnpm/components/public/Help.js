@@ -6,6 +6,7 @@ import { expect } from 'chai'; // eslint-disable-line import/no-extraneous-depen
 import Help from '../../../src/components/public/Help';
 
 describe('Help component', () => {
+  // 133
   it('Should render the component', () => {
     const wrapper = shallow(<Help />);
     assert.equal(wrapper.length, 1);

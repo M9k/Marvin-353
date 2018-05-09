@@ -4,6 +4,7 @@ import assert from 'assert';
 import License from '../../../src/components/public/License';
 
 describe('License component', () => {
+  // 140
   it('Should render the component', () => {
     const wrapper = shallow(<License />);
     assert.equal(wrapper.length, 1);

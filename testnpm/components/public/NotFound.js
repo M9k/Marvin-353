@@ -5,6 +5,7 @@ import NotFound from '../../../src/components/public/NotFound';
 
 // unit tests for the NotFound component
 describe('NotFound component', () => {
+  // 151
   it('should render the component', () => {
     const wrapper = shallow(<NotFound />);
     assert.equal(wrapper.length, 1);
