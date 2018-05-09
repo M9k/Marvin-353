@@ -45,13 +45,13 @@ describe('ModalForm component', () => {
     expect(wrapper.state().showing).to.equal(false);
   });
   // 113
-  it('Should render Yes and No Button with a definited yesFunction', () => {
+  it('Should render Yes and No Button with a defined yesFunction', () => {
     const wrapper = mount(<ModalForm title="Test title" show yesFunction={e => e} />);
     assert.equal(wrapper.length, 1);
     expect(wrapper.find(Button)).to.have.length(2);
   });
   // 114
-  it('Should render only No Button with a definited noFunction', () => {
+  it('Should render only No Button with a defined noFunction', () => {
     const wrapper = mount(<ModalForm title="Test title" show noFunction={e => e} />);
     assert.equal(wrapper.length, 1);
     expect(wrapper.find(Button)).to.have.length(1);

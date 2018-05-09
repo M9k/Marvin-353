@@ -69,7 +69,7 @@ describe('AdminExams component', () => {
     expect(wrapper.find(PageTableForm)).to.have.length(1);
   });
   // 25
-  it('Should non render the table if the table is not loading', () => {
+  it('Should not render the table if the table is not loading', () => {
     const wrapper2 = shallow( // eslint-disable-line function-paren-newline
       <AdminExams
         examList={null}

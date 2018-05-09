@@ -5,7 +5,7 @@ import ErrorTaker from '../../../src/components/custom/ErrorTaker';
 
 describe('Error taker component', () => {
   // 86
-  it('renders', () => {
+  it('renders the component', () => {
     const wrapper = shallow(<ErrorTaker><div>test</div></ErrorTaker>);
     expect(wrapper).to.have.length(1);
   });

@@ -119,7 +119,7 @@ describe('ExamDetails component', () => {
     expect(wrapper1.find(Button)).to.have.length(0);
   });
   // 55
-  it('Should call teacher() and not render the Assign teacher button', () => {
+  it('Should call teacher() and render the Assign teacher button', () => {
     const wrapper2 = shallow(<ExamDetails
       object={exam2}
       moreDetails
