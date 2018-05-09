@@ -125,7 +125,7 @@ describe('TeacherExamStudents component', () => {
     expect(storeContainer.isActionDispatched(creators.getList(contract))).to.be.true;
   });
   // 202
-  it('Should fire the correct action to assgn vote', () => {
+  it('Should fire the correct action to assign vote', () => {
     const storeContainer = createMockStore(defaultStore);
     const wrapperContainer = shallowWithStore(<ContainerComponent />, storeContainer);
     wrapperContainer.props().addGradeToStudent(contract, 0, 0, 25);
