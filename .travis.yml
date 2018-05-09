@@ -53,7 +53,6 @@ jobs:
       if: branch = master
       before_script: export STAGE_NAME=deploy
       script:
-        - npm run migrateropsten
         - npm run build-prod
       deploy:
         provider: surge
