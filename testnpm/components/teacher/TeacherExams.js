@@ -1,10 +1,10 @@
-
-
 import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
 import configureStore from 'redux-mock-store'; // eslint-disable-line import/no-extraneous-dependencies
-import { TeacherExams } from '../../../src/components/teacher/TeacherExams';
+import ContainerComponent, { TeacherExams } from '../../../src/components/teacher/TeacherExams';
+import { createMockStore, shallowWithStore } from '../../helpers/component-with-store';
+import { creators } from '../../../src/sagas/TeacherExamSaga';
 
 describe('TeacherExams component', () => {
   const initialState = {
@@ -59,5 +59,42 @@ describe('TeacherExams component', () => {
     expect(address).to.equal('');
     wrapper.instance().getMyAssignedExamsAddr();
     expect(address).to.equal(realAddr);
+  });
+
+  // Testing container part
+  const defaultStore = {
+    teacherData: {
+      list: [
+        {
+          code: 'prova2',
+          courseName: 'INFO',
+          index: 0,
+          address: '0xc27f30b9268c7b46c3c8bc56489104a435d4516e',
+        },
+        {
+          code: 'prova',
+          courseName: 'INFO',
+          index: 1,
+          address: '0x30940b8cabc181f359cf15afc0791811e3c018f4',
+        },
+      ],
+    },
+    user: {
+      data: {
+        contract: '0xfa429bef26906146be2438c1892f8499e217b277',
+      },
+    },
+  };
+  const contract = '0xfa429bef26906146be2438c1892f8499e217b277';
+  it('Should connect right to the props', () => {
+    const wrapperContainer = shallowWithStore(<ContainerComponent />, defaultStore);
+    expect(wrapperContainer.props().assignedExams).to.deep.equal(exams);
+    expect(wrapperContainer.props().myContract).to.deep.equal(contract);
+  });
+  it('Should fire the correct actions', () => {
+    const storeContainer = createMockStore(defaultStore);
+    const wrapperContainer = shallowWithStore(<ContainerComponent />, storeContainer);
+    wrapperContainer.props().getMyAssignedExams(contract);
+    expect(storeContainer.isActionDispatched(creators.getList(contract))).to.be.true;
   });
 });
