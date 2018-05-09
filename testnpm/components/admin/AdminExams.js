@@ -86,7 +86,7 @@ describe('AdminExams component', () => {
     expect(wrapper2.find(PageTableForm)).to.have.length(0);
   });
   // 26
-  it('Should non render the year options if the year list is not loading', () => {
+  it('Should not render the year options if the year list is not loading', () => {
     const wrapper2 = shallow( // eslint-disable-line function-paren-newline
       <AdminExams
         examList={null}
