@@ -1,10 +1,10 @@
-
-
 import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
 import configureStore from 'redux-mock-store'; // eslint-disable-line import/no-extraneous-dependencies
-import { UniversityAcademic } from '../../../src/components/university/UniversityAcademic';
+import ContainerComponent, { UniversityAcademic } from '../../../src/components/university/UniversityAcademic';
+import { createMockStore, shallowWithStore } from '../../helpers/component-with-store';
+import { creators } from '../../../src/sagas/ManageYearsSaga';
 
 
 describe('UniversityYear component', () => {
@@ -94,5 +94,37 @@ describe('UniversityYear component', () => {
     expect(wrapper.state().viewErrorMessage).to.equal(true);
     wrapper.instance().closeErrorMessage();
     expect(wrapper.state().viewErrorMessage).to.equal(false);
+  });
+
+  // Testing container part
+  const defaultStore = {
+    manageYears: {
+      accademicYears: [
+        2019,
+        2020,
+      ],
+    },
+  };
+  it('Should connect right to the props', () => {
+    const wrapperContainer = shallowWithStore(<ContainerComponent />, defaultStore);
+    expect(wrapperContainer.props().academicYears).to.deep.equal(addedYears);
+  });
+  it('Should fire the correct action to get all years', () => {
+    const storeContainer = createMockStore(defaultStore);
+    const wrapperContainer = shallowWithStore(<ContainerComponent />, storeContainer);
+    wrapperContainer.props().getYears();
+    expect(storeContainer.isActionDispatched(creators.getAllYears())).to.be.true;
+  });
+  it('Should fire the correct action to delete year', () => {
+    const storeContainer = createMockStore(defaultStore);
+    const wrapperContainer = shallowWithStore(<ContainerComponent />, storeContainer);
+    wrapperContainer.props().deleteYears(2018);
+    expect(storeContainer.isActionDispatched(creators.removeEmptyYear(2018))).to.be.true;
+  });
+  it('Should fire the correct action to add year', () => {
+    const storeContainer = createMockStore(defaultStore);
+    const wrapperContainer = shallowWithStore(<ContainerComponent />, storeContainer);
+    wrapperContainer.props().addYear(2018);
+    expect(storeContainer.isActionDispatched(creators.addYear(2018))).to.be.true;
   });
 });
