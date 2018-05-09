@@ -7,6 +7,7 @@ import CardWithIcon from '../../../src/components/custom/CardWithIcon';
 import { expect } from "chai";
 
 describe('CardWithIcon component', () => {
+  // 80
   it('Should render the component with more that one link', () => {
     const links = [
       {
@@ -22,6 +23,7 @@ describe('CardWithIcon component', () => {
     assert.equal(wrapper.length, 1);
     assert.equal(wrapper.html().search('<a') !== -1, true);
   });
+  // 81
   it('Should render the component with only one link', () => {
     const links = [
       {
@@ -33,20 +35,24 @@ describe('CardWithIcon component', () => {
     assert.equal(wrapper.length, 1);
     assert.equal(wrapper.html().search('<a') !== -1, true);
   });
+  // 82
   it('Should render the component', () => {
     const wrapper = shallow(<CardWithIcon title="Test" text="Test" />);
     assert.equal(wrapper.length, 1);
   });
+  // 83
   it('Should have a title', () => {
     const props = { title: 'Test title', text: 'Test text' };
     const wrapper = shallow(<CardWithIcon {...props} />);
     assert.equal(wrapper.html().search('<h5') !== -1, true);
   });
+  // 84
   it('Should have a text', () => {
     const props = { title: 'Test title', text: 'Test text' };
     const wrapper = shallow(<CardWithIcon {...props} />);
     assert.equal(wrapper.html().search('<p') !== -1, true);
   });
+  // 85
   it('Should save correct props', () => {
     const props = { title: 'Test title', text: 'Test text' };
     const wrapper = mount(<CardWithIcon {...props} />);

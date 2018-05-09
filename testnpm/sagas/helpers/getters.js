@@ -10,6 +10,7 @@ import { NULL_ADDRESS } from '../../../src/util/web3/consts';
 
 describe('Getters', () => {
   describe('getExamData', () => {
+    // 15
     it('should retrieve the correct data', () => expectSaga(sagaStub, Getters.getExamData, '0')
       .provide([
         [matchers.call.fn(Exam.getName, '0'), 'Analisi Matematica'],
@@ -31,12 +32,14 @@ describe('Getters', () => {
         teacherSurname: 'Sartori',
       })
       .run());
+    // 16
     it('should not catch the error if something goes wrong', () => expectSaga(sagaStub, Getters.getExamData, '0')
       .provide([
         [matchers.call.fn(Exam.getName, '0'), throwError(new Error())],
       ])
       .put('error')
       .run());
+    // 17
     it('should retrieve the correct data even without a teacher', () => expectSaga(sagaStub, Getters.getExamData, '0')
       .provide([
         [matchers.call.fn(Exam.getName, '0'), 'Analisi Matematica'],
@@ -56,6 +59,7 @@ describe('Getters', () => {
       .run());
   });
   describe('getTeacherData', () => {
+    // 18
     it('should retrieve the correct data', () => expectSaga(sagaStub, Getters.getTeacherData, 'sart')
       .provide([
         [matchers.call.fn(User.getName, 'sart'), 'Caterina'],
@@ -67,6 +71,7 @@ describe('Getters', () => {
         surname: 'Sartori',
       })
       .run());
+    // 19
     it('should not catch the error if something goes wrong', () => expectSaga(sagaStub, Getters.getTeacherData, 'sart')
       .provide([
         [matchers.call.fn(User.getName, 'sart'), throwError(new Error())],
@@ -75,13 +80,15 @@ describe('Getters', () => {
       .run());
   });
   describe('getCourseExamsList', () => {
-    it('should retrive an empty list', () => expectSaga(sagaStub, Getters.getCourseExamsList, 'course')
+    // 20
+    it('should retrieve an empty list', () => expectSaga(sagaStub, Getters.getCourseExamsList, 'course')
       .provide([
         [matchers.call.fn(Course.getExamNumber, 'course'), 0],
       ])
       .put([])
       .run());
-    it('should retrive a list with more than one element', () => expectSaga(sagaStub, Getters.getCourseExamsList, 'course')
+    // 21
+    it('should retrieve a list with more than one element', () => expectSaga(sagaStub, Getters.getCourseExamsList, 'course')
       .provide({
         call: (effect, next) => {
           if (effect.fn === Course.getExamNumber) return 1;
@@ -114,7 +121,8 @@ describe('Getters', () => {
         teacherSurname: 'Filé',
       }])
       .run());
-    it('should retrive a list with more than one element', () => expectSaga(sagaStub, Getters.getCourseExamsList, 'course')
+    // 22
+    it('should retrieve a list with more than one element', () => expectSaga(sagaStub, Getters.getCourseExamsList, 'course')
       .provide({
         call: (effect, next) => {
           if (effect.fn === Course.getExamNumber) return 2;
@@ -170,6 +178,7 @@ describe('Getters', () => {
         },
       ])
       .run());
+    // 23
     it('should not catch the error when something goes wrong', () => expectSaga(sagaStub, Getters.getCourseExamsList, 'course')
       .provide([
         [matchers.call.fn(Course.getExamNumber, 'course'), throwError(new Error())],
@@ -178,6 +187,7 @@ describe('Getters', () => {
       .run());
   });
   describe('getCourseData', () => {
+    // 24
     it('should retrieve the correct data', () => expectSaga(sagaStub, Getters.getCourseData, 'course')
       .provide([
         [matchers.call.fn(Course.getName, 'course'), 'Scienze Informatiche'],
@@ -189,6 +199,7 @@ describe('Getters', () => {
         solarYear: 2017,
       })
       .run());
+    // 25
     it('should not catch the error when something goes wrong', () => expectSaga(sagaStub, Getters.getCourseData, 'course')
       .provide([
         [matchers.call.fn(Course.getName, 'course'), throwError(new Error())],

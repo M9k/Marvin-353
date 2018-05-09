@@ -60,6 +60,7 @@ describe('PageContainer component', () => {
         <p>test</p>
       </PageContainer>);
   });
+  // 1
   it('Should render the component', () => {
     assert.equal(wrapper.length, 1);
     expect(wrapper.find(NavbarCustom)).to.have.length(1);
@@ -67,6 +68,7 @@ describe('PageContainer component', () => {
     expect(wrapper.find(LoadingSpinner)).to.have.length(1);
     expect(wrapper.find(AlertDismissable)).to.have.length(1);
   });
+  // 2
   it('Should not render the alert dismissable if the query params ar not set', () => {
     assert.equal(wrapper2.length, 1);
     expect(wrapper2.find(NavbarCustom)).to.have.length(1);

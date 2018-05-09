@@ -84,6 +84,7 @@ const location = {
 };
 
 describe('AdminCourses component', () => {
+  // 17
   it('Should render the component', () => {
     const wrapper = shallow( // eslint-disable-line function-paren-newline
       <AdminCourses
@@ -101,6 +102,7 @@ describe('AdminCourses component', () => {
     expect(wrapper.find(FormControl)).to.have.length(1);
     expect(wrapper.find(PageTableForm)).to.have.length(1);
   });
+  // 18
   it('Should have the correct initial state', () => {
     const wrapper = shallow( // eslint-disable-line function-paren-newline
       <AdminCourses
@@ -114,7 +116,7 @@ describe('AdminCourses component', () => {
     expect(wrapper.state().year).to.equal('ALL');
     expect(wrapper.state().viewErrorMessage).to.equal(false);
   });
-
+  // 19
   it('Should call tableData()', () => {
     const wrapper = shallow( // eslint-disable-line function-paren-newline
       <AdminCourses
@@ -127,6 +129,7 @@ describe('AdminCourses component', () => {
       />);
     wrapper.instance().tableData();
   });
+  // 20
   it('Should call validateCourse(item) and add it', () => {
     const wrapper = shallow( // eslint-disable-line function-paren-newline
       <AdminCourses
@@ -139,6 +142,7 @@ describe('AdminCourses component', () => {
       />);
     wrapper.instance().validateCourse(objForm);
   });
+  // 21
   it('Should call validateCourse(item) and not add it', () => {
     const wrapper = shallow( // eslint-disable-line function-paren-newline
       <AdminCourses
@@ -151,11 +155,13 @@ describe('AdminCourses component', () => {
       />);
     wrapper.instance().validateCourse(objForm2);
   });
+  // 22
   it('Should connect right to the props', () => {
     const wrapper = shallowWithStore(<ContainerComponent />, defaultStore);
     expect(wrapper.props().academicYears).to.deep.equal(academicYears);
     expect(wrapper.props().courseList).to.deep.equal(courseList);
   });
+  // 23
   it('Should fire the correct actions', () => {
     const store = createMockStore(defaultStore);
     const wrapper = shallowWithStore(<ContainerComponent />, store);

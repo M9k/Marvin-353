@@ -50,35 +50,42 @@ describe('ConfirmTeachers component', () => {
     denyStudent={e => e}
     pendingStudents={students}
   />);
+  // 32
   it('Should render the simple component', () => {
     assert.equal(SimpleWrapper.length, 1);
   });
+  // 33
   it('Should render the child components', () => {
     expect(SimpleWrapper.find(PageTable)).to.have.length(1);
   });
 
   // Testing states and methods
+  // 34
   it('Should have the correct initial states', () => {
     expect(SimpleWrapper.state().confirm).to.deep.equal(false);
     expect(SimpleWrapper.state().deny).to.deep.equal(false);
   });
+  // 35
   it('Should have correct states value after running viewConfirm()', () => {
     SimpleWrapper.instance().viewConfirm(student);
     expect(SimpleWrapper.state().confirm).to.deep.equal(true);
     expect(SimpleWrapper.state().deny).to.deep.equal(false);
     expect(SimpleWrapper.state().item).to.deep.equal(student);
   });
+  // 36
   it('Should have correct states value after running closeConfirm()', () => {
     SimpleWrapper.instance().closeConfirm(student);
     expect(SimpleWrapper.state().confirm).to.deep.equal(false);
     expect(SimpleWrapper.state().deny).to.deep.equal(false);
   });
+  // 37
   it('Should have correct states value after running viewDeny()', () => {
     SimpleWrapper.instance().viewDeny(student);
     expect(SimpleWrapper.state().confirm).to.deep.equal(false);
     expect(SimpleWrapper.state().deny).to.deep.equal(true);
     expect(SimpleWrapper.state().item).to.deep.equal(student);
   });
+  // 38
   it('Should have correct states value after running closeDeny()', () => {
     SimpleWrapper.instance().closeDeny(student);
     expect(SimpleWrapper.state().confirm).to.deep.equal(false);
@@ -86,11 +93,13 @@ describe('ConfirmTeachers component', () => {
   });
 
   // Testing container part
+  // 39
   it('Should connect right to the props', () => {
     const wrapper = shallowWithStore(<ContainerComponent />, defaultStore);
     expect(wrapper.props().pendingStudents).to.deep.equal(students);
     expect(wrapper.props().pendingStudents).to.be.an('array');
   });
+  // 40
   it('Should fire the correct actions', () => {
     const store = createMockStore(defaultStore);
     const wrapper = shallowWithStore(<ContainerComponent />, store);

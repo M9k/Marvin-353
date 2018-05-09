@@ -38,6 +38,7 @@ const state = {
 };
 describe('Evaluator ducks', () => {
   describe('assignVote', () => {
+    // 30
     it('should assign the vote to the correct user', () => {
       const currentState = Object.assign(
         {},
@@ -75,6 +76,7 @@ describe('Evaluator ducks', () => {
     });
   });
   describe('setList', () => {
+    // 31
     it('should set the correct list', () => {
       expect(reducer(initialState, creators.setList([1, 2, 3])))
         .to.deep.equal({
@@ -91,6 +93,7 @@ describe('Evaluator ducks', () => {
           },
         });
     });
+    // 32
     it('should set an empty list when the list is null or undefined', () => {
       expect(reducer(initialState, creators.setList()).studentList.list).to.deep.equal([]);
       expect(reducer(initialState, creators.setList(null)).studentList.list).to.deep.equal([]);
@@ -98,9 +101,11 @@ describe('Evaluator ducks', () => {
     });
   });
   describe('student by name selector', () => {
+    // 33
     it('should not fail when the list is empty', () => {
       expect(selectors.studentByName(emptyList)).to.deep.equal([]);
     });
+    // 34
     it('should return the list sorted by name ASC', () => {
       expect(selectors.studentByName(state)).to.deep.equal([
         {
@@ -127,9 +132,11 @@ describe('Evaluator ducks', () => {
     });
   });
   describe('student by surname selector', () => {
+    // 35
     it('should not fail when the list is empty', () => {
       expect(selectors.studentBySurname(emptyList)).to.deep.equal([]);
     });
+    // 36
     it('should return the list sorted by surname ASC', () => {
       expect(selectors.studentBySurname(state)).to.deep.equal([
         {
@@ -156,9 +163,11 @@ describe('Evaluator ducks', () => {
     });
   });
   describe('student without vote selector', () => {
+    // 37
     it('should not fail when the list is empty', () => {
       expect(selectors.studentWithoutVote(emptyList)).to.deep.equal([]);
     });
+    // 38
     it('should return the list sorted by surname DESC without vote', () => {
       expect(selectors.studentWithoutVote(state)).to.deep.equal([
         {
@@ -175,9 +184,11 @@ describe('Evaluator ducks', () => {
     });
   });
   describe('student by vote presence selector', () => {
+    // 39
     it('should not fail when the list is empty', () => {
       expect(selectors.studentByVotePresence(emptyList)).to.deep.equal([]);
     });
+    // 40
     it('should return the list with votes not null ordered by vote DESC', () => {
       expect(selectors.studentByVotePresence(state)).to.deep.equal([
         {
@@ -194,6 +205,7 @@ describe('Evaluator ducks', () => {
     });
   });
   describe('set exam feature', () => {
+    // 41
     it('should compose the correct action', () => {
       expect(creators.setExam('0x0', 1, 'ABC', 'IT')).to.deep.equal({
         type: 'marvin/Evaluator/SET_EXAM',
@@ -203,6 +215,7 @@ describe('Evaluator ducks', () => {
         course: 'IT',
       });
     });
+    // 42
     it('should update the state correctly', () => {
       const cstate = {
         loading: false,

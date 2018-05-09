@@ -18,41 +18,48 @@ describe('PageContainer component', () => {
       component: Logout,
     },
   ];
+  // 3
   it('Should return university routes', () => {
     let routes = UniversityRoutes.concat(logout);
     routes = routes.concat(CommonRoutes);
     const universityRoutes = RoutesFactory(ROLES.UNIVERSITY);
     expect(universityRoutes).to.deep.equal(routes);
   });
+  // 4
   it('Should return admin routes', () => {
     let routes = AdminRoutes.concat(logout);
     routes = routes.concat(CommonRoutes);
     const adminRoutes = RoutesFactory(ROLES.ADMIN);
     expect(adminRoutes).to.deep.equal(routes);
   });
+  // 5
   it('Should return teacher routes', () => {
     let routes = TeacherRoutes.concat(logout);
     routes = routes.concat(CommonRoutes);
     const teacherRoutes = RoutesFactory(ROLES.TEACHER);
     expect(teacherRoutes).to.deep.equal(routes);
   });
+  // 6
   it('Should return student routes', () => {
     let routes = StudentRoutes.concat(logout);
     routes = routes.concat(CommonRoutes);
     const studentRoutes = RoutesFactory(ROLES.STUDENT);
     expect(studentRoutes).to.deep.equal(routes);
   });
+  // 7
   it('Should return public routes', () => {
     const routes = PublicRoutes.concat(CommonRoutes);
     const publicRoutes = RoutesFactory(ROLES.NOTLOGGED);
     expect(publicRoutes).to.deep.equal(routes);
   });
+  // 8
   it('Should return public routes for UNCONFIRMED_STUDENT', () => {
     let routes = PublicRoutes.concat(logout);
     routes = routes.concat(CommonRoutes);
     const publicRoutes = RoutesFactory(ROLES.UNCONFIRMED_STUDENT);
     expect(publicRoutes).to.deep.equal(routes);
   });
+  // 9
   it('Should return public routes for UNCONFIRMED_TEACHER', () => {
     let routes = PublicRoutes.concat(logout);
     routes = routes.concat(CommonRoutes);

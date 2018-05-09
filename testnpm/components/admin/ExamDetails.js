@@ -55,6 +55,7 @@ const defaultStore = {
 };
 
 describe('ExamDetails component', () => {
+  // 50
   it('Should render the component', () => {
     const wrapper1 = shallow( // eslint-disable-line function-paren-newline
       <ExamDetails
@@ -67,6 +68,7 @@ describe('ExamDetails component', () => {
     assert.equal(wrapper1.length, 1);
     expect(wrapper1.find(ModalForm)).to.have.length(2);
   });
+  // 51
   it('Should have the correct initial state', () => {
     const wrapper1 = shallow( // eslint-disable-line function-paren-newline
       <ExamDetails
@@ -79,6 +81,7 @@ describe('ExamDetails component', () => {
     expect(wrapper1.state().assignTeacher).to.equal(false);
     expect(wrapper1.state().teacherAddress).to.equal(null);
   });
+  // 52
   it('Should render the Assign Teacher Button if the teacher is not set', () => {
     const wrapper2 = shallow(<ExamDetails
       object={exam2}
@@ -89,6 +92,7 @@ describe('ExamDetails component', () => {
     />);
     expect(wrapper2.find(Button)).to.have.length(1);
   });
+  // 53
   it('Should call componentWillReceiveProps(nextProps)', () => {
     const wrapper1 = shallow( // eslint-disable-line function-paren-newline
       <ExamDetails
@@ -101,6 +105,7 @@ describe('ExamDetails component', () => {
     wrapper1.instance().componentWillReceiveProps(nextProps);
     expect(wrapper1.state().teacherAddress).to.equal(nextProps.teacherList[0].address);
   });
+  // 54
   it('Should call teacher() and not render the Assign teacher button', () => {
     const wrapper1 = shallow( // eslint-disable-line function-paren-newline
       <ExamDetails
@@ -113,6 +118,7 @@ describe('ExamDetails component', () => {
     wrapper1.instance().teacher();
     expect(wrapper1.find(Button)).to.have.length(0);
   });
+  // 55
   it('Should call teacher() and not render the Assign teacher button', () => {
     const wrapper2 = shallow(<ExamDetails
       object={exam2}
@@ -124,6 +130,7 @@ describe('ExamDetails component', () => {
     wrapper2.instance().teacher();
     expect(wrapper2.find(Button)).to.have.length(1);
   });
+  // 56
   it('Should call showAssignTeacher() and change state', () => {
     const wrapper1 = shallow( // eslint-disable-line function-paren-newline
       <ExamDetails
@@ -136,6 +143,7 @@ describe('ExamDetails component', () => {
     wrapper1.instance().showAssignTeacher();
     expect(wrapper1.state().assignTeacher).to.equal(true);
   });
+  // 57
   it('Should call notDelete() and change state', () => {
     const wrapper1 = shallow( // eslint-disable-line function-paren-newline
       <ExamDetails
@@ -148,6 +156,7 @@ describe('ExamDetails component', () => {
     wrapper1.instance().notDelete();
     expect(wrapper1.state().assignTeacher).to.equal(false);
   });
+  // 58
   it('Should call assTeacher()', () => {
     const wrapper2 = shallow(<ExamDetails
       object={exam2}
@@ -158,6 +167,7 @@ describe('ExamDetails component', () => {
     />);
     wrapper2.instance().assTeacher();
   });
+  // 59
   it('Should call moreDetails()', () => {
     const wrapper2 = shallow(<ExamDetails
       object={exam2}
@@ -168,11 +178,13 @@ describe('ExamDetails component', () => {
     />);
     wrapper2.instance().moreDetails();
   });
+  // 60
   it('Should connect right to the props', () => {
     const wrapper = shallowWithStore(<ContainerComponent />, defaultStore);
     expect(wrapper.props().teacherList).to.deep.equal(tList);
     expect(wrapper.props().loadingTeacher).to.equal(false);
   });
+  // 61
   it('Should fire the correct actions', () => {
     const store = createMockStore(defaultStore);
     const wrapper = shallowWithStore(<ContainerComponent />, store);

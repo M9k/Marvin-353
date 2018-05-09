@@ -82,6 +82,7 @@ const array = [
 ];
 
 describe('AdminCourseExams component', () => {
+  // 10
   it('Should render the component', () => {
     const wrapper = shallow( // eslint-disable-line function-paren-newline
       <AdminCourseExams
@@ -94,7 +95,7 @@ describe('AdminCourseExams component', () => {
     expect(wrapper.find(Form)).to.have.length(1);
     expect(wrapper.find(PageTableForm)).to.have.length(1);
   });
-
+  // 11
   it('Should have the correct initial state', () => {
     const wrapper = shallow( // eslint-disable-line function-paren-newline
       <AdminCourseExams
@@ -104,6 +105,7 @@ describe('AdminCourseExams component', () => {
       />);
     expect(wrapper.state().showDetails).to.equal(false);
   });
+  // 12
   it('Should change state when a button Details is clicked', () => {
     const wrapper = shallow( // eslint-disable-line function-paren-newline
       <AdminCourseExams
@@ -114,6 +116,7 @@ describe('AdminCourseExams component', () => {
     wrapper.instance().viewDetails(exam);
     expect(wrapper.state().showDetails).to.equal(true);
   });
+  // 13
   it('Should call addExamBuilder(objForm)', () => {
     const wrapper = shallow( // eslint-disable-line function-paren-newline
       <AdminCourseExams
@@ -123,6 +126,7 @@ describe('AdminCourseExams component', () => {
       />);
     wrapper.instance().addExamBuilder(objForm);
   });
+  // 14
   it('Should call getExamsByAddress()', () => {
     const wrapper = shallow( // eslint-disable-line function-paren-newline
       <AdminCourseExams
@@ -132,6 +136,7 @@ describe('AdminCourseExams component', () => {
       />);
     wrapper.instance().getExamsByAddress();
   });
+  // 15
   it('Should connect right to the props', () => {
     const wrapper = shallowWithStore(<ContainerComponent
       params={params}
@@ -140,6 +145,7 @@ describe('AdminCourseExams component', () => {
     expect(wrapper.props().academicYears).to.deep.equal([2018, 2019, 2020]);
     expect(wrapper.props().examList).to.deep.equal([exam]);
   });
+  // 16
   it('Should fire the correct actions', () => {
     const store = createMockStore(defaultStore);
     const wrapper = shallowWithStore(<ContainerComponent
