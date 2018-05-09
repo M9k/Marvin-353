@@ -1,3 +1,4 @@
+import { expect } from 'chai';
 import { expectSaga } from 'redux-saga-test-plan';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
@@ -11,6 +12,10 @@ import { creators as sessionCreators } from '../../../src/sagas/SessionSaga';
 
 describe('Booking feature', () => {
   // 6
+  it('should compose the correct action type', () => {
+    expect(sagas.creators.performLoad().type).to.equal('marvin/BookingSaga/LOAD');
+    expect(sagas.creators.performSignUp().type).to.equal('marvin/BookingSaga/SIGNUP');
+  });
   it('should retrive an empty course list when there are not courses', () => expectSaga(sagas.loadCourses, sagas.creators.performLoad(2018))
     .withReducer(reducer)
     .provide([
