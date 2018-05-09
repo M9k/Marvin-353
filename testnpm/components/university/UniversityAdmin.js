@@ -111,13 +111,13 @@ describe('UniversityAdmin component', () => {
   it('Should fire the correct action to delete admin', () => {
     const storeContainer = createMockStore(defaultStore);
     const wrapperContainer = shallowWithStore(<ContainerComponent />, storeContainer);
-    wrapperContainer.props().deleteAdmin('test');
-    expect(storeContainer.isActionDispatched(creators.removeAdminAction('test'))).to.be.true;
+    wrapperContainer.props().deleteAdmin('0xc8321642f5a2549c58b1a6f34a68ec76e2c107b9');
+    expect(storeContainer.isActionDispatched(creators.removeAdminAction('0xc8321642f5a2549c58b1a6f34a68ec76e2c107b9',))).to.be.true;// eslint-disable-line
   });
   it('Should fire the correct action to add admin', () => {
     const storeContainer = createMockStore(defaultStore);
     const wrapperContainer = shallowWithStore(<ContainerComponent />, storeContainer);
     wrapperContainer.props().addAdmin(admin);
-    expect(storeContainer.isActionDispatched(creators.addNewAdminAction(admin.addressAdmin.value))).to.be.true;// eslint-disable-line
+    expect(storeContainer.isActionDispatched(creators.addNewAdminAction('0xc8321642f5a2549c58b1a6f34a68ec76e2c107b9'))).to.be.true;// eslint-disable-line
   });
 });
