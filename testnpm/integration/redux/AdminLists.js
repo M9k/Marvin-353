@@ -1,4 +1,5 @@
 import { expectSaga } from 'redux-saga-test-plan';
+import { throwError } from 'redux-saga-test-plan/providers';
 import reducer, { creators } from '../../../src/ducks/Admin';
 import * as sagas from '../../../src/sagas/AdminSaga';
 import * as User from '../../../src/web3calls/User';
@@ -6,6 +7,16 @@ import * as Students from '../../../src/web3calls/UniversityStudent';
 import { getCourseContract } from '../../../src/web3calls/Student';
 import { getName } from '../../../src/web3calls/Course';
 import * as Teachers from '../../../src/web3calls/UniversityTeacher';
+
+const failedState =
+  {
+    loading: false,
+    errored: true,
+    studentsList: [],
+    teachersList: [],
+    pendingStudentsList: [],
+    pendingTeachersList: [],
+  };
 
 describe('Admin lists', () => {
   it('should get all the students', () => expectSaga(sagas.getAllStudents, sagas.creators.getAllStudentsAction())
@@ -65,6 +76,17 @@ describe('Admin lists', () => {
     })
     .put(creators.listIsLoading())
     .run());
+  it('should get an error if something goes wrong', () => expectSaga(sagas.getAllStudents, sagas.creators.getAllStudentsAction())
+    .withReducer(reducer)
+    .provide({
+      call: (effect, next) => {
+        if (effect.fn === Students.getStudentNumber) throwError(new Error());
+        return next();
+      },
+    })
+    .hasFinalState(failedState)
+    .put(creators.listIsLoading())
+    .run());
   it('should get all the pending students', () => expectSaga(sagas.getPendingStudents, sagas.creators.getPendingStudentsAction())
     .withReducer(reducer)
     .provide({
@@ -121,6 +143,17 @@ describe('Admin lists', () => {
     })
     .put(creators.listIsLoading())
     .run());
+  it('should get an error if something goes wrong', () => expectSaga(sagas.getPendingStudents, sagas.creators.getPendingStudentsAction())
+    .withReducer(reducer)
+    .provide({
+      call: (effect, next) => {
+        if (effect.fn === Students.getNotApprovedStudentNumber) throwError(new Error());
+        return next();
+      },
+    })
+    .hasFinalState(failedState)
+    .put(creators.listIsLoading())
+    .run());
   it('should get all the teachers', () => expectSaga(sagas.getAllTeachers, sagas.creators.getAllTEachersAction())
     .withReducer(reducer)
     .provide({
@@ -167,6 +200,17 @@ describe('Admin lists', () => {
     })
     .put(creators.listIsLoading())
     .run());
+  it('should get an error if something goes wrong', () => expectSaga(sagas.getAllTeachers, sagas.creators.getAllTEachersAction())
+    .withReducer(reducer)
+    .provide({
+      call: (effect, next) => {
+        if (effect.fn === Teachers.getNotApprovedTeacherNumber) throwError(new Error());
+        return next();
+      },
+    })
+    .hasFinalState(failedState)
+    .put(creators.listIsLoading())
+    .run());
   it('should get all the pending teachers', () => expectSaga(sagas.getPendingTeachers, sagas.creators.getPendingTEachersAction())
     .withReducer(reducer)
     .provide({
@@ -211,6 +255,17 @@ describe('Admin lists', () => {
           surname: 'toro',
         }],
     })
+    .put(creators.listIsLoading())
+    .run());
+  it('should get an error if something goes wrong', () => expectSaga(sagas.getPendingTeachers, sagas.creators.getPendingTEachersAction())
+    .withReducer(reducer)
+    .provide({
+      call: (effect, next) => {
+        if (effect.fn === Teachers.getNotApprovedTeacherNumber) throwError(new Error());
+        return next();
+      },
+    })
+    .hasFinalState(failedState)
     .put(creators.listIsLoading())
     .run());
 });
