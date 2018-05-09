@@ -2,7 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
 import configureStore from 'redux-mock-store'; // eslint-disable-line import/no-extraneous-dependencies
-import { UniversityAdmin } from '../../../src/components/university/UniversityAdmin';
+import ContainerComponent, { UniversityAdmin } from '../../../src/components/university/UniversityAdmin';
+import { createMockStore, shallowWithStore } from '../../helpers/component-with-store';
+import { creators } from '../../../src/sagas/AdminEmployerSaga';
 
 
 describe('UniversityAdmin component', () => {
@@ -80,5 +82,42 @@ describe('UniversityAdmin component', () => {
     expect(wrapper.state().item).to.equal('');
     expect(wrapper.state().delete).to.equal(false);
     expect(deletedAdminAddr).to.equal('0xc8321642f5a2549c58b1a6f34a68ec76e2c107b9');
+  });
+
+  // Testing container part
+  const defaultStore = {
+    university: {
+      adminAccount: [
+        '0xc8321642f5a2549c58b1a6f34a68ec76e2c107b9',
+        '0xc8321642f5a2549c58b1a6f34a68ec76e2c107b1',
+      ],
+    },
+  };
+  const admin = {
+    addressAdmin: {
+      value: '0xc8321642f5a2549c58b1a6f34a68ec76e2c107b9',
+    },
+  };
+  it('Should connect right to the props', () => {
+    const wrapperContainer = shallowWithStore(<ContainerComponent />, defaultStore);
+    expect(wrapperContainer.props().adminAccounts).to.deep.equal(addedAdmin);
+  });
+  it('Should fire the correct action to get all admins', () => {
+    const storeContainer = createMockStore(defaultStore);
+    const wrapperContainer = shallowWithStore(<ContainerComponent />, storeContainer);
+    wrapperContainer.props().getAdmins();
+    expect(storeContainer.isActionDispatched(creators.getAllAdminsAction())).to.be.true;
+  });
+  it('Should fire the correct action to delete admin', () => {
+    const storeContainer = createMockStore(defaultStore);
+    const wrapperContainer = shallowWithStore(<ContainerComponent />, storeContainer);
+    wrapperContainer.props().deleteAdmin('test');
+    expect(storeContainer.isActionDispatched(creators.removeAdminAction('test'))).to.be.true;
+  });
+  it('Should fire the correct action to add admin', () => {
+    const storeContainer = createMockStore(defaultStore);
+    const wrapperContainer = shallowWithStore(<ContainerComponent />, storeContainer);
+    wrapperContainer.props().addAdmin(admin);
+    expect(storeContainer.isActionDispatched(creators.addNewAdminAction(admin.addressAdmin.value))).to.be.true;// eslint-disable-line
   });
 });
