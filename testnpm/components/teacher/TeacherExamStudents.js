@@ -2,7 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
 import configureStore from 'redux-mock-store'; // eslint-disable-line import/no-extraneous-dependencies
-import { TeacherExamStudents } from '../../../src/components/teacher/TeacherExamStudents';
+import ContainerComponent, { TeacherExamStudents } from '../../../src/components/teacher/TeacherExamStudents';
+import { createMockStore, shallowWithStore } from '../../helpers/component-with-store';
+import { creators } from '../../../src/sagas/EvaluatorSaga';
 
 
 describe('TeacherExamStudents component', () => {
@@ -75,5 +77,55 @@ describe('TeacherExamStudents component', () => {
     expect(grade.examIndex).to.equal(examIndex);
     expect(grade.studentI).to.equal(11);
     expect(grade.studentGrade).to.equal(25);
+  });
+
+  // Testing container part
+  const List = [
+    {
+      name: 'Prova',
+      surname: 'Surname',
+      studentAddress: '0xfa429bef26906146be2438c1892f8499e217b277',
+      studentIndex: 0,
+      vote: 30,
+    },
+  ];
+  const defaultStore = {
+    selectedExam: {
+      studentList: {
+        index: 0,
+        list: [
+          {
+            name: 'Prova',
+            surname: 'Surname',
+            studentAddress: '0xfa429bef26906146be2438c1892f8499e217b277',
+            studentIndex: 0,
+            vote: 30,
+          },
+        ],
+      },
+    },
+    metamask: {
+      account: '0xfa429bef26906146be2438c1892f8499e217b277',
+    },
+  };
+
+  const contract = '0xfa429bef26906146be2438c1892f8499e217b277';
+  it('Should connect right to the props', () => {
+    const wrapperContainer = shallowWithStore(<ContainerComponent />, defaultStore);
+    expect(wrapperContainer.props().myWeb3Address).to.deep.equal(contract);
+    expect(wrapperContainer.props().studentsOfExam).to.deep.equal(List);
+    expect(wrapperContainer.props().examIndex).to.deep.equal(0);
+  });
+  it('Should fire the correct action to get list', () => {
+    const storeContainer = createMockStore(defaultStore);
+    const wrapperContainer = shallowWithStore(<ContainerComponent />, storeContainer);
+    wrapperContainer.props().getStudentsOfExam(contract);
+    expect(storeContainer.isActionDispatched(creators.getList(contract))).to.be.true;
+  });
+  it('Should fire the correct action to assgn vote', () => {
+    const storeContainer = createMockStore(defaultStore);
+    const wrapperContainer = shallowWithStore(<ContainerComponent />, storeContainer);
+    wrapperContainer.props().addGradeToStudent(contract, 0, 0, 25);
+    expect(storeContainer.isActionDispatched(creators.assignVote(contract, 0, 0, 25))).to.be.true;
   });
 });
