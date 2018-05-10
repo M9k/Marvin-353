@@ -69,7 +69,7 @@ export class AdminCourseExams extends React.Component {
               help: 'insert the name of the exam',
               placeholder: 'mathematics',
               type: FieldTypes.TEXT,
-              validateFunction: Utils.notNullValue,
+              validateFunction: Utils.validString,
             },
             {
               name: 'examCredits',
@@ -93,7 +93,7 @@ export class AdminCourseExams extends React.Component {
         <PageTableForm
           getTableData={this.getExamsByAddress}
           tableData={this.props.examList}
-          headerInfo={['Name', 'Credits', 'Mandatory', 'ProfessorName', 'ProfessorSurname', 'Details']}
+          headerInfo={['Name', 'Credits', 'Mandatory', 'Enrolled', 'ProfessorName', 'ProfessorSurname', 'Details']}
           tableButtons={[{
             buttonFunction: this.viewDetails,
             buttonText: 'Details',

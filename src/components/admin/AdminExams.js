@@ -60,7 +60,7 @@ export class AdminExams extends React.Component {
       table = (<PageTableForm
         getTableData={e => e}
         tableData={this.props.examList}
-        headerInfo={['Name', 'Credits', 'CourseName', 'SolarYear', 'ProfessorSurname', 'ProfessorName', 'Details']}
+        headerInfo={['Name', 'SolarYear', 'CourseName', 'Credits', 'Enrolled', 'ProfessorSurname', 'ProfessorName', 'Details']}
         tableButtons={[{
           buttonFunction: this.viewDetails,
           buttonText: 'Details',

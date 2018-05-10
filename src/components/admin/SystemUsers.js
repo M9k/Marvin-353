@@ -62,7 +62,7 @@ export class SystemUsers extends React.Component {
           columFilter
         />
         <ModalForm
-          title="TEACHER ELIMINATION"
+          title="Delete teacher confirmation"
           yesFunction={this.closeDeleteTeacher}
           keyForModal={{ item: this.state.item }}
           show={this.state.deleteTeacher}
@@ -72,7 +72,7 @@ export class SystemUsers extends React.Component {
           </p>
         </ModalForm>
         <ModalForm
-          title="STUDENT ELIMINATION"
+          title="Delete student confirmation"
           yesFunction={this.closeDeleteStudent}
           keyForModal={{ item: this.state.item }}
           show={this.state.deleteStudent}

@@ -26,6 +26,7 @@ check how many credits you need to end and you can choose and add optional exams
             bsStyle="success"
             now={(this.props.myCredits / this.props.graduationCredits) * 100}
           />
+          <h5>With your exams, you can make up to: {this.props.possibleCredits} more credits</h5>
         </Jumbotron>
         <CardWithIcon
           title="Exams list"
@@ -45,6 +46,7 @@ check how many credits you need to end and you can choose and add optional exams
 }
 Index.propTypes = {
   myCredits: PropTypes.number,
+  possibleCredits: PropTypes.number,
   graduationCredits: PropTypes.number,
   getCredits: PropTypes.func,
   myAddress: PropTypes.string.isRequired,
@@ -55,6 +57,7 @@ Index.propTypes = {
 Index.defaultProps = {
   getCredits: () => {},
   myCredits: 0,
+  possibleCredits: 0,
   graduationCredits: 0,
   userName: '',
   userSurname: '',
@@ -62,6 +65,7 @@ Index.defaultProps = {
 
 const mapStateToProps = state => ({
   myCredits: state.student.credits,
+  possibleCredits: state.student.possibleCredits,
   graduationCredits: state.student.graduationCredits,
   myAddress: state.user.data.contract,
   userName: state.user.data.name,

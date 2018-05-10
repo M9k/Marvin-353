@@ -53,7 +53,9 @@ export class TeacherExamStudents extends React.Component {
     let grade = Number(objForm.grade.value);
     if (grade < 0) grade = 0;
     if (grade > 30) grade = 32;
-
+    this.setState({
+      viewModalAddVote: false,
+    });
     this.props.addGradeToStudent(
       this.props.myWeb3Address,
       this.examIndex,

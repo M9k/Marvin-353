@@ -42,7 +42,7 @@ export class OptionalExams extends React.Component {
             ]}
         />
         <ModalForm
-          title="Confirmation teacher"
+          title="Exam confirmation"
           yesFunction={this.closeSelect}
           keyForModal={{ item: this.state.item }}
           show={this.state.select}

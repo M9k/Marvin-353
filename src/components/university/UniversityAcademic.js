@@ -77,7 +77,7 @@ export class UniversityAcademic extends React.Component {
           }]}
         />
         <ModalForm
-          title="Delete admin"
+          title="Delete confirmation"
           yesFunction={this.closeDelete}
           noFunction={this.notDelete}
           keyForModal={{ item: { year: this.state.item } }}
