@@ -56,6 +56,7 @@ export class ExamDetails extends React.Component {
     this.setState({ assignTeacher: false });
   }
   assTeacher() {
+    this.setState({ assignTeacher: false });
     this.props.setTeacher(this.props.object.address, this.state.teacherAddress);
   }
   moreDetails() {
