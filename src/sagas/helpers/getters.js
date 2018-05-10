@@ -23,8 +23,9 @@ export function* getExamData(examAddress, adapter = obj => obj) {
     call(Exam.getCredits, address),
     call(Exam.getObligatoriness, address),
     call(Exam.getTeacherContract, address),
+    call(Exam.getEnrolledNumber, address),
   ];
-  const [name, credits, mandatory, teacherAddress] = yield all(dataFetch);
+  const [name, credits, mandatory, teacherAddress, enrolled] = yield all(dataFetch);
   let teacherData;
   if (teacherAddress === NULL_ADDRESS) {
     teacherData = { name: '', surname: '' };
@@ -36,6 +37,7 @@ export function* getExamData(examAddress, adapter = obj => obj) {
     name,
     credits,
     mandatory,
+    enrolled,
     teacherAddress,
     teacherName: teacherData.name,
     teacherSurname: teacherData.surname,

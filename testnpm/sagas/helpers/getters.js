@@ -17,6 +17,7 @@ describe('Getters', () => {
         [matchers.call.fn(Exam.getCredits, '0'), 12],
         [matchers.call.fn(Exam.getObligatoriness, '0'), true],
         [matchers.call.fn(Exam.getTeacherContract, '0'), 'sart'],
+        [matchers.call.fn(Exam.getEnrolledNumber, '0'), 5],
         [matchers.call.fn(Getters.getTeacherData, 'sart'), {
           name: 'Caterina',
           surname: 'Sartori',
@@ -27,6 +28,7 @@ describe('Getters', () => {
         name: 'Analisi Matematica',
         credits: 12,
         mandatory: true,
+        enrolled: 5,
         teacherAddress: 'sart',
         teacherName: 'Caterina',
         teacherSurname: 'Sartori',
@@ -45,12 +47,14 @@ describe('Getters', () => {
         [matchers.call.fn(Exam.getName, '0'), 'Analisi Matematica'],
         [matchers.call.fn(Exam.getCredits, '0'), 12],
         [matchers.call.fn(Exam.getObligatoriness, '0'), true],
+        [matchers.call.fn(Exam.getEnrolledNumber, '0'), 0],
         [matchers.call.fn(Exam.getTeacherContract, '0'), NULL_ADDRESS],
       ])
       .put({
         address: '0',
         name: 'Analisi Matematica',
         credits: 12,
+        enrolled: 0,
         mandatory: true,
         teacherAddress: NULL_ADDRESS,
         teacherName: '',
