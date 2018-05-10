@@ -56,7 +56,7 @@ export class ConfirmTeacher extends React.Component {
         />
 
         <ModalForm
-          title="Confirmation teacher"
+          title="Add confirmation"
           yesFunction={this.closeConfirm}
           keyForModal={{ item: this.state.item }}
           show={this.state.confirm}
@@ -67,7 +67,7 @@ export class ConfirmTeacher extends React.Component {
         </ModalForm>
 
         <ModalForm
-          title="Deny teacher"
+          title="Deny confirmation"
           yesFunction={this.closeDeny}
           keyForModal={{ item: this.state.item }}
           show={this.state.deny}

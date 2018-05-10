@@ -57,7 +57,7 @@ export class UniversityAdmin extends React.Component {
         />
 
         <ModalForm
-          title="Confirmation teacher"
+          title="Delete confirmation"
           yesFunction={this.closeDelete}
           noFunction={this.notDelete}
           keyForModal={{ item: { address: this.state.item } }}
