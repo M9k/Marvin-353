@@ -26,7 +26,7 @@ check how many credits you need to end and you can choose and add optional exams
             bsStyle="success"
             now={(this.props.myCredits / this.props.graduationCredits) * 100}
           />
-          <h5>With your exams, you can make up to: {this.props.possibleCredits} credits</h5>
+          <h5>With your exams, you can make up to: {this.props.possibleCredits} more credits</h5>
         </Jumbotron>
         <CardWithIcon
           title="Exams list"
