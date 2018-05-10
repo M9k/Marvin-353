@@ -54,13 +54,27 @@ export function* getExamsCredits(action) {
     const apiContractCall = Array(num).fill().map((_, i) =>
       call(studentExams.getExamContractAt, action.address, i));
     const contracts = yield all(apiContractCall);
+    const apiExamsSubscriptionnCall = Array(num).fill().map((_, i) =>
+      call(studentExams.getExamSubscriptionAt, action.address, i));
+    const subscriptions = yield all(apiExamsSubscriptionnCall);
     const apiExamsValuationCall = Array(num).fill().map((_, i) =>
       call(studentExams.getExamValuationAt, action.address, i));
     let valuations = yield all(apiExamsValuationCall);
     valuations = valuations.map((valuation, i) => ({
       valuation,
+      subscription: subscriptions[i],
       contract: contracts[i],
     }));
+    let examsWithoutValuations = valuations;
+    examsWithoutValuations = examsWithoutValuations.filter(x => x.subscription === true);
+    examsWithoutValuations = examsWithoutValuations.filter(x => x.valuation <= 18);
+    let possibleCredits = 0;
+    if (examsWithoutValuations.length !== 0) {
+      const apiCreditsCall = Array(examsWithoutValuations.length).fill().map((_, i) =>
+        call(getCredits, examsWithoutValuations[i].contract));
+      possibleCredits = yield all(apiCreditsCall);
+      possibleCredits = possibleCredits.reduce((a, b) => a + b, 0);
+    }
     valuations = valuations.filter(x => x.valuation > 18); // 18 because it indicate the vote 17
     let credits = 0;
     if (valuations.length !== 0) {
@@ -72,7 +86,7 @@ export function* getExamsCredits(action) {
     const courseContract = yield call(studentExams.getCourseContract, action.address);
     let graduationCredits = yield call(getCreditsToGraduate, courseContract);
     graduationCredits = Number(graduationCredits);
-    yield put(actionCreators.setCredits(credits, graduationCredits));
+    yield put(actionCreators.setCredits(credits, possibleCredits, graduationCredits));
   } catch (e) {
     console.log('failed to get credits');
   }

@@ -157,9 +157,15 @@ describe('Student feature', () => {
           if (effect.args[1] === 1) return 23;
           if (effect.args[1] === 2) return 15;
         }
+        if (effect.fn === Student.getExamSubscriptionAt) {
+          if (effect.args[1] === 0) return true;
+          if (effect.args[1] === 1) return true;
+          if (effect.args[1] === 2) return true;
+        }
         if (effect.fn === getCredits) {
           if (effect.args[0] === 'tip') return 12;
           if (effect.args[0] === 'tap') return 6;
+          if (effect.args[0] === 'top') return 15;
         }
         if (effect.fn === Student.getCourseContract) return 'goku';
         if (effect.fn === getCreditsToGraduate) return 180;
@@ -170,6 +176,7 @@ describe('Student feature', () => {
       errored: false,
       loading: false,
       credits: 18,
+      possibleCredits: 15,
       graduationCredits: 180,
     })
     .run());
@@ -189,6 +196,16 @@ describe('Student feature', () => {
           if (effect.args[1] === 1) return 17;
           if (effect.args[1] === 2) return 15;
         }
+        if (effect.fn === Student.getExamSubscriptionAt) {
+          if (effect.args[1] === 0) return true;
+          if (effect.args[1] === 1) return false;
+          if (effect.args[1] === 2) return false;
+        }
+        if (effect.fn === getCredits) {
+          if (effect.args[0] === 'tip') return 12;
+          if (effect.args[0] === 'tap') return 6;
+          if (effect.args[0] === 'top') return 15;
+        }
         if (effect.fn === Student.getCourseContract) return 'goku';
         if (effect.fn === getCreditsToGraduate) return 180;
         return next();
@@ -198,6 +215,7 @@ describe('Student feature', () => {
       errored: false,
       loading: false,
       credits: 0,
+      possibleCredits: 12,
       graduationCredits: 180,
     })
     .run());

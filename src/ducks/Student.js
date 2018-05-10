@@ -10,6 +10,7 @@ const StudentDuck = new Duck({
     errored: false,
     examsList: [],
     credits: null,
+    possibleCredits: null,
     graduationCredits: null,
   },
   reducer: (state, action, duck) => {
@@ -36,6 +37,7 @@ const StudentDuck = new Duck({
           loading: false,
           errored: false,
           credits: action.credits,
+          possibleCredits: action.possibleCredits,
           graduationCredits: action.graduationCredits,
         };
       case (types.LIST_LOADING):
@@ -64,8 +66,13 @@ const StudentDuck = new Duck({
     pushNewSubscription: exam => (
       { type: duck.types.PUSH_NEW_SUBSCRIPTION, exam }
     ),
-    setCredits: (credits, graduationCredits) => (
-      { type: duck.types.SET_CREDITS, credits, graduationCredits }
+    setCredits: (credits, possibleCredits, graduationCredits) => (
+      {
+        type: duck.types.SET_CREDITS,
+        credits,
+        possibleCredits,
+        graduationCredits,
+      }
     ),
     listIsLoading: () => (
       { type: duck.types.LIST_LOADING }
