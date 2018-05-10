@@ -46,7 +46,7 @@ describe('Utils functions', () => {
     assert.equal(year3, 0);
   });
   // 131
-  it('should work grade from 0 to 31 (summa lode)', () => {
+  it('should work grade from 18 to 31 (summa lode)', () => {
     const grade1 = Utils.validGrade('');
     assert.equal(grade1, 2);
     const grade2 = Utils.validGrade(32);
@@ -54,8 +54,10 @@ describe('Utils functions', () => {
 
     const grade3 = Utils.validGrade(31);
     assert.equal(grade3, 1);
-    const grade4 = Utils.validGrade(1);
-    assert.equal(grade4, 1);
+    const grade4 = Utils.validGrade(17);
+    assert.equal(grade4, 0);
+    const grade5 = Utils.validGrade(18);
+    assert.equal(grade5, 1);
   });
   // 132
   it('always true', () => {

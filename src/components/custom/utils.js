@@ -40,7 +40,7 @@ class Utils {
 
   static validGrade(grade) {
     if (grade !== '') {
-      if (grade >= 0 && grade <= 31) { return 1; }
+      if (grade >= 18 && grade <= 31) { return 1; }
       return 0;
     }
     return 2;
