@@ -98,9 +98,11 @@ export function* enrollToExam(action) {
     index = Number(index);
     yield call(studentExams.enrollToOptionalExam, action.addStudent, index);
     const exam = yield call(getExamData, action.addExam);
+    const credits = yield call(getCredits, action.addExam);
     const examValuation = yield call(studentExams.getExamValuationAt, action.addStudent, index);
     exam.valuation = examValuation;
     exam.subscription = true;
+    exam.credits = credits;
     console.log(exam);
     yield put(actionCreators.pushNewSubscription(exam));
   } catch (e) {

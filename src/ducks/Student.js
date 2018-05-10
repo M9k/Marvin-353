@@ -20,6 +20,7 @@ const StudentDuck = new Duck({
         return {
           loading: false,
           errored: false,
+          possibleCredits: state.possibleCredits + action.credits,
           examsList: action.exams,
         };
       case (types.PUSH_NEW_SUBSCRIPTION):
