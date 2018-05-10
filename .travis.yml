@@ -53,9 +53,11 @@ jobs:
       if: branch = master
       before_script: export STAGE_NAME=deploy
       script:
+        - npm run testrpc
+        - npm run migrate
         - npm run build-prod
       deploy:
         provider: surge
         project: ./dist/
-        domain: marvin.surge.sh
+        domain: fake.marvin.surge.sh
         skip_cleanup: true
