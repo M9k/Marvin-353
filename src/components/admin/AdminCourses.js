@@ -100,7 +100,7 @@ export class AdminCourses extends React.Component {
               help: 'insert the code of the course',
               placeholder: 'A-36',
               type: FieldTypes.TEXT,
-              validateFunction: Utils.notNullValue,
+              validateFunction: Utils.validString,
             },
             {
               name: 'courseYear',

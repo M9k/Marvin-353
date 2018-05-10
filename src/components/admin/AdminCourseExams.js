@@ -69,7 +69,7 @@ export class AdminCourseExams extends React.Component {
               help: 'insert the name of the exam',
               placeholder: 'mathematics',
               type: FieldTypes.TEXT,
-              validateFunction: Utils.notNullValue,
+              validateFunction: Utils.validString,
             },
             {
               name: 'examCredits',

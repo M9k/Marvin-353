@@ -67,4 +67,14 @@ describe('Utils functions', () => {
     assert.equal(Utils.alwaysTrue(-3), 1);
     assert.equal(Utils.alwaysTrue('string'), 1);
   });
+
+  // 133
+  it('check is valid String', () => {
+    assert.equal(Utils.validString(3), 2);
+    assert.equal(Utils.validString(0), 2);
+    assert.equal(Utils.validString(-3), 2);
+    assert.equal(Utils.validString('-4a'), 1);
+    assert.equal(Utils.validString('a1'), 1);
+    assert.equal(Utils.validString('string'), 1);
+  });
 });

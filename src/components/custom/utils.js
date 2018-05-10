@@ -18,6 +18,11 @@ class Utils {
     if (e !== '') return 1; return 2;
   }
 
+  static validString(e) {
+    // eslint-disable-next-line no-restricted-globals
+    if (e !== '' && isNaN(e)) return 1; return 2;
+  }
+
   static validEthAddress(ind) {
     if (ind.length === 0) {
       return 2;
@@ -32,7 +37,7 @@ class Utils {
 
   static moreThanCurrentYear(year) {
     if (year !== '') {
-      if (year >= (new Date()).getFullYear()) { return 1; }
+      if (year >= (new Date()).getFullYear() && year < 65535) { return 1; }
       return 0;
     }
     return 2;
