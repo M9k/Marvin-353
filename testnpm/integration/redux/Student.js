@@ -103,6 +103,7 @@ describe('Student feature', () => {
     .hasFinalState({
       errored: false,
       loading: false,
+      possibleCredits: NaN,
       examsList: [
         {
           address: 'pluto',
@@ -226,6 +227,7 @@ describe('Student feature', () => {
       call: (effect, next) => {
         if (effect.fn === Student.getIndexOfExam) return 2;
         if (effect.fn === Student.enrollToOptionalExam) return true;
+        if (effect.fn === getCredits) return 12;
         if (effect.fn === getExamData) {
           return {
             address: 'pluto',
@@ -242,13 +244,13 @@ describe('Student feature', () => {
       },
     })
     .hasFinalState({
-      loading: false,
       errored: false,
+      loading: false,
       examsList: [
         {
           address: 'pluto',
           name: 'calcolo',
-          credits: 10,
+          credits: 12,
           mandatory: 'yes',
           teacherAddress: '0x0000',
           teacherName: 'giulia',
